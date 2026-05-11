@@ -151,7 +151,7 @@
   }
 
   #espresso-hero-{{ section.id }} .espresso-hero__card {
-    width: min({{ s.image_max_width | default: 555 }}px, 100%);
+    width: min({{ s.image_max_width | default: 560 }}px, 100%);
     border-radius: 26.43px;
     border-top: 0.88px solid var(--color-azure-17, #002657);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
@@ -385,7 +385,7 @@
     }
 
     #espresso-hero-{{ section.id }} .espresso-hero__card {
-      width: min({{ s.image_max_width_mobile | default: s.image_max_width | default: 555 }}px, 100%);
+      width: min({{ s.image_max_width_mobile | default: s.image_max_width | default: 560 }}px, 100%);
     }
 
     #espresso-hero-{{ section.id }} .espresso-hero__arrow {
@@ -702,7 +702,7 @@
       "step": 10,
       "unit": "px",
       "label": "Image max width",
-      "default": 555
+      "default": 560
     },
     {
       "type": "range",
@@ -712,7 +712,7 @@
       "step": 10,
       "unit": "px",
       "label": "Image max width on mobile",
-      "default": 555
+      "default": 560
     },
     { "type": "image_picker", "id": "main_image", "label": "Main image fallback", "info": "Used when no image slide blocks are added." },
     { "type": "image_picker", "id": "decor_left", "label": "Left decorative image" },
