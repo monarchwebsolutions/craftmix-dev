@@ -1,5 +1,12 @@
 {% liquid
   assign s = section.settings
+  assign bullet_blocks = section.blocks | where: 'type', 'bullet'
+  assign hero_image_count = 0
+  for block in section.blocks
+    if block.type == 'image_slide' and block.settings.image != blank
+      assign hero_image_count = hero_image_count | plus: 1
+    endif
+  endfor
 %}
 <style>
     #espresso-hero-{{ section.id }} {
@@ -144,15 +151,74 @@
     #espresso-hero-{{ section.id }} .espresso-hero__card {
       width: min(555px, 100%);
       border-radius: 26.43px;
-   border-top: 0.88px solid var(--color-azure-17, #002657);
+      border-top: 0.88px solid var(--color-azure-17, #002657);
       box-shadow: 0 18px 40px rgba(0,0,0,0.08);
-
+      position: relative;
+      overflow: hidden;
+      background: #fff;
     }
     #espresso-hero-{{ section.id }} .espresso-hero__card img {
       width: 100%;
       height: auto;
       display: block;
       border-radius: 12px;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__carousel,
+    #espresso-hero-{{ section.id }} .espresso-hero__carousel .splide__track,
+    #espresso-hero-{{ section.id }} .espresso-hero__carousel .splide__list,
+    #espresso-hero-{{ section.id }} .espresso-hero__slide {
+      height: 100%;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__slide {
+      line-height: 0;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__slide img {
+      border-radius: 26.43px;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      padding: 0;
+      border: 2px solid var(--craftmix-dark-blue, #002657);
+      border-radius: 999px;
+      background: var(--craftmix-light-blue, #60d3f8);
+      box-shadow: 2px 6px 0 0 var(--craftmix-dark-blue, #002657);
+      color: var(--craftmix-dark-blue, #002657);
+      transform: translateY(-50%);
+      transition: box-shadow .25s ease, transform .25s ease, opacity .25s ease;
+      cursor: pointer;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow:hover {
+      box-shadow: none;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow:focus-visible {
+      outline: 2px solid var(--craftmix-dark-blue, #002657);
+      outline-offset: 3px;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow--prev {
+      left: 1rem;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow--next {
+      right: 1rem;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__arrow svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      stroke: currentColor;
+      stroke-width: 3;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     #espresso-hero-{{ section.id }} .espresso-hero__decor {
       position: absolute;
@@ -227,6 +293,10 @@
       #espresso-hero-{{ section.id }} .espresso-hero__grid {
       gap:30px;
       }
+      #espresso-hero-{{ section.id }} .espresso-hero__arrow {
+        width: 3rem;
+        height: 3rem;
+      }
          #espresso-hero-{{ section.id }} .espresso-hero__decor--right {
       top:80%;
 
@@ -295,6 +365,17 @@
       gap:77px;
   
     }
+      #espresso-hero-{{ section.id }} .espresso-hero__arrow {
+        width: 2.75rem;
+        height: 2.75rem;
+        box-shadow: 2px 4px 0 0 var(--craftmix-dark-blue, #002657);
+      }
+      #espresso-hero-{{ section.id }} .espresso-hero__arrow--prev {
+        left: 0.75rem;
+      }
+      #espresso-hero-{{ section.id }} .espresso-hero__arrow--next {
+        right: 0.75rem;
+      }
          #espresso-hero-{{ section.id }} .espresso-hero__decor--right {
   z-index:3;
 
@@ -350,23 +431,20 @@
         </div>
       {% endif %}
 
-      {% if section.blocks.size > 0 %}
+      {% if bullet_blocks.size > 0 %}
         <ul class="espresso-hero__bullets" role="list">
-          {% for block in section.blocks %}
-            {% case block.type %}
-              {% when 'bullet' %}
-                <li class="espresso-hero__bullet" {{ block.shopify_attributes }}>
-                  {% if block.settings.icon != blank %}
-                    {{
-                      block.settings.icon
-                      | image_url: width: 40
-                      | image_tag: class: 'espresso-hero__bullet-icon', loading: 'lazy', alt: block.settings.icon.alt
-                      | escape
-                    }}
-                  {% endif %}
-                  <span class="espresso-hero__bullet-text">{{ block.settings.text }}</span>
-                </li>
-            {% endcase %}
+          {% for block in bullet_blocks %}
+            <li class="espresso-hero__bullet" {{ block.shopify_attributes }}>
+              {% if block.settings.icon != blank %}
+                {{
+                  block.settings.icon
+                  | image_url: width: 40
+                  | image_tag: class: 'espresso-hero__bullet-icon', loading: 'lazy', alt: block.settings.icon.alt
+                  | escape
+                }}
+              {% endif %}
+              <span class="espresso-hero__bullet-text">{{ block.settings.text }}</span>
+            </li>
           {% endfor %}
         </ul>
       {% endif %}
@@ -389,7 +467,54 @@
 
     <div class="espresso-hero__visual">
       <div class="espresso-hero__card">
-        {% if s.main_image != blank %}
+        {% if hero_image_count > 1 %}
+          <div
+            id="PrankHeroSlider-{{ section.id }}"
+            class="splide espresso-hero__carousel"
+            data-prank-hero-slider="{{ section.id }}"
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="{{ s.title | default: 'Prank lander hero images' | escape }}"
+          >
+            <div class="splide__track">
+              <ul class="splide__list">
+                {% for block in section.blocks %}
+                  {% if block.type == 'image_slide' and block.settings.image != blank %}
+                    <li class="splide__slide espresso-hero__slide" {{ block.shopify_attributes }}>
+                      {{
+                        block.settings.image
+                        | image_url: width: 1100
+                        | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                        | escape
+                      }}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+            <button class="splide__arrow splide__arrow--prev espresso-hero__arrow espresso-hero__arrow--prev" aria-label="Previous slide">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.5 5.5L8 12l6.5 6.5"></path>
+              </svg>
+            </button>
+            <button class="splide__arrow splide__arrow--next espresso-hero__arrow espresso-hero__arrow--next" aria-label="Next slide">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 5.5L16 12l-6.5 6.5"></path>
+              </svg>
+            </button>
+          </div>
+        {% elsif hero_image_count == 1 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'image_slide' and block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 1100
+                | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                | escape
+              }}
+            {% endif %}
+          {% endfor %}
+        {% elsif s.main_image != blank %}
           {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt | escape }}
         {% else %}
           {{ 'image' | placeholder_svg_tag }}
@@ -398,6 +523,55 @@
     </div>
   </div>
 </section>
+
+{% javascript %}
+  (() => {
+    const initPrankHeroSliders = (scope = document) => {
+      if (typeof Splide === 'undefined') return;
+
+      const sliders = scope.querySelectorAll
+        ? scope.querySelectorAll('[data-prank-hero-slider]')
+        : [];
+
+      sliders.forEach((slider) => {
+        if (slider.dataset.sliderInitialized === 'true' || slider.splide) return;
+
+        const splide = new Splide(slider, {
+          type: 'loop',
+          perPage: 1,
+          perMove: 1,
+          arrows: true,
+          pagination: false,
+          drag: true,
+          swipe: true,
+          speed: 550,
+          gap: 0,
+          autoplay: false
+        });
+
+        splide.mount();
+        slider.dataset.sliderInitialized = 'true';
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', () => initPrankHeroSliders(document));
+    document.addEventListener('shopify:section:load', (event) => initPrankHeroSliders(event.target));
+    document.addEventListener('shopify:section:reorder', () => initPrankHeroSliders(document));
+    document.addEventListener('shopify:block:select', (event) => {
+      const slide = event.target.closest('.espresso-hero__slide');
+      const slider = event.target.closest('[data-prank-hero-slider]');
+
+      if (!slide || !slider || !slider.splide) return;
+
+      const slides = Array.from(slide.parentElement.children);
+      const index = slides.indexOf(slide);
+
+      if (index >= 0) {
+        slider.splide.go(index);
+      }
+    });
+  })();
+{% endjavascript %}
 
 {% schema %}
 {
@@ -410,7 +584,7 @@
     { "type": "checkbox", "id": "show_rating", "label": "Show rating row", "default": true },
     { "type": "range", "id": "rating_stars", "min": 0, "max": 5, "step": 1, "default": 5, "label": "Star count" },
     { "type": "text", "id": "rating_label", "label": "Rating text", "default": "600+ Reviews" },
-    { "type": "image_picker", "id": "main_image", "label": "Main image" },
+    { "type": "image_picker", "id": "main_image", "label": "Main image fallback", "info": "Used when no image slide blocks are added." },
     { "type": "image_picker", "id": "decor_left", "label": "Left decorative image" },
     { "type": "text", "id": "decor_left_bottom", "label": "Left decor bottom position", "default": "25%", "info": "e.g. 25% or 20px" },
     { "type": "text", "id": "decor_left_img_width", "label": "Left decor image width", "info": "Leave blank for 100%. Enter number for px (e.g. 240).", "placeholder": "e.g. 240" },
@@ -427,13 +601,22 @@
     {
       "type": "bullet",
       "name": "Bullet",
+      "limit": 4,
       "settings": [
         { "type": "image_picker", "id": "icon", "label": "Icon" },
         { "type": "text", "id": "text", "label": "Text", "default": "Just add vodka, water, and ice" }
       ]
+    },
+    {
+      "type": "image_slide",
+      "name": "Image slide",
+      "limit": 10,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
     }
   ],
-  "max_blocks": 4,
+  "max_blocks": 14,
   "presets": [
     {
       "name": "Prank lander hero",
