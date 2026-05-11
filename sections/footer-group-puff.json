@@ -1,0 +1,93 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "174237818672d5e4af": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "email_footer_TNEn6d": {
+          "type": "email_footer",
+          "settings": {
+            "open_by_default": true,
+            "heading_email": "Stay in the mix",
+            "subtext_email": "",
+            "show_social_icons": false
+          }
+        },
+        "footer-0": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "heading_menu": "Shop Craftmix",
+            "menu": "shop-craftmix-2025",
+            "show_social_icons": false
+          }
+        },
+        "footer-1": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "heading_menu": "About",
+            "menu": "about-footer-2025",
+            "show_social_icons": false
+          }
+        },
+        "link_list_JMLJPG": {
+          "type": "link_list",
+          "settings": {
+            "open_by_default": false,
+            "heading_menu": "Support",
+            "menu": "footer-support-2025",
+            "show_social_icons": false
+          }
+        }
+      },
+      "block_order": [
+        "email_footer_TNEn6d",
+        "footer-0",
+        "footer-1",
+        "link_list_JMLJPG"
+      ],
+      "custom_css": [
+        ".footer-col--1 {width: 40%;}",
+        "h1 {font-family: Hornbill;}"
+      ],
+      "settings": {
+        "columns_desktop": 5,
+        "show_language_selector": true,
+        "show_currency_selector": true,
+        "show_social_icons": false,
+        "payment_enable": true,
+        "custom_payment": "",
+        "show_copyright": true,
+        "add_copyright_text": "",
+        "additional_layout": "vertical",
+        "show_powered": true,
+        "enable_follow_on_shop": false,
+        "top_padding": 0,
+        "bottom_padding": 40,
+        "top_padding_mobile": 0,
+        "bottom_padding_mobile": 28
+      }
+    }
+  },
+  "order": [
+    "174237818672d5e4af",
+    "footer"
+  ]
+}

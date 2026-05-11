@@ -1,0 +1,1363 @@
+<script defer>
+  document.addEventListener("DOMContentLoaded", function () {
+    function handleActiveClass(containerSelector, buttonSelector) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        const buttons = container.querySelectorAll(buttonSelector);
+
+        buttons.forEach(btn => {
+            btn.addEventListener("click", function () {
+                // Remove active class from all buttons in this group
+                buttons.forEach(b => b.classList.remove("active"));
+
+                // Add active class to the clicked button
+                this.classList.add("active");
+            });
+        });
+    }
+
+    // Apply function to both groups
+    handleActiveClass(".select-quantity-btns", ".select-quantity-btn");
+    handleActiveClass(".select-delivery-btns", ".select-delivery-btn");
+});
+</script>
+<script defer>
+document.addEventListener('DOMContentLoaded', function () {
+  const slider = document.querySelector('.change-flavor-body');
+  const flavorCards = document.querySelectorAll('.flavor-card');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+  let isDragging = false;
+
+  // Store the first product title
+  let firstProductTitle = '';
+  if (flavorCards.length > 0) {
+    firstProductTitle = flavorCards[0].querySelector('.flavor-card-heading').textContent.replace(/^2025 - /, '');
+  }
+
+  // Display the first product title
+  const productTitleElement = document.querySelector('.subscription-product-title');
+  if (productTitleElement && firstProductTitle) {
+    productTitleElement.textContent = firstProductTitle;
+  }
+
+  // Slider functionality
+  if (slider) {
+    slider.addEventListener('mousedown', (e) => {
+      isDown = true;
+      slider.style.cursor = 'grabbing';
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mouseup', () => {
+      isDown = false;
+      slider.style.cursor = 'grab';
+    });
+
+    slider.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      const walk = (x - startX) * 2; // Scroll speed
+      slider.scrollLeft = scrollLeft - walk;
+      isDragging = true;
+    });
+  }
+
+  // Flavor selection functionality
+  flavorCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      if (!isDragging) {
+        // Remove active class from all li elements
+        document.querySelectorAll('.change-flavor-list li').forEach(li => li.classList.remove('active'));
+        // Add active class to the parent li of the clicked card
+        this.closest('li').classList.add('active');
+        
+        // Update product title
+        const newTitle = this.querySelector('.flavor-card-heading').textContent.replace(/^2025 - /, '');
+        if (productTitleElement) {
+          productTitleElement.textContent = newTitle;
+        }
+        
+        // Update product image
+        const newImageSrc = this.dataset.productImage;
+        const productImage = document.querySelector('.product-image img') || document.querySelector('.pdp-main-img-container img');
+        if (productImage && newImageSrc) {
+          productImage.src = newImageSrc;
+          productImage.alt = this.querySelector('img')?.alt || newTitle; // Update alt text for accessibility
+          productImage.removeAttribute('style');
+        }
+
+        // Update main image bg color
+        const imageContainer = document.querySelector(".product-image-container");
+        const newBgColor = this.dataset.productBg;
+        imageContainer.style.backgroundColor = newBgColor;
+
+        // Update card bg color
+        const allCards = document.querySelectorAll(".flavor-card-container .flavor-card");
+
+        // Update Flavor Range Percentage
+        const flavorPercentRaw = card.querySelector(".flavor-range-percent")?.innerHTML.trim();
+        const flavorPercent = flavorPercentRaw === "" ? 50 : parseInt(flavorPercentRaw, 10) || 50;
+        console.log('Flavor %:', flavorPercent);
+
+        // Add What's Included for Variety Packs
+        const whatsIncluded = document.getElementById("whats-included-container");
+        
+        if (newTitle.trim() == "Variety Pack") {
+          whatsIncluded.innerHTML = "<strong>Included:</strong><br>Strawberry Mule, Passionfruit Paloma, Blood Orange Mai Tai & Mango Margarita";
+        } else if (newTitle.trim() == "Lemonade Variety") {
+          whatsIncluded.innerHTML = "<strong>Included:</strong><br>Classic Lemonade, Blueberry Lemonade & Pink Lemonade";
+        } else if (newTitle.trim() == "Holiday Variety") {
+          whatsIncluded.innerHTML = "<strong>Included:</strong><br>Spiked Apple Cider, Cranberry Vanilla & Espresso Martini";
+        } else if (newTitle.trim() == "5PM Happy Hour Kit") {
+          whatsIncluded.innerHTML = "<strong>Included:</strong><br>Blood Orange Mai Tai, Strawberry Mule, Mango Margarita, Passionfruit Paloma & Mint Mojito";
+        } else {
+          whatsIncluded.innerText = "";
+        }
+
+          
+        const flavorRangeBar = document.querySelector(".flavor-range-fill");
+        if (flavorRangeBar) {
+          flavorRangeBar.style.width = `${flavorPercent}%`;
+        }
+        
+        const flavorIcon = document.querySelector(".flavor-range .flavor-icon");
+        if (flavorIcon) {
+          flavorIcon.style.left = `calc(${flavorPercent}% - 3rem)`;
+        }
+
+        // Update Flavor Type
+        const flavorTypeRaw = card.querySelector(".flavor-type")?.innerHTML.trim();
+        const flavorType = flavorTypeRaw === "" ? "Sour" : flavorTypeRaw;
+
+        // Update Sweet Alt
+        const sweetAltRaw = card.querySelector(".sweet-alt")?.innerHTML.trim();
+        const sweetAlt = flavorTypeRaw === "" ? "Sweet" : flavorTypeRaw;
+
+        const flavorTypeContainer = document.querySelector(".sour-label");
+        if (flavorTypeContainer) {
+          flavorTypeContainer.innerText = flavorType
+        }
+
+        allCards.forEach(card => {
+            card.style.backgroundColor = "white";
+        });
+
+        const selectedCard = document.querySelector(".flavor-card-container.active .flavor-card");
+        selectedCard.style.backgroundColor = newBgColor;
+
+        console.log('Selected product:', newTitle, 'Product ID:', this.dataset.productId);
+      }
+      isDragging = false;
+    });
+  });
+
+  // Reset isDragging on mouse up
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+  });
+
+  // Set initial active flavor image
+  const activeFlavor = document.querySelector('.change-flavor-list li.active .flavor-card');
+  if (activeFlavor) {
+    const productImage = activeFlavor.dataset.productImage;
+    const mainImage = document.querySelector('.pdp-main-img-container img');
+    if (mainImage && productImage) {
+      mainImage.src = productImage;
+    }
+  }
+
+  // Log the first product title for verification
+  console.log('First Product Title:', firstProductTitle);
+});
+
+
+  // Flavor bar
+document.addEventListener('DOMContentLoaded', function () {
+  const flavorBars = document.querySelectorAll('.flavor-bar');
+
+  flavorBars.forEach(flavorBar => {
+    let sweetnessPercentage = 50; // Default value if no data is found
+
+    // Check if the metafield exists and has a value
+    if (typeof meta !== 'undefined' && meta.product && meta.product.sweetness_percentage) {
+      sweetnessPercentage = parseInt(meta.product.sweetness_percentage, 10);
+    }
+
+    // Ensure the sweetness percentage is within 0-100 range
+    sweetnessPercentage = Math.max(0, Math.min(100, sweetnessPercentage));
+
+    setFlavorRange(flavorBar, sweetnessPercentage);
+  });
+});
+
+function setFlavorRange(flavorBar, percentage) {
+  const fillElement = flavorBar.querySelector('.flavor-range-fill');
+  const iconElement = flavorBar.querySelector('.flavor-icon');
+  
+  if (fillElement && iconElement) {
+    fillElement.style.width = `${percentage}%`;
+    iconElement.style.left = `calc(${percentage}% - 3rem)`;
+  }
+}  
+</script>
+<script defer>
+document.addEventListener('DOMContentLoaded', function () {
+  const GROUPS = [
+    {
+      name: 'flavor',
+      container: document.querySelector('.change-flavor-container'),
+      itemsSelector: '.change-flavor-list .flavor-card'
+    },
+    {
+      name: 'quantity',
+      container: document.querySelector('.select-quantity'),
+      itemsSelector: '.select-quantity-btns .select-quantity-btn'
+    },
+    {
+      name: 'delivery',
+      container: document.querySelector('.select-delivery'),
+      itemsSelector: '.select-delivery-btns .select-delivery-btn'
+    }
+  ].filter(g => g.container);
+
+  const ACTIVATION_KEYS = new Set(['Enter', ' ']);
+  const ARROW_KEYS = new Set(['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']);
+
+  function isVisible(el) {
+    if (!el) return false;
+    const style = window.getComputedStyle(el);
+    if (style.display === 'none' || style.visibility === 'hidden') return false;
+    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+  }
+
+  function getGroupItems(group) {
+    return Array.from(group.container.querySelectorAll(group.itemsSelector)).filter(isVisible);
+  }
+
+  function getSelectedIndex(items) {
+    // Try common “selected” patterns without requiring markup changes:
+    // 1) aria-checked="true"
+    // 2) aria-selected="true"
+    // 3) class "active" or "selected"
+    // 4) fallback to first item
+    const idx =
+      items.findIndex(el => el.getAttribute('aria-checked') === 'true') !== -1
+        ? items.findIndex(el => el.getAttribute('aria-checked') === 'true')
+        : items.findIndex(el => el.getAttribute('aria-selected') === 'true') !== -1
+          ? items.findIndex(el => el.getAttribute('aria-selected') === 'true')
+          : items.findIndex(el => el.classList.contains('active')) !== -1
+            ? items.findIndex(el => el.classList.contains('active'))
+            : items.findIndex(el => el.classList.contains('selected')) !== -1
+              ? items.findIndex(el => el.classList.contains('selected'))
+              : 0;
+
+    return Math.max(0, idx);
+  }
+
+  function setRovingTabindex(items, selectedIndex) {
+    items.forEach((el, i) => {
+      el.setAttribute('tabindex', i === selectedIndex ? '0' : '-1');
+    });
+  }
+
+  function syncRovingForGroup(group) {
+    const items = getGroupItems(group);
+    if (!items.length) return;
+
+    const selectedIndex = getSelectedIndex(items);
+    setRovingTabindex(items, selectedIndex);
+
+    // Ensure the container itself is not accidentally tabbable (we only want the active option)
+    if (group.container.hasAttribute('tabindex')) group.container.removeAttribute('tabindex');
+  }
+
+  function clickSelect(items, index) {
+    const el = items[index];
+    if (!el) return;
+    el.click();
+
+    // After click handlers run and potentially change DOM/classes, resync tab indices.
+    requestAnimationFrame(() => {
+      // Recompute items because some widgets rerender
+      const newItems = items[0]?.closest('body')
+        ? items
+        : items;
+      // We resync at the group level instead of using newItems
+      // (handled by caller)
+      el.focus();
+    });
+  }
+
+  function moveSelection(group, direction) {
+    const items = getGroupItems(group);
+    if (!items.length) return;
+
+    let currentIndex = items.findIndex(el => el === document.activeElement);
+    if (currentIndex === -1) currentIndex = getSelectedIndex(items);
+
+    const delta = direction === 'prev' ? -1 : 1;
+    let nextIndex = currentIndex + delta;
+
+    if (nextIndex < 0) nextIndex = items.length - 1;
+    if (nextIndex >= items.length) nextIndex = 0;
+
+    // Select it by clicking so existing selection logic stays the source of truth
+    items.forEach((el, i) => el.setAttribute('tabindex', i === nextIndex ? '0' : '-1'));
+    clickSelect(items, nextIndex);
+
+    // Resync after selection logic runs
+    requestAnimationFrame(() => syncRovingForGroup(group));
+  }
+
+  // Initialize roving tabindex for all groups
+  GROUPS.forEach(syncRovingForGroup);
+
+  // Keep roving tabindex synced when user clicks (mouse/touch) any option
+  document.addEventListener('click', function (e) {
+    for (const group of GROUPS) {
+      const item = e.target?.closest?.(group.itemsSelector);
+      if (!item || !group.container.contains(item)) continue;
+
+      requestAnimationFrame(() => syncRovingForGroup(group));
+      break;
+    }
+  }, true);
+
+  // Keyboard handling (arrows to change selection, enter/space selects)
+  document.addEventListener('keydown', function (e) {
+    // Only handle when focus is within one of the option groups
+    const group = GROUPS.find(g => {
+      const activeEl = document.activeElement;
+      return activeEl && g.container.contains(activeEl) && activeEl.matches(g.itemsSelector);
+    });
+
+    if (!group) return;
+
+    // Arrow keys change selection within the current group
+    if (ARROW_KEYS.has(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const isPrev = (e.key === 'ArrowLeft' || e.key === 'ArrowUp');
+      moveSelection(group, isPrev ? 'prev' : 'next');
+      return;
+    }
+
+    // Enter/Space selects the focused option (click)
+    if (ACTIVATION_KEYS.has(e.key)) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const items = getGroupItems(group);
+      const idx = items.findIndex(el => el === document.activeElement);
+      if (idx !== -1) {
+        clickSelect(items, idx);
+        requestAnimationFrame(() => syncRovingForGroup(group));
+      }
+      return;
+    }
+  }, true);
+
+  // If the widget rerenders any of these groups, resync roving tabindex automatically
+  const observer = new MutationObserver(() => {
+    GROUPS.forEach(syncRovingForGroup);
+  });
+
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+});
+</script>
+
+<script defer>
+  const sellingPlans = {
+    "36 pack": {
+        "4 weeks": "4672487662",
+        "6 weeks": "4996792558",
+        "8 weeks": "4672520430"
+    },
+    "24 pack": {
+        "4 weeks": "4672585966",
+        "6 weeks": "4996759790",
+        "8 weeks": "4672618734"
+    },
+    "12 pack": {
+        "4 weeks": "4672684270",
+        "6 weeks": "4996727022",
+        "8 weeks": "4672717038"
+    }
+  }
+
+  const variantIds = {
+    {% for product in collections['new-website-flavors'].products %}
+      "{{ product.id }}": {
+        {% assign first = true %}
+        {% for v in product.variants %}
+          {% assign title = v.title %}
+          {% if title == '12 Pack' or title == '24 Pack' or title == '36 Pack' %}
+            {% unless first %},{% endunless %}
+            "{{ v.title | downcase }}": "{{ v.id }}"
+            {% assign first = false %}
+          {% endif %}
+        {% endfor %}
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  };
+
+  function getActiveProduct() {
+    const activeFlavorCard = document.querySelector(".flavor-card-container.active");
+    return activeFlavorCard ? activeFlavorCard.getAttribute("data-product-id") : "no product";
+  }
+  function getActiveQuantity() {
+    const activeQuantity = document.querySelector(".select-quantity-btn.active");
+    if (!activeQuantity) return "no quantity";
+    let text = "";
+
+    return activeQuantity.firstChild.textContent.trim();
+  }
+
+  function getActiveFrequency() {
+    const activeFrequency = document.querySelector(".select-delivery-btn.active");
+    return activeFrequency ? activeFrequency.innerHTML.trim() : "no frequency";
+  }
+  function getVariantId(product_id, quantity){
+    console.log(product_id)
+    console.log(quantity)
+    console.log('VARIANT ID =', variantIds);
+    return variantIds[product_id][quantity];
+  }
+  function getSellingPlanId(quantity, frequency){
+    console.log(sellingPlans[quantity][frequency])
+    return sellingPlans[quantity][frequency]
+  }
+  function setAtcButton() {
+    // Get the values from the respective functions
+    console.log("Getting active product...");
+    const activeProduct = getActiveProduct();
+    console.log("Getting active quantity...");
+    const activeQuantity = getActiveQuantity();
+    console.log(`ACTIVE QUANTITY = ${activeQuantity}`)
+    console.log("Setting variant id...");
+    const variantId = getVariantId(activeProduct, activeQuantity);
+    console.log(variantId);
+    console.log("Setting selling plan...");
+    const activeFrequency = getActiveFrequency();
+    console.log(`ACTIVE FREQUENCY = ${activeFrequency}`)
+    const sellingPlanId = getSellingPlanId(getActiveQuantity(), getActiveFrequency());
+    console.log(sellingPlanId)
+    console.log("Setting variant input...")
+    // Set the values in the corresponding input fields
+    const variantInput = document.getElementById("subscription-form-variant-id");
+    if (variantInput) variantInput.value = variantId;
+    console.log("Setting selling plan input...")
+    const sellingPlanInput = document.getElementById("subscription-form-selling-plan");
+    if (sellingPlanInput) sellingPlanInput.value = sellingPlanId;
+  }
+  function setPrice(){
+    const totalPriceContainer = document.querySelector('.price-box-comparison .price-1')
+    const finalPriceContainer = document.querySelector('.price-box-comparison .price-2')
+    const pricePerDrinkContainer = document.querySelector('.price-per-drink')
+    const atcButtonPrice = document.querySelector('.atc-button-price')
+    const activeQuantity = getActiveQuantity()
+    const activeProduct = getActiveProduct()
+    let totalPrice
+    let finalPrice
+    let pricePerDrink
+    switch (activeQuantity) {
+      case "12 pack":
+        totalPrice = activeProduct == 8737845772526 ? 16.99 : 14.99;
+        finalPrice = totalPrice * 0.85
+        pricePerDrink = finalPrice/12
+        break;
+      case "24 pack":
+        totalPrice = activeProduct == 8737845772526 ? 33.98 : 29.98;
+        finalPrice = totalPrice * 0.85
+        pricePerDrink = finalPrice/24
+        break;
+      // ... more cases as needed
+      case "36 pack":
+        totalPrice = activeProduct == 8737845772526 ? 50.97 : 44.97;
+        finalPrice = totalPrice * 0.85
+        pricePerDrink = finalPrice/36
+        break;
+      // ... more cases as needed
+    }
+    totalPriceContainer.innerHTML = `$${totalPrice.toFixed(2)}`;
+    finalPriceContainer.innerHTML = `$${finalPrice.toFixed(2)}`;
+    atcButtonPrice.innerHTML = `$${finalPrice.toFixed(2)}`;
+    pricePerDrinkContainer.innerHTML = `$${pricePerDrink.toFixed(2)}/drink`;
+  }
+  document.addEventListener("click", function (event) {
+  if (
+    event.target.closest(".flavor-card") ||
+    event.target.closest(".select-quantity-btn") ||
+    event.target.closest(".select-delivery-btn")
+  ) {
+    setTimeout(() => {
+      setAtcButton();
+      setPrice();
+    }, 100);
+  }
+});
+  
+  
+</script>
+<div class="subscriptions">
+  <img class="bg-img lemon-bg" width="200" height="auto" src="{{ 'lemon-bg.svg' | asset_url }}" alt="Lemon illustration">
+      <div class="container">
+        <div class="subscription-header">
+          <h2 class="subscription-heading">Always Save<br class="mobile-line-break"> Never Run Out</h2>
+
+          <div class="logo-container">
+            <div class="logo logo-1">
+              <img height="90" width="90" src="https://cdn.shopify.com/s/files/1/2340/1623/files/subscribe-and-save-15-badge-min.png?v=1769558829" alt="Always save 15% banner graphic">
+            </div>
+
+            <div class="logo logo-2">
+              <img height="90" width="90" src="https://cdn.shopify.com/s/files/1/2340/1623/files/easy-to-skip-min.png?v=1741224367" alt="Easy to skip banner graphic">
+            </div>
+
+            <div class="logo logo-3">
+              <img height="90" width="90" src="https://cdn.shopify.com/s/files/1/2340/1623/files/never-run-out-min.png?v=1741224367" alt="Never run out banner graphic">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container main-section-container">
+        <div class="subscription-product">
+          <div class="product-image-container">
+            <img class="bg-img yellowflower-bg" width="200" height="auto" src="{{ 'yellowflower.svg' | asset_url }}" alt="Yellow flower illustration">
+            <img class="bg-img mint-bg" width="200" height="auto" src="{{ 'mint-leaf.svg' | asset_url }}" alt="Mint leaf illustration">
+            <div class="product-image">
+              <img id="mainProductImage" src="{{ collections['new-website-flavors'].products[0].images.last | img_url: 'original'}}" alt="{{ collections['new-website-flavors'].products[0].images.last.alt }}">
+            </div>
+
+            <div class="flavor-bar" id="flavorBar">
+              <div class="flavor-range">
+                <div class="flavor-range-fill"></div>
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lime2.svg?v=1738881712" alt="Lime illustration" class="flavor-icon">
+              </div>
+              <div class="flavor-labels">
+                <span class="sweet-label">Sweet</span>
+                <span class="flavor-label">Flavor</span>
+                <span class="sour-label">Sour</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-info-container">
+            <div class="subscription-product-info">
+              <h3 class="subscription-product-title">{{ product.title | replace_first: "2025 - ", "" }}</h3>
+              <div class="price-box">
+                <div class="price-box-comparison">
+                  <div class="price-1">$14.99</div>
+                  <div class="price-2">$12.74</div>
+                </div>
+                <div class="price-per-drink">
+                  $1.06/drink
+                </div>
+              </div>
+            </div>
+
+            <div id="whats-included-container">
+              <strong>Includes:</strong><br>Strawberry Mule, Passionfruit Paloma, Blood Orange Mai Tai & Mango Margarita
+            </div>
+            
+            <div class="change-flavor-container">
+              <h5 class="change-flavor-heading">Change Flavor</h5>
+              <div class="change-flavor-body">
+                <!-- <div class="change-flavor-overlay"></div> -->
+                <ul class="change-flavor-list">
+                  {% for product in collections['new-website-flavors'].products %}
+                    {% unless product.tags contains "price_test" %}
+                    <li class="flavor-card-container {% if forloop.first %}active{% endif %}" data-product-id="{{ product.id }}">
+                      <div class="flavor-card" data-product-id="{{ product.id }}" data-product-image="{{ product.images.last | img_url: '600x600' }}" data-product-bg="{{ product.metafields.custom.color_3 }}">
+                        <img class="flavor-card-image" src="{{ product.images.last | img_url: '300x300' }}" alt="{{ product.images.last.alt}}">
+                        {% assign title_length = product.title | size %}
+                        <h6 class="flavor-card-heading"
+                            style="max-width: {% if title_length < 15 %}70%{% else %}90%{% endif %};">
+                          {{ product.title }}
+                        </h6>
+                        <div class="hidden-product-details">
+                          <div class="flavor-range-percent">{{ product.metafields.custom.flavor_measure }}</div>
+                          <div class="flavor-type">{{ product.metafields.custom.flavor_type }}</div>
+                          <div class="sweet-alt">{{ product.metafields.custom.sweet_alt.value | default: 'Sweet' }}</div>
+                        </div>
+                      </div>
+                    </li>
+                    {% endunless %}
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            
+            <div class="select-quantity">
+              <h5 class="select-quantity-heading">Select Quantity</h5>
+              <div class="select-quantity-btns">
+                <div class="select-quantity-btn active">12 pack</div>
+                <div class="select-quantity-btn">24 pack</div>
+                <div class="select-quantity-btn">36 pack<span class="most-popular-badge">Most Popular</span></div>
+              </div>
+              {% comment %} <div class="select-quantity-btns">
+                <div class="quantity-btn-discount">15% Off</div>
+                <div class="quantity-btn-discount">15% Off</div>
+                <div class="quantity-btn-discount">15% Off</div>
+              </div> {% endcomment %}
+            </div>
+            <div class="select-delivery">
+              <h5 class="select-delivery-heading">Deliver Every</h5>
+              <div class="select-delivery-btns">
+                <div class="select-delivery-btn active">4 weeks</div>
+                <div class="select-delivery-btn">6 weeks</div>
+                <div class="select-delivery-btn">8 weeks</div>
+              </div>
+            </div>
+            
+            <div class="benifit-checks">
+              <div class="benifit">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/tick-icon.png?v=1739131445" alt="Checkmark icon">
+                Get an always-on discount up to 15% OFF
+              </div>
+              <div class="benifit">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/tick-icon.png?v=1739131445" alt="Checkmark icon">
+                No commitments! Skip, change flavors, gift it, or cancel upcoming orders anytime
+              </div>
+            </div>
+            <div class="subscription-cta">
+              <form action="/cart/add" method="post" id="add-to-cart-form">
+                <!-- Hidden field for the variant ID -->
+                <input id="subscription-form-variant-id" type="hidden" name="id" value="46082712076526">
+              
+                <!-- Hidden field for quantity (change as needed) -->
+                <input type="hidden" name="quantity" value="1">
+              
+                <!-- Hidden field for selling plan -->
+                <input id="subscription-form-selling-plan" type="hidden" name="selling_plan" value="4672684270">
+              
+                <!-- Submit button -->
+                <button class="primary-cta" type="submit">Add to Cart - <span class="atc-button-price">$12.74</span></button>
+              </form>
+              <div class="subscription-atc-sub-text-container">
+                <div class="subscription-atc-sub-text">Always FREE Shipping When You Subscribe</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="section-wave-container" style="margin-bottom: -100px">
+        <lottie-player class="section-wave" src="{{ 'wave-animation-left-to-right-pale-blue.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+      </div>
+    </div>
+
+{% style %}
+:root {
+  --light-color: {{ product.metafields.custom.color_3 }};
+  --medium-color: {{ product.metafields.custom.color_2  }};
+  --dark-color: {{ product.metafields.custom.color_1 }};
+}
+
+  *,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.subscriptions {
+  padding: 4rem 0;
+  background-color: #ddf7f7;
+}
+
+.container {
+  max-width: 1400px;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+.lemon-bg{
+  width: 184px;
+  height: auto;
+  right: -2.5rem;
+  transform: scaleX(-1);
+}
+.mint-bg{
+  width:200px;
+  height:auto;
+  right: -5rem;
+  z-index: -1;
+  transform: rotate(33deg);
+  bottom: -5rem;
+}
+.yellowflower-bg{
+    width: 300px;
+    height: auto;
+    left: -11.5rem;
+    top: -7rem;
+    z-index: -1;
+}
+.subscription-header {
+  margin-bottom: 70px;
+}
+.change-flavor-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.subscription-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 40px;
+  z-index: 1;
+  position: relative;
+}
+.logo-container .logo{
+  height:90px;
+}
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 58px;
+}
+.hidden-product-details{
+  position:absolute;
+  visibility:hidden;
+}
+.subscription-product {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  z-index: 1;
+  position: relative;
+}
+.subscriptions .main-section-container{
+  margin-bottom:2rem;
+}
+.subscriptions lottie-player{
+  transform: scaleX(-1);
+}
+.product-image-container {
+  height: 684px;
+  width: 616px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: {{ collections['new-website-flavors'].products[0].metafields.custom.color_3 }};
+  position:relative;
+}
+
+.product-image {
+  width: 538px;
+  height: 538px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  max-width: 538px; 
+}
+
+.flavor-bar {
+  width: 451px;
+  height: 64px;
+  margin-left: 86px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flavor-range {
+  width: 100%;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 6px;
+  overflow: visible;
+  position: relative;
+}
+
+.flavor-range-fill {
+  height: 100%;
+  background-color: #002657;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+.flavor-icon {
+  position: absolute;
+  top: 50%;
+  right: -22px; /* Half the width of the icon */
+  transform: translateY(-50%) translateX(50%) rotate(90deg);
+  width: 44px;
+  height: 42px;
+  transition: right 0.3s ease;
+}
+
+.flavor-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-family: 'Goldplay';
+  font-size: 14px;
+  color: rgba(0, 38, 87, 0.7);
+}
+
+.change-flavor-list li.active .flavor-card {
+  background-color: {{ collections['new-website-flavors'].products[0].metafields.custom.color_3 }};
+  
+}
+
+.sweet-label,
+.sour-label {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: center;
+  line-height: 16px;
+}
+
+.flavor-label {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 14px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.flavor-card-container{
+  border-radius:12px;
+}
+.flavor-card-container.active{
+    border: 1.5px solid var(--craftmix-dark-blue);
+}
+
+.product-info-container {
+  width: 616px;
+  padding-top: 11px;
+  padding-left: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self:center;
+}
+
+.subscription-product-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.subscription-product-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: left;
+  line-height: 54px;
+  margin-right: 24px;
+  margin-bottom: 12px;
+}
+#whats-included-container{
+  font-family: "Goldplay";
+  font-weight:500;
+  margin-bottom:32px;
+  font-size:16px;
+  width:65%;
+}
+#whats-included-container strong{
+  font-weight:600;
+}
+.price-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-box-comparison {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.price-box-comparison .price-1 {
+  opacity: 0.42;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 22px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  text-decoration: line-through;
+}
+.price-box-comparison .price-2 {
+  opacity: 1;
+  color: var(--craftmix-orange);
+  font-family: 'Goldplay';
+  font-size: 24px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: left;
+  line-height: 20px;
+}
+.price-per-drink {
+  opacity: 0.42;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 14px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -0.08px;
+  text-align: right;
+  line-height: 12px;
+  text-transform: uppercase;
+  margin-right: 6px;
+}
+.select-quantity{
+  margin-bottom:12px;
+}
+.change-flavor-heading,
+.select-quantity-heading,
+.select-delivery-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 14px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.3px;
+  text-align: left;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.change-flavor-body {
+  height: 176px;
+  margin-bottom: 23px;
+  overflow-x: auto;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0, 38, 87, 0.16) transparent; /* For Firefox */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative; /* for blur overlay */
+  mask-image: linear-gradient(
+    to right,
+    black calc(100% - 200px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    black calc(100% - 200px),
+    transparent 100%
+  );
+}
+
+change-flavor-body:active {
+  cursor: grabbing;
+}
+
+/* Styling for WebKit browsers (Chrome, Safari, etc.) */
+.change-flavor-body::-webkit-scrollbar {
+  height: 4px; /* Slightly increased height for better visibility */
+}
+
+.change-flavor-body::-webkit-scrollbar-track {
+  background: rgba(0, 38, 87, 0.05); /* Light background for the track */
+  border-radius: 2px;
+}
+
+.change-flavor-body::-webkit-scrollbar-thumb {
+  background-color: rgba(
+    0,
+    38,
+    87,
+    0.2
+  ); /* Slightly darker for better contrast */
+  border-radius: 3px;
+}
+.change-flavor-body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 38, 87, 0.3); /* Darker on hover */
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.change-flavor-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: thin; /* Firefox */
+}
+
+.change-flavor-list {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 6px; /* Reduced padding to account for scrollbar height */
+  padding-right: 50px; /* Add padding to prevent content from being cut off */
+}
+
+.flavor-card {
+  width: 115px;
+  height: 156px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 38, 87, 0.08);
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+}
+
+.flavor-card-image {
+  margin-top: 6px;
+  margin-left: 2px;
+  margin-bottom: 12px;
+}
+
+.flavor-card img {
+  pointer-events: none; /* Prevents image dragging */
+  -webkit-user-drag: none; /* For Safari */
+  user-select: none; /* Standard syntax for preventing selection */
+  -webkit-user-select: none; /* For older WebKit browsers */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For Internet Explorer/Edge */
+}
+
+.flavor-card-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: center;
+  line-height: 16px;
+  max-width: 90%;
+  margin: auto;
+}
+
+.select-quantity-btns,
+.select-delivery-btns {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+
+.select-quantity-btn,
+.select-delivery-btn {
+  position:relative;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: center;
+  line-height: 22px;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 11px 41px;
+  width: 164px;
+  cursor: pointer;
+}
+.quantity-btn-discount{
+  text-align:center;
+  width:164px;
+  font-family: Goldplay;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: red;
+  font-weight: bold;
+}
+.most-popular-badge{
+  position: absolute;
+  font-size: 14px;
+  top: -1.25rem;
+  background: var(--craftmix-orange);
+  border: 1.5px solid var(--craftmix-dark-blue);
+  border-radius: 100rem;
+  color: white;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  text-align: center;
+  max-width: 7.5rem;
+}
+.select-quantity-btn.active,
+.select-quantity-btn:hover,
+.select-delivery-btn.active,
+.select-delivery-btn:hover {
+  background-color: #60d3f8;
+}
+
+/* .carousel height 156px + bar margin ( bottom 16px) + 4px bar */
+
+.benifit-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 26px;
+}
+
+.benifit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+}
+
+.benifit img {
+  width: 14px;
+  height: 10px;
+  margin-right: 14px;
+}
+
+.subscription-cta {
+  text-align: left;
+}
+.subscription-cta button{
+  width:510px;
+  max-width:100%;
+  background: var(--craftmix-light-blue);
+}
+
+.add-to-cart-btn {
+  display: inline-block;
+  padding: 21px 161px;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: rgba(96, 211, 248, 1);
+  border-radius: 33px;
+}
+.subscription-atc-sub-text-container{
+  width: 510px;
+  max-width:100%;
+  text-align: center;
+  margin-top: 1rem;
+}
+.subscription-atc-sub-text{
+  font-size: 15px;
+  font-family: Goldplay;
+  font-weight: 600;
+}
+.most-popular-badge{
+  position: absolute;
+  font-size: 15px;
+  left: 0;
+}
+/******************/
+/* Media Queries */
+/******************/
+@media screen and (max-width: 1290px) {
+  .subscription-product {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .subscription-product-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .mint-bg{
+    bottom:-2rem;
+  }
+  .product-image-container{
+    align-self:center;
+  }
+}
+@media screen and (max-width:1023px){
+  .yellowflower-bg{
+    width:15rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  .product-image-container
+   {
+    height: 449px;
+    width: 388px;
+    max-width:100%;
+  }
+
+  .product-info-container {
+    width: 388px;
+    max-width:100%;
+  }
+
+  .logo-container {
+    gap: 40px;
+  }
+  .logo-container .logo img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .subscription-header {
+    margin-bottom: 40px;
+  }
+
+  .subscription-heading {
+    font-size: 40px;
+    letter-spacing: -1.05px;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 40px;
+    padding: 0 50px;
+  }
+  .product-image {
+    width: 328px;
+    height: 328px;
+    /* margin-left: 43px; */
+    margin-top: 28px;
+  }
+  .flavor-bar {
+    width: 354px;
+    max-width:90%;
+    margin-left: 17px;
+  }
+
+  .subscription-product-title {
+    font-size: 40px;
+    letter-spacing: -1.05px;
+    text-align: left;
+    line-height: 40px;
+  }
+
+  .price-box-comparison .price-1 {
+    font-size: 18px;
+    letter-spacing: -0.11px;
+    text-align: left;
+    line-height: 22px;
+  }
+  .price-box-comparison .price-2 {
+    font-size: 18px;
+    letter-spacing: -0.11px;
+    text-align: left;
+    line-height: 22px;
+  }
+  .price-per-drink {
+    opacity: 0.4;
+    font-size: 12px;
+    letter-spacing: -0.08px;
+    text-align: left;
+    line-height: 12px;
+  }
+
+  .select-quantity-btn,
+  .select-delivery-btn {
+    /* Changed on shopify style sheet */
+    padding: 11px 12px;
+    width: 125px;
+  }
+
+  .add-to-cart-btn {
+    display: inline-block;
+    padding: 19px 101px;
+  }
+
+  .change-flavor-body {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  .yellowflower-bg{
+    width:10rem;
+    left:-6.5rem;
+    top:-4rem;
+  }
+  .lemon-bg{
+    width:8rem;
+    right:-3.5rem;
+  }
+  .most-popular-badge{
+    font-size:12px;
+    max-width: 80%;
+  }
+  #whats-included-container{
+    width:90%;
+  }
+}
+
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Custom Subscribe Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Always Save Never Run Out"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Subscribe Header",
+    }
+  ]
+}
+{% endschema %}

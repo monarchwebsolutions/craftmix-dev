@@ -1,0 +1,1608 @@
+{% liquid 
+if settings.lang_direction contains request.locale.iso_code
+  assign is_rtl = true
+else
+  assign is_rtl = false
+endif
+%}
+ 
+<div class="customer-account-section">
+
+  <div class="customer-account-container">
+    <img class="background-fruit fruit-cherry" src="https://cdn.shopify.com/s/files/1/2340/1623/files/cherrycherry.png?v=1739182967"  width="171" height="218" alt="Cherry" >
+    <img class="background-fruit fruit-blueberry" src="https://cdn.shopify.com/s/files/1/2340/1623/files/blueberry.png?v=1739183661" width="108" height="110" alt="Blueberry">
+    <img class="background-fruit fruit-mint" src="https://cdn.shopify.com/s/files/1/2340/1623/files/mint.svg?v=1738881269" width="294" height="270" alt="Mint">
+    <img class="background-fruit fruit-grapefruit" src="https://cdn.shopify.com/s/files/1/2340/1623/files/grapefruit.png?v=1739183425" width="220" height="220" alt="Grapefruit">
+    <img class="background-fruit fruit-strawberry" src="https://cdn.shopify.com/s/files/1/2340/1623/files/strawberry.png?v=1739183172" width="169" height="160" alt="Strawberry">
+    <img class="background-fruit fruit-lime" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lime2lime.png?v=1739183072" width="218" height="185" alt="Lime">
+    <div class="customer-account_container-header">
+      <h5 class="customer-account_container-subheading">Your Account</h5>
+      <h2 class="customer-account_container-heading">Hey, {{ customer.first_name }}</h2>
+    </div>
+
+   
+    <div class="account-page">
+      <div class="account-details-wrapper">
+        <div class="account-details">
+          
+          <div class="account-details_nav">
+            <nav class="account-nav">
+              <ul class="account-ul tabs">
+                <li data-tab-target="#profile" class="account-li tab active" tabindex="0">Profile</li>
+                <li data-tab-target="#orders" class="account-li tab" tabindex="0">Past orders</li>
+                <li data-tab-target="#returns" class="account-li tab" tabindex="0">Returns</li>
+                <li data-tab-target="#subscriptions" class="account-li tab" tabindex="0">Subscription</li>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="account-details_main tab-content">
+    
+
+            <div id="profile" class="content-body profile active" data-tab-content>
+              <div class="profile-content">
+                <div class="general">
+                  <h3 class="general-title">General</h3>
+                  <div class="name">
+                    <h4>Name</h4>
+                    <p>{{ customer.first_name }} {{ customer.last_name }}</p>
+                  </div>
+                  <div class="email">
+                    <h4>Email</h4>
+                    <p>{{ customer.email }}</p>
+                  </div>
+                </div>
+                <div class="address">
+                  <h3 class="address-title">Address</h3>
+                  <p class="account-address">{{ customer.default_address | format_address }}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Past Orders  -->
+          
+            <div id="orders" class="content-body past-orders" data-tab-content>
+              <h3 class="past-orders-title">Recent Orders</h3>
+            
+              {% if customer.orders.size > 0 %}
+                <ul class="order-list">
+                  {% for order in customer.orders limit:5 %}
+                    <li class="order-item">
+                      <p class="order-number">
+                        <!-- <a href="{{ order.order_status_url }}">Order {{ order.name }}</a> -->
+                        Order {{ order.name }}
+                      </p>
+                      <p class="order-date">{{ order.created_at | date: "%B %d, %Y" }}</p>
+                      <p class="order-total">Total: {{ order.total_price | money }}</p>
+                      <p class="order-status">Status: {{ order.fulfillment_status | capitalize }}</p>
+            
+                      <ul class="product-list">
+                        {% for line_item in order.line_items %}
+                          <li class="product-item">
+                            <p class="product-title">{{ line_item.title }}</p>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% else %}
+                <div class="empty-orders">
+                  <p>You haven't placed any orders yet.</p>
+                  <a href="/collections/all" class="empty-orders-btn">Start Shopping</a>
+                </div>
+              {% endif %}
+            </div>
+            
+            <div id="returns" class="content-body returns" data-tab-content>
+              <h3 class="returns-title">Returns</h3>
+               <p>If you would like to check the status of your active returns, please sign in <a href="https://www.craftmix.com/apps/redo/returns-portal/login" class="account-text-link" target="_blank" rel="noopener">here</a>.</p>
+
+            </div>
+            
+            <div id="subscriptions" class="content-body subscriptions" data-tab-content>
+              <h3 class="subscriptions-title">Subscriptions</h3>
+               <p>See all details on your subscriptions <a href="https://www.craftmix.com/a/account/subscriptions" class="account-text-link" target="_blank" rel="noopener">here</a>.</p>
+            </div> 
+          </div>
+
+      
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="customer-account_container-cta">
+      <a href="/account/logout/" class="logout-button">Logout</a>
+    </div>
+
+  </div>
+  
+</div>
+
+<div class="subscribe-card-section">
+  <div class="subscribe-card">
+    <img class="subscribe-card-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/subscribe-card.svg?v=1737762251" width="297" height="175" alt="Cocktail illustration">
+
+    <div class="subscribe-card-text">
+      <h2>Never get left dry!</h2>
+      <p>Subscribe & save 15% today</p>
+    </div>
+    <div class="subscribe-card-cta">
+      <a href="/pages/subscriptions" class="subscribe-card-btn">
+        Subscribe today - Learn more
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% style %}
+/* ****************** */
+/* *  Account Info  * */
+/* ****************** */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+  
+.customer-account-section {
+  background-color: #bfefff;
+}
+
+
+
+.account-details-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.customer-account_container-header {
+  width: 100%;
+  text-align: center;
+  padding: 45px 0;
+}
+
+h5.customer-account_container-subheading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2.customer-account_container-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: center;
+}
+
+.account-details {
+  margin: 0 auto;
+  width: 930px;
+  height: 465px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 0.22);
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.account-details_nav {
+  height: 59px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 0.2);
+}
+
+nav.account-nav {
+  height: 59px;
+}
+
+nav ul.account-ul {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+}
+
+nav ul li.account-li {
+  height: 100%; 
+  display: flex; 
+  align-items: center; 
+  padding: 0px 34px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #002657;
+  font-family: "Goldplay";
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+}
+
+nav ul li.account-li:hover,
+nav ul li.account-li:active,
+.tab.active{
+  background-color: #002657;
+  color: #fff;
+}
+
+.account-details_main {
+  height: 405px;
+  width: 100%;
+}
+
+.profile {
+  height: 404px;
+  width: 100%;
+  max-width: 926px; 
+  margin: 0 auto;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.general {
+  flex: 0 0 33%;
+  height: 100%;
+  border-right: 1.5px solid rgba(0, 38, 87, 0.2);
+  padding-top: 37px;
+  padding-left: 40px;
+}
+
+.address {
+  flex: 0 0 66%;
+  height: 100%;
+  padding-top: 37px;
+  padding-left: 40px;
+}
+
+.account-address {
+    opacity: 0.9;
+color: rgba(0, 38, 87, 1);
+font-family: "Goldplay";
+font-size: 18px;
+font-weight: 500;
+font-style: Medium;
+letter-spacing: -0.11px;
+text-align: left;
+line-height: 24px;
+  }
+
+.past-orders,
+.returns,
+.subscriptions {
+  padding: 36px 40px;
+}
+
+.general-title,
+.address-title,
+.past-orders-title,
+.returns-title,
+.subscriptions-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: left;
+  line-height: 20px;
+  margin-bottom: 32px;
+}
+
+.name h4,
+.email h4 {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+  margin-bottom: 2px;
+}
+
+.name {
+  margin-bottom: 63px;
+}
+
+.name p,
+.email p {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+}
+  
+.customer-account_container-cta {
+  width: 928px;
+  margin: 0 auto; 
+  padding-top: 30px;
+  padding-bottom: 118px;
+}
+  
+.customer-account_container-cta a {
+  position: relative;
+    display: inline-block;
+    color: rgba(0, 38, 87, 1);
+    font-family: "Goldplay";
+    font-size: 20px;
+    font-weight: 600;
+    font-style: SemiBold;
+    letter-spacing: -0.13px;
+    text-align: left;
+    line-height: 20px;
+     border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+    padding-bottom: 7px;
+    z-index: 4;
+
+}
+
+/* orders section  */
+.order-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.order-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.order-number {
+  font-weight: bold;
+}
+
+.order-date {
+  color: #666;
+}
+
+.product-list {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.product-item {
+  margin-top: 10px;
+}
+
+
+/* Classes for nav */
+[data-tab-content] {
+  display: none;
+}
+.active[data-tab-content] {
+  display: block;
+}
+
+/* media queries  */
+
+@media screen and (max-width: 1040px) {
+  .account-details {
+    width: 388px;
+    height: 498px;
+  }
+
+  nav ul.account-ul {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav ul li.account-li {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+
+  .name {
+    margin-bottom: 16px;
+  }
+
+  .customer-account_container-cta {
+  width: 388px;
+  margin: 0 auto; 
+  padding-top: 30px;
+  padding-bottom: 118px;
+}
+}
+
+@media screen and (max-width: 1040px) {
+  .profile-content {
+    flex-direction: column;
+  }
+
+  .general,
+  .address {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .general {
+    border-right: none;
+  }
+}
+
+ .customer-account_container-heading {
+    opacity: 1;
+color: rgba(0, 38, 87, 1);
+font-family: "Hornbill";
+font-size: 30px;
+font-weight: 700;
+font-style: Bold;
+letter-spacing: -0.79px;
+text-align: center;
+line-height: 35px;
+
+  }
+  .customer-account_container-subheading {
+opacity: 1;
+color: rgba(0, 38, 87, 1);
+font-family: "Goldplay-";
+font-size: 18px;
+font-weight: 700;
+font-style: Bold;
+letter-spacing: 0.43px;
+text-align: center;
+line-height: 17px;
+text-transform: uppercase;
+        margin-bottom: 7px;
+  }
+
+
+    
+}
+/* ****************** */
+/* *******Start****** */
+/* *  * */
+/* ****************** */
+/* General Styles */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Goldplay", sans-serif;
+  color: rgba(0, 38, 87, 1);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Account Info Styles */
+.account-details-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.account-details {
+  margin: 0 auto;
+  width: 930px;
+  height: 465px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 0.22);
+  overflow: hidden;
+  position: relative;
+}
+
+.account-details_nav {
+  height: 59px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 0.2);
+}
+
+nav {
+  height: 59px;
+}
+
+nav ul.account-ul {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+nav ul li.account-li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 34px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  line-height: 16px;
+}
+
+nav ul li.account-li:hover,
+nav ul li.account-li:active,
+.tab.active {
+  background-color: #002657;
+  color: #fff;
+}
+
+.account-details_main {
+  /* height: 405px; */
+  width: 100%;
+}
+
+.profile {
+  height: 404px;
+  width: 100%;
+  max-width: 926px;
+  margin: 0 auto;
+}
+
+.profile-content {
+  display: flex;
+  height: 100%;
+}
+
+.general,
+.address {
+  padding-top: 37px;
+  padding-left: 40px;
+}
+
+  .address {
+    font-size: 18px;
+  }
+
+
+.general {
+  flex: 0 0 33%;
+  border-right: 1.5px solid rgba(0, 38, 87, 0.2);
+}
+
+.address {
+  flex: 0 0 66%;
+}
+
+.general-title,
+.address-title,
+.past-orders-title,
+.returns-title,
+.subscriptions-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  margin-bottom: 32px;
+}
+
+.name h4,
+.email h4 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  line-height: 16px;
+  margin-bottom: 2px;
+}
+
+.name {
+  margin-bottom: 63px;
+}
+
+.name p,
+.email p,
+.account-address {
+  opacity: 0.9;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  line-height: 24px;
+}
+
+.past-orders,
+.returns,
+.subscriptions {
+  padding: 36px 40px;
+}
+
+.customer-account_container-cta {
+  width: 928px;
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 118px;
+}
+
+.customer-account_container-cta a {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  padding-bottom: 7px;
+  z-index: 4;
+}
+
+/* Orders Section */
+.order-list {
+  padding: 0;
+}
+
+.order-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.order-number {
+  font-weight: bold;
+}
+
+.order-date {
+  color: #666;
+}
+
+.product-list {
+  padding-left: 20px;
+}
+
+.product-item {
+  margin-top: 10px;
+}
+
+/* Tab Content */
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block;
+}
+
+/* Headings */
+.customer-account_container-heading {
+  font-family: "Hornbill", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.79px;
+  text-align: center;
+  line-height: 35px;
+}
+
+.customer-account_container-subheading {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+
+/* OLD */
+/* NEW */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Goldplay", sans-serif;
+  color: rgba(0, 38, 87, 1);
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Account Info Styles */
+.customer-account-section {
+  background-color: #bfefff;
+}
+
+.account-details-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.customer-account_container-header {
+  text-align: center;
+  padding: 45px 0;
+}
+
+.customer-account_container-subheading {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.customer-account_container-heading {
+  font-family: "Hornbill", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.79px;
+  line-height: 35px;
+}
+
+.account-details {
+  margin: 0 auto;
+  width: 930px;
+  height: 465px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 0.22);
+  overflow: hidden;
+}
+
+/* Navigation Styles */
+.account-details_nav {
+  height: 59px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 0.2);
+}
+
+nav ul.account-ul {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+nav ul li.account-li {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 34px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  line-height: 16px;
+}
+
+nav ul li.account-li:hover,
+nav ul li.account-li:active,
+.tab.active {
+  background-color: #002657;
+  color: #fff;
+}
+
+/* Profile Content Styles */
+.account-details_main {
+  /* height: 405px; */
+}
+
+.profile {
+  height: 404px;
+  max-width: 926px;
+  margin: 0 auto;
+}
+
+.profile-content {
+  display: flex;
+  height: 100%;
+}
+
+.general,
+.address {
+  padding: 37px 0 0 40px;
+}
+
+.general {
+  flex: 0 0 33%;
+  border-right: 1.5px solid rgba(0, 38, 87, 0.2);
+}
+
+.address {
+  flex: 0 0 66%;
+}
+
+.general-title,
+.address-title,
+.past-orders-title,
+.returns-title,
+.subscriptions-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  margin-bottom: 32px;
+}
+
+.name h4,
+.email h4 {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  line-height: 16px;
+  margin-bottom: 2px;
+}
+
+.name {
+  margin-bottom: 63px;
+}
+
+.name p,
+.email p,
+.account-address {
+  opacity: 0.9;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  line-height: 24px;
+}
+
+.past-orders,
+.returns,
+.subscriptions {
+  padding: 36px 40px;
+}
+
+.account-text-link {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* CTA Styles */
+.customer-account_container-cta {
+  width: 928px;
+  margin: 0 auto;
+  padding: 30px 0 78px;
+}
+
+.customer-account_container-cta a {
+  position: relative;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  padding-bottom: 7px;
+  z-index: 4;
+}
+
+/* Orders Section */
+.order-list {
+  padding: 0;
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.order-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
+
+.order-number {
+  font-weight: bold;
+}
+
+.order-date {
+  color: #666;
+}
+
+.product-list {
+  padding-left: 20px;
+}
+
+.product-item {
+  margin-top: 10px;
+}
+
+/* Tab Content */
+[data-tab-content] {
+  display: none;
+}
+
+.active[data-tab-content] {
+  display: block;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1040px) {
+  .account-details,
+  .customer-account_container-cta {
+    width: 388px;
+  }
+
+  .account-details {
+    height: 498px;
+  }
+
+  nav ul.account-ul {
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav ul li.account-li {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+  }
+
+  .name {
+    margin-bottom: 16px;
+  }
+
+  .profile-content {
+    flex-direction: column;
+  }
+
+  .general,
+  .address {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .general {
+    border-right: none;
+  }
+}
+  
+
+/* END NEW  */
+
+
+/* Media Queries */
+@media screen and (max-width: 1040px) {
+  .account-details,
+  .customer-account_container-cta {
+    width: 388px;
+  }
+
+  .account-details {
+    height: 498px;
+  }
+
+  nav ul.account-ul {
+    justify-content: space-evenly;
+    padding: 0;
+    margin: 0;
+  }
+
+  nav ul li.account-li {
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .name {
+    margin-bottom: 16px;
+  }
+
+  .profile-content {
+    flex-direction: column;
+  }
+
+  .general,
+  .address {
+    width: 100%;
+    max-width: 100%;
+    padding: 30px;
+  }
+
+  .general {
+    border-right: none;
+  }
+  account-details_main {
+    height: 438px;
+  }
+  .order-list {
+    padding: 0;
+    max-height: 340px;
+    overflow-y: scroll;
+    }
+}
+
+@media screen and (max-width: 430px) {
+   h2.customer-account_container-heading {
+    opacity: 1;
+    color: rgba(0, 38, 87, 1);
+    font-family: "Hornbill";
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.79px;
+    text-align: center;
+    line-height: 35px;
+}
+
+  .account-details-wrapper {
+    padding: 0 16px;
+  }
+
+  .account-details {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 20px;
+    overflow: hidden; /* Prevent overall scrolling */
+  }
+
+  .account-details_nav {
+    min-height: 59px;
+  }
+
+  nav.account-nav {
+    height: 100%;
+  }
+
+  nav ul.account-ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+    padding: 0;
+  }
+
+  nav ul li.account-li {
+    flex: 1;
+    padding: 0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  nav ul li.account-li:hover,
+  nav ul li.account-li:active,
+  .tab.active {
+    background-color: #002657;
+    color: #fff;
+  }
+
+  .account-details_main {
+    height: 438px;
+    overflow-y: auto; /* Enable vertical scrolling */
+  }
+
+  .content-body {
+    height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling for each tab content */
+    padding: 20px;
+  }
+
+  .profile-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  
+  .general, .address {
+      flex: 1;
+      width: 100%;
+      padding: 20px 16px;
+      border-right: none;
+   }
+
+  .address {
+    font-size: 18px;
+  }
+
+
+  .customer-account_container-cta {
+    padding: 20px 16px 20px 16px;
+  }
+
+  .customer-account_container-heading {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .customer-account_container-subheading {
+    font-size: 16px;
+  }
+
+  /* Adjust spacing for profile content */
+  .name,
+  .email {
+    margin-bottom: 15px;
+  }
+
+  .general-title,
+  .address-title {
+    margin-bottom: 15px;
+  }
+
+  /* Ensure both sections are visible and properly sized */
+  .profile {
+    height: 100%;
+  }
+
+  /* Adjust scrolling for specific content bodies */
+  #profile.content-body {
+    overflow-y: hidden; /* Disable scrolling for profile tab */
+  }
+
+  #profile .profile-content {
+    height: 100%;
+    overflow-y: auto; /* Enable scrolling for profile content */
+  }
+  .general-title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.11px;
+    line-height: 22px;
+    margin-bottom: 32px;
+ }
+}
+
+@media screen and (max-width: 380px) {
+ nav ul li.account-li {
+    flex: 1;
+    padding: 0;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+
+  
+/* ****************** */
+/* *******Start****** */
+/* * Subscribe Card * */
+/* ****************** */
+.subscribe-card-section {
+  background-color: #bfefff;
+  padding: 50px 0;
+  position: relative;
+  z-index: 0:
+}
+
+.subscribe-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1390px;
+  height: 122px;
+  font-family: 'Goldplay', sans-serif;
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff0bd;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  opacity: 1;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.subscribe-card-image {
+  width: auto;
+  height: 175px;
+  align-self: flex-end;
+  overflow: hidden;
+  margin-bottom: -70px;
+}
+
+.subscribe-card-text {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.subscribe-card-text h2 {
+  font-size: 30px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-text p {
+  font-size: 18px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 33px;
+  font-family: 'Goldplay', sans-serif;
+  font-size: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: #60d3f8;
+  color: #002657;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.subscribe-card-btn:hover {
+  box-shadow: none;
+}
+
+/* ****************** */
+  /* ***** Start ******* */
+/* * Subscribe Card * */
+  /* Media Queries */
+/* ****************** */
+
+@media (max-width: 1400px) {
+  .subscribe-card {
+    margin: 0 50px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .subscribe-card {
+    max-width: 388px;
+    height: 331px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .subscribe-card-text {
+    padding-left: 0;
+    padding-top: 25px;
+    margin: 0;
+    flex: 0;
+    order: -1;
+    text-align: center;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 26px;
+  }
+
+  .subscribe-card-image {
+    margin: 0 auto -70px;
+    order: 1;
+  }
+
+  .subscribe-card-cta {
+    order: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-card-btn {
+    padding: 14px 25px;
+  }
+}
+@media (max-width: 399px) {
+  .subscribe-card-section {
+    padding: 30px 16px;
+  }
+
+  .subscribe-card {
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 16px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-card-text p {
+    font-size: 16px;
+  }
+
+  .subscribe-card-image {
+    height: 140px;
+    margin-bottom: -70px;
+  }
+
+  .subscribe-card-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 349px) {
+  .subscribe-card-btn {
+    font-size: 14px;       
+  }
+}
+
+/* ****************** */
+/* ***** END ******* */
+/* * Subscribe Card * */
+  /* Media Queries */
+/* ****************** */
+
+
+/* ****************** */
+/* *******Start****** */
+/* * Background fruits * */
+/* ****************** */
+  .background-fruit {
+  position: absolute;
+  z-index: 0;
+}
+.background-fruit.fruit-cherry {
+  top: 155px;
+  left: -40px;
+  width: auto! important;
+  height: 218px !important;
+  
+}
+.background-fruit.fruit-blueberry {
+  top: 550px;
+  left: 75px;
+  width: auto! important;
+  height: 110px !important;
+  
+}
+.background-fruit.fruit-mint {
+  top: 710px;
+  left: -175px;
+   width: auto! important;
+  height: 270px !important;
+  z-index: 2;
+}
+.background-fruit.fruit-grapefruit {
+  top: 140px;
+  right: -30px;
+  transform: rotate(160deg);
+   width: auto! important;
+  height: 220px !important;
+}
+.background-fruit.fruit-strawberry {
+  top: 400px;
+  right: 70px;
+   width: auto! important;
+  height: 160px !important;
+}
+.background-fruit.fruit-lime {
+ top: 735px;
+  right: -80px;
+  width: auto! important;
+  height: 185px !important;
+  z-index: 2;
+}
+
+
+@media (max-width: 800px) {
+
+
+  .background-fruit.fruit-blueberry {
+    display: none;
+  }
+    
+  .background-fruit.fruit-strawberry {
+    display: none;
+   
+  }
+
+}  
+
+  @media (max-width: 550px) {
+
+.background-fruit.fruit-cherry {
+   width: auto! important;
+  height: 128px !important;
+  top: 130px;
+  left: -35px;
+}
+.background-fruit.fruit-blueberry {
+  display: none;
+}
+.background-fruit.fruit-mint {
+  display: none;
+}
+.background-fruit.fruit-grapefruit {
+  top: 110px;
+  right: -30px;
+  transform: rotate(160deg);
+    width: auto! important;
+  height: 100px !important;
+}
+.background-fruit.fruit-strawberry {
+   display: none;
+}
+.background-fruit.fruit-lime {
+ top: 690px;
+  right: -60px;
+   width: auto! important;
+  height: 130px !important;
+  z-index: 0;
+}
+}  
+/* ****************** */
+/* *******END****** */
+/* * Background fruits * */
+/* ****************** */
+  
+{% endstyle %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function () {
+  const tabs = document.querySelectorAll('[data-tab-target]');
+  const tabsContent = document.querySelectorAll('[data-tab-content]');
+
+  function activateTab(tab) {
+    const target = document.querySelector(tab.dataset.tabTarget);
+    if (!target) return;
+
+    tabsContent.forEach(tabContent => {
+      tabContent.classList.remove('active');
+    });
+
+    tabs.forEach(t => {
+      t.classList.remove('active');
+    });
+
+    tab.classList.add('active');
+    target.classList.add('active');
+  }
+
+  tabs.forEach(tab => {
+    // Mouse activation
+    tab.addEventListener('click', function () {
+      activateTab(tab);
+    });
+
+    // Keyboard activation
+    tab.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); // prevent page scroll on Space
+        activateTab(tab);
+      }
+    });
+  });
+});
+{% endjavascript %}
+
+
+{% schema %}
+{
+  "name": "t:sections.main-account.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "paginate_type",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.main-collection-product-grid.settings.paginate_type.options__1.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.main-collection-product-grid.settings.paginate_type.options__2.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.main-collection-product-grid.settings.paginate_type.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_layout_mobile"
+    },
+    {
+      "type": "range",
+      "id": "top_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

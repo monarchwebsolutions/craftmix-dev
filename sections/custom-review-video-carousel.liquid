@@ -1,0 +1,131 @@
+<div class="people-love-it-wrapper">
+  <div class="section-wave-container">
+    <div
+      class="lazy-lottie-container section-wave"
+      data-src="{{ 'wave-animation-left-to-right-pale-blue.json' | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+  <div class="custom-video-review-carousel-section">
+    <div class="custom-video-review-carousel-header">
+      <div class="custom-video-review-carousel-header-stars">
+        <img class="lazy-img" width="101" height="18" alt="Review Stars" loading="lazy" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/orangestars.svg?v=1738215358">
+      </div>
+      <div class="custom-video-review-carousel-header-stars-text">over 6,000 verified 5 star reviews</div>
+      <h3 class="custom-video-review-carousel-heading">People Love It</h3>
+      <p class="custom-video-review-carousel-header-optional-paragraph">Words from our Craftmix Fam</p>
+    </div>
+    <div class="custom-video-review-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-video-review-carousel-container">
+      {% render 'review-video-carousel-inner' %}
+    </div>
+    <div class="custom-video-review-carousel-cta">
+      <a href="/pages/reviews-2025" class="custom-video-review-carousel-cta-btn">Read our customer reviews</a>
+    </div>
+  </div>
+  <div class="testimonial-selector-section">
+    <img loading="lazy" width="282" height="272" alt="Tropical Leaf Illustration" data-src="{{ 'tropicalleaf.svg' | asset_url }}" class="bg-img tropicalleaf-1-bg lazy-img">
+    <img loading="lazy" width="118" height="114" alt="Blueberry Illustration" data-src="{{ 'blueberry.svg' | asset_url }}" class="bg-img blueberry-bg lazy-img">
+    <img loading="lazy" width="176" height="201" alt="Orange Peel Illustration" data-src="{{ 'orangepeel.svg' | asset_url }}" class="bg-img orangepeel-bg lazy-img">
+    <img loading="lazy" width="273" height="282" alt="Mint Leaf Illustration" data-src="{{ 'mint-leaf-light.svg' | asset_url }}" class="bg-img mint-leaf-bg lazy-img">
+    <img loading="lazy" width="272" height="272" alt="Tropical Leaf Illustration" data-src="{{ 'tropicalleaf-shadow.svg' | asset_url }}" class="bg-img tropicalleaf-2-bg lazy-img">
+    <img loading="lazy" width="242" height="232" alt="Melon Slice Illustration" data-src="{{ 'lime.svg' | asset_url }}" class="bg-img lime-bg lazy-img">
+    <div class="testimonial-selector-content">
+      <div class="circled-quote-img-container">
+        <img class="lazy-img" width="60" height="60" loading="lazy" alt="Dark blue quotation mark symbol inside a pink and orange circular ring on a transparent background" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/circled-quote-min.png?v=1738218276">
+      </div>
+      <div class="quote-text quote-1">"Each mixer makes creating great-tasting, low-calorie drinks simple."</div>
+      <div class="quote-text quote-2 active">“You feel like a professional bartender in a few easy steps – perfect for hosting friends and family.”</div>
+      <div class="quote-text quote-3">"Paris Hilton signals the end of old cocktail mixers with this modern low-cal option."</div>
+      <div class="quote-logo-container">
+        <button class="quote-logo logo-1">
+          <img class="lazy-img" loading="lazy" height="40" width="112" alt="USA Today logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/usa-today-logo.png?v=1746923425">
+        </button>
+        <button class="quote-logo logo-2 active-logo">
+          <img class="lazy-img" loading="lazy" height="29" width="112" alt="LA Weekly logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/laweekly-logo.png?v=1746923425">
+        </button>
+        <button class="quote-logo logo-3">
+          <img class="lazy-img" loading="lazy" height="18" width="112" alt="Female First logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/femalefirst-logo.png?v=1746923425">
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Select all logo buttons
+    const logoButtons = document.querySelectorAll(".quote-logo");
+
+    logoButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const logoNumber = button.classList.contains("logo-1") ? "1" :
+                              button.classList.contains("logo-2") ? "2" :
+                              button.classList.contains("logo-3") ? "3" : null;
+
+            if (!logoNumber) return;
+
+            // Remove 'active-logo' from all logo buttons
+            document.querySelectorAll(".quote-logo").forEach(btn => btn.classList.remove("active-logo"));
+
+            // Add 'active-logo' only to the clicked button
+            button.classList.add("active-logo");
+
+            // Remove 'active' class from all quote texts
+            document.querySelectorAll(".quote-text").forEach(quote => quote.classList.remove("active"));
+
+            // Add 'active' class to the corresponding quote text
+            const correspondingQuote = document.querySelector(`.quote-${logoNumber}`);
+            if (correspondingQuote) {
+                correspondingQuote.classList.add("active");
+            }
+        });
+    });
+});
+</script>
+
+{% schema %}
+  {
+    "name": "Custom Rev video carousel",
+    "settings":[],
+    "blocks": [
+      {
+        "type": "carousel_card",
+        "name": "Carousel Card",
+        "settings": [
+          {
+            "type": "url",
+            "id": "video_url",
+            "label": "Video URL",
+            "info": "Upload video to Content > Files, then paste the link here (e.g., .mp4, .mov)"
+          },
+          {
+            "type": "text",
+            "id": "captions_title",
+            "label": "Captions Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "thumbnail",
+            "label": "Thumbnail Image"
+          },
+          {
+            "type": "product",
+            "id": "linked_product",
+            "label": "Linked Product"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 8,
+    "presets": [{"name": "Custom Review video carousel"}]
+   }
+{% endschema %}
+

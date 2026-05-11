@@ -1,0 +1,206 @@
+<div class="professional-bartender-wrapper">
+  <div class="testimonial-selector-section">
+    <img loading="lazy" width="282" height="272" alt="Tropical Leaf Illustration" data-src="{{ 'tropicalleaf.svg' | asset_url }}" class="bg-img tropicalleaf-1-bg lazy-img">
+    <img loading="lazy" width="118" height="114" alt="Blueberry Illustration" data-src="{{ 'blueberry.svg' | asset_url }}" class="bg-img blueberry-bg lazy-img">
+    <img loading="lazy" width="176" height="201" alt="Orange Peel Illustration" data-src="{{ 'orangepeel.svg' | asset_url }}" class="bg-img orangepeel-bg lazy-img">
+    <img loading="lazy" width="273" height="282" alt="Mint Leaf Illustration" data-src="{{ 'mint-leaf-light.svg' | asset_url }}" class="bg-img mint-leaf-bg lazy-img">
+    <img loading="lazy" width="272" height="272" alt="Tropical Leaf Illustration" data-src="{{ 'tropicalleaf-shadow.svg' | asset_url }}" class="bg-img tropicalleaf-2-bg lazy-img">
+    <img loading="lazy" width="242" height="232" alt="Melon Slice Illustration" data-src="{{ 'lime.svg' | asset_url }}" class="bg-img lime-bg lazy-img">
+    <div class="testimonial-selector-content">
+      <div class="circled-quote-img-container">
+        <img class="lazy-img" width="60" height="60" loading="lazy" alt="Dark blue quotation mark symbol inside a pink and orange circular ring on a transparent background" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/circled-quote-min.png?v=1738218276">
+      </div>
+      <div class="quote-text quote-1">"Each mixer makes creating great-tasting, low-calorie drinks simple."</div>
+      <div class="quote-text quote-2 active">"You feel like a professional bartender in a few easy steps – perfect for hosting friends and family."</div>
+      <div class="quote-text quote-3">"Paris Hilton signals the end of old cocktail mixers with this modern low-cal option."</div>
+      <div class="quote-logo-container">
+        <button class="quote-logo logo-1">
+          <img class="lazy-img" loading="lazy" height="40" width="112" alt="USA Today logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/usa-today-logo.png?v=1746923425">
+        </button>
+        <button class="quote-logo logo-2 active-logo">
+          <img class="lazy-img" loading="lazy" height="29" width="112" alt="LA Weekly logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/laweekly-logo.png?v=1746923425">
+        </button>
+        <button class="quote-logo logo-3">
+          <img class="lazy-img" loading="lazy" height="18" width="112" alt="Female First logo in Craftmix dark blue" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/femalefirst-logo.png?v=1746923425">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="section-wave-container">
+    <div
+      class="lazy-lottie-container section-wave"
+      data-src="{{ 'wave-divider-left-to-right-2400px-mint-green.json' | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+
+<style>
+  .professional-bartender-wrapper {
+    background-color: var(--craftmix-sky-blue);
+  }
+  .professional-bartender-wrapper .circled-quote-img-container {
+    width: 3.75rem;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+  .professional-bartender-wrapper .quote-text {
+    display: none;
+    text-align: center;
+    font-family: Hornbill, serif;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .professional-bartender-wrapper .quote-text.active {
+    display: block;
+   
+  }
+  .quote-text.active {
+   border:none;
+   background-color: transparent;
+  }
+  
+  .professional-bartender-wrapper .testimonial-selector-section {
+    padding-top: 4rem;
+    padding-bottom: 7rem;
+    position: relative;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .bg-img {
+    position: absolute;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .lime-bg {
+    right: 0;
+    top: -3rem;
+    width: 15rem;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .tropicalleaf-1-bg {
+    transform: rotate(70deg);
+    right: -3rem;
+    width: 13rem;
+    top: -2rem;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .tropicalleaf-2-bg {
+    bottom: -11rem;
+    z-index: 1;
+    left: -5rem;
+    width: 17rem;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .mint-leaf-bg {
+    right: -6rem;
+    transform: rotate(-70deg);
+    bottom: -7rem;
+    z-index: 1;
+    width: 14rem;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .orangepeel-bg {
+    left: 6rem;
+    bottom: 1rem;
+    width: 11rem;
+  }
+  .professional-bartender-wrapper .testimonial-selector-section .blueberry-bg {
+    top: 0;
+    left: 3rem;
+    transform: rotate(75deg);
+  }
+  .professional-bartender-wrapper .testimonial-selector-content {
+    max-width: 38rem;
+    margin: auto;
+  }
+  .professional-bartender-wrapper .quote-logo {
+    padding: 1rem 2.5rem;
+    opacity: 0.2;
+    flex: 1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .professional-bartender-wrapper .quote-logo.active-logo {
+    border-radius: 1.25rem;
+    opacity: 1;
+    background: white;
+  }
+  .professional-bartender-wrapper .quote-logo-container {
+    margin: auto;
+    margin-top: 3rem;
+    padding: 0 1rem;
+    display: flex;
+  }
+  @media screen and (max-width: 1023px) {
+    .professional-bartender-wrapper .testimonial-selector-section .tropicalleaf-2-bg {
+      bottom: -8rem;
+      width: 12rem;
+    }
+    .professional-bartender-wrapper .testimonial-selector-section .mint-leaf-bg {
+      width: 11rem;
+      bottom: -5rem;
+    }
+    .professional-bartender-wrapper .testimonial-selector-section .orangepeel-bg {
+      left: -5rem;
+      bottom: 9rem;
+      width: 9rem;
+    }
+    .professional-bartender-wrapper .testimonial-selector-section .tropicalleaf-1-bg {
+      display: none;
+    }
+    .professional-bartender-wrapper .testimonial-selector-section .blueberry-bg {
+      top: -2rem;
+      width: 7rem;
+    }
+    .professional-bartender-wrapper .testimonial-selector-section .lime-bg {
+      right: -6rem;
+      width: 12rem;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .professional-bartender-wrapper .quote-logo {
+      padding: 1rem;
+    }
+    .professional-bartender-wrapper .quote-text {
+      line-height: 1.2;
+      font-size: 1.75rem;
+      padding: 0 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".professional-bartender-wrapper");
+    if (!wrapper) return;
+    const logoButtons = wrapper.querySelectorAll(".quote-logo");
+    logoButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const logoNumber = button.classList.contains("logo-1") ? "1" :
+                          button.classList.contains("logo-2") ? "2" :
+                          button.classList.contains("logo-3") ? "3" : null;
+        if (!logoNumber) return;
+        wrapper.querySelectorAll(".quote-logo").forEach((btn) => btn.classList.remove("active-logo"));
+        button.classList.add("active-logo");
+        wrapper.querySelectorAll(".quote-text").forEach((quote) => quote.classList.remove("active"));
+        const correspondingQuote = wrapper.querySelector(".quote-" + logoNumber);
+        if (correspondingQuote) {
+          correspondingQuote.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Professional Bartender",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Professional Bartender"
+    }
+  ]
+}
+{% endschema %}

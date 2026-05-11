@@ -1,0 +1,97 @@
+{% liquid
+  if section.settings.card_image != blank
+    assign shop_now_card_image_src = section.settings.card_image | image_url: width: 596
+    assign shop_now_card_image_alt = section.settings.card_image.alt | default: 'Illustration of three colorful tropical cocktails in different glasses with fruit garnishes, umbrellas, sprinkles, and straws'
+  else
+    assign shop_now_card_image_src = 'https://cdn.shopify.com/s/files/1/2340/1623/files/shop-now-card.svg?v=1737762225'
+    assign shop_now_card_image_alt = 'Illustration of three colorful tropical cocktails in different glasses with fruit garnishes, umbrellas, sprinkles, and straws'
+  endif
+%}
+<section style="background-color: {{ section.settings.background_color }} !important;" class="shop-now-card-section">
+  <div class="shop-now-card">
+    <img loading="lazy" width="298" height="175" alt="{{ shop_now_card_image_alt | escape }}" class="shop-now-card-image lazy-img" data-src="{{ shop_now_card_image_src }}">
+
+    <div class="shop-now-card-text">
+      <h2>{{ section.settings.heading_text | default: 'Thirsty? Lets get sipping!' }}</h2>
+      <p>{{ section.settings.paragraph_text | default: 'Free US shipping on orders over $40' }}</p>
+    </div>
+    <div class="shop-now-card-cta">
+      <a href="/collections/flavors-2024"  class="shop-now-card-btn">
+         {{ section.settings.button_text | default: 'Shop now' }}
+      </a>
+    </div>
+  </div>
+</section>
+<style>
+
+#shopify-section-{{ section.id }} .shop-now-card {
+  background-color: {{ section.settings.card_background_color | default: '#f5e2e2' }};
+}
+.shop-now-card-image {
+    max-width:297px;
+  max-height:122px;
+  
+    overflow: hidden;
+   margin-bottom: 0px!important;
+}
+@media (max-width: 400px) {
+    .shop-now-card {
+     
+        padding: 20px 15px 0;
+    }
+}
+  </style>
+{% schema %}
+  {
+    "name": "Espresso Shop Card",
+    "settings": [
+      {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#fff"
+    },
+      {
+      "type": "color",
+      "id": "card_background_color",
+      "label": "Card Background Color",
+      "default": "#FFF0BD"
+    },
+      {
+        "type": "image_picker",
+        "id": "card_image",
+        "label": "Card image"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading",
+        "default": "Thirsty? Lets get sipping!"
+      },
+      {
+        "type": "text",
+        "id": "paragraph_text",
+        "label": "Paragraph",
+        "default": "Free US shipping on orders over $40"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Shop now"
+    },
+      {
+        "type": "url",
+        "id": "shop_now_link",
+        "label": "Shop Now Button Link",
+        "default": "/collections/all"
+      }
+
+    ],
+    "presets" : [
+      {
+        "name": "Espresso Shop Card"
+      }
+    ]
+  }
+{% endschema %}

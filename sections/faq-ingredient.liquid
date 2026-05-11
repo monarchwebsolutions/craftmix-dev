@@ -1,0 +1,266 @@
+<section class="custom-faq faq-section" id="ingredient" data-category="ingredient">
+      <div class="custom-faq-wrapper">
+        <div class="faqs-container">
+          <div class="custom-faq-title-section">
+            <h2 class="custom-faq-section-heading">{{ section.settings.headline }}</h2>
+          </div>
+          
+          <div class="custom-faq-section">
+           
+            <!-- Faq -->
+            {% for block in section.blocks %}
+            <div class="ingredient-faq {% if forloop.index == 2 %}active{% endif %}">
+              <div class="faq-text">
+                <div class="faq-question">
+                  <h6 class="faq-question-text">{{ block.settings.question }}</h6>
+                </div>
+                <div class="faq-answer">
+                  <p class="faq-answer-text">{{ block.settings.answer }}</p>
+                </div>
+              </div>
+              <div class="faq-icons">
+                <div class="faq-icon faq-icon-open">
+                  <img src="{{ 'faq-orange-open-icon.png' | asset_url }}" alt="open icon" width="36" height="36" loading="lazy">
+                </div>
+                <div class="faq-icon faq-icon-closed">
+                   <img src="{{ 'faq-orange-close-icon.png' | asset_url }}" alt="close icon" width="36" height="36" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <!-- End Faq -->
+            {% endfor %}
+          </div>
+
+      </div>
+
+    </div>
+
+      
+</section>
+
+{% style %}
+ *,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.custom-faq {
+  background-color: #ddf7f7;
+}
+.custom-faq-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 5px 20px;
+}
+
+.faqs-container {
+  max-width: 1015px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 115px;
+  margin-bottom: 55px;
+}
+
+.custom-faq-title-section {
+  max-width: 332px;
+  width: 100%;
+}
+.custom-faq-section {
+  max-width: 568px;
+  width: 100%;
+}
+
+.custom-faq-section-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+}
+
+.ingredient-faq {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+}
+
+.faq-question {
+  max-width: 440px;
+  width: 100%;
+}
+
+.faq-question-text {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  padding: 22px 5px;
+}
+
+.faq-answer {
+  max-width: 440px;
+  width: 100%;
+}
+
+.faq-answer-text {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  padding: 22px 5px;
+}
+
+.faq-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.faq-icons {
+  padding-top: 15px;
+}
+
+.ingredient-faq {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  cursor: pointer;
+}
+
+.faq-answer {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.ingredient-faq.active .faq-answer {
+  display: block;
+}
+
+
+.faq-icon-closed {
+  display: none;
+}
+
+.ingredient-faq.active .faq-icon-open {
+  display: none;
+}
+
+.ingredient-faq.active .faq-icon-closed {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .faqs-container {
+    gap: 40px;
+  }
+}
+@media (max-width: 860px) {
+  .custom-faq-section {
+    max-width: 388px;
+    width: 100%;
+  }
+  .faq-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .custom-faq-section-heading {
+    text-align: center;
+  }
+  .faqs-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 576px) {
+   .custom-faq-section-heading {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }
+  .faq-icons {
+    padding-left: 10px;
+  }
+  .faq-cta-container {
+    text-align: center;
+  }
+  .faq-cta {
+    font-size: 20px;
+    letter-spacing: -0.13px;
+    text-align: center;
+    line-height: 20px;
+    padding: 22px 20px;
+  }
+  .faq-question-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .faq-answer-text {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    line-height: 19px;
+  }
+}
+@media (max-width: 400px) {
+  .faq-icons {
+    padding-left: 10px;
+  }
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Custom Faq Ingredient",
+  "settings": [
+      {
+        "type": "text",
+        "label": "Headline",
+        "id": "headline"
+      }
+    ],
+   "blocks": [
+      {
+         "name": "question",
+        "type": "question",
+        "settings" : [
+          {
+            "type": "text",
+            "label": "question",
+            "id": "question"
+          },
+         {
+            "type": "text",
+            "label": "answer",
+            "id": "answer"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Custom Faq Ingredient",
+    }
+  ]
+}
+{% endschema %}

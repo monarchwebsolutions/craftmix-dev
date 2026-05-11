@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="292px" height="283px" viewBox="0 0 292 283" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>illustration/other/yellowflower</title>
+    <defs>
+        <filter x="-12.1%" y="-11.4%" width="131.9%" height="133.6%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="10" dy="10" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.125874126 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <polygon id="path-2" points="0 0 219.22622 0 219.22622 208.351787 0 208.351787"></polygon>
+    </defs>
+    <g id="Final-Full-Site-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Homepage---desktop" transform="translate(-1144, -6591)">
+            <g id="illustration/other/yellowflower" filter="url(#filter-1)" transform="translate(1280.0828, 6722.6575) scale(-1, -1) rotate(-908) translate(-1280.0828, -6722.6575)translate(1170.4697, 6618.4816)">
+                <g id="Group-6" transform="translate(0, 0)">
+                    <g id="Group-3">
+                        <mask id="mask-3" fill="white">
+                            <use xlink:href="#path-2"></use>
+                        </mask>
+                        <g id="Clip-2"></g>
+                        <path d="M25.6956791,0 C91.6086626,48.6420659 158.858509,91.7922857 219.226701,147.940516 C208.502921,169.733423 193.348602,187.597566 176.438674,197.148132 C126.598124,225.295648 68.2935857,194.413038 38.2376407,170.217148 C-6.51537033,134.190445 -13.6497165,41.3669341 25.6956791,0" id="Fill-1" fill="#FABBCB" mask="url(#mask-3)"></path>
+                    </g>
+                    <path d="M26.6429143,115.329732 C12.1034802,81.1789681 22.7358099,40.6808143 35.7975956,7.40484725 C94.8301286,50.4335341 154.589453,89.8378912 209.215513,138.810864 C176.330618,215.495759 53.4499582,178.299452 26.6429143,115.329732" id="Fill-4" fill="#FF5F00"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

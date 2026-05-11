@@ -1,0 +1,57 @@
+{% comment %}
+MAKE-CRAFT-DRINKS SECTION FILE BUT WITH NO INFO BAR
+{% endcomment %}
+
+
+<link rel="stylesheet" href="{{ 'make-craft-drinks-custom.css' | asset_url }}">
+<div class="make-craft-drinks-wrapper">
+  <div class="make-craft-drinks-section page-max-width">
+    <div class="craft-drinks-card-container">
+      <div class="craft-drinks-card">
+        <div class="craft-drinks-card-header">
+          <span class="card-subheading">make</span>
+          <h3 class="card-title">Craft Drinks</h3>
+          <p class="card-paragraph">in under 30 seconds</p>
+        </div>
+        <div class="craft-drinks-card-list-container">
+          <ul class="craft-drinks-card-list">
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>1</span></div>Pour 4oz water & optionally 1oz liquor
+            </li>
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>2</span></div>Stir in 1 Craftmix packet (30-60s)
+            </li>
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>3</span></div>Serve over a lot of ice and enjoy
+            </li>
+          </ul>
+        </div>
+  
+        <div class="craft-drinks-card-cta">
+          <a class="craft-drinks-card-cta-btn" href="/collections/flavors-2024">Find your flavor</a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="craft-drinks-image-container">
+      <lottie-player class="preparation-animation" src="{{ 'preparation-animation.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+    </div>
+  
+  </div>
+   <div class="section-wave-container">
+      <lottie-player class="section-wave" src="{{ 'wave-divider-r2l-purple.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+    </div>
+  
+</div>
+
+{% schema %}
+  {
+    "name": "Make Craft Drinks Alt",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Make Craft Drinks Alt"
+      }
+    ]
+  }
+{% endschema %}

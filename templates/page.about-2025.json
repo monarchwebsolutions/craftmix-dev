@@ -1,0 +1,126 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "custom_about_hero_DM9fYp": {
+      "type": "custom-about-hero",
+      "settings": {}
+    },
+    "custom_about_info_KgJfty": {
+      "type": "custom-about-info",
+      "settings": {}
+    },
+    "custom_flavor_carousel_XQPpdN": {
+      "type": "Custom-flavor-carousel",
+      "settings": {
+        "heading": "Find Your Flavor",
+        "background_color": "#ead1fa"
+      }
+    },
+    "custom_about_faq_atFpbV": {
+      "type": "custom-about-faq",
+      "blocks": {
+        "question_gYa33P": {
+          "type": "question",
+          "settings": {
+            "question": "Lacus blandit cubilia est felis adipiscing",
+            "answer": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dignissimos                    explicabo cumque, nobis                    sit dolor? Ratione non qui quidem quaerat doloremque fugiat!"
+          }
+        },
+        "question_rTy9y3": {
+          "type": "question",
+          "settings": {
+            "question": "Lacus blandit cubilia est felis adipiscing",
+            "answer": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dignissimos                    explicabo cumque, nobis                    sit dolor? Ratione non qui quidem quaerat doloremque fugiat!"
+          }
+        },
+        "question_9wUzmJ": {
+          "type": "question",
+          "settings": {
+            "question": "Lacus blandit cubilia est felis adipiscing",
+            "answer": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dignissimos                    explicabo cumque, nobis                    sit dolor? Ratione non qui quidem quaerat doloremque fugiat!"
+          }
+        },
+        "question_i6cAHh": {
+          "type": "question",
+          "settings": {
+            "question": "Lacus blandit cubilia est felis adipiscing",
+            "answer": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dignissimos                    explicabo cumque, nobis                    sit dolor? Ratione non qui quidem quaerat doloremque fugiat!"
+          }
+        },
+        "question_DKHLBH": {
+          "type": "question",
+          "settings": {
+            "question": "Lacus blandit cubilia est felis adipiscing",
+            "answer": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iste dignissimos                    explicabo cumque, nobis                    sit dolor? Ratione non qui quidem quaerat doloremque fugiat!"
+          }
+        }
+      },
+      "block_order": [
+        "question_gYa33P",
+        "question_rTy9y3",
+        "question_9wUzmJ",
+        "question_i6cAHh",
+        "question_DKHLBH"
+      ],
+      "settings": {
+        "headline": "Frequently Asked Questions"
+      }
+    },
+    "subscribe_card_pNAjgj": {
+      "type": "subscribe-card",
+      "settings": {
+        "background_color": "#fff9f5",
+        "button_link": ""
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_heading": true,
+        "heading_size": 170,
+        "heading_tag": "h1",
+        "show_breadcrumbs": true,
+        "show_breadcrumbs_border": false,
+        "full_width_breadcrumb": true,
+        "desktop_content_alignment": "text-left",
+        "mobile_content_alignment": "text-left",
+        "background_color_light": "#f2f2f2",
+        "text_color_light": "rgba(0,0,0,0)",
+        "textlink_color_light": "rgba(0,0,0,0)",
+        "background_color_dark": "#313131",
+        "text_color_dark": "rgba(0,0,0,0)",
+        "textlink_color_dark": "rgba(0,0,0,0)",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "marquee_divider_TgUQWX": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#ffffff",
+        "marquee_bottom_color": "#ffffff",
+        "lottie_file": ""
+      }
+    }
+  },
+  "order": [
+    "custom_about_hero_DM9fYp",
+    "custom_about_info_KgJfty",
+    "marquee_divider_TgUQWX",
+    "custom_flavor_carousel_XQPpdN",
+    "custom_about_faq_atFpbV",
+    "subscribe_card_pNAjgj",
+    "main"
+  ]
+}

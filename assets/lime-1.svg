@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="182px" height="173px" viewBox="0 0 182 173" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>illustration/ingredient/lime@2x</title>
+    <defs>
+        <polygon id="path-1" points="0 0 182.188 0 182.188 173.1508 0 173.1508"></polygon>
+    </defs>
+    <g id="illustration/ingredient/lime" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-6" transform="translate(0, 0)">
+            <g id="Group-3">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M21.3544,0 C76.1314,40.424 132.0194,76.284 182.1884,122.946 C173.2764,141.057 160.6824,155.903 146.6294,163.84 C105.2094,187.232 56.7554,161.567 31.7774,141.459 C-5.4146,111.519 -11.3436,34.378 21.3544,0" id="Fill-1" fill="#00945F" mask="url(#mask-2)"></path>
+            </g>
+            <path d="M22.1416,95.8448 C10.0586,67.4638 18.8946,33.8078 29.7496,6.1538 C78.8086,41.9128 128.4716,74.6598 173.8686,115.3588 C146.5396,179.0878 44.4196,148.1758 22.1416,95.8448" id="Fill-4" fill="#D8EACD"></path>
+        </g>
+    </g>
+</svg>

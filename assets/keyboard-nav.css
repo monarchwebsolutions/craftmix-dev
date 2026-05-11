@@ -1,0 +1,183 @@
+/* Universal */
+
+*:focus-visible {
+  outline: 3px solid var(--craftmix-orange) !important; 
+  /* outline-offset: 3px; */
+}
+
+/* Header */
+
+[class^="announcement-nav-prev-sections"]:focus-visible,
+[class^="announcement-nav-next-sections"]:focus-visible {
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+
+/* Rebuy Smart Cart */
+
+#rebuy-cart-close:focus-visible {
+  outline: 3px solid var(--craftmix-orange) !important; 
+  outline-offset: 1px;
+}
+
+.rebuy-cart__progress-bar-meter-fill::focus-visible{
+  outline:none !important;
+}
+
+.rebuy-cart__flyout .product-img-link:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+  border-radius:11px;
+}
+
+.rebuy-cart__flyout-item-product-title{
+  max-width:90%;
+  padding-right:0;
+}
+
+.rebuy-cart__flyout .rebuy-cart__flyout-item-product-title:focus-visible,
+.rebuy-cart__flyout .rebuy-cart__flyout-item-remove:focus-visible,
+.rebuy-cart__flyout .rebuy-product-image:focus-visible,
+.rebuy-cart__flyout .rebuy-product-title-link:focus-visible,
+.rebuy-cart__flyout .rebuy-button:focus-visible,
+.rebuy-cart__flyout .rebuy-select:focus-visible,
+.rebuy-cart__flyout button:focus-visible,
+.rebuy-cart .rebuy-cart__flyout .rebuy-cart__flyout-empty-cart a:focus-visible{
+  outline: 3px solid var(--craftmix-orange) !important; 
+  outline-offset: 1px;
+}
+
+.tool-tip-left a:focus-visible .tool-tip-image{
+  outline: 3px solid var(--craftmix-orange) !important; 
+}
+
+.rebuy-cart__flyout .rebuy-cart__flyout-item-quantity-widget-button:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+
+.rebuy-cart__flyout .rebuy-cart__flyout-item-media a:focus-visible{
+  outline: 3px solid var(--craftmix-orange) !important;
+  outline-offset: -3px;
+  border-radius: 10px;
+}
+
+/* Homepage */
+
+.custom-video-review-carousel-video:focus-visible{
+  outline-offset: -3px !important;
+  border-radius: 29px !important;
+}
+.easy-cocktail-video:focus-visible{
+  outline-offset: -3px !important;
+  border-radius: 37px !important;
+}
+
+.promo-learn-more:focus-visible{
+  outline: 3px solid var(--craftmix-dark-blue) !important;
+}
+
+
+/* PDP */
+
+.input-radio:focus-visible+label{
+  outline: 3px solid var(--craftmix-orange) !important;
+  outline-offset: 1px; 
+}
+
+/* Collection Page */
+
+.product-grid .product-card-img-link:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+
+.product-grid .custom-variant-trigger:focus-visible{
+  outline-offset:-12px;
+}
+.product-grid .product-card-add-btn:focus-visible{
+  outline: 3px solid var(--craftmix-dark-blue) !important;
+}
+
+/* Flavor Carousels */
+
+.flavor-card:focus-visible,
+.product-card-container .variant-option:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+.flickity-button:focus-visible{
+  box-shadow:none !important;
+}
+
+/* Stamped Reviews */
+
+.stamped-summary-actions-newreview,
+.stamped-tab-container,
+#tab-reviews,
+.new-review-form,
+.stamped-messages,
+.stamped-reviews-filter,
+.stamped-share-icon,
+.stamped-share-links,
+.stamped-review-vote,
+ul.stamped-pagination{
+  display:none;
+}
+
+/* Store Locator */
+
+.range-radius input:focus-visible{
+  outline-offset: 5px;
+  outline: 2px solid var(--craftmix-dark-blue) !important;
+}
+
+.map-tab-mobile-bnt-item:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-dark-blue) !important;
+}
+
+/* Account Page */
+
+.account-page .account-li:focus-visible{
+  outline:none !important;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+
+/* Reviews Page */
+
+.review-header-stories-card-product-product-info a:focus-visible h4{
+  outline: 3px solid var(--craftmix-orange) !important; 
+  outline-offset: 1px;
+}
+
+/* Blog Home */
+
+.custom-blog-article-card-title-link:focus-visible{
+  outline:none !important;
+  outline-offset:0;
+  box-shadow: inset 0 0 0 3px var(--craftmix-orange) !important;
+}
+
+/* Blog Article */
+
+.article-featured-product a:focus-visible{
+  outline-offset:0;
+  outline: var(--craftmix-orange) auto 1px !important;
+}
+
+.article-featured-product-img-container a:focus-visible{
+  outline-offset:-3px;
+}
+
+/* Landing Pages */
+
+.img-wrapper-sm img:focus-visible{
+    outline-offset: -3px;
+    border-radius: 16px;
+}
+
+._14-d{
+  outline: 3px solid var(--craftmix-orange) !important; 
+  outline-offset: 1px;
+}

@@ -1,0 +1,96 @@
+{%- assign recent_articles = section.blocks | map: 'settings' | map: 'article' -%}
+<div> 
+  <div class="custom-blog-carousel-section">
+    <div class="custom-blog-carousel-header">
+      <h5 class="custom-blog-carousel-subheading">{{ section.settings.subheading }}</h5>
+      <h3 class="custom-blog-carousel-heading">{{ section.settings.heading }}</h3>
+    </div>
+    <div class="custom-video-review-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-blog-carousel-container">
+      <div class="custom-carousel">
+        
+        
+        {%- for article in recent_articles -%}
+  
+         <!-- Carousel Items Start -->
+          <a href="{{ article.url }}" class="custom-carousel-card-link">
+            <div class="custom-blog-carousel-cell{% if forloop.first %} first-cell{% elsif forloop.last %} last-cell{% endif %}">
+              <div class="custom-blog-carousel-card">
+                <div class="custom-blog-carousel-card-img">
+                  {%- if article.image -%}
+                    <img
+                      class="lazy-img"
+                      loading="lazy"
+                      data-src="{{ article.image | image_url: width: 600 }}" 
+                      alt="{{ article.title | escape }}" 
+                      loading="lazy" 
+                      width="300" 
+                      height="378">
+                  {%- else -%}
+                    <img 
+                      class="lazy-img"
+                      data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/blog-carousel-placeholder-1.png" 
+                      alt="Placeholder image" 
+                      loading="lazy" 
+                      width="300" 
+                      height="378">
+                  {%- endif -%}
+                </div>
+                <div>
+                  <p class="custom-blog-carousel-card-text">{{ article.title }}</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        {%- endfor -%}
+        <!-- Carousel Items End  -->
+        
+      </div>
+    </div>
+  
+    <div class="custom-blog-carousel-cta">
+      <a href="/blogs/happy-hour-blog" class="custom-blog-carousel-cta-btn">Explore our blog</a>
+    </div>
+  </div>
+</div> 
+
+{% schema %}
+{
+  "name": "Custom Blog Carousel",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Let's stir this up" 
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading Text",
+      "default": "Blog"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "article",
+      "name": "Featured Article",
+      "settings": [
+        {
+          "type": "article",
+          "id": "article",
+          "label": "Select Article"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Blog Carousel"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,215 @@
+<section style="background-color: {{ section.settings.background_color }} !important;" class="subscribe-card-section">
+  <div class="subscribe-card">
+    <img class="subscribe-card-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/subscribe-card.svg?v=1737762251" loading="lazy" width="297" height="175" alt="Cocktail illustration">
+
+    <div class="subscribe-card-text">
+      <h2>Never get left dry!</h2>
+      <p>Subscribe & save 15% today</p>
+    </div>
+    <div class="subscribe-card-cta">
+     <a href="/pages/subscriptions" class="subscribe-card-btn">
+        Subscribe today - Learn more
+      </a>
+    </div>
+  </div>
+</section>
+{% style %}
+/* ****************** */
+/* * Subscribe Card * */
+/* ****************** */
+
+.subscribe-card-section {
+  padding: 50px 0;
+  position:relative;
+  z-index:0;
+}
+
+.subscribe-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1390px;
+  height: 122px;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff0bd;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+}
+
+/* Image Section */
+.subscribe-card-image {
+  width: auto;
+  height: 175px;
+  align-self: flex-end;
+  overflow: hidden;
+  margin-bottom: -70px;
+}
+
+/* Text Section */
+.subscribe-card-text {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.subscribe-card-text h2 {
+  font-size: 30px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-text p {
+  font-size: 18px;
+  color: #002657;
+  margin: 0;
+}
+
+/* CTA Section */
+
+.subscribe-card-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 33px;
+  font-family: 'Goldplay';
+  font-size: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: #60d3f8;
+  color: #002657;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.subscribe-card-btn:hover {
+  box-shadow: none;
+}
+
+
+/* ****************** */
+  /* ***** Start ******* */
+/* * Subscribe Card * */
+  /* Media Queries */
+/* ****************** */
+
+@media (max-width: 1400px) {
+  .subscribe-card {
+    margin: 0 50px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .subscribe-card {
+    width: 388px;
+    max-width:92%;
+    height: 331px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .subscribe-card-text {
+    padding-left: 0;
+    padding-top: 25px;
+    margin: 0;
+    flex: 0;
+    order: -1;
+    text-align: center;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 26px;
+  }
+
+  .subscribe-card-image {
+    margin: 0 auto -70px;
+    order: 1;
+  }
+
+  .subscribe-card-cta {
+    order: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-card-btn {
+    padding: 14px 25px;
+  }
+}
+@media (max-width: 399px) {
+  .subscribe-card-section {
+    padding: 30px 22px;
+  }
+
+  .subscribe-card {
+    margin: 0;
+    padding: 20px 16px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-card-text p {
+    font-size: 16px;
+  }
+
+  .subscribe-card-image {
+    height: 140px;
+    margin-bottom: -70px;
+  }
+
+  .subscribe-card-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 349px) {
+  .subscribe-card-btn {
+    font-size: 14px;       
+  }
+}
+
+/* ****************** */
+/* ***** END ******* */
+/* * Subscribe Card * */
+  /* Media Queries */
+/* ****************** */
+
+  
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "Subscribe Card",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link",
+        "default": "/"
+      }
+    ],
+    "presets" : [
+      {
+        "name": "Subscribe Card"
+      }
+    ]
+  }
+{% endschema %}

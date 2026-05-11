@@ -1,0 +1,49 @@
+<div class="marquee-container">
+  <div class="marquee-top" style="background-color: {{ section.settings.marquee_top_color }}"></div>
+  <div class="marquee-bottom" style="background-color: {{ section.settings.marquee_bottom_color }}"></div>
+
+  {% if section.settings.lottie_file %}
+    <div
+      class="lazy-lottie-container section-wave marquee"
+      data-src="{{ section.settings.lottie_file | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Marquee Divider",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "Marquee Divider"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color",
+      "id": "marquee_top_color",
+      "label": "Marquee Top Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "marquee_bottom_color",
+      "label": "Marquee Bottom Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "lottie_file",
+      "label": "Lottie Animation File Name (from assets)"
+    }
+  ]
+}
+{% endschema %}

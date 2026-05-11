@@ -1,0 +1,38 @@
+<div class="cart-animation-container">
+  <lottie-player class="cart-animation" 
+    src="{{ "cart-animation-single.json" | asset_url }}" 
+    background="transparent"  
+    speed="0.6"  
+    loop autoplay>
+  </lottie-player>
+</div>
+<style>
+.cart-animation{
+  width:75%;
+  margin:auto;
+  padding-top:1rem;
+}
+.cart-animation-container{
+  background: var(--craftmix-pale-blue);
+}
+@media screen and (max-width:479px){
+  .cart-animation{
+    width: 200%;
+    right: 104%;
+    position:relative;
+  }
+}
+</style>
+{% schema %}
+{
+  "name": "SL Cart Animation",
+  "tag": "section",
+  "class": "wholesale-content-block-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SL Cart Animation"
+    }
+  ]
+}
+{% endschema %}

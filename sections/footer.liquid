@@ -1,0 +1,2132 @@
+<link rel="stylesheet" href="{{ 'footer-custom.css' | asset_url }}">
+{% liquid 
+  if settings.lang_direction contains request.locale.iso_code
+    assign class_rtl = 'rtl'
+    assign is_rtl = true
+  else
+    assign class_rtl = 'ltr'
+    assign is_rtl = false
+  endif
+%}
+
+{% comment %}
+Change the color of the footer background depending on the page being viewed
+{% endcomment %}
+<style>
+  {% if template.name == 'product' or template == 'page.wholesale' or request.path == '/account' %}
+    .footer-shell {
+      background-color: var(--craftmix-sky-blue) !important;  
+    }
+  {% elsif template == 'page.faq' or template == 'collection' or request.path contains '/account' %}
+    .footer-shell {
+      background-color: #ddf7f7 !important;  
+    }
+  {% elsif template == 'article' or template == 'page.store-locator-2025' %}
+    .footer-shell {
+      background-color: #BFEFFF !important;  
+    }
+  {% elsif request.path contains '/a/account' %}
+    .footer-shell {
+      background-color: #ffffff !important;  
+    }
+  {% else %}
+    .footer-shell {
+      background-color: #fff9f5 !important;  /* Default color for other pages */
+    }
+  {% endif %}
+</style>
+
+<div class="footer-shell">
+  
+    <div id="custom-contact-modal" class="custom-contact-modal" role="dialog" aria-labelledby="contact-modal-title" aria-modal="true">
+      
+      <div class="modal-content">
+
+        <div class="custom-contact-modal-header">
+          <img class="close-modal lazy-img" height="46" width="46" alt="Dark blue X icon on circular light blue background" data-src="{{ "modal-close.png" | asset_url }}" tabindex="0">
+          <h2 id="contact-modal-title">Contact Us</h2>
+        </div>
+  
+        {%- form 'contact', id: 'custom-contact-form', class: 'custom-form-class' -%}
+
+        <div class="form-body">
+            {%- if form.posted_successfully? -%}
+              <p class="custom-success-message">Your message has been sent successfully!</p>
+            {%- elsif form.errors -%}
+              <p class="custom-error-message">{{ form.errors | default_errors }}</p>
+            {%- endif -%}
+          
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="contact[name]" class="custom-input" placeholder="First & Last Name" required>
+          
+            <label for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" name="contact[email]" class="custom-input" placeholder="Enter your Email Address" required>
+          
+            <label for="contact-phone">Phone</label>
+            <input type="tel" id="contact-phone" name="contact[phone]" class="custom-input" placeholder="xxx-xxx-xxxx" required>
+          
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="contact[body]" class="custom-textarea" rows="6" placeholder="Let us know how we can help" required></textarea>
+          
+            <button type="submit" class="custom-submit-button">Send</button>
+        </div> 
+          {%- endform -%}
+      </div>
+    </div>
+  
+  <div class="section-footer background-footer sticky-footer selection:bg-[rgba(var(--colors-text-footer),0.2)] pt-[{{ section.settings.top_padding_mobile }}px] md:pt-[{{ section.settings.top_padding }}px] pb-[{{ section.settings.bottom_padding_mobile }}px] md:pb-[{{ section.settings.bottom_padding }}px]">
+    {%- if section.settings.show_social_icons -%}
+      <div class="flex items-center">
+        {% render 'toolbar', show_social_icons: section.settings.show_social_icons %}
+      </div>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 or section.settings.newsletter_enable or section.settings.show_social or section.settings.enable_follow_on_shop -%}
+      <div class="flex-wrap md:mb-5 md:border-b md:border-b-solid md:pt-12 md:pb-7">
+        {%- if section.blocks.size > 0 -%}
+          {%- liquid
+            assign number_col_footer = section.settings.columns_desktop
+          -%}
+          <div class="pt-6 md:pt-0 md:flex justify-center md:m-auto md:pr-0 rtl:md:pr-5 rtl:md:pl-0 page-width flex-wrap">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign number = forloop.index | modulo: number_col_footer
+              -%}
+            <div class="footer-col footer-col--{{ forloop.index }}{% if is_rtl %} md:pl-5 md:first:pr-0{% else %} md:pr-5 md:first:pl-0{% endif %} md:mb-7{% if number == 1 %}{% if is_rtl %} md:pr-0{% else %} md:pl-0{% endif %}{% else %}{% if is_rtl %} md:pr-10{% else %} md:pl-10{% endif %}{% endif %} w-full md:w-1/{{ section.settings.columns_desktop }} {{ class_rtl }}" {{ block.shopify_attributes }}>
+                {%- case block.type -%}
+                  {%- when 'text' -%}
+                    <div x-data="{ open: {{ block.settings.open_by_default }} }" class="py-4 border-b border-b-solid md:border-none">
+                      {%- if block.settings.heading_text != blank -%}
+                      <div @click="open = ! open" class="relative{% if is_rtl %} pl-5{% else %} pr-5{% endif %} cursor-pointer md:cursor-default duration-200 transition" tabindex="0">
+                          <p class="h6 text-[115%]">{{- block.settings.heading_text | escape -}}</p>
+                          <span class="md:hidden absolute w-2.5	h-2.5 top-1/2 -translate-y-1/2 flex{% if is_rtl %} left-3.5{% else %} right-3.5{% endif %}" :class="open ? 'rotate-180' : ''">{% render 'icon-alls', icon: 'icon-custom-plus' %}</span>
+                        </div>
+                      {%- endif -%}
+                      <div {% if block.settings.heading_text != blank %} :class="open ? 'block' : 'hidden md:block'"{% endif %}>
+                        {%- if block.settings.image != blank -%}
+                          {%- capture sizes -%}
+                            {{ block.settings.image_width | times: 1.1 | ceil }}px
+                          {%- endcapture -%}
+                          {% style %}
+                            .image-{{ block.id }} {
+                              width: {{ block.settings.image_width }}px;
+                            }
+                          {% endstyle %}
+                          {% assign image_tags = block.settings.image_width | times: 1.1 | ceil | append: '' %}
+                          {%- if block.settings.link_image_footer != blank -%}
+                            <a href="{{ block.settings.link_image_footer }}"{% if block.settings.open_new_window %} target="_blank"{% endif %} class="h-full inline-block overflow-hidden{% if block.settings.heading_text != blank %} mt-6{% endif %}{% if block.settings.rounded_corner_image %} rounded-[10px]{% endif %}">
+                              {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: widths: image_tags,
+                                height: block.settings.image.height,
+                                class: "image-hover",
+                                width: block.settings.image.width,
+                                sizes: sizes,
+                                alt: block.settings.image.alt | escape
+                              }}
+                            </a>
+                          {%- else -%}
+                            <div class="h-full inline-block overflow-hidden{% if block.settings.heading_text != blank %} mt-6{% endif %}{% if block.settings.rounded_corner_image %} rounded-[10px]{% endif %}">
+                              {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: widths: image_tags,
+                                height: block.settings.image.height,
+                                class: "image-hover",
+                                width: block.settings.image.width,
+                                sizes: sizes,
+                                alt: block.settings.image.alt | escape
+                              }}
+                            </div>
+                          {%- endif -%}
+                        {%- endif -%}
+                        <div class="rte{% if block.settings.image != blank %} mt-2{% else %} mt-6{% endif %}">{{ block.settings.subtext }}</div>
+                        {%- if block.settings.show_social_icons -%}
+                          <div class="mt-2">
+                            {% render 'toolbar', enable_footer: true, show_social_icons: block.settings.show_social_icons %}
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+                  {%- when 'link_list' -%}
+                    <div x-data="{ open: {{ block.settings.open_by_default }} }" class="py-4 border-b md:border-none">
+                      {%- if block.settings.heading_menu != blank -%}
+                        <div @click="open = ! open" class="relative{% if is_rtl %} pl-5{% else %} pr-5{% endif %} cursor-pointer md:cursor-default duration-200 transition" tabindex="0">
+                          <p class="h6 text-[115%]">{{- block.settings.heading_menu | escape -}}</p>
+                          <span class="md:hidden absolute w-2.5	h-2.5 top-1/2 -translate-y-1/2 flex{% if is_rtl %} left-3.5{% else %} right-3.5{% endif %}" :class="open ? 'rotate-180' : ''">{% render 'icon-alls', icon: 'icon-custom-plus' %}</span>
+                        </div>
+                      {%- endif -%}
+                      {%- if block.settings.menu != blank -%}
+                        <ul class="mt-6"{% if block.settings.heading_menu != blank %} :class="open ? 'block' : 'hidden md:block'"{% endif %}>
+                          {%- for link in block.settings.menu.links -%}
+                            <li class="mb-1 first:pt-0 pt-2">
+                              <a href="{{ link.url }}" class="hover-text-link nav-link relative block lg:inline-block">
+                                {{ link.title }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                          {%- if block.settings.show_social_icons -%}
+                            <div class="mt-2">
+                              {% render 'toolbar', enable_footer: true, show_social_icons: block.settings.show_social_icons %}
+                            </div>
+                          {%- endif -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  {%- when 'image' -%}
+                    <div class="py-4 text-{{ block.settings.alignment }} flex flex-col justify-start{% if number == 1 %} md:pr-0{% endif %}{% if block.settings.alignment == 'center' %} items-center{% elsif block.settings.alignment == 'right' %} items-end{% endif %}">
+                      {%- if block.settings.image != blank -%}
+                        {%- capture sizes -%}
+                          {{ block.settings.image_width | times: 1.1 | ceil }}px
+                        {%- endcapture -%}
+                        {% style %}
+                          .image-{{ block.id }} {
+                            width: {{ block.settings.image_width }}px;
+                          }
+                        {% endstyle %}
+                        {% assign image_tags = block.settings.image_width | times: 1.1 | ceil | append: '' %}
+                        {%- if block.settings.link_image_footer != blank -%}
+                          <a href="{{ block.settings.link_image_footer }}"{% if block.settings.open_new_window %} target="_blank"{% endif %} class="image-{{ block.id }} h-full inline-block overflow-hidden{% if block.settings.rounded_corner_image %} rounded-[10px]{% endif %}">
+                            {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: widths: image_tags,
+                              height: 'auto',
+                              class: "image-hover",
+                              width: block.settings.image_width,
+                              sizes: sizes,
+                              alt: block.settings.image.alt | escape
+                            }}
+                          </a>
+                        {%- else -%}
+                          <div class="image-{{ block.id }} h-full inline-block overflow-hidden{% if block.settings.rounded_corner_image %} rounded-[10px]{% endif %}">
+                            {{ block.settings.image | image_url: width: block.settings.image.width | image_tag: widths: image_tags,
+                              height: 'auto',
+                              class: "image-hover",
+                              width: block.settings.image_width,
+                              sizes: sizes,
+                              alt: block.settings.image.alt | escape
+                            }}
+                          </div>
+                        {%- endif -%}
+                      {%- else -%}
+                        {% liquid
+                          assign class_img = 'max-w-[13rem] bg-neutral-200'
+                          if block.settings.rounded_corner_image 
+                            assign class_img = class_img | append: ' rounded-[10px]'
+                          endif
+                        %}
+                        {{ 'image' | placeholder_svg_tag: class_img }}  
+                      {%- endif -%}
+                      {% if block.settings.text != blank %}
+                        {% style %}
+                          .text-{{ block.id }} {
+                            margin-top: {{ block.settings.spacing }}px;
+                          }
+                          .text-{{ block.id }}.rte p:first-child {
+                            margin-top: 0px;
+                          }
+                        {% endstyle %}
+                        <div class="text-{{ block.id }} rte">
+                          {{ block.settings.text }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  {%- when 'email_footer' -%}
+                    <div class="klaviyo-form-S5VwZV"></div>
+                  {% when 'contact' %}
+                    <div x-data="{ open: {{ block.settings.open_by_default }} }" class="py-4 border-b md:border-none">
+                      {%- if block.settings.heading_menu != blank -%}
+                        <div @click="open = ! open" class="relative{% if is_rtl %} pl-5{% else %} pr-5{% endif %} cursor-pointer md:cursor-default duration-200 transition" tabindex="0">
+                          <p class="h6 text-[115%]">{{- block.settings.heading_menu | escape -}}</p>
+                        <span class="md:hidden absolute w-2.5	h-2.5 top-1/2 -translate-y-1/2 flex{% if is_rtl %} left-3.5{% else %} right-3.5{% endif %}" :class="open ? 'rotate-180' : ''">{% render 'icon-alls', icon: 'icon-custom-plus' %}</span>
+                        </div>
+                      {%- endif -%}
+                      <div class="mt-6" :class="open ? 'block' : 'hidden md:block'">
+                        {% if block.settings.icon_1 != 'none' or block.settings.title_1 or block.settings.text_1 %}
+                          <div class="mb-4 flex items-center gap-x-4">
+                            {% if block.settings.icon_1 != 'none' %}
+                              {% unless block.settings.custom_icon == blank and block.settings.another_icon_1 == blank and block.settings.icon_1 == 'another_icon' %}
+                                <span class="inline-block h-6 w-6 lg:h-9 lg:w-9 min-w-[24px] lg:min-w-[36px]">
+                                  {% if block.settings.custom_icon == blank %}
+                                    {% if block.settings.another_icon_1 != blank and block.settings.icon_1 == 'another_icon' %}
+                                      {% render 'icon-new-alls', icon: block.settings.another_icon_1 %}
+                                    {% else %}
+                                      {% render 'icon-labels-bags', icon: block.settings.icon_1 %}
+                                    {% endif %}
+                                  {% else %}
+                                    {{ block.settings.custom_icon }}
+                                  {% endif %}
+                                </span>
+                              {% endunless %}
+                            {% endif %}
+                            {% if block.settings.title_1 or block.settings.text_1 %}
+                              <div>
+                                <p class="empty:hidden p-break-words">{{ block.settings.title_1 | escape }}</p>
+                                {% if block.settings.text_link_1 != blank %}
+                                  <a href="{{ block.settings.text_link_1 }}"{% if block.settings.open_new_window_1 %} target="_blank"{% endif %}
+                                    class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_1 %} text-[rgb(var(--colors-text-link))]{% endif %} hover-text-link nav-link relative"
+                                  >
+                                    {{ block.settings.text_1 | escape }}
+                                  </a>
+                                {% else %}
+                                  <p class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_1 %} text-[rgb(var(--colors-text-link))]{% endif %}">
+                                    {{ block.settings.text_1 | escape }}
+                                  </p>
+                                {% endif %} 
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                        {% if block.settings.icon_2 != 'none' or block.settings.title_2 or block.settings.text_2 %}
+                          <div class="mb-4 flex items-center gap-x-4">
+                            {% if block.settings.icon_2 != 'none' %}
+                              {% unless block.settings.custom_icon_2 == blank and block.settings.another_icon_2 == blank and block.settings.icon_2 == 'another_icon' %}
+                                <span class="inline-block min-w-[24px] lg:min-w-[36px] h-6 w-6 lg:h-9 lg:w-9">
+                                  {% if block.settings.custom_icon_2 == blank %}
+                                    {% if block.settings.another_icon_2 != blank and block.settings.icon_2 == 'another_icon' %}
+                                      {% render 'icon-new-alls', icon: block.settings.another_icon_2 %}
+                                    {% else %}
+                                      {% render 'icon-labels-bags', icon: block.settings.icon_2 %}
+                                    {% endif %}
+                                  {% else %}
+                                    {{ block.settings.custom_icon_2 }}
+                                  {% endif %}
+                                </span>
+                              {% endunless %}
+                            {% endif %}
+                            {% if block.settings.title_2 or block.settings.text_2 %}
+                              <div>
+                                <p class="empty:hidden">{{ block.settings.title_2 | escape }}</p>
+                                {% if block.settings.text_link_2 != blank %}
+                                  <a href="{{ block.settings.text_link_2 }}"{% if block.settings.open_new_window_2 %} target="_blank"{% endif %}
+                                    class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_2 %} text-[rgb(var(--colors-text-link))]{% endif %} hover-text-link nav-link relative"
+                                  >
+                                    {{ block.settings.text_2 | escape }}
+                                  </a>
+                                {% else %}
+                                  <p class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_2 %} text-[rgb(var(--colors-text-link))]{% endif %}">
+                                    {{ block.settings.text_2 | escape }}
+                                  </p>
+                                {% endif %} 
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                        {% if block.settings.icon_3 != 'none' or block.settings.title_3 or block.settings.text_3 %}
+                          <div class="mb-4 flex items-center gap-x-4">
+                            {% if block.settings.icon_3 != 'none' %}
+                              {% unless block.settings.custom_icon_3 == blank and block.settings.another_icon_3 == blank and block.settings.icon_3 == 'another_icon' %}
+                                <span class="inline-block h-6 w-6 lg:h-9 lg:w-9 min-w-[24px] lg:min-w-[36px]">
+                                  {% if block.settings.custom_icon_3 == blank %}
+                                    {% if block.settings.another_icon_3 != blank and block.settings.icon_3 == 'another_icon' %}
+                                      {% render 'icon-new-alls', icon: block.settings.another_icon_3 %}
+                                    {% else %}
+                                      {% render 'icon-labels-bags', icon: block.settings.icon_3 %}
+                                    {% endif %}
+                                  {% else %}
+                                    {{ block.settings.custom_icon_3 }}
+                                  {% endif %}
+                                </span>
+                              {% endunless %}
+                            {% endif %}
+                            {% if block.settings.title_3 or block.settings.text_3 %}
+                              <div>
+                                <p class="empty:hidden">{{ block.settings.title_3 | escape }}</p>
+                                {% if block.settings.text_link_3 != blank %}
+                                  <a href="{{ block.settings.text_link_3 }}"{% if block.settings.open_new_window_3 %} target="_blank"{% endif %}
+                                    class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_3 %} text-[rgb(var(--colors-text-link))]{% endif %} hover-text-link nav-link relative"
+                                  >
+                                    {{ block.settings.text_3 | escape }}
+                                  </a>
+                                {% else %}
+                                  <p class="font-semibold p-break-words empty:hidden{% if block.settings.enable_text_link_3 %} text-[rgb(var(--colors-text-link))]{% endif %}">
+                                    {{ block.settings.text_3 | escape }}
+                                  </p>
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      </div>
+                      {%- if block.settings.show_social_icons -%}
+                        <div class="mt-4 md:mt-6 pb-1">
+                          {% render 'toolbar', enable_footer: true, show_social_icons: block.settings.show_social_icons %}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
+      <div class="page-width text-center pt-5 md:pt-3.5 md:pb-3 pb-2 change-position-popup">
+      {% comment %} TODO: enable theme-check once `login_button` is accepted as valid filter {% endcomment %}
+      {% comment %}theme-check-disable{% endcomment %}
+        {{ shop | login_button: action: 'follow' }}
+      {% comment %}theme-check-enable{% endcomment %}
+      </div>
+    {%- endif -%}
+    <div class="additional-footer {{ class_rtl }}{% if section.settings.additional_layout == 'horizontal' %} page-width mx-auto lg:flex lg:flex-row lg:justify-between items-center{% else %} mx-5{% endif -%}"
+    >
+      <img class="lazy-img" width="5309" height="984" alt="Opaque Craftmix logo" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/main_4x_be510f58-c11e-48c6-b367-89375ab7f42c.png?v=1738482253">
+      <div class="footer-bottom">
+        <div class="social-icons-container">
+          <div class="social-icon ig-icon">
+            <a target="_blank" class="social-icon-link" href="https://www.instagram.com/craftmix/"><img class="lazy-img" width="28" height="28" alt="Instagram icon" data-src="{{ "ig-icon.svg" | asset_url }}"></a>
+          </div>
+          <div class="social-icon fb-icon">
+            <a target="_blank" class="social-icon-link" href="https://www.facebook.com/craftmix"><img class="lazy-img" width="15" height="30" alt="Facebook icon" data-src="{{ "fb-icon.svg" | asset_url }}"></a>
+          </div>
+          <div class="social-icon tt-icon">
+            <a target="_blank" class="social-icon-link" href="https://www.tiktok.com/@craftmix"><img class="lazy-img" width="25" height="30" alt="TikTok icon" data-src="{{ "tt-icon.svg" | asset_url }}"></a>
+          </div>
+          <div class="social-icon yt-icon">
+            <a target="_blank" class="social-icon-link" href="https://www.youtube.com/@craftmix_"><img class="lazy-img" width="34" height="24" alt="Youtube icon" data-src="{{ "yt-icon.svg" | asset_url }}"></a>
+          </div>
+        </div>
+        <div class="copyright-text">©Craftmix 2025. All Rights Reserved.</div>
+        <div class="footer-badges-container">
+          <img class="lazy-img" width="363" height="56" alt='Set of four white circular badges on a transparent background displaying the phrases: "Pocket-Sized Convenience" with a packet icon, "Natural Ingredients" with a strawberry icon, "Low Calorie Low Sugar" with sugar cubes and a down arrow, and "Affordable for Everyone" with clinking glasses.' data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/footer-badges-natural-ingredients-2.png?v=1778103802">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+document.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+
+  const el = e.target;
+
+  // Only divs acting like buttons
+  if (
+    el.tagName === 'DIV' &&
+    el.getAttribute('tabindex') === '0' &&
+    (
+      el.hasAttribute('@click') ||          // literal Alpine syntax (if present)
+      el.hasAttribute('x-on:click') ||       // compiled Alpine
+      el.hasAttribute('data-click-toggle')   // optional future-proof hook
+    )
+  ) {
+    e.preventDefault(); // prevent Space scroll
+    el.click();
+  }
+});
+</script>
+{% style %}
+  /* css modal */
+  /*  
+.custom-contact-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  top: 112px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: stretch;
+  justify-content: flex-end;
+}
+  
+
+  
+.modal-content {
+  background: #fff9f5;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  border-radius: 0;
+  position: relative;
+  padding: 25px;
+  overflow-y: auto; 
+  -webkit-overflow-scrolling: touch; 
+}
+*/ 
+
+.custom-contact-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  right: 0;
+  top: 112px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.modal-content {
+  background: #fff9f5;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  height: calc(100vh - 112px);
+
+  padding: 25px;
+  position: relative;
+
+  overflow-y: auto; 
+  -webkit-overflow-scrolling: touch; 
+}
+
+.modal-content .form-body {
+  margin-bottom: 60px;
+}  
+  
+.close-modal {
+  width: 46px;
+  height: 46px;
+  cursor: pointer;
+}
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+.modal-content form label {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal-content form textarea,
+.modal-content form input {
+  width: 100%;
+  border-radius: 28px;
+  padding: 15px 23px;
+  border: 1px solid #002657;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.modal-content form input::placeholder,
+.modal-content form textarea::placeholder {
+  opacity: 0.5;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+}
+
+.custom-contact-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 45px;
+}
+.custom-contact-modal-header h2 {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.79px;
+  text-align: left;
+}
+
+.custom-submit-button {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border-radius: 33px;
+    border: 1.5px solid rgba(0, 38, 87, 1);
+    box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+    background-color: rgba(96, 211, 248, 1);
+    opacity: 1;
+    color: rgba(0, 38, 87, 1);
+    font-family: "Goldplay";
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.13px;
+    text-align: center;
+    line-height: 20px;
+    text-decoration: none;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+@media (max-width: 1023px) {
+  .custom-contact-modal {
+    top: 108px;
+  }
+}
+  
+@media (max-width: 529px) {
+  .custom-contact-modal {
+    top: 0;
+    height: 100vh;
+  }
+  .modal-content {
+    height: 100vh; 
+  }
+  .custom-contact-modal-header {
+    margin-bottom: 20px;
+  }
+  .custom-submit-button {
+    margin-top: 0px;
+  }
+}
+{% endstyle %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("custom-contact-modal");
+    const openButtons = document.querySelectorAll("a[href='#custom-contact-modal']");
+    const closeButton = modal ? modal.querySelector(".close-modal") : null;
+    const body = document.body;
+
+    if (!modal) return;
+
+    // --- Accessibility setup ---
+    // Ensure dialog semantics
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    if (!modal.getAttribute("aria-labelledby")) modal.setAttribute("aria-labelledby", "contact-modal-title");
+
+    // Make the close "img" act like a button
+    if (closeButton) {
+      if (!closeButton.hasAttribute("tabindex")) closeButton.setAttribute("tabindex", "0");
+      if (!closeButton.hasAttribute("role")) closeButton.setAttribute("role", "button");
+    }
+
+    // Track last focused element to restore focus on close
+    let lastActiveEl = null;
+
+    function isModalOpen() {
+      return modal.style.display !== "none" && getComputedStyle(modal).display !== "none";
+    }
+
+    function getFocusableElements() {
+      const selectors = [
+        'a[href]',
+        'button:not([disabled])',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ].join(',');
+
+      return Array.from(modal.querySelectorAll(selectors)).filter((el) => {
+        const style = getComputedStyle(el);
+        // filter out hidden/disabled/zero-dimension elements
+        if (style.display === "none" || style.visibility === "hidden") return false;
+        if (el.hasAttribute("disabled")) return false;
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+      });
+    }
+
+    function focusFirstInModal() {
+      // Per your requirement, focus the close "button" first
+      if (closeButton) {
+        closeButton.focus();
+        return;
+      }
+
+      const focusables = getFocusableElements();
+      if (focusables.length) focusables[0].focus();
+      else modal.focus?.();
+    }
+
+    function openModal() {
+      lastActiveEl = document.activeElement;
+
+      modal.style.display = "flex";
+      body.classList.add("modal-open"); // Prevent scrolling
+      modal.setAttribute("aria-hidden", "false");
+
+      // Focus after render
+      requestAnimationFrame(() => {
+        focusFirstInModal();
+      });
+    }
+
+    function closeModal() {
+      modal.style.display = "none";
+      body.classList.remove("modal-open");
+      modal.setAttribute("aria-hidden", "true");
+
+      // Restore focus to opener
+      if (lastActiveEl && typeof lastActiveEl.focus === "function") {
+        requestAnimationFrame(() => lastActiveEl.focus());
+      }
+    }
+
+    // Ensure modal is hidden on load
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+
+    // Open handlers
+    openButtons.forEach((button) => {
+      button.addEventListener("click", function (event) {
+        event.preventDefault();
+        openModal();
+      });
+    });
+
+    // Close button handlers (click + Enter/Space)
+    if (closeButton) {
+      closeButton.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeModal();
+      });
+
+      closeButton.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          e.stopPropagation();
+          closeModal();
+        }
+      });
+    }
+
+    // Click outside modal-content closes (backdrop click)
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) closeModal();
+    });
+
+    // Trap focus + ESC close
+    document.addEventListener("keydown", function (e) {
+      if (!isModalOpen()) return;
+
+      // ESC closes
+      if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        closeModal();
+        return;
+      }
+
+      // Trap Tab
+      if (e.key !== "Tab") return;
+
+      const focusables = getFocusableElements();
+      if (!focusables.length) {
+        e.preventDefault();
+        return;
+      }
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      // If focus is outside modal, pull it back in
+      if (!modal.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+        return;
+      }
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }, true);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.footer.name",
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "t:sections.footer.blocks.link_list.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": false,
+          "label": "t:sections.footer.blocks.open_by_default"
+        },
+        {
+          "type": "text",
+          "id": "heading_menu",
+          "default": "Quick links",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "default": "footer",
+          "label": "t:sections.footer.blocks.link_list.settings.menu.label",
+          "info": "t:sections.footer.blocks.link_list.settings.menu.info"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_icons",
+          "default": false,
+          "label": "t:sections.footer.settings.show_social_icons.label",
+          "info": "t:sections.footer.settings.show_social_icons.info"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "t:sections.footer.blocks.text.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": false,
+          "label": "t:sections.footer.blocks.open_by_default"
+        },
+        {
+          "type": "text",
+          "id": "heading_text",
+          "default": "Custom text",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext",
+          "default": "<p>Share contact information, store details, and brand content with your customers.</p>",
+          "label": "t:sections.footer.blocks.text.settings.subtext.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_icons",
+          "default": false,
+          "label": "t:sections.footer.settings.show_social_icons.label",
+          "info": "t:sections.footer.settings.show_social_icons.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.footer.settings.image.label"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 200,
+          "step": 5,
+          "label": "t:sections.footer.settings.image_width.label",
+          "default": 100
+        },
+        {
+          "type": "url",
+          "id": "link_image_footer",
+          "label": "t:sections.footer.settings.link_image_footer.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_window",
+          "default": false,
+          "label": "t:sections.all.open_new_window.label"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "t:sections.all.image.label",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.footer.settings.image.label"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 200,
+          "step": 5,
+          "label": "t:sections.footer.settings.image_width.label",
+          "default": 100
+        },
+        {
+          "type": "url",
+          "id": "link_image_footer",
+          "label": "t:sections.footer.settings.link_image_footer.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_window",
+          "default": false,
+          "label": "t:sections.all.open_new_window.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "rounded_corner_image",
+          "default": false,
+          "label": "t:sections.promotion-grid.blocks.promotion.settings.rounded_corner_image.label"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "t:sections.footer.settings.alignment.label",
+          "options": [
+            {
+              "value": "left",
+              "label": "t:sections.all.content_alignment.options__1.label"
+            },
+            {
+              "value": "center",
+              "label": "t:sections.all.content_alignment.options__2.label"
+            },
+            {
+              "value": "right",
+              "label": "t:sections.all.content_alignment.options__3.label"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.footer.blocks.image.settings.text.label"
+        },
+        {
+          "type": "range",
+          "id": "spacing",
+          "min": 4,
+          "max": 100,
+          "step": 4,
+          "unit": "px",
+          "label": "t:sections.all.spacing.label",
+          "default": 28
+        }
+      ]
+    },
+    {
+      "type": "email_footer",
+      "limit": 1,
+      "name": "t:sections.footer.blocks.email_footer.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": true,
+          "label": "t:sections.footer.blocks.open_by_default"
+        },
+        {
+          "type": "text",
+          "id": "heading_email",
+          "default": "Subscribe to our emails",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "richtext",
+          "id": "subtext_email",
+          "label": "t:sections.all.text.text"
+        },
+        {
+          "type": "paragraph",
+          "content": "t:sections.footer.settings.paragraph.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social_icons",
+          "default": true,
+          "label": "t:sections.footer.settings.show_social_icons.label",
+          "info": "t:sections.footer.settings.show_social_icons.info"
+        }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "t:sections.footer.blocks.contact.name",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "default": false,
+          "label": "t:sections.footer.blocks.open_by_default"
+        },
+        {
+          "type": "text",
+          "id": "heading_menu",
+          "default": "Need help",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.contact.settings.line_1.label"
+        },
+        {
+          "type": "select",
+          "id": "icon_1",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.all.icon.options.none"
+            },
+            {
+              "value": "another_icon",
+              "label": "t:sections.all.icon.another_icon_label"
+            },
+            {
+              "value": "activity",
+              "label": "t:sections.all.icon.options.activity"
+            },
+            {
+              "value": "archive",
+              "label": "t:sections.all.icon.options.archive"
+            },
+            {
+              "value": "arrow-down-cricle",
+              "label": "t:sections.all.icon.options.arrow-down-cricle"
+            },
+            {
+              "value": "arrow-left",
+              "label": "t:sections.all.icon.options.arrow-left"
+            },
+            {
+              "value": "arrow-left-circle",
+              "label": "t:sections.all.icon.options.arrow-left-circle"
+            },
+            {
+              "value": "arrow-right",
+              "label": "t:sections.all.icon.options.arrow-right"
+            },
+            {
+              "value": "arrow-right-circle",
+              "label": "t:sections.all.icon.options.arrow-right-circle"
+            },
+            {
+              "value": "arrow-up-circle",
+              "label": "t:sections.all.icon.options.arrow-up-circle"
+            },
+            {
+              "value": "chevron-left",
+              "label": "t:sections.all.icon.options.chevron-left"
+            },
+            {
+              "value": "trending-down",
+              "label": "t:sections.all.icon.options.trending-down"
+            },
+            {
+              "value": "tv",
+              "label": "t:sections.all.icon.options.tv"
+            },
+            {
+              "value": "trending-up",
+              "label": "t:sections.all.icon.options.trending-up"
+            },
+            {
+              "value": "zap",
+              "label": "t:sections.all.icon.options.zap"
+            },
+            {
+              "value": "1st-medal",
+              "label": "t:sections.all.icon.options.1st-medal"
+            },
+            {
+              "value": "award",
+              "label": "t:sections.all.icon.options.award"
+            },
+            {
+              "value": "bicycle",
+              "label": "t:sections.all.icon.options.bicycle"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.all.icon.options.box"
+            },
+            {
+              "value": "briefcase",
+              "label": "t:sections.all.icon.options.briefcase"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.all.icon.options.calendar"
+            },
+            {
+              "value": "camera",
+              "label": "t:sections.all.icon.options.camera"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "t:sections.all.icon.options.chat-bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "t:sections.all.icon.options.check-mark"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.all.icon.options.clock"
+            },
+            {
+              "value": "cloud-rain",
+              "label": "t:sections.all.icon.options.cloud-rain"
+            },
+            {
+              "value": "coffee",
+              "label": "t:sections.all.icon.options.coffee"
+            },
+            {
+              "value": "coin",
+              "label": "t:sections.all.icon.options.coin"
+            },
+            {
+              "value": "credit-card",
+              "label": "t:sections.all.icon.options.credit-card"
+            },
+            {
+              "value": "delivery-truck",
+              "label": "t:sections.all.icon.options.delivery-truck"
+            },
+            {
+              "value": "dollar-sign",
+              "label": "t:sections.all.icon.options.dollar-sign"
+            },
+            {
+              "value": "earth",
+              "label": "t:sections.all.icon.options.earth"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.all.icon.options.eye"
+            },
+            {
+              "value": "feather",
+              "label": "t:sections.all.icon.options.feather"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.all.icon.options.fire"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.all.icon.options.flower"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.all.icon.options.gift"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.all.icon.options.globe"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.all.icon.options.heart"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.all.icon.options.iron"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.all.icon.options.leaf"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.all.icon.options.lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:sections.all.icon.options.map-pin"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:sections.all.icon.options.megaphone"
+            },
+            {
+              "value": "message-text",
+              "label": "t:sections.all.icon.options.message-text"
+            },
+            {
+              "value": "music",
+              "label": "t:sections.all.icon.options.music"
+            },
+            {
+              "value": "packages",
+              "label": "t:sections.all.icon.options.packages"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.all.icon.options.pants"
+            },
+            {
+              "value": "percent",
+              "label": "t:sections.all.icon.options.percent"
+            },
+            {
+              "value": "piggy-bank",
+              "label": "t:sections.all.icon.options.piggy-bank"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.all.icon.options.plane"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.all.icon.options.planet"
+            },
+            {
+              "value": "question-mark",
+              "label": "t:sections.all.icon.options.question-mark"
+            },
+            {
+              "value": "rocket",
+              "label": "t:sections.all.icon.options.rocket"
+            },
+            {
+              "value": "rulers",
+              "label": "t:sections.all.icon.options.rulers"
+            },
+            {
+              "value": "scissors",
+              "label": "t:sections.all.icon.options.scissors"
+            },
+            {
+              "value": "settings",
+              "label": "t:sections.all.icon.options.settings"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.all.icon.options.shirt"
+            },
+            {
+              "value": "shop-alt",
+              "label": "t:sections.all.icon.options.shop-alt"
+            },
+            {
+              "value": "shopping-bag",
+              "label": "t:sections.all.icon.options.shopping-bag"
+            },
+            {
+              "value": "shopping-cart",
+              "label": "t:sections.all.icon.options.shopping-cart"
+            },
+            {
+              "value": "smile",
+              "label": "t:sections.all.icon.options.smile"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.all.icon.options.star"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.all.icon.options.sun"
+            },
+            {
+              "value": "support",
+              "label": "t:sections.all.icon.options.support"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.all.icon.options.tag"
+            },
+            {
+              "value": "telephone",
+              "label": "t:sections.all.icon.options.telephone"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.all.icon.options.truck"
+            },
+            {
+              "value": "wallet",
+              "label": "t:sections.all.icon.options.wallet"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.all.icon.options.washing"
+            },
+            {
+              "value": "yoga",
+              "label": "t:sections.all.icon.options.yoga"
+            }
+          ],
+          "default": "question-mark",
+          "label": "t:sections.multicolumn.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "another_icon_1",
+          "label": "t:sections.all.icon.another_icon_label",
+          "info": "t:sections.all.icon.another_icon_info"
+        },
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.all.icon.custom_icon",
+          "info": "t:sections.all.icon.custom_icon_info"
+        },
+        {
+          "type": "text",
+          "id": "title_1",
+          "default": "Got questions? Call us 24/7",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "text",
+          "id": "text_1",
+          "default": "1908474783",
+          "label": "t:sections.all.text.text"
+        },
+        {
+          "type": "url",
+          "id": "text_link_1",
+          "label": "t:sections.footer.blocks.contact.settings.text_link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_window_1",
+          "default": false,
+          "label": "t:sections.all.open_new_window.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_text_link_1",
+          "default": true,
+          "label": "t:sections.footer.blocks.contact.settings.color_text_link.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.contact.settings.line_2.label"
+        },
+        {
+          "type": "select",
+          "id": "icon_2",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.all.icon.options.none"
+            },
+            {
+              "value": "another_icon",
+              "label": "t:sections.all.icon.another_icon_label"
+            },
+            {
+              "value": "activity",
+              "label": "t:sections.all.icon.options.activity"
+            },
+            {
+              "value": "archive",
+              "label": "t:sections.all.icon.options.archive"
+            },
+            {
+              "value": "arrow-down-cricle",
+              "label": "t:sections.all.icon.options.arrow-down-cricle"
+            },
+            {
+              "value": "arrow-left",
+              "label": "t:sections.all.icon.options.arrow-left"
+            },
+            {
+              "value": "arrow-left-circle",
+              "label": "t:sections.all.icon.options.arrow-left-circle"
+            },
+            {
+              "value": "arrow-right",
+              "label": "t:sections.all.icon.options.arrow-right"
+            },
+            {
+              "value": "arrow-right-circle",
+              "label": "t:sections.all.icon.options.arrow-right-circle"
+            },
+            {
+              "value": "arrow-up-circle",
+              "label": "t:sections.all.icon.options.arrow-up-circle"
+            },
+            {
+              "value": "chevron-left",
+              "label": "t:sections.all.icon.options.chevron-left"
+            },
+            {
+              "value": "trending-down",
+              "label": "t:sections.all.icon.options.trending-down"
+            },
+            {
+              "value": "tv",
+              "label": "t:sections.all.icon.options.tv"
+            },
+            {
+              "value": "trending-up",
+              "label": "t:sections.all.icon.options.trending-up"
+            },
+            {
+              "value": "zap",
+              "label": "t:sections.all.icon.options.zap"
+            },
+            {
+              "value": "1st-medal",
+              "label": "t:sections.all.icon.options.1st-medal"
+            },
+            {
+              "value": "award",
+              "label": "t:sections.all.icon.options.award"
+            },
+            {
+              "value": "bicycle",
+              "label": "t:sections.all.icon.options.bicycle"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.all.icon.options.box"
+            },
+            {
+              "value": "briefcase",
+              "label": "t:sections.all.icon.options.briefcase"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.all.icon.options.calendar"
+            },
+            {
+              "value": "camera",
+              "label": "t:sections.all.icon.options.camera"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "t:sections.all.icon.options.chat-bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "t:sections.all.icon.options.check-mark"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.all.icon.options.clock"
+            },
+            {
+              "value": "cloud-rain",
+              "label": "t:sections.all.icon.options.cloud-rain"
+            },
+            {
+              "value": "coffee",
+              "label": "t:sections.all.icon.options.coffee"
+            },
+            {
+              "value": "coin",
+              "label": "t:sections.all.icon.options.coin"
+            },
+            {
+              "value": "credit-card",
+              "label": "t:sections.all.icon.options.credit-card"
+            },
+            {
+              "value": "delivery-truck",
+              "label": "t:sections.all.icon.options.delivery-truck"
+            },
+            {
+              "value": "dollar-sign",
+              "label": "t:sections.all.icon.options.dollar-sign"
+            },
+            {
+              "value": "earth",
+              "label": "t:sections.all.icon.options.earth"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.all.icon.options.eye"
+            },
+            {
+              "value": "feather",
+              "label": "t:sections.all.icon.options.feather"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.all.icon.options.fire"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.all.icon.options.flower"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.all.icon.options.gift"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.all.icon.options.globe"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.all.icon.options.heart"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.all.icon.options.iron"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.all.icon.options.leaf"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.all.icon.options.lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:sections.all.icon.options.map-pin"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:sections.all.icon.options.megaphone"
+            },
+            {
+              "value": "message-text",
+              "label": "t:sections.all.icon.options.message-text"
+            },
+            {
+              "value": "music",
+              "label": "t:sections.all.icon.options.music"
+            },
+            {
+              "value": "packages",
+              "label": "t:sections.all.icon.options.packages"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.all.icon.options.pants"
+            },
+            {
+              "value": "percent",
+              "label": "t:sections.all.icon.options.percent"
+            },
+            {
+              "value": "piggy-bank",
+              "label": "t:sections.all.icon.options.piggy-bank"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.all.icon.options.plane"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.all.icon.options.planet"
+            },
+            {
+              "value": "question-mark",
+              "label": "t:sections.all.icon.options.question-mark"
+            },
+            {
+              "value": "rocket",
+              "label": "t:sections.all.icon.options.rocket"
+            },
+            {
+              "value": "rulers",
+              "label": "t:sections.all.icon.options.rulers"
+            },
+            {
+              "value": "scissors",
+              "label": "t:sections.all.icon.options.scissors"
+            },
+            {
+              "value": "settings",
+              "label": "t:sections.all.icon.options.settings"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.all.icon.options.shirt"
+            },
+            {
+              "value": "shop-alt",
+              "label": "t:sections.all.icon.options.shop-alt"
+            },
+            {
+              "value": "shopping-bag",
+              "label": "t:sections.all.icon.options.shopping-bag"
+            },
+            {
+              "value": "shopping-cart",
+              "label": "t:sections.all.icon.options.shopping-cart"
+            },
+            {
+              "value": "smile",
+              "label": "t:sections.all.icon.options.smile"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.all.icon.options.star"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.all.icon.options.sun"
+            },
+            {
+              "value": "support",
+              "label": "t:sections.all.icon.options.support"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.all.icon.options.tag"
+            },
+            {
+              "value": "telephone",
+              "label": "t:sections.all.icon.options.telephone"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.all.icon.options.truck"
+            },
+            {
+              "value": "wallet",
+              "label": "t:sections.all.icon.options.wallet"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.all.icon.options.washing"
+            },
+            {
+              "value": "yoga",
+              "label": "t:sections.all.icon.options.yoga"
+            }
+          ],
+          "default": "message-text",
+          "label": "t:sections.multicolumn.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "another_icon_2",
+          "label": "t:sections.all.icon.another_icon_label",
+          "info": "t:sections.all.icon.another_icon_info"
+        },
+        {
+          "type": "html",
+          "id": "custom_icon_2",
+          "label": "t:sections.all.icon.custom_icon",
+          "info": "t:sections.all.icon.custom_icon_info"
+        },
+        {
+          "type": "text",
+          "id": "title_2",
+          "default": "Need help with your order?",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "text",
+          "id": "text_2",
+          "default": "Contact",
+          "label": "t:sections.all.text.text"
+        },
+        {
+          "type": "url",
+          "id": "text_link_2",
+          "label": "t:sections.footer.blocks.contact.settings.text_link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_window_2",
+          "default": false,
+          "label": "t:sections.all.open_new_window.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_text_link_2",
+          "default": true,
+          "label": "t:sections.footer.blocks.contact.settings.color_text_link.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.footer.blocks.contact.settings.line_3.label"
+        },
+        {
+          "type": "select",
+          "id": "icon_3",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.all.icon.options.none"
+            },
+            {
+              "value": "another_icon",
+              "label": "t:sections.all.icon.another_icon_label"
+            },
+            {
+              "value": "activity",
+              "label": "t:sections.all.icon.options.activity"
+            },
+            {
+              "value": "archive",
+              "label": "t:sections.all.icon.options.archive"
+            },
+            {
+              "value": "arrow-down-cricle",
+              "label": "t:sections.all.icon.options.arrow-down-cricle"
+            },
+            {
+              "value": "arrow-left",
+              "label": "t:sections.all.icon.options.arrow-left"
+            },
+            {
+              "value": "arrow-left-circle",
+              "label": "t:sections.all.icon.options.arrow-left-circle"
+            },
+            {
+              "value": "arrow-right",
+              "label": "t:sections.all.icon.options.arrow-right"
+            },
+            {
+              "value": "arrow-right-circle",
+              "label": "t:sections.all.icon.options.arrow-right-circle"
+            },
+            {
+              "value": "arrow-up-circle",
+              "label": "t:sections.all.icon.options.arrow-up-circle"
+            },
+            {
+              "value": "chevron-left",
+              "label": "t:sections.all.icon.options.chevron-left"
+            },
+            {
+              "value": "trending-down",
+              "label": "t:sections.all.icon.options.trending-down"
+            },
+            {
+              "value": "tv",
+              "label": "t:sections.all.icon.options.tv"
+            },
+            {
+              "value": "trending-up",
+              "label": "t:sections.all.icon.options.trending-up"
+            },
+            {
+              "value": "zap",
+              "label": "t:sections.all.icon.options.zap"
+            },
+            {
+              "value": "1st-medal",
+              "label": "t:sections.all.icon.options.1st-medal"
+            },
+            {
+              "value": "award",
+              "label": "t:sections.all.icon.options.award"
+            },
+            {
+              "value": "bicycle",
+              "label": "t:sections.all.icon.options.bicycle"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.all.icon.options.box"
+            },
+            {
+              "value": "briefcase",
+              "label": "t:sections.all.icon.options.briefcase"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.all.icon.options.calendar"
+            },
+            {
+              "value": "camera",
+              "label": "t:sections.all.icon.options.camera"
+            },
+            {
+              "value": "chat-bubble",
+              "label": "t:sections.all.icon.options.chat-bubble"
+            },
+            {
+              "value": "check-mark",
+              "label": "t:sections.all.icon.options.check-mark"
+            },
+            {
+              "value": "clock",
+              "label": "t:sections.all.icon.options.clock"
+            },
+            {
+              "value": "cloud-rain",
+              "label": "t:sections.all.icon.options.cloud-rain"
+            },
+            {
+              "value": "coffee",
+              "label": "t:sections.all.icon.options.coffee"
+            },
+            {
+              "value": "coin",
+              "label": "t:sections.all.icon.options.coin"
+            },
+            {
+              "value": "credit-card",
+              "label": "t:sections.all.icon.options.credit-card"
+            },
+            {
+              "value": "delivery-truck",
+              "label": "t:sections.all.icon.options.delivery-truck"
+            },
+            {
+              "value": "dollar-sign",
+              "label": "t:sections.all.icon.options.dollar-sign"
+            },
+            {
+              "value": "earth",
+              "label": "t:sections.all.icon.options.earth"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.all.icon.options.eye"
+            },
+            {
+              "value": "feather",
+              "label": "t:sections.all.icon.options.feather"
+            },
+            {
+              "value": "fire",
+              "label": "t:sections.all.icon.options.fire"
+            },
+            {
+              "value": "flower",
+              "label": "t:sections.all.icon.options.flower"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.all.icon.options.gift"
+            },
+            {
+              "value": "globe",
+              "label": "t:sections.all.icon.options.globe"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.all.icon.options.heart"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.all.icon.options.iron"
+            },
+            {
+              "value": "leaf",
+              "label": "t:sections.all.icon.options.leaf"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.all.icon.options.lock"
+            },
+            {
+              "value": "map-pin",
+              "label": "t:sections.all.icon.options.map-pin"
+            },
+            {
+              "value": "megaphone",
+              "label": "t:sections.all.icon.options.megaphone"
+            },
+            {
+              "value": "message-text",
+              "label": "t:sections.all.icon.options.message-text"
+            },
+            {
+              "value": "music",
+              "label": "t:sections.all.icon.options.music"
+            },
+            {
+              "value": "packages",
+              "label": "t:sections.all.icon.options.packages"
+            },
+            {
+              "value": "pants",
+              "label": "t:sections.all.icon.options.pants"
+            },
+            {
+              "value": "percent",
+              "label": "t:sections.all.icon.options.percent"
+            },
+            {
+              "value": "piggy-bank",
+              "label": "t:sections.all.icon.options.piggy-bank"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.all.icon.options.plane"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.all.icon.options.planet"
+            },
+            {
+              "value": "question-mark",
+              "label": "t:sections.all.icon.options.question-mark"
+            },
+            {
+              "value": "rocket",
+              "label": "t:sections.all.icon.options.rocket"
+            },
+            {
+              "value": "rulers",
+              "label": "t:sections.all.icon.options.rulers"
+            },
+            {
+              "value": "scissors",
+              "label": "t:sections.all.icon.options.scissors"
+            },
+            {
+              "value": "settings",
+              "label": "t:sections.all.icon.options.settings"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.all.icon.options.shirt"
+            },
+            {
+              "value": "shop-alt",
+              "label": "t:sections.all.icon.options.shop-alt"
+            },
+            {
+              "value": "shopping-bag",
+              "label": "t:sections.all.icon.options.shopping-bag"
+            },
+            {
+              "value": "shopping-cart",
+              "label": "t:sections.all.icon.options.shopping-cart"
+            },
+            {
+              "value": "smile",
+              "label": "t:sections.all.icon.options.smile"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.all.icon.options.star"
+            },
+            {
+              "value": "sun",
+              "label": "t:sections.all.icon.options.sun"
+            },
+            {
+              "value": "support",
+              "label": "t:sections.all.icon.options.support"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.all.icon.options.tag"
+            },
+            {
+              "value": "telephone",
+              "label": "t:sections.all.icon.options.telephone"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.all.icon.options.truck"
+            },
+            {
+              "value": "wallet",
+              "label": "t:sections.all.icon.options.wallet"
+            },
+            {
+              "value": "washing",
+              "label": "t:sections.all.icon.options.washing"
+            },
+            {
+              "value": "yoga",
+              "label": "t:sections.all.icon.options.yoga"
+            }
+          ],
+          "default": "chat-bubble",
+          "label": "t:sections.multicolumn.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "another_icon_3",
+          "label": "t:sections.all.icon.another_icon_label",
+          "info": "t:sections.all.icon.another_icon_info"
+        },
+        {
+          "type": "html",
+          "id": "custom_icon_3",
+          "label": "t:sections.all.icon.custom_icon",
+          "info": "t:sections.all.icon.custom_icon_info"
+        },
+        {
+          "type": "text",
+          "id": "title_3",
+          "default": "Available 24/7 via chat",
+          "label": "t:sections.all.text.heading"
+        },
+        {
+          "type": "text",
+          "id": "text_3",
+          "default": "Chat With US",
+          "label": "t:sections.all.text.text"
+        },
+        {
+          "type": "url",
+          "id": "text_link_3",
+          "label": "t:sections.footer.blocks.contact.settings.text_link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_window_3",
+          "default": false,
+          "label": "t:sections.all.open_new_window.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_text_link_3",
+          "default": true,
+          "label": "t:sections.footer.blocks.contact.settings.color_text_link.label"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.collection-list.settings.columns_desktop.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.language_currency"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "default": true,
+      "label": "t:sections.header.settings.show_language_selector.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "default": true,
+      "label": "t:sections.header.settings.show_currency_selector.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_add_info.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social_icons",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social_icons.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "payment_enable",
+      "default": true,
+      "label": "t:sections.footer.settings.payment_enable.label"
+    },
+    {
+      "type": "text",
+      "id": "custom_payment",
+      "info": "t:sections.footer.settings.custom_payment.info",
+      "label": "t:sections.footer.settings.custom_payment.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copyright",
+      "default": false,
+      "label": "t:sections.footer.settings.show_copyright.label"
+    },
+    {
+      "type": "richtext",
+      "id": "add_copyright_text",
+      "label": "t:sections.footer.settings.add_copyright_text.label"
+    },
+    {
+      "type": "select",
+      "id": "additional_layout",
+      "label": "Additional information desktop layout",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:sections.header.blocks.tabbed_menu.settings.tab_style.options__1.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.header.blocks.tabbed_menu.settings.tab_style.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered",
+      "default": true,
+      "label": "t:sections.footer.settings.show_powered.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header_follow_on_shop.content",
+      "info": "t:sections.footer.settings.header_follow_on_shop.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_follow_on_shop",
+      "default": false,
+      "label": "t:sections.footer.settings.enable_follow_on_shop.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_layout_mobile"
+    },
+    {
+      "type": "range",
+      "id": "top_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 28
+    }
+  ],
+  "default": {
+    "blocks": [
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "link_list"
+      },
+      {
+        "type": "email_footer"
+      }
+    ]
+  }
+}
+{% endschema %}

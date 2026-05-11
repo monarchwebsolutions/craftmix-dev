@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product-grid": {
+      "type": "main-collection-product-grid",
+      "blocks": {
+        "a59e424d-3ee8-4334-9173-d22fbfeb78ac": {
+          "type": "promotion_block",
+          "settings": {
+            "subheading": "",
+            "heading": "Bundle & Save",
+            "highlight_type": "underline",
+            "title_size": 80,
+            "content": "",
+            "text_size": 100,
+            "show_sound_control": false,
+            "video_url": "",
+            "enable_video_autoplay": false,
+            "video_alt_text": "",
+            "image_overlay_opacity": 10,
+            "position": 7,
+            "button_label": "Shop Bundle",
+            "button_link": "",
+            "open_new_window": true,
+            "show_button_style": "primary",
+            "alignment": "left",
+            "content_position": "end",
+            "background_color_light": "#f6f6f6",
+            "text_color_light": "#000000",
+            "color_heading_highlight_light": "rgba(0,0,0,0)",
+            "background_color_dark": "#2a2a2a",
+            "text_color_dark": "#ffffff",
+            "color_heading_highlight_dark": "rgba(0,0,0,0)",
+            "color_button": "rgba(0,0,0,0)",
+            "color_text_button": "rgba(0,0,0,0)",
+            "color_button_hover": "rgba(0,0,0,0)",
+            "color_text_button_hover": "rgba(0,0,0,0)",
+            "color_button_secondary": "rgba(0,0,0,0)",
+            "secondary_button_text": "rgba(0,0,0,0)",
+            "colors_text_link": "rgba(0,0,0,0)",
+            "number_of_columns": 2,
+            "number_of_row": 1,
+            "number_of_columns_mobile": "1",
+            "number_of_row_mobile": "1"
+          }
+        }
+      },
+      "block_order": [
+        "a59e424d-3ee8-4334-9173-d22fbfeb78ac"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_filtering": true,
+        "sticky_filtering": false,
+        "filter_type": "above",
+        "default_hide_filtering": false,
+        "expand_filter": false,
+        "enable_collection_count": true,
+        "enable_sorting": true,
+        "products_per_page": "18;26;30",
+        "products_per_row_on_desktop": 4,
+        "products_per_row_on_mobile": "2",
+        "pagination": "pagination",
+        "paginate_type": "circle",
+        "show_vendor": false,
+        "show_rating": false,
+        "show_quickview": true,
+        "show_description": true,
+        "enable_advanced_filter": false,
+        "key_value": "",
+        "hide_unavaiable_filter": false,
+        "columns_desktop_1": 4,
+        "desktop_image_width_1": 150,
+        "columns_desktop_2": 4,
+        "desktop_image_width_2": 150,
+        "enable_desktop_slider": false,
+        "image_ratio_filter": "round",
+        "full_width": true,
+        "spacing_col": 30,
+        "spacing_row": 60,
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "spacing_col_mobile": 16,
+        "spacing_row_mobile": 32,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "main_collection_product_grid_2025_EnC7WC": {
+      "type": "main-collection-product-grid-2025",
+      "settings": {
+        "heading": "Shop All"
+      }
+    }
+  },
+  "order": [
+    "product-grid",
+    "main_collection_product_grid_2025_EnC7WC"
+  ]
+}

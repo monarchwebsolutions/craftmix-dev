@@ -1,0 +1,90 @@
+<div class="cell-container">
+  <div class="custom-flavor-carousel-cell">
+    <div class="product-carousel-card">
+
+      <!-- Product Card -->
+      <div class="product-card-container">
+        <div class="flavor-carousel-product-card"
+             data-product-id="{{ product.id }}"
+             data-color1="{{ product.metafields.custom.color_1 | default: '#8c4a84' }}"
+             data-color2="{{ product.metafields.custom.color_2 | default: '#e6dbf7' }}"
+             data-color3="{{ product.metafields.custom.color_3 | default: '#f8f3fa' }}"
+             style="background-color: {{ product.metafields.custom.color_3 | default: '#f8f3fa' }};">
+             
+          <div class="flavor-carousel-product-card-info">
+            <div class="flavor-carousel-product-card-stars">
+              <img src="{{ 'stars-dark.svg' | asset_url }}" width="105" height="18" class="stars" alt="Review stars">
+              <p class="carousel-review-average">5.0</p>
+            </div>
+             <div 
+              class="stamped-product-reviews-badge" 
+              data-id="{{ product.id }}" 
+              style="display: none;">
+            </div>
+            <h3 class="flavor-carousel-product-card-title">{{ product.title | replace_first: "2025 - ", "" }}</h3>
+          </div>
+
+          <div class="flavor-carousel-product-card-image">
+            {% if product.images.last %}
+              <a href="{{ product.url }}" class="product-card-link">
+                <img 
+                  src="{{ product.images.last | img_url: 'large' }}" 
+                  alt="{{ product.title | escape }}" 
+                  loading="lazy" 
+                  width="325" 
+                  height="278"/>
+                  
+              </a>
+            {% else %}
+              <a href="{{ product.url }}">
+                <img 
+                  src="{{ 'product-placeholder.png' | asset_url }}" 
+                  alt="Placeholder image" 
+                  loading="lazy" 
+                  width="278" 
+                  height="278"/>
+              </a>
+            {% endif %}
+          </div>
+          <div class="flavor-carousel-product-card-footer">
+            {% if product.variants.size > 1 %}
+              <div class="flavor-carousel-product-card-variant-size custom-select" style="background-color: {{ product.metafields.custom.color_2 | default: '#e6dbf7' }};">
+                <div class="custom-variant-trigger" data-dropdown-id="variant-options-{{ product.id }}" tabindex="0">
+                  <div class="selected-variant" style="background-color: {{ product.metafields.custom.color_2 | default: '#e6dbf7' }};">
+                    {{ product.variants.first.title }}
+                  </div>
+                  <span class="custom-arrow">
+                    <img src="{{ 'custom-select-arrow.svg' | asset_url }}" width=12 height=8 alt="Dropdown arrow" />
+                  </span>
+                </div>
+              </div>
+            {% endif %}
+
+            <div class="flavor-carousel-product-card-add-to-cart" style="background-color: {{ product.metafields.custom.color_1 | default: '#8c4a84' }};">
+              <button style="color: {{ product.metafields.custom.btn_text_color | default: '#ffffff' }};" class="flavor-carousel-product-card-add-btn" data-product-id="{{ product.variants.first.id }}" data-variants='{{ product.variants | json }}'>
+                Add - <span class="flavor-carousel-variant-price igPrice" data-product-id="{{ product.id }}">{{ product.price | money }}</span>
+              </button>
+            </div>
+          </div>
+
+   
+        </div>
+          <!-- Custom Dropdown -->
+          {% if product.variants.size > 1 %}
+            <div class="variant-options-container"
+                id="variant-options-{{ product.id }}"
+                style="background-color: {{ product.metafields.custom.color_3 | default: '#ffffff' }}; --variant-hover: {{ product.metafields.custom.color_2 | default: '#f0f0f0' }};">
+              {% for variant in product.variants %}
+                <div class="variant-option"
+                    data-id="{{ variant.id }}"
+                    data-price="{{ variant.price }}">
+                  {{ variant.title }}
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <!-- End Card -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,478 @@
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+
+{% liquid
+  assign carousel_collection = blank
+  if section.settings.carousel_collection != blank
+    assign carousel_collection = section.settings.carousel_collection
+    if carousel_collection.products == blank
+      assign carousel_collection = collections[section.settings.carousel_collection]
+    endif
+  endif
+%}
+  
+<div class="custom-flavor-carousel-header">
+  <h3 class="custom-flavor-carousel-heading">{{ section.settings.heading }}</h3>
+</div>
+<div class="custom-flavor-carousel-nav">
+  <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+  <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+</div>
+<div class="custom-flavor-carousel-container">
+  <div class="custom-carousel">
+
+    {% for carousel_product in carousel_collection.products %}
+      <!-- Carousel Items Start  -->
+      {% unless carousel_product.handle == product.handle %}
+        {% render 'custom-carousel-card-product', product: carousel_product, forloop: forloop %}
+      {% endunless %}
+      <!-- Carousel Items End  -->
+    {% endfor %}
+    </div>   
+</div>
+
+{% style %}
+.custom-carousel-container{
+  background-color:{{section.settings.background_color | default:"var(--craftmix-sky-blue)"}};
+  position:relative;
+  /* z-index:2; */
+}
+.custom-flavor-carousel-section {
+  padding-bottom: 50px;
+  position: relative;
+}
+
+.custom-flavor-carousel-container {
+  padding-bottom: 80px;
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for the buttons */
+}
+
+.custom-flavor-carousel-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: center;
+  line-height: 46px;
+}
+
+.custom-flavor-carousel-cell {
+  width: 332px;
+  margin: 0 15px;
+}
+
+.flavor-carousel-product-card-container {
+  position: relative;
+  width: 332px;
+  height: 444px;
+}
+
+.flavor-carousel-product-card-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  z-index: 100;
+  height: 90px;
+  width: 90px;
+}
+
+
+.flavor-carousel-product-card {
+  height: 444px;
+  width: 332px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(248, 243, 250, 1);
+  overflow: hidden;
+}
+
+
+.flavor-carousel-product-card-stars {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 15px;
+}
+  
+.flavor-carousel-product-card-stars img {
+  margin-right: 8px;
+}
+  
+.flavor-carousel-product-card-stars p {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.47px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.flavor-carousel-product-card-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.47px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.flavor-carousel-product-card-image {
+  width: 278px;
+  height: 278px;
+  margin: 0 auto;
+  margin-bottom: 28px;
+}
+
+.flavor-carousel-product-card-image img{
+    height: 100%;
+    max-width: unset;
+    position: relative;
+    left: -8%;
+}
+
+
+.flavor-carousel-product-card-footer {
+  width: 100%;
+  height: 60px;
+  border-top: 1.5px solid #002657;
+  display: flex;
+}
+
+.flavor-carousel-product-card-variant-size,
+.flavor-carousel-product-card-add-to-cart {
+  min-width: 50%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flavor-carousel-product-card-variant-size {
+  border-right: 1.5px solid #002657;
+}
+
+.flavor-carousel-product-card-add-btn {
+  opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+}
+.product-carousel-card .product-card-link{
+  display:block;
+}
+
+/* CUSTOM SELECT AND DROPDOWN */
+.custom-select {
+  position: relative;
+  height: 60px; /* match footer height */
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  padding: 15px 10px 15px 24px;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  color: #002657;
+}  
+
+.custom-variant-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 20px;
+  color: #002657;
+  cursor: pointer;
+  border-radius: 8px;
+  position: relative;
+  text-align: center;
+}
+
+.variant-options-container {
+  position: absolute;
+  top: 100%;
+  left: 18px;
+  width: 45%;
+  margin-top: -10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #002657;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: none;
+  font-family: 'Goldplay';
+  font-size: 16px;
+  padding: 8px 0;
+  background-color: var(--variant-bg, #ffffff); /* fallback */
+}
+
+.variant-option {
+  text-align: center;
+  font-weight: 600;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.variant-option:hover {
+  background-color: var(--variant-hover);
+}
+
+.rotated-wave .section-wave {
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.rotated-wave {
+    bottom: 2px;
+}
+.custom-flavor-carousel-nav{
+  position:relative;
+}
+
+@media (max-width: 768px) {
+  .custom-flavor-carousel-heading {
+    font-size: 30px;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }  
+  .custom-flavor-carousel-nav{
+    position:unset;
+  }
+  .custom-carousel-container{
+    padding-top:50px;
+  }
+  .custom-flavor-carousel-container{
+    padding-top:30px;
+  }
+}
+
+
+{% endstyle %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function updateCarouselProductReviews() {
+      const cards = document.querySelectorAll('.flavor-carousel-product-card');
+
+      cards.forEach(card => {
+        const productId = card.dataset.productId;
+        const badgeEl = document.querySelector(`.stamped-product-reviews-badge[data-id="${productId}"] .stamped-badge`);
+        const avgEl = card.querySelector('.carousel-review-average');
+
+        if (!badgeEl || !avgEl) return;
+
+        const avg = badgeEl.getAttribute('data-rating') || '5.0';
+        avgEl.textContent = avg;
+      });
+    }
+
+    // Mutation observer for each hidden badge
+    const badges = document.querySelectorAll('.stamped-product-reviews-badge');
+    badges.forEach(badge => {
+      const observer = new MutationObserver(updateCarouselProductReviews);
+      observer.observe(badge, { childList: true, subtree: true });
+    });
+
+    // Fallback in case observer doesn’t trigger
+    setTimeout(updateCarouselProductReviews, 1500);
+  });
+</script>
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButtons = document.querySelectorAll('.flavor-carousel-product-card-add-btn');
+
+  // Toggle dropdown logic
+  document.querySelectorAll('.custom-variant-trigger').forEach(trigger => {
+    const dropdownId = trigger.getAttribute('data-dropdown-id');
+    const dropdown = document.getElementById(dropdownId);
+    const selectedText = trigger.querySelector('.selected-variant');
+
+    if (!dropdown || !selectedText) return;
+
+    // Step 1 prerequisite: allow programmatic focus on options
+    dropdown.querySelectorAll('.variant-option').forEach(opt => {
+      if (!opt.hasAttribute('tabindex')) opt.setAttribute('tabindex', '-1');
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();   // prevent page scroll on Space + prevent any default "button-like" behavior
+        e.stopPropagation();  // keep it consistent with click
+        trigger.click();      // re-use existing click handler
+      }
+    });
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Hide any other open dropdowns
+      document.querySelectorAll('.variant-options-container').forEach(d => {
+        if (d !== dropdown) {
+          d.style.display = 'none';
+        }
+      });
+
+      // Show this dropdown
+      const isOpening = dropdown.style.display !== 'block';
+      dropdown.style.display = isOpening ? 'block' : 'none';
+
+      if (isOpening) {
+        const options = Array.from(dropdown.querySelectorAll('.variant-option'));
+        const selectedLabel = (selectedText.textContent || '').trim();
+
+        const targetOption =
+          options.find(o => (o.textContent || '').trim() === selectedLabel) || options[0];
+
+        if (targetOption) {
+          requestAnimationFrame(() => {
+            try { targetOption.focus(); } catch (e) {}
+          });
+        }
+      }
+    });
+
+    // Variant selection inside dropdown
+    dropdown.querySelectorAll('.variant-option').forEach(option => {
+      option.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          e.stopPropagation();
+          option.click();
+          return;
+        }
+        // Escape + Tab routing
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const container = option.closest('.variant-options-container');
+          if (container) container.style.display = 'none';
+
+          // return focus to the trigger for this dropdown
+          const trigger = document.querySelector(`.custom-variant-trigger[data-dropdown-id="${container ? container.id : ''}"]`);
+          if (trigger) trigger.focus();
+          return;
+        }
+
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const container = option.closest('.variant-options-container');
+          if (container) container.style.display = 'none';
+
+          const trigger = container
+            ? document.querySelector(`.custom-variant-trigger[data-dropdown-id="${container.id}"]`)
+            : null;
+
+          const cardRoot = trigger ? trigger.closest('.cell-container') : null;
+          const addBtn = cardRoot ? cardRoot.querySelector('.flavor-carousel-product-card-add-btn') : null;
+
+          if (e.shiftKey) {
+            requestAnimationFrame(() => {
+              if (trigger) trigger.focus({ preventScroll: true });
+            });
+          } else {
+            requestAnimationFrame(() => {
+              if (addBtn) addBtn.focus({ preventScroll: true });
+            });
+          }
+          return;
+        }
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const container = option.closest('.variant-options-container');
+          if (!container) return;
+
+          const options = Array.from(container.querySelectorAll('.variant-option'));
+          const currentIndex = options.indexOf(option);
+          if (currentIndex === -1) return;
+
+          const nextIndex =
+            e.key === 'ArrowDown'
+              ? Math.min(options.length - 1, currentIndex + 1)
+              : Math.max(0, currentIndex - 1);
+
+          const nextOption = options[nextIndex];
+          if (nextOption) nextOption.focus();
+        }
+      });
+      option.addEventListener('click', () => {
+        const variantId = option.dataset.id;
+        const variantPrice = option.dataset.price;
+        const title = option.textContent;
+
+        selectedText.textContent = title;
+        dropdown.style.display = 'none';
+
+        const productCard = trigger.closest('.flavor-carousel-product-card');
+        const addBtn = productCard.querySelector('.flavor-carousel-product-card-add-btn');
+        const priceEl = productCard.querySelector('.flavor-carousel-variant-price');
+
+        if (addBtn) addBtn.setAttribute('data-product-id', variantId);
+        if (priceEl){priceEl.textContent = formatMoney(variantPrice); priceEl.setAttribute('data-product-id', variantId); } 
+        requestAnimationFrame(() => {
+          addBtn && addBtn.focus({ preventScroll: true });
+        });
+      });
+    });
+  });
+
+  // Close dropdown if clicked outside
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.variant-options-container').forEach(dropdown => {
+      dropdown.style.display = 'none';
+    });
+  });
+
+  // Add to cart functionality
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      const variantId = this.getAttribute('data-product-id');
+      const quantity = 1;
+
+      addToCart(variantId, quantity);
+    });
+  });
+
+  function addToCart(variantId, quantity) {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: [{ id: variantId, quantity: quantity }] })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Product added to cart:', data);
+    })
+    .catch(error => {
+      console.error('Error adding product to cart:', error);
+    });
+  }
+
+  function formatMoney(cents) {
+    const dollars = (cents / 100).toFixed(2);
+    return `$${dollars}`;
+  }
+});
+{% endjavascript %}

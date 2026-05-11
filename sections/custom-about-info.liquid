@@ -1,0 +1,506 @@
+<section class="about-info">
+      <div class="about-info-container">
+        <!-- Top Section  -->
+        <div class="about-info_main-text">
+          <p>
+            <span>Making your own cocktails</span>
+            <img src="{{ 'about-text-margarita.svg' | asset_url }}" alt="margarita" class="inline-svg margarita" width="36" height="40" role="presentation">
+            <span>from scratch can be a real struggle! And we realize that the cocktail mixers</span>
+            <img src="{{ 'about-text-bottle.svg' | asset_url }}" alt="bottle" class="inline-svg bottle" width="24" height="45" role="presentation">
+            <span>on the market were all extremely unhealthy, inconveniently sized, and tasted terrible</span>
+            <img src="{{ 'about-text-cry-face.svg' | asset_url }}" alt="Cry emoji" class="inline-svg cry-face" width="30" height="30" role="presentation"><span>!</span>
+          </p>
+
+          <p>
+            <span>I mean seriously, who likes that syrupy neon sludge? And that's why we created Craftmix!
+            Finally, a cocktail and mocktail mix</span>
+            <img src="{{ 'about-text-paloma-simple.svg' | asset_url }}" alt="paloma" class="inline-svg paloma-simple" width="42" height="42" role="presentation">
+            <span>that's health-conscious</span>
+            <img src="{{ 'about-text-ice-cube.svg' | asset_url }}" alt="ice-cube" class="inline-svg ice-cube" width="49" height="48" role="presentation">
+            <span>conveniently sized</span>
+            <img src="{{ 'about-text-green.svg' | asset_url }}" alt="green-sachet" class="inline-svg green-sachet" width="29" height="29" role="presentation">
+            <span>and most of all, tastes delicious</span>
+            <img src="{{ 'about-text-strawberry.svg' | asset_url }}" alt="strawberry" class="inline-svg strawberry" width="32" height="30" role="presentation"><span>!</span>
+          </p>
+          <br><br>
+          <p>
+            Finally, a cocktail and mocktail mix that’s health-conscious, conveniently sized and most of all, tastes delicious.
+          </p>
+        </div>
+
+        <!-- Bottom Section  -->
+        <div class="about-info_text-and-img">
+          
+          <div class="image-container" id="video-wrapper" tabindex="0">
+            <div class="about-image">
+             <video
+              id="about-video"
+              playsinline
+              loop
+              poster="{{ section.settings.video_poster | image_url: width: 726 }}"
+              preload="none">
+              <source src="{{ section.settings.video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          
+            <!-- Play/Pause Button -->
+            <div class="play-btn" id="play-toggle" tabindex="0">
+              <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/carousel-card-play-btn.svg?v=1738191527" width="68" height="68" alt="Play" class="play-icon" id="play-icon" loading="lazy">
+            </div>
+          
+              
+              <!-- Volume/Mute Button -->
+              <div class="volume-btn" id="volume-toggle" tabindex="0">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/Speaker_Icon_7d83b52f-cbca-4d55-ac43-c5293b0d97a4.png?v=1734273205"  width="40" height="40" alt="Volume" class="volume-icon" id="volume-icon" loading="lazy">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/Mute_Icon_77a389ee-8a3a-415f-9dd5-741c7c752fcb.png?v=1734273205"  width="40" height="40" alt="Mute" class="mute-icon" id="mute-icon" style="display: none;" loading="lazy">
+              </div>
+              
+            </div>
+          </div>
+
+
+          
+          <div class="image-and-text">
+            <div class="text">
+              <p>Craftmix was started when JT, an avid entrepreneur and former bartender, realized there was a void in
+                the pre-packaged cocktail market. After founding various startups, JT received and overwhelmingly
+                positive response to the idea of Craftmix, and he knew this was the one!</p>
+              <p>JT, alongside many brave roommates, friends, and team members spent over 6 months testing (getting
+                drunk) different flavor combinations and formulas to create the delicious flavors you know.</p>
+            </div>
+            <div class="img">
+              <div class="img-jt_signature">
+                <img 
+                  src="{{ 'jake-signature-3.png' | asset_url }}" 
+                  alt="Jake Signature" 
+                  loading="lazy" 
+                  width="217" 
+                  height="80">
+              </div>
+              <div class="img-jt">
+                <img 
+                  src="{{ 'jake-about.png' | asset_url }}" 
+                  alt="Jake" 
+                  loading="lazy" 
+                  width="273" 
+                  height="193">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+{% style %}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* img {
+  width: 100%;
+} */
+
+.about-info {
+  background-color: #ddf7f7;
+}
+.about-info-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+}
+/* Top Section */
+.about-info_main-text {
+  margin: 0 auto;
+  margin-bottom: 73px;
+  max-width: 780px;
+  text-align: center;
+}
+.about-info_main-text p {
+  display: inline-block;
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  color: #002657;
+  font-family: 'Hornbill';
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.79px;
+  line-height: 2.75rem;
+}
+
+.about-info_main-text p:nth-of-type(2) {
+  margin-top: 33px;
+}
+
+.inline-svg {
+  display: inline-block;
+  width: auto; 
+  margin: 0 0.2rem; 
+  vertical-align: text-bottom; 
+}
+.inline-svg.margarita {
+  height: 40px;
+  width: 36px;
+  
+}
+.inline-svg.bottle {
+  height: 45px;
+  width: 24px;
+}
+.inline-svg.cry-face {
+  height: 30px;
+  width: 30px;
+}
+.inline-svg.paloma-simple {
+  height: 42px;
+  width: 42px;
+}
+.inline-svg.ice-cube {
+  height: 48px;
+  width: 49px;
+}
+.inline-svg.green-sachet {
+  height: 29px;
+  width: 29px;
+}
+.inline-svg.strawberry {
+  height: 30px;
+  width: 32px;
+}
+
+/* Bottom Section */
+.about-info_text-and-img {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 65px;
+}
+
+.image-container {
+  max-width: 365px;
+  width: 100%;
+  margin: 0 auto;
+  height: 624px; 
+  border-radius: 30px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%; 
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1.5px solid #002657;
+}
+
+.about-image video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-btn img {
+  width: 68px;
+  height: 68px;
+}
+
+.volume-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid rgba(0, 38, 87, 1);
+}
+
+.volume-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+
+
+.image-and-text {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.image-and-text .text {
+  max-width: 499px;
+}
+.image-and-text .text p {
+  opacity: 0.9;
+  color: #002657;
+  font-family: 'Goldplay';
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 1.5rem;
+}
+
+.image-and-text .text p:first-of-type {
+  margin-bottom: 30px;
+}
+
+.img-jt_signature img {
+  width: 217px;
+  /* height: 38px; */
+}
+.img-jt img {
+  width: 273px;
+  height: 193px;
+}
+
+/* Media query for desktop */
+@media (max-width: 992px) {
+   .about-info_main-text {
+    padding-top: 20px;
+  }
+  .about-info_main-text p {
+    max-width: 500px;
+    /* padding-left: 30px;
+    padding-right: 30px; */
+  }
+  .image-container {
+    width: 298px;
+    max-width: 100%;
+    height: auto;
+  }
+  .image-and-text .text {
+    max-width: 388px;
+  }
+  .image-and-text .text p {
+    font-size: 1, 25rem;
+    letter-spacing: -0.11px;
+    line-height: 1.5rem;
+  }
+}
+
+/* Media query for tablet responsiveness */
+@media (max-width: 768px) {
+  .about-info_text-and-img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+  .image-container {
+    max-width: 100%;
+    height: auto; 
+    aspect-ratio: 365 / 624; /
+  }
+}
+
+
+@media (max-width: 576px) {
+  .about-info_main-text {
+    padding-top: 48px;
+    margin-bottom: 48px;
+  }
+  .about-info_main-text p {
+    max-width: 328px;
+    font-size: 18px;
+    letter-spacing: -0.47px;
+    line-height: 29px;
+  }
+
+  .about-info_text-and-img {
+    margin-bottom: 0px;
+  }
+
+  .image-container {
+    aspect-ratio: 365 / 624;
+  }
+
+  .image-and-text {
+    gap: 22px;
+  }
+  
+  .img-jt_signature img {
+    width: 188px;
+    /* height: 32px; */
+  }
+
+  .img-jt img {
+    width: 241px;
+    height: 170px;
+  }
+
+  .img-jt {
+    justify-self: center;
+    transform: translateY(50px);
+    z-index: 3;
+  }
+
+  .inline-svg.margarita {
+    height: 29px;
+    width: 25px;
+  }
+  .inline-svg.bottle {
+    height: 30px;
+    width: 16px;
+  }
+  .inline-svg.cry-face {
+    height: 21px;
+    width: 21px;
+  }
+  .inline-svg.paloma-simple {
+    height: 20px;
+    width: 22px;
+  }
+  .inline-svg.ice-cube {
+    height: 30px;
+    width: 30px;
+  }
+  .inline-svg.green-sachet {
+    height: 18px;
+    width: 18px;
+  }
+  .inline-svg.strawberry {
+    height: 20px;
+    width: 22px;
+  }
+}
+
+{% endstyle %}
+
+{% javascript %}
+document.addEventListener("DOMContentLoaded", function () {
+  const video = document.getElementById("about-video");
+  const playIcon = document.getElementById("play-toggle");
+  const volumeIcon = document.getElementById("volume-icon");
+  const muteIcon = document.getElementById("mute-icon");
+  const videoWrapper = document.getElementById("video-wrapper");
+  const volumeToggle = document.getElementById("volume-toggle");
+
+  // Helper: toggle play/pause state
+  function togglePlayPause() {
+    if (video.paused) {
+      video.play();
+      playIcon.style.display = "none";
+      playIcon.tabIndex=-1
+    } else {
+      video.pause();
+      playIcon.style.display = "inline";
+      playIcon.tabIndex=0
+    }
+  }
+
+  // Handle video click: anywhere except volume button
+  videoWrapper.addEventListener("click", function (e) {
+    if (!volumeToggle.contains(e.target)) {
+      togglePlayPause();
+    }
+  });
+
+  // Keyboard: Enter / Space
+
+  videoWrapper.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      // Prevent spacebar scrolling
+      e.preventDefault();
+
+      // Do not toggle if focus is on volume button
+      if (!volumeToggle.contains(document.activeElement)) {
+        togglePlayPause();
+      }
+    }
+  });
+
+  // Move focus to video wrapper when play button disappears
+
+  playIcon.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      requestAnimationFrame(() => {
+        videoWrapper.focus();
+      });
+    }
+  });
+
+  // Handle volume toggle
+  volumeToggle.addEventListener("click", function () {
+    video.muted = !video.muted;
+    volumeIcon.style.display = video.muted ? "none" : "inline";
+    muteIcon.style.display = video.muted ? "inline" : "none";
+  });
+
+  volumeToggle.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+
+      video.muted = !video.muted;
+      volumeIcon.style.display = video.muted ? "none" : "inline";
+      muteIcon.style.display = video.muted ? "inline" : "none";
+    }
+  });
+
+  // Pause when out of view
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          if(!video.paused && !video.ended){
+            togglePlayPause();
+          }
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  observer.observe(video);
+});
+ 
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Custom About info",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+    },
+    {
+      "type": "image_picker",
+      "id": "video_poster",
+      "label": "Video Thumbnail"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom About info"
+    }
+  ]
+}
+{% endschema %}

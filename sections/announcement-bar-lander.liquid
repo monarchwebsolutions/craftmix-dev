@@ -1,0 +1,370 @@
+{%- liquid
+  if section.settings.enable == false
+    assign show = false
+  else
+    assign show = true
+  endif
+  assign check_text_color = section.settings.text_color | color_extract: 'alpha'
+  assign check_text_color_dark = section.settings.text_color_dark | color_extract: 'alpha'
+  assign check_backgound_color = section.settings.backgound_color | color_extract: 'alpha'
+  assign check_backgound_color_dark = section.settings.backgound_color_dark | color_extract: 'alpha'
+-%}
+
+{%- style -%}
+  .announcement-bar-lander-container-{{ section.id }} {
+    {% if section.settings.backgound_color != blank and check_backgound_color and check_backgound_color != 0.0 %}
+      background: {{ section.settings.backgound_color }};
+    {% else %}
+      background: rgba(var(--colors-background));
+    {% endif %}
+  }
+  .dark .announcement-bar-lander-container-{{ section.id }} {
+    {% if section.settings.backgound_color_dark != blank and check_backgound_color_dark and check_backgound_color_dark != 0.0 %}
+      background: {{ section.settings.backgound_color_dark }};
+    {% else %}
+      background: rgba(var(--colors-background));
+    {% endif %}
+  }
+  .announcement-bar-lander-text-{{ section.id }} {
+    {% if section.settings.text_color != blank and check_text_color and check_text_color != 0.0 %}
+      color: {{ section.settings.text_color }};
+    {% else %}
+      color: rgb(var(--colors-text));
+    {% endif %}
+  }
+  .dark .announcement-bar-lander-text-{{ section.id }} {
+    {% if section.settings.text_color_dark != blank and check_text_color_dark and check_text_color_dark != 0.0 %}
+      color: {{ section.settings.text_color_dark }};
+    {% else %}
+      color: rgb(var(--colors-text));
+    {% endif %}
+  }
+  {% if section.settings.enable_sticky_bar %}
+    .section-announcement-bar-lander {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+  {% endif %}
+  
+  /* Custom Swiper Container */
+  .announcement-swiper-container-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    {% if section.blocks.size > 1 %}
+    cursor: grab;
+    {% else %}
+    cursor: default;
+    {% endif %}
+  }
+  
+  {% if section.blocks.size > 1 %}
+  .announcement-swiper-container-{{ section.id }}:active {
+    cursor: grabbing;
+  }
+  
+  .announcement-swiper-container-{{ section.id }}.swiper-initialized {
+    cursor: grab;
+  }
+  
+  .announcement-swiper-container-{{ section.id }}.swiper-initialized:active {
+    cursor: grabbing;
+  }
+  {% endif %}
+  
+  /* Custom Swiper Wrapper */
+  .announcement-swiper-wrapper-{{ section.id }} {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition-property: transform;
+    box-sizing: content-box;
+  }
+  
+  /* Custom Swiper Slide */
+  .announcement-swiper-slide-{{ section.id }} {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+  }
+  
+  /* Navigation Arrows */
+  .announcement-nav-prev-{{ section.id }},
+  .announcement-nav-next-{{ section.id }} {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+  }
+
+  .announcement-nav-prev-{{ section.id }}.swiper-button-disabled,
+  .announcement-nav-next-{{ section.id }}.swiper-button-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .announcement-nav-prev-{{ section.id }} {
+    left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .announcement-nav-next-{{ section.id }} {
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .announcement-nav-prev-{{ section.id }} svg {
+    transform: rotate(180deg);
+  }
+  .announcement-nav-prev-{{ section.id }}::after,
+  .announcement-nav-next-{{ section.id }}::after {
+    content: none;
+  }
+
+  .announcement-nav-prev-{{ section.id }}> svg {
+    width: 15px;
+    height: 15px;
+    fill: #002657;
+  }
+
+  .announcement-nav-next-{{ section.id }}> svg {
+    width: 15px;
+    height: 15px;
+    fill: #002657;
+  }
+
+  .custom-swiper-slide-announcement-bar {
+    padding: 8.5px 29px;
+  }
+  /* Icon styling */
+  .announcement-bar-lander-{{ section.id }} .banner-icon{
+    margin: 0 6px;
+  }  
+  /* Text styling */ 
+  .announcement-bar-lander-{{ section.id }} .rte {
+    text-align: center;
+  }
+
+  .announcement-bar-lander-{{ section.id }} .rte {
+    margin: 0 24px;
+  }
+  .announcement-bar-lander-{{ section.id }} .rte p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0; 
+    font-weight: 500;
+    font-family: Goldplay;
+  }
+  .announcement-bar-lander-{{ section.id }} .rte a {
+    text-decoration: underline;
+  }
+
+  .announcement-bar-lander-{{ section.id }} .rte a:hover {
+    text-decoration: underline;
+    background: unset;
+  }
+
+  .custom-svg-announcement-bar {
+    fill: #002657 !important;
+  }
+  
+  @media (max-width: 769px) {
+  .custom-swiper-slide-announcement-bar {
+    padding: 12.5px 29px;
+  }
+
+  .announcement-bar-lander-{{ section.id }} .rte p { 
+    font-size: 12px;
+  }
+
+  .announcement-nav-prev-{{ section.id }} {
+    left: 10px;
+    justify-content: flex-start;
+  }
+  .announcement-nav-next-{{ section.id }} {
+    right: 10px;
+    justify-content: flex-end;
+  }
+  } 
+
+
+  
+{%- endstyle -%}
+{% if template contains 'lander' or template contains 'landing' %}
+    {%- if show -%}
+    <!-- Swiper CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    
+    <div 
+        class="announcement-bar-lander-container-{{ section.id }} announcement-bar-lander-text-{{ section.id }} relative overflow-hidden"
+        {% if section.settings.enable_sticky_bar %}
+        data-is-sticky="true"
+        {% endif %}
+    >
+        {% if section.blocks.size > 0 %}
+        <div class="announcement-bar-lander-{{ section.id }} announcement-swiper-container-{{ section.id }} swiper">
+            <div class="announcement-swiper-wrapper-{{ section.id }}">
+            {%- for block in section.blocks -%}
+                <div class="custom-swiper-slide-announcement-bar announcement-swiper-slide-{{ section.id }} py-3 px-5 flex items-center justify-center" {{ block.shopify_attributes }}>
+                {%- if block.settings.text != blank -%}
+                    <img class="banner-icon" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-box.png?v=1744805636" alt="Box icon" height=16 width=16>
+                    <img class="banner-icon" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-stars.png?v=1744805632" alt="Stars icon" height=16 width=16>
+                    <div class="rte">
+                    {{ block.settings.text }}
+                    </div>
+                    <img class="banner-icon" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-box.png?v=1744805636" alt="Box icon" height=16 width=16>
+                    <img class="banner-icon" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-stars.png?v=1744805632"  alt="Stars icon" height=16 width=16>
+                {%- endif -%}
+                </div>
+            {%- endfor -%}
+            </div>
+            
+            <!-- Navigation arrows -->
+            {% if section.settings.show_navigation and section.blocks.size > 1 %}
+            <div class="announcement-nav-prev-{{ section.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+            </div>
+            <div class="announcement-nav-next-{{ section.id }}">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false"><path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path></svg>
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Swiper JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Initialize Swiper with Custom Classes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const swiperElement = document.querySelector('.announcement-bar-lander-{{ section.id }}');
+        if (swiperElement) {
+            new Swiper('.announcement-bar-lander-{{ section.id }}', {
+            // Custom class names to avoid conflicts
+            wrapperClass: 'announcement-swiper-wrapper-{{ section.id }}',
+            slideClass: 'announcement-swiper-slide-{{ section.id }}',
+            
+            loop: {{ section.blocks.size | default: 0 }} > 1 ? true : false,
+            speed: 600,
+            {% if section.settings.auto_switch_bar and section.blocks.size > 1 %}
+            autoplay: {
+                delay: {{ section.settings.change_bar_every | times: 1000 }},
+                disableOnInteraction: false,
+            },
+            {% endif %}
+            navigation: {
+                nextEl: '.announcement-nav-next-{{ section.id }}',
+                prevEl: '.announcement-nav-prev-{{ section.id }}',
+            },
+            {% if section.blocks.size <= 1 %}
+            allowTouchMove: false,
+            {% endif %}
+            });
+        }
+        });
+    </script>
+    {%- endif -%}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement Bar Lander",
+  "class": "section-announcement-bar-lander",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "color",
+      "id": "backgound_color",
+      "label": "Background color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "backgound_color_dark", 
+      "label": "Background color (Dark mode)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color_dark",
+      "label": "Text color (Dark mode)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Slider Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_switch_bar",
+      "label": "Auto switch slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "change_bar_every",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slide every",
+      "info": "Only applies when auto switch is enabled",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "label": "Show navigation arrows",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Welcome to our store!</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar Lander",
+      "blocks": [
+        {
+          "type": "slide"
+        },
+        {
+          "type": "slide"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

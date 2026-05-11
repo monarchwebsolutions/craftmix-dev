@@ -1,0 +1,56 @@
+{% assign top_section_bg = '#EAD1FA' | default: '#ffffff' %}
+<!-- {% assign bottom_section_bg = product.metafields.custom.color_3 | default: '#ffffff' %} -->
+{% assign bottom_section_bg = '#333333' %}
+
+
+<div class="marquee-container pdp-marquee-divider">
+  <div class="marquee-top" style="background-color: {{ top_section_bg }}"></div>
+  <div class="marquee-bottom" style="background-color: {{ bottom_section_bg }}"></div>
+  {% if section.settings.lottie_file %}
+    <lottie-player class="section-wave marquee" 
+      src="{{ section.settings.lottie_file | asset_url }}" 
+      background="transparent"  
+      speed="0.6"  
+      loop autoplay>
+    </lottie-player>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+/* .pdp-marquee-divider {
+  z-index: 0;
+}
+
+@media screen and (max-width: 1000px) {
+ .pdp-marquee-divider {
+    z-index: 1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+ #animation-container .animation {
+  margin-left: 101px !important;
+   margin-top: -23px !important;
+  }
+} */
+{% endstylesheet %}
+  
+{% schema %}
+{
+  "name": "PDP Marquee Divider",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "PDP Marquee Divider"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "lottie_file",
+      "label": "Lottie Animation File Name (from assets)"
+    }
+  ]
+}
+{% endschema %}

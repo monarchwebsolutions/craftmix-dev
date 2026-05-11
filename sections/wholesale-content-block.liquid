@@ -1,0 +1,252 @@
+<section class="wholesale-content-block">
+  <img class="bg-img wholesale-blueberry" width=105 height=110 src="{{ "blueberry.svg" | asset_url }}" alt="Blueberry illustration">
+  <img class="bg-img wholesale-blood-orange" width=208 height=222 src="{{ "bloodorange.svg" | asset_url }}" alt="Blood orange slice illustration">
+  <img class="bg-img wholesale-green-umbrella" width=257 height=157 src="{{ "green-umbrella.svg" | asset_url }}" alt="Green umbrella illustration">
+  <div class="wholesale-content-block__inner page-width">
+    <h1 class="wholesale-content-block__title">{{ page.title }}</h1>
+    <p class="wholesale-description">Join Walmart, Jetblue, and 1000+ independent stores that have chosen to sell Craftmix on their shelves.</p>
+    <div class="wholesale-content-block__content rte">
+      <div class="faire-widget-container">
+        <div class="faire-widget-left">
+          <div class="faire-logos">
+            <img class="craftmix-logo-small" height=17 width=96 src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839" alt="Craftmix logo">
+            <span class="faire-x">X</span>
+            <img class="faire-logo-small" height=17 width=141 src="https://cdn.shopify.com/s/files/1/2340/1623/files/faire-logo.png?v=1744885009" alt="Faire Logo">
+          </div>
+          <div class="faire-header">Try our products&nbsp<br class="desktop-break-lg">in your store,&nbsp<br class="desktop-break-lg">risk-free</div>
+          <div class="faire-bullet-container">
+            <div class="faire-bullet">
+              <img class="faire-checkmark" width=14 height=9 src="{{  "blue-checkmark.svg" | asset_url }}" alt="Blue checkmark icon">
+              <span class="bullet-content">50% off your first order (up to $150)</span>
+            </div>
+            <div class="faire-bullet">
+              <img class="faire-checkmark" width=14 height=9 src="{{  "blue-checkmark.svg" | asset_url }}" alt="Blue checkmark icon">
+              <span class="bullet-content">1 year of free shipping with us</span>
+            </div>
+            <div class="faire-bullet">
+              <img class="faire-checkmark" width=14 height=9 src="{{  "blue-checkmark.svg" | asset_url }}" alt="Blue checkmark icon">
+              <span class="bullet-content">60-day payment terms for eligible retailers</span>
+            </div>
+            <div class="faire-bullet">
+              <img class="faire-checkmark" width=14 height=9 src="{{  "blue-checkmark.svg" | asset_url }}" alt="Blue checkmark icon">
+              <span class="bullet-content">Free returns on your first order</span>
+            </div>
+          </div>
+          <a target="_blank" class="faire-cta secondary-cta" href="https://www.faire.com/direct/craftmix?utm_source=widgetv2&widgetToken=bw_7qxlqk5nha">Shop Wholesale prices</a>
+        </div>
+        <div class="faire-widget-right">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/Craftmix_Packets_1_4x_1_-min.jpg?v=1749103459" alt="Four Craftmix cocktail mix packets—Mint Mojito, Strawberry Mule, Espresso Martini, and Classic Margarita—arranged on orange pedestals against a warm amber background.">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .wholesale-content-block{
+    background-color:var(--craftmix-pale-blue);
+    position:relative;
+  }
+  .wholesale-content-block__inner{
+    z-index: 2;
+    position: relative;
+  }
+  .wholesale-content-block__content{
+    /* width:80%; */
+    margin: auto;
+  }
+  .wholesale-content-block h1{
+    font-family: 'Hornbill';
+    font-weight: 600;
+    font-size: 64px;
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom:26px;
+    color:var(--craftmix-dark-blue);
+  }
+  .wholesale-content-block__content p,
+  .wholesale-content-block__content ul
+  {
+    font-size:18px;
+    font-family:Goldplay;
+  }
+  .wholesale-blueberry{
+    transform: rotate(250deg);
+    top:475px;
+    left:40px;
+    
+  }
+  .wholesale-blood-orange{
+    transform: scaleX(-1);
+    bottom:-76px;
+    left:-50px;
+    transform: rotate(418deg);
+    z-index:1;
+  }
+  .wholesale-green-umbrella{
+    right: -64px;
+    top: 90px;
+  }
+  .faire-widget-container{
+    display:flex;
+    flex-direction:row;
+    width:984px;
+    height:757px;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+    margin:auto;
+  }
+  .faire-widget-left{
+    background-color:#fff;
+    padding:50px;
+    width:50%;
+  }
+  .faire-widget-right{
+    width:50%;
+  }
+  .faire-widget-right img{
+    height:100%;
+    object-fit:cover;
+  }
+  .faire-x{
+    font-family: 'GOLDPLAY';
+    font-weight: 300;
+    margin: 0 10px;
+    margin-right:8px;
+  }
+  .faire-header{
+    font-family: 'Hornbill';
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin-top: 80px;
+    margin-bottom:50px;
+  }
+  .faire-checkmark{
+    margin-bottom:0 !important;
+    height:12px !important;
+    margin-top:5px !important;
+    margin-right:12px;
+  }
+  .bullet-content{
+    font-size:18px;
+    font-family:Goldplay;
+    font-weight:600;
+  }
+  .faire-bullet{
+    margin-left: 20px;
+    display:flex;
+    margin-bottom:20px;
+  }
+  .faire-bullet-container{
+    max-width:313px;
+    margin-bottom:60px;
+  }
+  .wholesale-description{
+    text-align: center;
+    max-width: 534px;
+    margin: auto;
+    font-family: 'GOLDPLAY';
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom:72px;
+  }
+  .faire-cta:hover{
+    background-size: unset !important;
+    background:#fff !important;
+    cursor:pointer;
+  }
+  .faire-cta{
+    font-size:20px;
+    transition: 0.3s;
+    padding:16px 64px;
+    font-weight:600;
+    transition:0.3s !important;
+    text-align: center;
+  }
+  @media screen and (max-width:1023px){
+    .faire-widget-container{
+      flex-direction:column-reverse;
+      width:500px;
+      max-width:90%;
+      height:unset;
+    }
+    .faire-widget-left,
+    .faire-widget-right{
+      width:100%;
+    }
+    .faire-widget-right img{
+      margin-bottom:0;
+      width:100%;
+    }
+    .faire-widget-right{
+      height:300px;
+    }
+    .wholesale-blood-orange,
+    .wholesale-blueberry{
+      display:none;
+    }
+    .wholesale-green-umbrella{
+      width:130px;
+      right: -40px;
+      top: 154px;
+    }
+    .wholesale-content-block h1{
+      font-size:40px;
+    }
+    .wholesale-description{
+      width:75%;
+    }
+    .faire-widget-left{
+      padding:24px;  
+    }
+    .craftmix-logo-small,
+    .faire-logo-small{
+      height:14px !important;
+      width:auto !important;
+    }
+    .faire-header{
+      font-size:25px;
+      font-weight:700;
+      margin-top:28px;
+      margin-bottom:28px;
+    }
+    .faire-bullet-container{
+      max-width:unset;
+    }
+    .faire-bullet{
+      margin-bottom:8px;
+    }
+    .bullet-content{
+      font-size:16px;
+    }
+    .faire-cta{
+      display:block;
+      padding:16px;
+    }
+    .faire-bullet-container{
+      margin-bottom:25px;
+    }
+    .wholesale-content-block{
+      padding-bottom:25px;
+    }
+  }
+  @media screen and (max-width:480px){
+    .faire-widget-right{
+      height:226px;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Wholesale Content Block",
+  "tag": "section",
+  "class": "wholesale-content-block-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Wholesale Content Block"
+    }
+  ]
+}
+{% endschema %}

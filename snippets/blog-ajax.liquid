@@ -1,0 +1,26 @@
+{% paginate blogs[blog_handle].articles by 8 %}
+    {% for article in blogs[blog_handle].articles %}
+        <div class="article-card">
+            <a href="{{ article.url }}" class="article-card-link">
+                <div class="article-card-img">
+                    {% if article.tags.size > 0 %}
+                        <span class="card-article-tag">{{ article.tags.first }}</span>
+                    {% endif %}
+                    <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
+                </div>
+            </a>
+            <div class="card-article-text">
+                <span class="card-read-time">
+                    Read time: {{ article.metafields.custom.read_time | default: '5' }} mins
+                </span>
+                <a href="{{ article.url }}" class="article-title-link">
+                    <h3 class="card-article-title">
+                        {% assign words = article.title | split: ' ' %}
+                        {{ words | slice: 0, 6 | join: ' ' }}{% if words.size > 6 %}...{% endif %}
+                    </h3>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endpaginate %}
+

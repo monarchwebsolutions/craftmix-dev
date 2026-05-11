@@ -1,0 +1,118 @@
+* ****************** */
+/* ***** Why Craftmix Card* ***** */
+/* ****************** */
+
+.why-craftmix-card-section {
+  background-color: transparent;
+  padding: 50px 0;
+}
+
+.why-craftmix-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1390px;
+  height: 122px;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #f7ecfd;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  opacity: 1;
+  overflow: hidden;
+}
+
+/* Image Section */
+.why-craftmix-card-image {
+  max-width: 220px;
+  align-self: flex-end;
+  overflow: hidden;
+  margin-bottom: -20px;
+}
+
+/* Text Section */
+.why-craftmix-card-text {
+  flex: 1;
+  margin: 0 20px;
+}
+
+.why-craftmix-card-text h2 {
+  font-size: 30px;
+  color: #002657;
+  line-height: 30px;
+}
+
+.why-craftmix-card-text p {
+  font-size: 18px;
+  color: #002657;
+}
+
+/* CTA Section */
+.why-craftmix-card-cta a.btn  {
+  color: #002657;
+  min-width: 245px;
+  min-height: 60px;
+  padding: 10px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: #60d3f8;
+  opacity: 1;
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.why-craftmix-card-cta a.btn:hover {
+  color: #fff; 
+}
+
+
+* ****************** */
+/* ***** Media Queries ***** */
+/* ****************** */
+@media (max-width: 1000px) {
+  .why-craftmix-card {
+    max-width: 388px;
+    height: 331px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .why-craftmix-card h2,
+  .why-craftmix-card p {
+    text-align: center;
+  }
+
+  .why-craftmix-card h2 {
+    font-size: 24px;
+  }
+
+  .why-craftmix-card-text {
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 15px;
+    flex: 0;
+  }
+
+  /* Image position */
+  .why-craftmix-card-image {
+    margin: 0 auto;
+    order: 2;
+  }
+
+  .why-craftmix-card-cta {
+    order: 3;
+  }
+}

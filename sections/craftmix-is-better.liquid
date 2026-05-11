@@ -1,0 +1,80 @@
+{{ 'craftmix-is-better-custom.css' | asset_url | stylesheet_tag }}
+<div class="craftmix-is-better-section" style="background-color: {{ section.settings.background_color }};">
+  <div class="craftmix-is-better-container page-max-width">
+    <div class="craftmix-is-better-header">
+      <div class="tiny-header">Why</div>
+      <h2>Craftmix Is Better</h2>
+      <div class="subheading">for you and the environment</div>
+    </div>
+    <div class="craftmix-is-better-content-container">
+      <div class="left-column">
+        <div class="benefit-box">
+          <img class="lazy-img" width="83" height="80" alt="Two overlapping peach-colored rectangles with a blue downward arrow icon in the lower left corner." loading="lazy" data-src="{{ 'low-sugar.svg' | asset_url }}">
+          <h3>Low on sugar</h3>
+          <div class="benefit-box-description">Our mixers are sweetened with a blend of natural sweeteners</div>
+        </div>
+        <div class="benefit-box">
+          <img class="lazy-img" width="48" height="80" alt="Purple water bottle icon with white X on green circle" loading="lazy" data-src="{{ 'less-plastic.svg' | asset_url }}">
+          <h3>Less plastic</h3>
+          <div class="benefit-box-description">Our packaging uses 95% less plastic than traditional bottled mixers</div>
+        </div>
+      </div>
+    
+      <div class="middle-column">
+        <img class="lazy-img" width=490 height=650 alt="Three Craftmix single-serve cocktail mix packets displayed in a stacked layout featuring Mint Mojito, Espresso Martini, and Strawberry Mule flavors" loading="lazy" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/3-packets-b-min.png?v=1738145792">
+      </div>
+      <div class="right-column">
+        <div class="benefit-box">
+          <img class="lazy-img" width="112" height="80" alt="Melon illustration beside blueberry illustration" loading="lazy" data-src="{{ 'natural.svg' | asset_url }}">
+          <h3>Natural</h3>
+          <div class="benefit-box-description">Our clean, refreshing flavors with no artificial ingredients</div>
+        </div>
+        <div class="benefit-box">
+          <img class="lazy-img" width="87" height="80" alt="Green leaf illustration with two pink stars in top right corner" loading="lazy" data-src="{{ 'fuel-efficient.svg' | asset_url }}">
+          <h3>More fuel effecient</h3>
+          <div class="benefit-box-description">Our lightweight, space-saving packaging uses 95% less fuel for transport than competitors</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="craftmix-is-better-cta-container">
+    <a href="/pages/about-us" class="primary-cta">Learn about Craftmix</a>
+  </div>
+  {% liquid
+  if template == 'index'
+    assign craftmix_better_wave = 'beige-divider-left-to-right.json'
+  else
+    assign craftmix_better_wave = 'wave-divider-left-to-right-2400px-pale-purple.json'
+  endif
+%}
+  <div class="section-wave-container">
+    <div
+      class="lazy-lottie-container section-wave"
+      data-src="{{ craftmix_better_wave | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Craftmix Is Better",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#DDF7F7"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Craftmix Is Better"
+      }
+    ]
+  }
+{% endschema %}

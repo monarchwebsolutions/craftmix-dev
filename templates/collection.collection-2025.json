@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main_collection_product_grid_2025_3hMxzD": {
+      "type": "main-collection-product-grid-2025",
+      "settings": {
+        "heading": "Let's stir this up"
+      }
+    },
+    "subscribe_card_ybUrrC": {
+      "type": "subscribe-card",
+      "settings": {
+        "background_color": "#ddf7f7",
+        "button_link": ""
+      }
+    }
+  },
+  "order": [
+    "main_collection_product_grid_2025_3hMxzD",
+    "subscribe_card_ybUrrC"
+  ]
+}

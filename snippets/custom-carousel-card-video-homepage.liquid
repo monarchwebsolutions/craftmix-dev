@@ -1,0 +1,57 @@
+<div class="custom-review-carousel-card {% if first %}first-card{% endif %}">
+  <video class="custom-video-review-carousel-video"
+    tabindex="0"
+    preload="none"
+    src="{{ video_url }}"
+    loading="lazy" 
+    {% if thumbnail %}data-poster="{{ thumbnail | image_url }}"{% endif %}
+    playsinline loop>
+    {% if block.settings.captions_title != blank %}
+      <track
+        kind="captions"
+        src="{{ block.settings.captions_title | asset_url }}"
+        srclang="en"
+        label="English"
+      >
+    {% endif %}
+  </video>
+  <button class="play-btn">
+    <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/carousel-card-play-btn.svg?v=1738191527" width="68" height="68" alt="Play Button" class="play-icon">
+    <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/icons8-pause-button-30.png?v=1738103868" width="68" height="68" alt="Pause Button" class="pause-icon" style="display: none;">
+  </button>
+
+  <button class="volume-btn">
+    <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/Speaker_Icon_7d83b52f-cbca-4d55-ac43-c5293b0d97a4.png?v=1734273205" width="40" height="40" alt="Volume Button" class="volume-icon">
+    <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/Mute_Icon_77a389ee-8a3a-415f-9dd5-741c7c752fcb.png?v=1734273205"  width="40" height="40" alt="Mute Button" class="mute-icon" style="display: none;">
+  </button>
+  {% if block.settings.captions_title != blank %}
+    <button
+      type="button"
+      class="cc-toggle"
+      aria-pressed="false"
+      aria-label="Turn captions on"
+      data-cc-src="{{ block.settings.captions_title | asset_url }}"
+    >
+      CC
+    </button>
+  {% endif %}
+  {% if linked_product %}
+    <div class="carousel-product-info">
+      <div class="carousel-product-info-text">
+        <div class="stars">
+          <img src="{{ 'stars-dark.svg' | asset_url }}" width="55" height="9"  alt="Review Stars">
+        </div>
+        <h5 class="carousel-product-title">{{ linked_product.title | remove_first: '2025 - ' }}</h5>
+        <p class="product-variant">
+          {{ linked_product.variants.first.title }} - <span class="igPrice" data-product-id="{{ linked_product.id }}">{{ linked_product.price | money }}</span>
+        </p>
+      </div>
+      <div class="carousel-product-info-cta">
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ linked_product.variants.first.id }}">
+          <button type="submit" class="carousel-product-info-cta-btn">Add</button>
+        </form>
+      </div>
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,435 @@
+{% assign section_bg = product.metafields.custom.color_3 | default: '#ffffff' %}
+{% assign icon_color = product.metafields.custom.color_1 | default: '#000000' %}
+
+<div class="custom-product-faq-section" style="background-color: {{ section_bg }};">
+       <img src="{{ 'pink-umbrella.svg' | asset_url }}" width="246" height="296" alt="Decorative background image of pink unbrella"  class="faq-fruit bg-pink-umbrella" loading="lazy">
+
+  <div class="custom-product-faq-section-container">
+    
+    <div class="product-faq-body">
+      <h2 class="product-faq-heading">{{ section.settings.heading }}</h2>
+     
+
+
+        {% assign faqs = product.metafields.custom.faqs.value %}
+            {% if faqs != blank %}
+              {% for faq in faqs limit:5 %}
+                <div class="faq{% if forloop.index == 1 %} faq-active{% endif %}">
+                  <div class="question" tabindex="0">
+                    <h3 class="question-title">{{ faq.question }}</h3>
+                    <div class="question-icon">
+                      <div class="icon-circle" style="background-color: {{ icon_color }}">
+                        <div class="icon-line horizontal"></div>
+                        <div class="icon-line vertical"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="answer">
+                    <p>{{ faq.answer }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              <p>No FAQs available for this product.</p>
+            {% endif %}
+     
+    </div>
+    
+      
+  
+    <div class="product-faq-image-container">
+      
+      {% if product.metafields.custom.pdp_faq_image %}
+        <img class="product-faq-image" src="{{ product.metafields.custom.pdp_faq_image | image_url }}" width="811" height="811" alt="Image of cocktail" loading="lazy">
+      {% else %}
+        <img class="product-faq-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/Faq_ClassicMargarita_1.png?v=1746101694" width="811" height="811" alt="Image of cocktail" loading="lazy">
+      {% endif %}
+      
+    </div>
+      
+  </div>
+  <div class="section-wave-container">
+      <div
+        class="lazy-lottie-container section-wave"
+        data-src="{{ 'wave-divider-left-to-right-2400px-purple.json' | asset_url }}"
+        data-background="transparent"
+        data-speed="1"
+        data-autoplay="true"
+        data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+
+{% style %}
+  *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.custom-product-faq-section {
+  padding-top: 100px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.custom-product-faq-section-container {
+  min-height: 820px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+.product-faq-body {
+  position: relative;
+  max-width: 568px; 
+  width: 100%;
+  z-index: 2;
+  margin-left: 290px;
+}
+
+.product-faq-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+  margin-bottom: 45px;
+}
+
+.faq {
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  margin-bottom: 5px;
+}
+.faq .question {
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+}
+.faq .question-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+}
+
+.question-icon {
+  min-width: 30px;
+  min-height: 30px;
+}
+
+.icon-circle {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #002657;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+}
+  
+.icon-line {
+  position: absolute;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.icon-line.horizontal {
+  width: 60%;
+  height: 2px;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+}
+
+.icon-line.vertical {
+  width: 2px;
+  height: 60%;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+}
+
+.faq.faq-active .icon-circle {
+  background-color: #00965e;
+  border-color: #fff;
+}
+
+.faq.faq-active .icon-line {
+  background-color: #fff;
+}
+.faq.faq-active .icon-line.vertical {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+.faq .question-icon:hover {
+  cursor: pointer;
+}
+
+.faq .answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding-right: 80px;
+  padding-bottom: 0;
+}
+
+.faq.faq-active .answer {
+  max-height: 1000px;
+  transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+  padding-bottom: 26px;
+}
+
+.faq .question-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.faq.faq-active .question-icon {
+  transform: rotate(180deg);
+}
+
+.faq .answer p {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  padding-bottom: 26px;
+}
+
+
+.icon-open,
+.faq.active .icon-close {
+  display: none;
+}
+
+.icon-close,
+.faq.active .icon-open {
+  display: block;
+}
+
+.faq-cta {
+  text-align: center;
+}
+
+.product-faq-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 811px;
+  width: 811px;
+  overflow: hidden;
+  z-index: 1;
+  
+}
+
+.product-faq-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+* ********* */
+/*  Fruits   */
+/* ********* */
+.custom-product-faq-section {
+  position: relative;
+}
+
+/* Adjust individual background positions */
+.faq-fruit.bg-pink-umbrella {
+  position: absolute !important;
+  z-index: 2;
+  top: -32px;
+  left: -60px;
+  transform: rotate(359deg) scaleX(-1);
+} 
+
+
+@media screen and (max-width: 1550px) {
+  .product-faq-body {
+  position: relative;
+  max-width: 568px; 
+  width: 100%;
+  z-index: 2;
+  margin-left: 190px;
+}
+}
+
+  
+@media screen and (max-width: 1350px) {
+  .product-faq-image-container {
+    position: absolute;
+    top: 50% ;
+    transform: translateY(-50%);  
+    height: 600px;
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .product-faq-body {
+    max-width: 388px;
+  } 
+}
+
+@media (max-width: 1023px) {
+   .custom-product-faq-section-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height:unset;
+  }
+  .product-faq-body {
+    margin-left: 0;
+    padding: 40px 16px;
+    max-width: 95%;
+    width: 600px;
+    z-index: 0; 
+  }
+
+  .product-faq-image-container {
+    display:none;
+  }
+
+  .faq-fruit.bg-pink-umbrella {
+    display: none; /* optional: hide umbrella on small screens */
+  }
+  .custom-product-faq-section{
+    min-height:unset;
+    padding-top:0
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .product-faq-heading {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.79px;
+    text-align: left;
+    line-height: 35px;
+  }
+  .faq .question-title {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    line-height: 20px;
+  }
+
+  .faq .answer p {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    line-height: 19px;
+  }
+
+  .faq-cta-btn {
+    padding: 20px 23px;
+    margin-top: 62px;
+    margin-bottom: 62px;
+  }
+}
+
+
+{% endstyle %}
+
+{% javascript %}
+
+document.addEventListener('DOMContentLoaded', function () {
+  const faqs = document.querySelectorAll('.faq');
+
+  faqs.forEach(faq => {
+    const question = faq.querySelector('.question');
+    const answer = faq.querySelector('.answer');
+
+    question.addEventListener('click', () => {
+      faqs.forEach(otherFaq => {
+        const otherAnswer = otherFaq.querySelector('.answer');
+        if (otherFaq !== faq) {
+          otherFaq.classList.remove('faq-active');
+          if (otherAnswer) otherAnswer.style.maxHeight = null;
+        }
+      });
+
+      const isActive = faq.classList.toggle('faq-active');
+
+      if (isActive) {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = null;
+      }
+    });
+  });
+
+  // Initialize open height for the default open one (faq-active)
+  const activeAnswer = document.querySelector('.faq-active .answer');
+  if (activeAnswer) {
+    activeAnswer.style.maxHeight = activeAnswer.scrollHeight + 'px';
+  }
+});
+{% endjavascript %}
+<script>
+  // Simulate click when enter is pressed on FAQ button
+  document.addEventListener('keydown', (e) => {
+    const el = document.activeElement;
+
+    if (!el || !el.classList.contains('question')) return;
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); // prevent scroll on Space
+      el.click();
+    }
+  });
+</script>
+  
+{% schema %}
+  {
+    "name": "V2-PDP Faq Section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading Text",
+        "default": "Got Questions" 
+      }, 
+    ],
+     "presets": [{"name": "V2-PDP Faq Section"}]
+   }
+{% endschema %}

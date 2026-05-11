@@ -1,0 +1,864 @@
+{% comment %}
+  Sticky Add to Cart Component
+  Shows when user scrolls past the original ATC button
+  Handles variants and subscriptions properly
+{% endcomment %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign has_variants = false
+  assign has_subscriptions = false
+  
+  unless product.has_only_default_variant
+    assign has_variants = true
+  endunless
+  
+  if product.selling_plan_groups.size > 0
+    assign has_subscriptions = true
+  endif
+-%}
+
+    <div 
+      id="sticky-atc"
+      class="sticky-atc__container sticky-atc__container--initial"
+      x-data="stickyATC()"
+      :class="{ 'sticky-atc__container--visible': showStickyATC }"
+    >
+  <div class="sticky-atc__content">
+    <div class="sticky-atc__inner">
+      <!-- Product Info -->
+      <div class="sticky-atc__product-info">
+        <h3 class="sticky-atc__title">
+          {{ product.title }}
+        </h3>
+        <div class="sticky-atc__price">
+          {% if current_variant.compare_at_price > current_variant.price %}
+            <span class="sticky-atc__compare-price">{{ current_variant.compare_at_price | money }}</span>
+          {% endif %}
+          <span class="sticky-atc__current-price">{{ current_variant.price | money }}</span>
+        </div>
+      </div>
+      
+      <!-- Add to Cart Button -->
+      <div class="sticky-atc__button-container">
+        {%- form 'product', product, id: 'sticky-product-form', class: 'sticky-atc__form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+          
+          <button
+            type="submit"
+            name="add"
+            class="sticky-atc__button"
+            x-on:click="handleStickyATC($event)"
+            :disabled="loading"
+            data-available="{{ current_variant.available }}"
+            {% if current_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+            <!-- Loading Spinner -->
+            <div 
+              class="sticky-atc__spinner"
+              x-show="loading"
+              x-cloak
+            >
+              <svg class="sticky-atc__spinner-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="sticky-atc__spinner-circle" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="sticky-atc__spinner-path" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </div>
+            
+            <!-- Button Text -->
+            <span class="sticky-atc__button-text" x-show="!loading" x-cloak>
+              ADD TO CART - {{ current_variant.price | money }}
+            </span>
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function stickyATC() {
+    return {
+      showStickyATC: false,
+      loading: false,
+      originalATCButton: null,
+      observer: null,
+      isScrollingToProduct: false,
+      
+      init() {
+        // Remove initial class to allow normal transitions
+        const container = document.getElementById('sticky-atc');
+        if (container) {
+          container.classList.remove('sticky-atc__container--initial');
+        }
+        
+        // Ensure sticky ATC is hidden on initialization
+        this.showStickyATC = false;
+        
+        // Find the original ATC button - try multiple selectors
+        this.originalATCButton = document.querySelector('[id^="x-atc-button-"]') ||
+                                document.querySelector('.add_to_cart_button');
+        
+        // Track if user has scrolled past the original ATC
+        this.hasScrolledPastATC = false;
+        this.originalATCPosition = null;
+        
+        if (this.originalATCButton) {
+          // Use a single, reliable scroll detection method
+          this.setupScrollDetection();
+        } else {
+          // Fallback: show sticky ATC after scrolling down a bit
+          this.setupFallbackScrollDetection();
+        }
+        
+        // Listen for variant changes
+        this.$watch('$store.xVariantSelect.currentVariant', (newVariant) => {
+          this.updateStickyATC(newVariant);
+        });
+        
+        // Also listen for direct variant updates
+        document.addEventListener('variant:change', (event) => {
+          this.updateStickyATC(event.detail.variant);
+        });
+        
+        // Listen for subscription changes
+        this.setupSubscriptionListeners();
+        
+        // Initial price update - wait for subscription system to load
+        this.waitForSubscriptionSystem();
+        
+        // Debug logging
+        console.log('Sticky ATC initialized', {
+          originalButton: this.originalATCButton,
+          originalATCPosition: this.originalATCPosition,
+          hasVariants: {{ has_variants | json }},
+          hasSubscriptions: {{ has_subscriptions | json }}
+        });
+      },
+      
+      setupScrollDetection() {
+        // Get initial position of original ATC button
+        this.updateATCPosition();
+        
+        // Check if device is mobile
+        this.isMobile = window.innerWidth <= 768;
+        
+        // Create intersection observer for the original ATC button
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              // Original ATC is visible
+              if (this.isMobile) {
+                // On mobile, check if ATC is at least 160px below viewport top
+                const rect = entry.boundingClientRect;
+                if (rect.top >= 160) {
+                  // ATC is 160px+ below top, hide sticky
+                  this.showStickyATC = false;
+                  this.hasScrolledPastATC = false;
+                }
+                // If ATC is less than 160px from top, keep sticky visible
+              } else {
+                // Desktop behavior - hide sticky when ATC is visible
+                this.showStickyATC = false;
+                this.hasScrolledPastATC = false;
+              }
+            } else {
+              // Original ATC is not visible, check if we should show sticky
+              this.checkIfShouldShowSticky();
+            }
+          });
+        }, {
+          threshold: 0,
+          rootMargin: '0px 0px -50px 0px'
+        });
+        
+        this.observer.observe(this.originalATCButton);
+        
+        // Also listen to scroll events for more precise control
+        window.addEventListener('scroll', () => {
+          this.updateATCPosition();
+          
+          // Reset scrolling flag if user manually scrolls
+          if (this.isScrollingToProduct) {
+            this.isScrollingToProduct = false;
+          }
+          
+          this.checkIfShouldShowSticky();
+        });
+        
+        // Listen for window resize to recalculate position and update mobile detection
+        window.addEventListener('resize', () => {
+          this.isMobile = window.innerWidth <= 768;
+          this.updateATCPosition();
+        });
+      },
+      
+      setupFallbackScrollDetection() {
+        // Fallback: show sticky ATC after scrolling down a bit
+        let hasScrolled = false;
+        window.addEventListener('scroll', () => {
+          if (!hasScrolled && window.scrollY > 300) {
+            this.showStickyATC = true;
+            hasScrolled = true;
+          } else if (hasScrolled && window.scrollY <= 100) {
+            this.showStickyATC = false;
+            hasScrolled = false;
+          }
+        });
+      },
+      
+      updateATCPosition() {
+        if (this.originalATCButton) {
+          const rect = this.originalATCButton.getBoundingClientRect();
+          this.originalATCPosition = rect.top + window.scrollY;
+        }
+      },
+      
+      checkIfShouldShowSticky() {
+        if (!this.originalATCButton || this.originalATCPosition === null) {
+          return;
+        }
+        
+        // Don't show sticky ATC if we're programmatically scrolling to product
+        if (this.isScrollingToProduct) {
+          return;
+        }
+        
+        const currentScrollY = window.scrollY;
+        const atcBottom = this.originalATCPosition + this.originalATCButton.offsetHeight;
+        
+        if (this.isMobile) {
+          // Mobile behavior: check if ATC is visible and its position
+          const rect = this.originalATCButton.getBoundingClientRect();
+          const isATCVisible = rect.top < window.innerHeight && rect.bottom > 0;
+          
+          if (isATCVisible && rect.top >= 160) {
+            // ATC is visible and 160px+ below top, hide sticky
+            this.hasScrolledPastATC = false;
+            this.showStickyATC = false;
+          } else if (currentScrollY > atcBottom) {
+            // User has scrolled past the ATC, show sticky
+            this.hasScrolledPastATC = true;
+            this.showStickyATC = true;
+          } else if (currentScrollY <= this.originalATCPosition) {
+            // User is back above the ATC, hide sticky
+            this.hasScrolledPastATC = false;
+            this.showStickyATC = false;
+          }
+        } else {
+          // Desktop behavior: original logic
+          if (currentScrollY > atcBottom) {
+            // User has scrolled past the ATC, show sticky
+            this.hasScrolledPastATC = true;
+            this.showStickyATC = true;
+          } else if (currentScrollY <= this.originalATCPosition) {
+            // User is back above the ATC, hide sticky
+            this.hasScrolledPastATC = false;
+            this.showStickyATC = false;
+          }
+        }
+        // If user is between the ATC top and bottom, keep current state
+      },
+      
+      waitForSubscriptionSystem() {
+        // Wait for subscription system to be ready
+        const checkSubscriptionSystem = () => {
+          const subscribeRadio = document.getElementById('subscribe');
+          const oneTimeRadio = document.getElementById('one_time');
+          const subPriceElement = document.getElementById('sub-final-price');
+          const otPriceElement = document.getElementById('ot-final-price');
+          const otPriceSpan = document.querySelector('.otp-container .plan-selector-price-container span');
+          const subPriceSpan = document.querySelector('.plan-selector-price-container span:nth-child(2)');
+          
+          // Check if subscription elements exist
+          if (subscribeRadio && oneTimeRadio) {
+            if (subscribeRadio.checked) {
+              // Subscription is selected
+              if (subPriceElement && subPriceElement.textContent.trim()) {
+                // Subscription price is ready
+                this.updateStickyPrice();
+                return;
+              } else if (subPriceSpan && subPriceSpan.textContent.trim()) {
+                const priceText = subPriceSpan.textContent.trim();
+                this.updateStickyButtonPrice(priceText);
+                return;
+              } else {
+                // Subscription price not ready, use fallback
+                this.fallbackToVariantPrice();
+                return;
+              }
+            } else if (oneTimeRadio.checked) {
+              // One-time is selected
+              if (otPriceElement && otPriceElement.textContent.trim()) {
+                // One-time price is ready
+                this.updateStickyPrice();
+                return;
+              } else if (otPriceSpan && otPriceSpan.textContent.trim()) {
+                const priceText = otPriceSpan.textContent.trim();
+                this.updateStickyButtonPrice(priceText);
+                return;
+              } else {
+                // One-time price not ready, use fallback
+                this.fallbackToVariantPrice();
+                return;
+              }
+            }
+          }
+          
+          // If subscription system not ready, use fallback
+          this.fallbackToVariantPrice();
+        };
+        
+        // Start checking after a short delay
+        setTimeout(checkSubscriptionSystem, 200);
+      },
+      
+      setupSubscriptionListeners() {
+        // Listen for subscription radio button changes
+        const subscribeRadio = document.getElementById('subscribe');
+        const oneTimeRadio = document.getElementById('one_time');
+        
+        if (subscribeRadio && oneTimeRadio) {
+          subscribeRadio.addEventListener('change', () => {
+            this.updateStickyPrice();
+          });
+          
+          oneTimeRadio.addEventListener('change', () => {
+            this.updateStickyPrice();
+          });
+        }
+        
+        // Listen for subscription interval changes
+        const subOptions = document.querySelectorAll('.sub-option');
+        subOptions.forEach(option => {
+          option.addEventListener('click', () => {
+            this.updateStickyPrice();
+          });
+        });
+        
+        // Listen for subscription system updates (when variant changes trigger price updates)
+        const observer = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+              const target = mutation.target;
+              if (target.id === 'sub-final-price' || target.id === 'ot-final-price' || 
+                  target.id === 'sub-original-price' || target.id === 'ot-original-price') {
+                // Subscription price elements updated, refresh sticky ATC price
+                setTimeout(() => this.updateStickyPrice(), 50);
+              }
+            }
+          });
+        });
+        
+        // Observe subscription price elements
+        const subPriceElement = document.getElementById('sub-final-price');
+        const otPriceElement = document.getElementById('ot-final-price');
+        const subOriginalPriceElement = document.getElementById('sub-original-price');
+        const otOriginalPriceElement = document.getElementById('ot-original-price');
+        
+        [subPriceElement, otPriceElement, subOriginalPriceElement, otOriginalPriceElement].forEach(element => {
+          if (element) {
+            observer.observe(element, { childList: true, characterData: true, subtree: true });
+          }
+        });
+      },
+      
+      updateStickyPrice() {
+        // Get the current price from the subscription system
+        const subscribeRadio = document.getElementById('subscribe');
+        const oneTimeRadio = document.getElementById('one_time');
+        const otPriceSpan = document.querySelector('.otp-container .plan-selector-price-container span');
+        const subPriceSpan = document.querySelector('.plan-selector-price-container span:nth-child(2)');
+        
+        if (subscribeRadio && oneTimeRadio) {
+          const isSubscribe = subscribeRadio.checked;
+          
+          if (isSubscribe) {
+            // Get subscription price and compare price
+            const subPriceElement = document.getElementById('sub-final-price');
+            const subOriginalPriceElement = document.getElementById('sub-original-price');
+            
+            if (subPriceElement && subPriceElement.textContent.trim()) {
+              const priceText = subPriceElement.textContent.trim();
+              this.updateStickyButtonPrice(priceText);
+              
+              // Update compare price if it exists
+              if (subOriginalPriceElement && subOriginalPriceElement.textContent.trim()) {
+                const comparePriceText = subOriginalPriceElement.textContent.trim();
+                const comparePriceDisplay = document.querySelector('.sticky-atc__compare-price');
+                if (comparePriceDisplay && comparePriceText) {
+                  const cleanComparePrice = comparePriceText.replace(/[^\d.,$€£¥]/g, '').trim();
+                  comparePriceDisplay.textContent = cleanComparePrice;
+                  comparePriceDisplay.style.display = 'inline';
+                }
+              }
+            } else if (subPriceSpan && subPriceSpan.textContent.trim()) {
+              const priceText = subPriceSpan.textContent.trim();
+              this.updateStickyButtonPrice(priceText);
+            } else {
+              // Subscription price not ready, fallback to variant price
+              this.fallbackToVariantPrice();
+            }
+          } else {
+            // Get one-time price
+            const otPriceElement = document.getElementById('ot-final-price');
+            const otOriginalPriceElement = document.getElementById('ot-original-price');
+            
+            if (otPriceElement && otPriceElement.textContent.trim()) {
+              const priceText = otPriceElement.textContent.trim();
+              this.updateStickyButtonPrice(priceText);
+              
+              // Update compare price if it exists
+              if (otOriginalPriceElement && otOriginalPriceElement.textContent.trim()) {
+                const comparePriceText = otOriginalPriceElement.textContent.trim();
+                const comparePriceDisplay = document.querySelector('.sticky-atc__compare-price');
+                if (comparePriceDisplay && comparePriceText) {
+                  const cleanComparePrice = comparePriceText.replace(/[^\d.,$€£¥]/g, '').trim();
+                  comparePriceDisplay.textContent = cleanComparePrice;
+                  comparePriceDisplay.style.display = 'inline';
+                }
+              }
+            } else if (otPriceSpan && otPriceSpan.textContent.trim()) {
+              const priceText = otPriceSpan.textContent.trim();
+              this.updateStickyButtonPrice(priceText);
+            } else {
+              // One-time price not ready, fallback to variant price
+              this.fallbackToVariantPrice();
+            }
+          }
+        } else {
+          // No subscription system, fallback to variant price
+          this.fallbackToVariantPrice();
+        }
+      },
+      
+      fallbackToVariantPrice() {
+        // Fallback to variant price when subscription prices aren't available
+        const currentVariant = window.product?.selected_or_first_available_variant || 
+                              window.product?.variants?.[0];
+        
+        if (currentVariant) {
+          const formattedPrice = this.formatMoney(currentVariant.price);
+          const button = document.querySelector('.sticky-atc__button');
+          if (!button) return;
+          
+          const buttonText = button.querySelector('.sticky-atc__button-text');
+          const priceDisplay = document.querySelector('.sticky-atc__current-price');
+          
+          if (buttonText) {
+            buttonText.textContent = `ADD TO CART - ${formattedPrice}`;
+          }
+          if (priceDisplay) {
+            priceDisplay.textContent = formattedPrice;
+          }
+          
+          // Hide compare price for fallback
+          const comparePriceDisplay = document.querySelector('.sticky-atc__compare-price');
+          if (comparePriceDisplay) {
+            comparePriceDisplay.style.display = 'none';
+          }
+        }
+      },
+      
+      updateStickyButtonPrice(priceText) {
+        const button = document.querySelector('.sticky-atc__button');
+        if (!button) return;
+        
+        const buttonText = button.querySelector('.sticky-atc__button-text');
+        const priceDisplay = document.querySelector('.sticky-atc__current-price');
+        
+        if (buttonText && priceText) {
+          // Clean the price text - keep currency symbols and numbers
+          const cleanPrice = priceText.replace(/[^\d.,$€£¥]/g, '').trim();
+          buttonText.textContent = `ADD TO CART - ${cleanPrice}`;
+          
+          // Also update the price display in the product info section
+          if (priceDisplay) {
+            priceDisplay.textContent = cleanPrice;
+          }
+        }
+      },
+      
+      updateStickyATC(variant) {
+        if (variant) {
+          const form = document.querySelector('#sticky-product-form');
+          if (!form) return;
+          
+          const hiddenInput = form.querySelector('input[name="id"]');
+          const button = form.querySelector('.sticky-atc__button');
+          
+          if (hiddenInput) hiddenInput.value = variant.id;
+          if (button) {
+            button.dataset.available = variant.available;
+            button.disabled = !variant.available;
+          }
+          
+          // Always update price - check if subscriptions are available first
+          if ({{ has_subscriptions | json }}) {
+            // If subscriptions exist, wait a bit for subscription system to update, then use subscription pricing
+            setTimeout(() => {
+              this.updateStickyPrice();
+            }, 100);
+          } else {
+            // No subscriptions, use variant price
+            const priceElement = button.querySelector('.sticky-atc__button-text');
+            const priceDisplay = document.querySelector('.sticky-atc__current-price');
+            const formattedPrice = this.formatMoney(variant.price);
+            
+            if (priceElement) {
+              priceElement.textContent = `ADD TO CART - ${formattedPrice}`;
+            }
+            if (priceDisplay) {
+              priceDisplay.textContent = formattedPrice;
+            }
+          }
+        }
+      },
+      
+      async handleStickyATC(event) {
+        event.preventDefault();
+        
+        // Check which option is currently selected
+        const subscribeRadio = document.getElementById('subscribe');
+        const oneTimeRadio = document.getElementById('one_time');
+        
+        // If subscription is selected, scroll to original ATC
+        if (subscribeRadio && subscribeRadio.checked) {
+          this.scrollToOriginalATC();
+          return;
+        }
+        
+        // If one-time is selected or no subscription system, add to cart directly
+        if ((oneTimeRadio && oneTimeRadio.checked) || (!subscribeRadio && !oneTimeRadio)) {
+          this.addToCartDirectly(event);
+          return;
+        }
+        
+        // Fallback: scroll to original ATC if we can't determine the selection
+        this.scrollToOriginalATC();
+      },
+      
+      scrollToOriginalATC() {
+        // Set flag to prevent sticky ATC from showing during programmatic scroll
+        this.isScrollingToProduct = true;
+        
+        // Find the product section to scroll to the top of the product
+        const productSection = document.querySelector('[id^="ProductInfo-"]') ||
+                              document.querySelector('.product-info') || 
+                              document.querySelector('.product-content-container') ||
+                              document.querySelector('main') ||
+                              document.querySelector('#MainContent');
+        
+        if (productSection) {
+          // Scroll to the top of the product section
+          productSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        } else if (this.originalATCButton) {
+          // Fallback to original ATC button if no product section found
+          this.originalATCButton.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }
+        
+        // Hide sticky ATC and keep it hidden
+        this.showStickyATC = false;
+        this.hasScrolledPastATC = false;
+        
+        // Reset flag after scroll animation completes
+        setTimeout(() => {
+          this.isScrollingToProduct = false;
+        }, 1500);
+      },
+      
+      async addToCartDirectly(event) {
+        this.loading = true;
+        
+        try {
+          // Get the main product form to ensure we have all the correct data
+          const mainProductForm = document.querySelector('form[action*="/cart/add"]:not(#sticky-product-form)');
+          
+          if (!mainProductForm) {
+            throw new Error('Main product form not found');
+          }
+          
+          // Use the same approach as the main product cart
+          let formData = new FormData(mainProductForm);
+          formData.append(
+            'sections',
+            Alpine.store('xCartHelper').getSectionsToRender().map((section) => section.id)
+          );
+          formData.append('sections_url', window.location.pathname);
+          
+          const response = await fetch(window.Eurus.cart_add_url, {
+            method: 'POST',
+            headers: { 
+              Accept: 'application/javascript', 
+              'X-Requested-With': 'XMLHttpRequest' 
+            },
+            body: formData
+          });
+          
+          const responseData = await response.json();
+          
+          if (response.ok && responseData.status !== '422') {
+            // Update cart sections using the same method as main product cart
+            Alpine.store('xCartHelper').getSectionsToRender().forEach((section => {
+              const sectionElement = document.querySelector(section.selector);
+              if (sectionElement && responseData.sections && responseData.sections[section.id]) {
+                sectionElement.innerHTML = getSectionInnerHTML(responseData.sections[section.id], section.selector);
+              }
+            }));
+            
+            // Update cart count and trigger events (without opening cart drawer)
+            Alpine.store('xCartHelper').currentItemCount = parseInt(document.querySelector('#cart-icon-bubble span').innerHTML);
+            document.dispatchEvent(new CustomEvent('eurus:cart:items-changed'));
+          } else {
+            throw new Error(responseData.description || 'Failed to add to cart');
+          }
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          // Fallback: scroll to original ATC
+          this.scrollToOriginalATC();
+        } finally {
+          this.loading = false;
+        }
+      },
+      
+      formatMoney(cents) {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(cents / 100);
+      },
+      
+      destroy() {
+        if (this.observer) {
+          this.observer.disconnect();
+          this.observer = null;
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+    body:has(.sticky-atc__container--visible) .kl-teaser-XYRmyK {
+        bottom: 120px !important;
+      }
+      body:has(.menu-opening) .kl-teaser-XYRmyK {
+   display: none !important;
+  }
+  /* Sticky ATC Container */
+  .sticky-atc__container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+    border-top: 1px solid black;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(100%);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+  }
+  
+  /* Hide sticky ATC when mobile menu is open */
+  body:has(.menu-opening) .sticky-atc__container {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  /* Fallback for browsers that don't support :has() */
+  .menu-opening ~ .sticky-atc__container,
+  .menu-opening .sticky-atc__container {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  
+  .sticky-atc__container--visible {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  /* Prevent flash on load - hide until Alpine.js initializes */
+  .sticky-atc__container--initial {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(100%) !important;
+  }
+  
+  /* Content Layout */
+  .sticky-atc__content {
+    padding: 19px 27px;
+  }
+  
+  .sticky-atc__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  /* Product Info */
+  .sticky-atc__product-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+    .sticky-atc__title {
+      font-family: 'Hornbill', sans-serif;
+      font-weight: 700;
+      color: black;
+      font-size: 24px;
+      line-height: 150%;
+      margin: 0;
+      letter-spacing: 1.2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  
+  .sticky-atc__price {
+    font-family: 'Goldplay', sans-serif;
+    color: black;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 1px;
+    display: none;
+  }
+  
+  .sticky-atc__compare-price {
+    text-decoration: line-through;
+    opacity: 0.6;
+    margin-right: 8px;
+  }
+  
+  .sticky-atc__current-price {
+    font-family: 'Goldplay', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    letter-spacing: 1px;
+  }
+  
+  /* Button Container */
+  .sticky-atc__button-container {
+    flex-shrink: 0;
+  }
+  
+  .sticky-atc__form {
+    margin: 0;
+  }
+  
+  /* Button Styles */
+  .sticky-atc__button {
+    position: relative;
+    background-color: {{ product.metafields.custom.color_1 | default: '#FE6B00' }};
+    color: white;
+    font-family: 'Goldplay', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0.9px;
+    padding: 12.5px 0px;
+    border: 1px solid black;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.3s ease-in-out;
+    width: 310px;
+    min-height: 45px;
+    overflow: hidden;
+    box-shadow: 2px 6px 0px #002657;
+  }
+  
+  .sticky-atc__button:hover {
+    box-shadow: none;
+  }
+  
+  .sticky-atc__button:disabled {
+    cursor: not-allowed;
+  }
+  
+  /* Spinner */
+  .sticky-atc__spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sticky-atc__spinner-icon {
+    width: 16px;
+    height: 16px;
+    color: white;
+    animation: spin 1s linear infinite;
+  }
+  
+  .sticky-atc__spinner-circle {
+    opacity: 0.25;
+  }
+  
+  .sticky-atc__spinner-path {
+    opacity: 0.75;
+  }
+  
+  .sticky-atc__button-text {
+    display: block;
+  }
+  
+  /* Enhanced transitions for better performance */
+  .sticky-atc__container {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+  
+  /* Mobile Optimizations */
+  @media (min-width: 768px) {
+    .sticky-atc__content {
+      padding: 27px 49px;
+    }
+    
+    .sticky-atc__spinner-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .sticky-atc__inner{
+        flex-direction: column;
+        gap: 2px;
+    }
+    .sticky-atc__price{
+        display: none;
+    }
+    .sticky-atc__title{
+        font-family: 'Hornbill', sans-serif;
+        font-size: 18px;
+        letter-spacing: 0.9px;
+    }
+  }
+  
+  /* Animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>

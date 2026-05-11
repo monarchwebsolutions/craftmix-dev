@@ -1,0 +1,960 @@
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
+<script src="{{ 'custom-carousel-card-video.js' | asset_url }}" defer></script>
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer="defer"></script>
+{{ 'custom-carousel-card-video.css' | asset_url | stylesheet_tag }}
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+
+{% assign variety_pack = all_products['variety-pack'] %}
+{% assign blood_orange = all_products['blood-orange-mai-tai'] %}
+{% assign mango_margarita = all_products['mango-margarita'] %}
+{% assign mint_mojito = all_products['mint-mojito'] %}
+{% assign margarita_variety = all_products['margarita-variety'] %}
+{% assign espresso_martini = all_products['espresso-martini'] %}
+{% assign classic_margarita = all_products['classic-margarita'] %}
+{% assign strawberry_mule = all_products['strawberry-mule'] %}
+
+
+{% style %}
+.custom-review-header {
+  background-color: #bfefff;
+  padding: 76px 0px;
+}
+
+.custom-review-header-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.review-header-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 42px;
+}
+
+.review-header-text {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: center;
+  line-height: 24px;
+  max-width: 534px;
+  margin: 0 auto;
+  margin-bottom: 55px;
+}
+
+
+.review-header-logo-carousel {
+  background-color: #ddf7f7;
+  overflow: hidden;
+  width: 100%;
+  height: 89px; 
+  overflow: hidden;
+  background: #ddf7f7;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center logos vertically */
+  padding: 0;
+  margin-bottom: 80px;
+}
+
+.review-header-logo-carousel-track {
+    display: flex;
+    gap: 70px; 
+    animation: scrollLogos 20s linear infinite;
+    align-items: center; 
+}
+
+.review-header-logo-carousel-track img {
+  max-height: 39px; /* Restrict logo height */
+  width: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Ensure logos scale properly */
+}
+
+@keyframes scrollLogos {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.review-header-stories-subheader {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+}
+
+.review-header-stories-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.05px;
+  text-align: center;
+  line-height: 46px;
+  margin-bottom: 40px;
+}
+
+.review-header-stories-cards {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  z-index: 2;
+}
+
+.review-header-stories-card {
+  max-width: 388px;
+  width: 100%;
+  min-height: 348px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.review-header-stories-card-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  text-align: left;
+  line-height: 33px;
+  text-transform: uppercase;
+}
+.review-header-stories-card-body {
+  display: flex;
+  flex-direction: row;
+  max-width: 388px;
+  width: 100%;
+  height: 227px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  /* background-color: rgba(223, 239, 219, 1); */
+  overflow: hidden;
+}
+
+.review-header-stories-card-body-image {
+  flex: 0 0 41%; 
+  height: 100%;
+  border-right: 1.5px solid rgba(0, 38, 87, 1);
+  overflow: hidden; /* Prevent overflow when image is scaled */
+  display: flex;
+}
+
+.review-header-stories-card-body-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+  display: block; 
+}
+  
+.review-header-stories-card-body-text {
+  flex-grow: 1;
+  padding: 22px 28px 22px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-header-stories-card-body-text-stars {
+  width: 80px;
+}
+  
+.review-header-stories-card-body-text-review {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 19px;
+}
+.review-header-stories-card-body-text-reviewer {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: -0.08px;
+  text-align: left;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+.review-header-stories-card-product {
+  max-width: 388px;
+  width: 100%;
+  height: 72px;
+  background-color: #fff;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  border-radius: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: start;
+  padding: 5px 16px;
+}
+
+.review-header-stories-card-product-product-cta {
+  margin-left: auto;
+}
+.review-header-stories-card-product-img {
+  width: 50px;
+  margin-right: 8px;
+}
+  
+.review-header-stories-card-product-product-info-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+}
+
+.review-header-stories-card-product-product-info-price {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 19px;
+}
+
+.review-header-stories-card-product-product-cta button {
+  display: inline-block;
+  /* color: rgba(0, 38, 87, 1); */
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: center;
+  /* background-color: #60D3F8; */
+  padding: 5px 22px;
+  border: 1px solid rgba(0, 38, 87, 1);
+  border-radius: 30px;
+  cursor: pointer;
+}
+ 
+.custom-sub-carousel-section {
+  padding-top: 110px;
+  padding-bottom: 50px;
+}
+.custom-sub-carousel-header{
+  padding-top:1rem;
+}
+
+.custom-sub-carousel-subheader {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+
+.custom-sub-carousel-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 100px;
+}
+
+.flickity-slider {
+  z-index: 4;
+} 
+
+.custom-sub-carousel-container {
+  margin-bottom: 60px;
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for the buttons */
+}
+
+.carousel-cell {
+  margin-right: 25px;
+}
+
+.custom-sub-review-carousel-card {
+   height: 558px;
+   width: 332px;
+   border-radius: 30px;
+   border: 1.5px solid rgba(0, 38, 87, 1);
+   overflow: hidden;
+   position: relative;
+   background-color: #f0f0f0;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* first-card class added to first card in carousel for margin */
+.custom-video-review-carousel-card {
+  margin-left: 25px;
+}
+
+.custom-sub-review-carousel-card.first-card {
+  margin-left: 25px;
+}
+
+.custom-video-review-carousel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-btn img {
+  width: 68px;
+  height: 68px;
+}
+
+.volume-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid rgba(0, 38, 87, 1);
+}
+
+.volume-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.volume-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 12px 15px 10px 15px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.product-info-text {
+  flex-grow: 1;
+}
+
+.stars img {
+  width: 55px;
+  height: auto;
+}
+
+.product-title {
+  margin: 5px 0 0 0;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+}
+
+.product-variant {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 15px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 19px;
+}
+
+.product-info-cta-btn {
+  font-family: "Goldplay";
+  background-color: rgba(96, 211, 248, 1);
+  color: rgba(0, 38, 87, 1);
+  padding: 10px 28px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+  border-radius: 23px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+
+}
+
+.custom-video-review-carousel-cta {
+  text-align: center;
+}
+
+.custom-video-review-carousel-cta-btn {
+  display: inline-block;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 2px 0px rgba(0, 38, 87, 1);
+  border-radius: 30px;
+  opacity: 1;
+  background-color: rgba(96, 211, 248, 1);
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  padding: 20px;
+}
+
+.custom-review-header .custom-video-review-carousel-nav{
+  top:-85px;
+}
+  
+/* Media Queries */
+@media (max-width: 1300px) {
+  .review-header-stories-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .review-header-stories-cards .item:last-child {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+
+@media (max-width: 876px) {
+  .review-header-stories-cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .review-header-logo-carousel {
+    height: 60px; 
+    margin-bottom: 80px;
+  }
+  
+  .review-header-logo-carousel-track {
+      display: flex;
+      gap: 70px; 
+      animation: scrollLogos 20s linear infinite;
+      align-items: center; 
+  }
+  
+  .review-header-logo-carousel-track img {
+    max-height: 26px; 
+    width: auto; 
+    object-fit: contain; 
+  }
+
+  .custom-sub-carousel-heading {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1.05px;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom:30px;
+  }  
+  .custom-review-header .custom-video-review-carousel-nav{
+    top:310px;
+  }
+}
+  
+@media (max-width: 528px) {
+  .review-header-title {
+    font-size: 40px;
+    letter-spacing: -1.05px;
+    line-height: 40px;
+    margin-bottom: 20px;
+  }
+  .review-header-text {
+    margin-bottom: 21px;
+  }
+  .review-header-carousel {
+    width: 100%;
+    height: 60px;
+    margin-bottom: 68px;
+    background-color: #ddf7f7;
+  }
+  .review-header-stories-heading {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+    margin-bottom: 37px;
+  }
+  .custom-sub-review-carousel-card.first-card {
+  margin-left: 0px;
+}
+}
+@media (max-width: 400px) {
+  .review-header-stories-card-body-text {
+    flex-grow: 1;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 360px) {
+  .review-header-stories-card-body-text-review {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 15px;
+  }
+}
+
+
+
+
+
+/* ****************** */
+/* *******Start****** */
+/* * Background fruits * */
+/* ****************** */
+.background-fruit {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-fruit.pineapple-bg {
+  top: 465px;
+  left: -80px;
+  width: auto !important;
+  height: 286px !important;
+  transform: rotate(59deg);
+}
+.background-fruit.mint-leaf-bg {
+  top: 1205px;
+  left: -250px;
+  width: auto !important;
+  height: 315px !important;
+  transform: rotate(40deg);
+  
+}
+.background-fruit.mint_pink-bg {
+  top: 625px;
+  right: -100px;
+  width: auto !important;
+  height: 260px !important;
+  
+}
+.background-fruit.blueberry-bg {
+  top: 1050px;
+  right: 240px;
+  transform: rotate(270deg);
+   width: auto !important;
+  height: 111px !important;
+}
+
+@media (max-width: 1096px) {
+  .background-fruit.pineapple-bg {
+    top: 570px;
+    height: 230px !important;
+  }
+}
+
+@media (max-width: 528px) {
+ .background-fruit {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-fruit.pineapple-bg {
+  top: 445px;
+  left: -35px;
+  height: 175px !important;
+  transform: rotate(59deg);
+}
+.background-fruit.mint-leaf-bg {
+   top: 1920px;
+  left: -120px;
+  height: 200px !important;
+  transform: rotate(40deg);
+  
+}
+.background-fruit.mint_pink-bg {
+  top: 590px;
+  right: -60px;
+  height: 170px !important;
+  
+}
+.background-fruit.blueberry-bg {
+  top: 1650px;
+  right: 0px;
+  transform: rotate(270deg);
+  height: 110px !important;
+}
+}
+
+@media (max-width: 420px) {
+.background-fruit.pineapple-bg {
+  top: 500px;
+  height: 140px !important;
+}
+.background-fruit.mint-leaf-bg {
+   top: 1975px;
+  left: -120px;
+  height: 170px !important;
+  transform: rotate(40deg);
+  
+}
+.background-fruit.mint_pink-bg {
+  height: 130px !important;
+}
+
+}
+
+  
+
+{% endstyle %}
+
+<section class="custom-review-header">
+   
+   <div class="custom-review-header-wrapper">
+      <h1 class="review-header-title">What Customers & Press Are Saying</h1>
+      <p class="review-header-text">Whether it’s cocktails or mocktails, our customers can’t stop talking about how delicious and easy-to-make Craftmix is. Join the conversation and see what all the buzz is about!</p>
+    </div>
+
+    <div class="review-header-logo-carousel">
+      <div class="review-header-logo-carousel-track">
+         <img src="{{ 'GMA_logo.png' | asset_url }}" width="89" height="39" alt="GMA Logo">
+         <img src="{{ 'billboard_logo.png' | asset_url }}" width="179" height="39" alt="Billboard Logo">
+         <img src="{{ 'eat-this-not-that_logo.png' | asset_url }}" width="340" height="39" alt="Eat This Not That Logo">
+         <img src="{{ 'taste-of-home_logo.png' | asset_url }}" width="265" height="39" alt="Taste Of Home Logo">
+         <img src="{{ 'thrillist_logo.png' | asset_url }}" width="149" height="39" alt="Thrillist Logo">
+          <!-- Duplicate for smooth scrolling -->
+        <img src="{{ 'GMA_logo.png' | asset_url }}" width="89" height="39" alt="GMA Logo">
+         <img src="{{ 'billboard_logo.png' | asset_url }}" width="179" height="39" alt="Billboard Logo">
+         <img src="{{ 'eat-this-not-that_logo.png' | asset_url }}" width="340" height="39" alt="Eat This Not That Logo">
+         <img src="{{ 'taste-of-home_logo.png' | asset_url }}" width="265" height="39" alt="Taste Of Home Logo">
+         <img src="{{ 'thrillist_logo.png' | asset_url }}" width="149" height="39" alt="Thrillist Logo">
+      </div>
+    </div>
+
+   <div class="review-header-stories">
+    <div class="custom-review-header-wrapper">
+      <h5 class="review-header-stories-subheader">A Few Of Our</h5>
+      <h4 class="review-header-stories-heading">Customer Stories</h4>
+
+      <div class="review-header-stories-cards">
+       
+        <!-- Review Card -->
+
+         {% for block in section.blocks %}
+          {% if block.type == "review_card"  %}
+            <div class="review-header-stories-card" {{ block.shopify_attributes }}>
+              <div class="review-header-stories-card-title">
+                {{ block.settings.card_title }}
+              </div>
+              <div class="review-header-stories-card-body" style="background-color: {{ block.settings.background_color }};">
+                <div class="review-header-stories-card-body-image">
+                  {% if block.settings.review_image %}
+                    <img src="{{ block.settings.review_image | img_url: 'medium' }}" width="157" height="225" alt="Review Image">
+                  {% endif %}
+                </div>
+                <div class="review-header-stories-card-body-text">
+                  <img class="review-header-stories-card-body-text-stars" src="{{ 'stars-dark.png' | asset_url }}" width="80" height="14" alt="review stars">
+                  <p class="review-header-stories-card-body-text-review">"{{ block.settings.review_text }}"</p>
+                  <p class="review-header-stories-card-body-text-reviewer">{{ block.settings.reviewer_name }} - {{ block.settings.review_date }}</p>
+                </div>
+              </div>
+              <div class="review-header-stories-card-product">
+                {% if block.settings.linked_product != blank %}
+                  <a href="{{ block.settings.linked_product.url }}">
+                    <img src="{{ block.settings.linked_product.images.last | img_url: 'medium' }}" width="50" height="43" alt="Product Image" class="review-header-stories-card-product-img">
+                  </a>
+                  <div class="review-header-stories-card-product-product-info">
+                    <a href="{{ block.settings.linked_product.url }}">
+                      <h4 class="review-header-stories-card-product-product-info-title">
+                        {{ block.settings.linked_product.title | remove_first: "2025 - "}}
+                      </h4>
+                    </a>
+                    <p class="review-header-stories-card-product-product-info-price">
+                      {{ block.settings.linked_product.variants.first.title }} - {{ block.settings.linked_product.price | money }}
+                    </p>
+                  </div>
+                  <div class="review-header-stories-card-product-product-cta">
+                    <form method="post" action="/cart/add">
+                      <input type="hidden" name="id" value="{{ block.settings.linked_product.variants.first.id }}">
+                      <button type="submit" style="background-color: {{ block.settings.button_color }}; color: {{ block.settings.button_text_color }};">Add</button>
+                    </form>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        <!--End Review Card -->
+      </div>
+    </div>
+  </div>
+    
+  <div class="custom-sub-carousel-section">
+    <div>
+      <div class="custom-sub-carousel-header">
+        <h5 class="custom-sub-carousel-subheader">customer Favorites </h5>
+        <h3 class="custom-sub-carousel-heading">What Our Fans Say</h3>
+      </div>
+      <div class="custom-video-review-carousel-nav">
+        <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+        <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+      </div>
+      <div class="custom-sub--carousel-container">
+        
+        <div class="custom-video-review-carousel-container">
+          {% render 'review-video-carousel-inner' %}
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <img class="background-fruit pineapple-bg" alt="Pinapple" width="222" height="286" src="{{ 'pineapple.svg' | asset_url }}" role="presentation">
+   <img class="background-fruit mint-leaf-bg" alt="Mint leaf" width="264" height="315" src="{{ 'mint-leaf.svg' | asset_url }}" role="presentation">
+   <img class="background-fruit mint_pink-bg" alt="Pink leaf" width="180" height="214" src="{{ 'mint_pink.png' | asset_url }}" role="presentation">
+   <img class="background-fruit blueberry-bg" alt="Balueberry" width="105" height="111" src="{{ 'blueberry.svg' | asset_url }}" role="presentation">
+</section>
+
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.custom-sub-review-carousel-card');
+  const videos = document.querySelectorAll('.custom-video-review-carousel-video');
+
+  cards.forEach(card => {
+    const video = card.querySelector('.custom-video-review-carousel-video');
+    const playBtn = card.querySelector('.play-btn');
+    const volumeBtn = card.querySelector('.volume-btn');
+    const volumeIcon = volumeBtn.querySelector('.volume-icon');
+    const muteIcon = volumeBtn.querySelector('.mute-icon');
+
+    // Fade-in fix: Add 'ready' class once video is actually rendering a frame
+    video.addEventListener('playing', () => {
+      video.classList.add('ready');
+    });
+
+    // Play/Pause Button Click
+    playBtn.addEventListener('click', () => {
+      if (video.paused) {
+        pauseAllVideos(video); // Ensure only one video plays
+        video.play();
+        playBtn.style.display = 'none';
+      } else {
+        video.pause();
+        playBtn.style.display = 'block';
+      }
+    });
+
+    // Video Click to Play/Pause
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        pauseAllVideos(video);
+        video.play();
+        playBtn.style.display = 'none';
+      } else {
+        video.pause();
+        playBtn.style.display = 'block';
+      }
+    });
+
+    // Reset Play Button when Video Ends
+    video.addEventListener('ended', () => {
+      playBtn.style.display = 'block';
+    });
+
+    // Volume Control Button
+    volumeBtn.addEventListener('click', () => {
+      if (video.muted) {
+        video.muted = false;
+        volumeIcon.style.display = 'block';
+        muteIcon.style.display = 'none';
+      } else {
+        video.muted = true;
+        volumeIcon.style.display = 'none';
+        muteIcon.style.display = 'block';
+      }
+    });
+  });
+
+  // Function to Pause All Other Videos
+  function pauseAllVideos(currentVideo) {
+    videos.forEach(video => {
+      if (video !== currentVideo) {
+        video.pause();
+      }
+    });
+  }
+
+  // Pause Videos When They Go Out of View
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) {
+        entry.target.pause();
+      }
+    });
+  }, { threshold: 0.1 });
+
+  videos.forEach(video => observer.observe(video));
+});
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Custom Review Page Header",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+       "settings": [
+       {
+          "type": "text",
+          "id": "card_title",
+          "label": "Review Card Title",
+          "default": "Flavor"
+        },
+        {
+          "type": "product",
+          "id": "linked_product",
+          "label": "Select Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Image"
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text"
+        },
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name"
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "Review Date"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background Color",
+          "default": "#f8f8f8"
+        },
+        {
+          "type": "color",
+          "id": "button_color",
+          "label": "Button Background Color",
+          "default": "#60D3F8"
+        },
+        {
+          "type": "color",
+          "id": "button_text_color",
+          "label": "Button Text Color",
+          "default": "#002657"
+        }
+      ]
+    },
+    {
+        "type": "carousel_card",
+        "name": "Carousel Card",
+        "settings": [
+          {
+            "type": "url",
+            "id": "video_url",
+            "label": "Video URL",
+            "info": "Upload video to Content > Files, then paste the link here (e.g., .mp4, .mov)"
+          },
+          {
+            "type": "text",
+            "id": "captions_title",
+            "label": "Captions Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "thumbnail",
+            "label": "Thumbnail Image"
+          },
+          {
+            "type": "product",
+            "id": "linked_product",
+            "label": "Linked Product"
+          }
+        ]
+      }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Custom Review Page Header",
+      "blocks": [
+        { "type": "review_card" },
+        { "type": "review_card" },
+        { "type": "review_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

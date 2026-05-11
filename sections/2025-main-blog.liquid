@@ -1,0 +1,462 @@
+{% assign blog_handle = 'happy-hour-blog' %}
+{% assign articles_per_page = 8 %}
+
+{% style %}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* img {
+  width: 100%;
+} */
+
+.blog-main {
+  background-color: #fff9f5;
+}
+
+.blog-main-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.blog-main-filters {
+  max-width: 456px;
+  margin: 0 auto 50px;
+}
+
+.blog-main-filters-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.blog-main-filters-list-item {
+  border-radius: 23px;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  padding: 7px 21px;
+  transition: background-color 0.2s ease-out, border-color 0.2s ease-out, transform 0.15s ease-out;
+}
+
+.blog-main-filters-list-item.active, 
+.blog-main-filters-list-item:hover {
+  border-radius: 23px;
+  padding: 7px 21px;
+  background-color: #60D3F8;
+  border: 1.5px solid #002657;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in, border-color 0.1s ease-in, transform 0.1s ease-in;
+}
+.blog-main-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 20px;
+  row-gap: 40px;
+  justify-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.custom-blog-article-card {
+  width: 100%;
+  max-width: 320px;
+  overflow: hidden;
+  /* border-radius: 12px; */
+}
+
+/* Image Container */
+.custom-blog-article-card-img {
+  max-width: 320px;
+  width: 100%;
+  height: 345px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+}
+
+.custom-blog-article-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Article Tag */
+.custom-blog-article-card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  letter-spacing: 0.5px;
+  border-radius: 18px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(255, 255, 255, 1);
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  text-align: center;
+  line-height: 16px;
+}
+
+/* Text Content */
+.custom-blog-article-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.custom-blog-article-card-read-time {
+  opacity: 0.5;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+  margin-top: 10px;
+}
+
+.custom-blog-article-card-article-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Hornbill";
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.63px;
+  text-align: left;
+  line-height: 30px;
+}
+
+.main-blog-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: rgba(96, 211, 248, 1);
+  width: 284px;
+  height: 60px; 
+  margin: 0 auto;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.main-blog-cta:hover {
+  box-shadow: none; 
+}
+
+.main-blog-cta a {
+  text-decoration: none;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0; 
+}
+
+@media (max-width: 1196px) {
+  .blog-main-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 830px) {
+
+  .blog-main-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 560px) {
+  .blog-main-filters {
+    max-width: 380px;
+    margin: 0 auto 50px;
+  }
+  .blog-main-filters-list-item {
+    font-size: 16px;
+    letter-spacing: -0.11px;
+    line-height: 20px;
+  }
+  .custom-blog-article-card {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  /* Image Container */
+  .custom-blog-article-card-img {
+    height: 220px;
+  }
+  
+  .custom-blog-article-card-tag {
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: -0.09px;
+    text-align: center;
+    line-height: 10px;
+  }
+   .custom-blog-article-card-article-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.63px;
+    text-align: left;
+    line-height: 19px;
+  }
+}
+
+{% endstyle %}
+
+<section class="blog-main">
+  <div class="blog-main-wrapper">
+    <div class="blog-main-filters" style="display:none;">
+      <ul class="blog-main-filters-list">
+        <li class="blog-main-filters-list-item active">All</li>
+        <li class="blog-main-filters-list-item">Tag Filter</li>
+        <li class="blog-main-filters-list-item">Tag Filter</li>
+        <li class="blog-main-filters-list-item">Tag Filter</li>
+      </ul>
+    </div>
+      <div class="blog-main-grid" id="blog-main-grid">
+        {% if blogs[blog_handle] and blogs[blog_handle].articles.size > 0 %}
+            {% paginate blogs[blog_handle].articles by 8 %}
+                {% for article in blogs[blog_handle].articles %}
+                    <div class="custom-blog-article-card">
+                        <a href="{{ article.url }}" class="custom-blog-article-card-link" tabindex="-1">
+                            <div class="custom-blog-article-card-img">
+                                {% if article.tags.size > 0 %}
+                                    <span class="custom-blog-article-card-tag">{{ article.tags.first }}</span>
+                                {% endif %}
+                              <img 
+                                  class="blog-image" 
+                                  src="{{ article.image | image_url }}" 
+                                  alt="{{ article.title }}" 
+                                  width="320" 
+                                  height="345"
+                                  {% if forloop.index > 4 %}loading="lazy"{% endif %}
+                                >
+                            </div>
+                        </a>
+                        <div class="custom-blog-article-card-text">
+                            <span class="custom-blog-article-card-read-time">
+                                {% assign word_count = article.content | strip_html | split: ' ' | size %}
+                                {% assign read_time = word_count | divided_by: 200 | ceil %}
+                                Read time: {{ read_time }} mins
+                            </span>
+                            <a href="{{ article.url }}" class="custom-blog-article-card-title-link">
+                                <h3 class="custom-blog-article-card-article-title">
+                                    {% assign truncated_title = article.title | slice: 0, 45 %}
+                                    {{ truncated_title }}{% if article.title.size > 45 %}...{% endif %}
+                                </h3>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endpaginate %}
+        {% else %}
+            <p>No articles found.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Load More Button -->
+    <div class="main-blog-cta">
+      {% if blogs[blog_handle].articles.size > articles_per_page %}
+        <a href="#" id="load-more-btn" 
+            data-current-page="1" 
+            data-total-pages="{{ blogs[blog_handle].articles.size | divided_by: articles_per_page | ceil }}"
+            data-blog-handle="{{ blog.handle }}">
+            Load More
+        </a>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% javascript %}
+document.addEventListener("DOMContentLoaded", function () {
+  const loadMoreBtn = document.getElementById("load-more-btn");
+  const blogGrid = document.querySelector(".blog-main-grid");
+  const blogCta = document.querySelector(".main-blog-cta");
+
+  if (!loadMoreBtn) {
+    console.error("❌ Load More button not found.");
+    return;
+  }
+
+  function getNextFocusableAfter(node) {
+    if (!node) return null;
+
+    const selector =
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    let el = node;
+
+    while (el) {
+      // Scan next siblings (and their descendants)
+      let sib = el.nextElementSibling;
+      while (sib) {
+        if (sib.matches && sib.matches(selector)) return sib;
+
+        if (sib.querySelector) {
+          const inside = sib.querySelector(selector);
+          if (inside) return inside;
+        }
+
+        sib = sib.nextElementSibling;
+      }
+
+      // Move up and keep scanning
+      el = el.parentElement;
+    }
+
+    return null;
+  }
+
+  function hideCtaAndRefocus(existingCount) {
+    loadMoreBtn.style.display = "none";
+    if (blogCta) blogCta.style.display = "none";
+
+    // Prefer the next focusable element after the CTA (keeps forward tab flow)
+    const next = getNextFocusableAfter(blogCta || loadMoreBtn);
+
+    if (next) {
+      requestAnimationFrame(() => {
+        try { next.focus(); } catch (e) {}
+      });
+      return;
+    }
+
+    // Fallback: focus first newly appended article (or first focusable inside it)
+    if (!blogGrid) return;
+    const allArticles = blogGrid.querySelectorAll(".custom-blog-article-card");
+    const firstNew = allArticles[existingCount];
+
+    if (firstNew) {
+      const target =
+        firstNew.querySelector('a[href], button, [tabindex]:not([tabindex="-1"])') || firstNew;
+
+      if (target === firstNew && !firstNew.hasAttribute("tabindex")) {
+        // programmatic focus only (does not add tab stop)
+        firstNew.setAttribute("tabindex", "-1");
+      }
+
+      requestAnimationFrame(() => {
+        try { target.focus(); } catch (e) {}
+      });
+    }
+  }
+
+  loadMoreBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    let currentPage = parseInt(loadMoreBtn.getAttribute("data-current-page"));
+    let totalPages = parseInt(loadMoreBtn.getAttribute("data-total-pages"));
+    let blogHandle = loadMoreBtn.getAttribute("data-blog-handle");
+    let nextPage = currentPage + 1;
+
+    // Capture current article count so we can identify the first newly appended article
+    const existingCount = blogGrid
+      ? blogGrid.querySelectorAll(".custom-blog-article-card").length
+      : 0;
+
+    if (nextPage > totalPages) {
+      hideCtaAndRefocus(existingCount);
+      return;
+    }
+
+    let fetchUrl = `/blogs/${blogHandle}?page=${nextPage}`;
+
+    fetch(fetchUrl)
+      .then((response) => response.text())
+      .then((data) => {
+        let parser = new DOMParser();
+        let newDocument = parser.parseFromString(data, "text/html");
+        let newArticles = newDocument.querySelectorAll(".custom-blog-article-card");
+
+        if (newArticles.length === 0) {
+          console.warn("⚠️ No new articles found.");
+          // If we expected more but got none, treat it as end-of-results
+          hideCtaAndRefocus(existingCount);
+          return;
+        }
+
+        newArticles.forEach((article) => {
+          blogGrid.appendChild(article);
+        });
+
+        // Update the button to the next page
+        loadMoreBtn.setAttribute("data-current-page", nextPage);
+
+        // Hide CTA if it's the last page
+        if (nextPage >= totalPages) {
+          hideCtaAndRefocus(existingCount);
+        }
+      })
+      .catch((error) => console.error("❌ Error loading more articles:", error));
+  });
+});
+{% endjavascript %}
+
+
+{% schema %}
+  {
+    "name": "2025 Main Blog",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets" : [
+      {
+        "name": "2025 Main Blog"
+      }
+    ]
+  }
+{% endschema %}

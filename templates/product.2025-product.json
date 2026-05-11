@@ -1,0 +1,354 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "product_name_xkPbAa": {
+          "type": "product_name",
+          "disabled": true,
+          "settings": {
+            "title_size": 100,
+            "heading_tag": "h1"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "disabled": true,
+          "settings": {
+            "picker_type": "button",
+            "show_variant_option": true,
+            "enable_color_swatches": true,
+            "swatch_size": "small"
+          }
+        },
+        "skio_subscriptions_yc_s20_app_block_g9qbTD": {
+          "type": "shopify://apps/skio-subscriptions-yc-s20/blocks/app-block/de50f7a4-0bb0-4d4c-84e2-c03dce83436d",
+          "disabled": true,
+          "settings": {
+            "form_id": "product-form-{{section.id}}",
+            "start_onetime": "false",
+            "onetime_first": "false",
+            "default_subscription": "",
+            "group_border_radius": 5,
+            "group_border_shadow": true,
+            "group_border_selected_color": "#000000",
+            "onetime_title": "One Time",
+            "subscription_title": "Subscribe & save",
+            "prepaid_title": "Prepaid",
+            "discount_format": "percent",
+            "discount_style": "bubble",
+            "discount_prefix": "Save",
+            "discount_suffix": "",
+            "discount_color": "#0fa573"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "disabled": true,
+          "settings": {
+            "show_button_style": "secondary",
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "pickup_availability": false,
+            "hide_when_pre_order": false,
+            "preorder_button_label": "Pre-order",
+            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
+            "preorder_show_dynamic_button": false,
+            "show_background": false,
+            "box_type": "square",
+            "background_color_light": "rgba(0,0,0,0)",
+            "message_color_light": "rgba(0,0,0,0)",
+            "background_color_dark": "rgba(0,0,0,0)",
+            "message_color_dark": "rgba(0,0,0,0)",
+            "button_light": "rgba(0,0,0,0)",
+            "button_text_light": "rgba(0,0,0,0)",
+            "button_hover_light": "rgba(0,0,0,0)",
+            "button_text_hover_light": "rgba(0,0,0,0)",
+            "secondary_button_light": "rgba(0,0,0,0)",
+            "secondary_button_text_light": "rgba(0,0,0,0)",
+            "button_dark": "rgba(0,0,0,0)",
+            "button_text_dark": "rgba(0,0,0,0)",
+            "button_hover_dark": "rgba(0,0,0,0)",
+            "button_text_hover_dark": "rgba(0,0,0,0)",
+            "secondary_button_dark": "rgba(0,0,0,0)",
+            "secondary_button_text_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {
+            "show_in_tab": true,
+            "open_by_default": true,
+            "make_content_center": false,
+            "icon": "none",
+            "another_icon": "",
+            "custom_icon": "",
+            "heading": "Description",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        },
+        "collapsible-row-1": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "open_by_default": false,
+            "icon": "none",
+            "another_icon": "",
+            "custom_icon": "",
+            "use_secondary_background": false,
+            "heading": "Returns + Exchanges",
+            "tab_content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "collapsible-row-0": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "open_by_default": false,
+            "icon": "none",
+            "another_icon": "",
+            "custom_icon": "",
+            "use_secondary_background": false,
+            "heading": "Giving Back",
+            "tab_content": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "social-sharing": {
+          "type": "social_sharing",
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_name_xkPbAa",
+        "variant_picker",
+        "skio_subscriptions_yc_s20_app_block_g9qbTD",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "collapsible-row-1",
+        "collapsible-row-0",
+        "social-sharing"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_sticky_image": true,
+        "show_product_name": false,
+        "title_size": 80,
+        "heading_tag": "h1",
+        "show_vendor": false,
+        "link_vendor": false,
+        "make_content_center": false,
+        "desktop_layout": "left",
+        "desktop_media_layout": "thumbnail_slider",
+        "show_arrow_button": true,
+        "mobile_media_size": "full_width",
+        "show_thumnail_mobile": false,
+        "image_ratio": "3/4",
+        "thumbnail_position": "horizontal",
+        "enable_image_zoom": false,
+        "zoom_effect": "enlarge",
+        "enable_video_autoplay": false,
+        "enable_video_loop": false,
+        "show_first_image_avaiable": true,
+        "show_media_with_variant_selected": false,
+        "option_to_classify_variant_media": "",
+        "enable_microdata": false,
+        "show_breadcrumbs": true,
+        "show_breadcrumbs_border": true,
+        "full_width_breadcrumb": true,
+        "desktop_content_alignment": "text-center",
+        "mobile_content_alignment": "text-center",
+        "background_color_light": "rgba(0,0,0,0)",
+        "text_color_light": "rgba(0,0,0,0)",
+        "textlink_color_light": "rgba(0,0,0,0)",
+        "background_color_dark": "rgba(0,0,0,0)",
+        "text_color_dark": "rgba(0,0,0,0)",
+        "textlink_color_dark": "rgba(0,0,0,0)",
+        "full_width": true,
+        "spacing_col": "small",
+        "padding_top": 60,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 28
+      }
+    },
+    "custom_product_section_yX9kQP": {
+      "type": "custom-product-section",
+      "settings": {}
+    },
+    "review_test_section_mLyAUC": {
+      "type": "review-test-section",
+      "settings": {
+        "heading": "Always Save Never Run Out"
+      }
+    },
+    "marquee_divider_WXfYjQ": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#ffffff",
+        "marquee_bottom_color": "#ffffff",
+        "lottie_file": ""
+      }
+    },
+    "custom_sub_video_carousel_pp7iyM": {
+      "type": "custom-sub-video-carousel",
+      "settings": {
+        "background_color": "#c5f3c2"
+      }
+    },
+    "marquee_divider_efjXAc": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#c5f3c2",
+        "marquee_bottom_color": "#ffffff",
+        "lottie_file": ""
+      }
+    },
+    "custom_happy_hour_G9CFki": {
+      "type": "custom-happy-hour",
+      "settings": {}
+    },
+    "marquee_divider_8pBMwt": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#ffffff",
+        "marquee_bottom_color": "#ffffff",
+        "lottie_file": ""
+      }
+    },
+    "make_craft_drinks_alt_FAmH8y": {
+      "type": "make-craft-drinks-alt",
+      "settings": {}
+    },
+    "marquee_divider_XJRMJA": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#ffffff",
+        "marquee_bottom_color": "#ffffff",
+        "lottie_file": ""
+      }
+    },
+    "custom_product_faq_wjmE8d": {
+      "type": "custom-product-faq",
+      "settings": {
+        "heading": "Got Questions"
+      }
+    },
+    "custom_review_section_KqUFNc": {
+      "type": "custom-review-section",
+      "settings": {}
+    },
+    "marquee_divider_GHGm3j": {
+      "type": "marquee-divider",
+      "settings": {
+        "marquee_top_color": "#fff9f5",
+        "marquee_bottom_color": "#bfefff",
+        "lottie_file": ""
+      }
+    },
+    "custom_flavor_carousel_3d8GLw": {
+      "type": "Custom-flavor-carousel",
+      "settings": {
+        "heading": "Find Your Flavor",
+        "background_color": "#bfefff"
+      }
+    },
+    "why_craftmix_card_JP8n7h": {
+      "type": "why-craftmix-card",
+      "settings": {
+        "background_color": "#bfefff",
+        "button_link": ""
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "heading": "You May Also Like...",
+        "highlight_type": "underline",
+        "heading_size": 100,
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "products_to_show": 5,
+        "background_color_light": "",
+        "background_color_dark": "",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_quickview": true,
+        "enable_carousel_desktop": false,
+        "enable_swiper_mobile": true,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_section_divider": false,
+        "spacing": 28,
+        "padding_top": 56,
+        "padding_bottom": 88,
+        "columns_mobile": "1",
+        "show_section_divider_mobile": false,
+        "spacing_mobile": 16,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "1739469099b3c5075c": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_QmVjJL": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_QmVjJL"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "custom_product_section_yX9kQP",
+    "review_test_section_mLyAUC",
+    "marquee_divider_WXfYjQ",
+    "custom_sub_video_carousel_pp7iyM",
+    "marquee_divider_efjXAc",
+    "custom_happy_hour_G9CFki",
+    "marquee_divider_8pBMwt",
+    "make_craft_drinks_alt_FAmH8y",
+    "marquee_divider_XJRMJA",
+    "custom_product_faq_wjmE8d",
+    "custom_review_section_KqUFNc",
+    "marquee_divider_GHGm3j",
+    "custom_flavor_carousel_3d8GLw",
+    "why_craftmix_card_JP8n7h",
+    "product-recommendations",
+    "1739469099b3c5075c"
+  ]
+}

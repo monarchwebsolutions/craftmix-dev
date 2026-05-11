@@ -1,0 +1,38 @@
+.scrolling-products-mobile-container .scrolling-product-image-mobile {
+  padding: 5% 5% 0;
+}
+
+.scrolling-products-mobile-container .swiper-slide {
+  overflow: visible;
+}
+
+.scrolling-products-mobile-container .scrolling-product-badge {
+  right: calc(50% - 2.1875rem); /* 35px */
+  color: white;
+}
+
+.scrolling-products-mobile-container .scrolling-product-atc-btn {
+  position: absolute;
+  text-align: center;
+  right: 0;
+  left: 0;
+  border-radius: 6.25rem; /* 100px */
+  padding: 0.3125rem 0; /* 5px 0 */
+}
+
+.scrolling-products-mobile-container .scrolling-product-title {
+  margin-bottom: 1.5rem;
+}
+
+.scrolling-products-mobile-container h2 {
+  text-align: center;
+  font-family: 'Goldplay' !important;
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700 !important;
+}
+
+@media screen and (min-width: 64rem) { /* 1024px */
+  .scrolling-products-mobile-container {
+    display: none;
+  }
+}

@@ -1,0 +1,190 @@
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+
+<div> 
+  <div class="custom-article-carousel-section">
+    <div class="custom-article-carousel-header">
+      <h3 class="custom-article-carousel-heading">{{ section.settings.heading }}</h3>
+    </div>
+    <div class="custom-flavor-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-article-carousel-container">
+      <div class="custom-carousel">
+  
+        <!-- Carousel Items Start  -->      
+          {% for block in section.blocks %}
+          {% assign article = block.settings.selected_article %}
+            {% if article != blank %}
+              <a href="{{ article.url }}" class="custom-carousel-card-link">
+                <div class="custom-article-carousel-cell first-cell">
+                  <div class="custom-article-carousel-card">
+                    <div class="custom-article-carousel-card-img">
+                      <img src="{{ article.image | img_url: 'large' }}" alt="Linked article post image" width="330" height="378" loading="lazy">
+                    </div>
+                    <div>
+                      <p class="custom-article-carousel-card-text">
+                        {{ article.title }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            {% endif %}
+          {% endfor %}
+         <!-- Carousel Items End  -->
+        
+      </div>
+    </div>
+  </div>
+</div> 
+
+{% style %}
+.custom-article-carousel-section {
+  padding-top: 20px;
+  background-color: #BFEFFF;
+}
+
+.custom-article-carousel-section .custom-flavor-carousel-nav{
+  position:relative;
+}
+
+.custom-article-carousel-container {
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for Flickity the buttons */
+  padding-bottom:3px;
+}
+
+.custom-article-carousel-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Hornbill";
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+  padding: 0 77px;
+}
+
+.custom-article-carousel-cell {
+  width: 332px;
+  margin: 0 15px;
+  height: auto;
+}
+
+.custom-article-carousel-card {
+  width: 100%;
+  height: auto;
+}
+
+.custom-article-carousel-card-img {
+  height: 380px;
+  width: 332px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: #333;
+  margin-bottom: 22px;
+  overflow: hidden;
+  position: relative;
+}
+
+.custom-article-carousel-card-img img {
+   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+  
+.custom-article-carousel-card-text {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.63px;
+  text-align: left;
+  line-height: 30px;
+  padding-right: 15px;
+}
+
+@media (max-width: 768px) {
+  .custom-article-carousel-container{
+    padding-top:30px;
+  }
+  .custom-article-carousel-heading {
+    font-size: 40px;
+    letter-spacing: -1.05px; 
+    line-height: 40px;
+  }  
+  .custom-article-carousel-section .custom-flavor-carousel-nav{
+    top:232px;
+  }
+}
+
+@media (max-width: 529px) {
+  .custom-article-carousel-heading {
+    font-family: "Hornbill";
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -1.05px;
+    text-align: left;
+    line-height: 46px;
+    padding: 0 20px;
+  }
+  .custom-article-carousel-section .custom-flavor-carousel-nav {
+    /* top: 286px;  */
+  }
+}
+
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Custom Article Carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading Text",
+        "default": "Recommended Articles"
+      },
+      {
+        "type": "blog",
+        "id": "blog_source",
+        "label": "Select Blog"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "article",
+        "name": "Article",
+        "settings": [
+          {
+            "type": "article",
+            "id": "selected_article",
+            "label": "Select an article"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 10,
+    "presets": [
+      {
+        "name": "Custom Article Carousel",
+        "blocks": [
+          { "type": "article" },
+          { "type": "article" },
+          { "type": "article" },
+          { "type": "article" },
+          { "type": "article" },
+          { "type": "article" }
+        ]
+      }
+    ]
+  }
+{% endschema %}

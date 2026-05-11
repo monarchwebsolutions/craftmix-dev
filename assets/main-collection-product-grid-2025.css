@@ -1,0 +1,923 @@
+.custom-shop-all-section {
+  background-color: #ddf7f7;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.collection-header {
+  z-index: 2;
+}
+
+.collection-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 20px 0px;
+  position: relative;
+  z-index: 10;
+}
+
+h1.collection-page-title {
+  position: relative;
+  text-align: left;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Hornbill";
+  font-size: 78px;
+  font-weight: 700;
+  letter-spacing: -2.05px;
+  line-height: 75px;
+  margin-top: 76px;
+  margin-bottom: 45px;
+  z-index: 10;
+}
+
+.filter-list {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 50px;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+  gap: 5px;
+}
+
+.filter-list li {
+  list-style-type: none;
+}
+
+.filter-link {
+  text-decoration: none;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  padding: 10px 29px;
+  border-radius: 23px;
+  border: 1.5px solid transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.filter-link:hover,
+.filter-link.active {
+  color: rgba(0, 38, 87, 1);
+  border-color: rgba(0, 38, 87, 1);
+  background-color: rgba(96, 211, 248, 1);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 390px);
+  gap: 65px;
+  justify-content: center;
+  position: relative;
+}
+
+.product-card-container {
+  position: relative;
+  width: 390px;
+  height: 500px;
+}
+
+.product-card-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  z-index: 100;
+  height: 90px;
+  width: 90px;
+}
+.stamped-product-reviews-badge {
+  display: none !important;
+}
+
+.product-card-badge-and-text {
+  position: relative;
+}
+.product-card-badge-lg {
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.product-card-badge-sm {
+  display: none;
+}
+
+.product-card-badge-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  font-family: Goldplay;
+  font-weight: 600;
+}
+
+.product-card {
+  width: 390px;
+  height: 500px;
+  border-radius: 30px;
+  border: 1.5px solid #002657;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.product-card a {
+  height: 100%;
+}
+
+.product-card-img-link{
+  border-top-left-radius:29px;
+  border-top-right-radius:29px;
+}
+
+.product-card-image img {
+  max-width: none;
+  width: 110% !important;
+  position: relative;
+  left: -5%;
+  margin-top: 20px;
+}
+
+.product-card .product-card-main {
+  height: 100%;
+}
+
+.product-card-info {
+  position: relative;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.product-card-stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Goldplay";
+  color: #002657;
+  margin-bottom: 15px;
+}
+
+.product-card-stars img {
+  position: relative;
+  color: #002657;
+  max-width: 100%;
+  margin-right: 10px;
+}
+
+.product-review-rating-number {
+  position: relative;
+  color: #002657;
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  line-height: 17px;
+}
+
+.product-card-reviews {
+  position: relative;
+  opacity: 1;
+  color: #002657;
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  padding-bottom: 5px;
+}
+
+.product-card-title {
+  position: relative;
+  color: #002657;
+  font-family: "Hornbill";
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.63px;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.product-card-image {
+  position: relative;
+  width: 100%;
+  max-width: 328px;
+  height: auto;
+  margin: 0 auto;
+  padding-bottom: 12px;
+  margin-top: -30px;
+  z-index: 0;
+  margin-bottom: 13px;
+}
+
+.product-card-image.happy-hour {
+  margin-top: -15px;
+  padding-bottom: 0px;
+}
+
+.product-card-image img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  z-index: 0;
+}
+
+.product-card-footer {
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid #002657;
+  display: flex;
+  color: #002657;
+  font-family: "Goldplay";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+}
+
+.product-card-variant-size,
+.product-card-add-to-cart {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-variant-size {
+  border-right: 1.5px solid #002657;
+}
+
+.product-card-add-to-cart {
+  border-radius: 0 0 29px 0;
+}
+
+/* If there's only one variant, make Add-to-Cart full width */
+.product-card-footer.single-variant .product-card-add-to-cart {
+  width: 100%;
+  border-radius: 0 0 30px 30px;
+}
+
+.product-card-footer.single-variant .product-card-variant-size {
+  display: none;
+}
+
+.product-card-add-btn {
+  font-family: "Goldplay";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+/* for bg image */
+.product-card-main {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1; /* under image content */
+}
+
+.product-card-image {
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.product-card-main:hover::before {
+  opacity: 1;
+}
+
+.product-card-main:hover .product-card-image {
+  opacity: 0;
+  visibility: hidden;
+}
+/* End for bg image */
+/* for dropdown */
+.custom-variant-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  color: #002657;
+  font-size: 20px;
+  font-family: "Goldplay";
+  font-weight: 600;
+  padding: 16px 10px 16px 24px;
+}
+
+.variant-options-container {
+  position: absolute;
+  left: 10px;
+  width: 45%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #002657;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  display: none;
+  font-family: "Goldplay";
+  font-size: 16px;
+  padding: 8px 0;
+}
+
+.variant-options-container.below {
+  top: 100%;
+  margin-top: -10px;
+}
+
+.variant-option {
+  text-align: center;
+  font-weight: 600;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.variant-option:hover {
+  background-color: var(--variant-hover);
+}
+/* End for dropdown */
+
+/* ********* */
+/*  Media    */
+/* ********* */
+@media screen and (max-width: 1349px) {
+  .collection-header {
+    padding-left: 50px;
+  }
+  .product-grid {
+    row-gap: 30px !important;
+    column-gap: 30px !important;
+  }
+}
+
+@media screen and (max-width: 1275px) {
+  .collection-header h1 {
+    text-align: center;
+  }
+
+  .collection-header {
+    padding-left: 0;
+  }
+
+  .filter-list {
+    justify-content: center;
+  }
+
+  .collection-container {
+    max-width: 810px; /* two 390px columns with 30px gap */
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 390px);
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  h1.collection-page-title {
+    text-align: center !important;
+    font-size: 46px;
+    text-align: left;
+    line-height: 46px;
+    letter-spacing: -1.21px;
+    margin-top: 76px;
+    margin-bottom: 30px;
+  }
+  .product-grid {
+    gap: 30px;
+  }
+
+  .filter-link {
+    font-family: "Goldplay";
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    line-height: 20px;
+    padding: 7px 6px;
+  }
+}
+
+/* Remove hover effect on small screens */
+@media (hover: hover) and (pointer: fine) {
+  .product-card-main:hover::before {
+    opacity: 1;
+  }
+
+  .product-card-main:hover .product-card-image {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .product-grid {
+    grid-template-columns: repeat(3, 181px);
+    gap: 40px;
+  }
+
+  .product-card-container {
+    position: relative;
+    max-width: 181px;
+    width: 100%;
+    height: 290px;
+  }
+
+  .product-card {
+    max-width: 181px;
+    width: 100%;
+    height: 290px;
+    overflow: hidden;
+  }
+
+  .product-card-badge {
+    height: 55px;
+    width: 55px;
+    top: -19px;
+    right: -20px;
+  }
+
+  .product-card-badge-and-text {
+    position: relative;
+  }
+  .product-card-badge-lg {
+    display: none;
+  }
+
+  .product-card-badge-sm {
+    display: block;
+    position: relative;
+    width: 55px;
+    height: 55px;
+  }
+
+  .product-card-badge-text {
+    font-size: 10px;
+  }
+
+  .product-card-info {
+    padding-top: 14px;
+    max-width: 140px;
+    margin: 0 auto;
+  }
+
+  .product-card-info.happy-hour {
+    max-width: 170px;
+  }
+
+  .product-card-stars {
+    margin-bottom: 1px;
+  }
+
+  .product-card-stars img {
+    height: 10px;
+    width: auto;
+  }
+
+  .product-card-stars p {
+    color: rgba(0, 38, 87, 1);
+    font-family: "Goldplay";
+    font-size: 14px;
+    font-weight: 700;
+    font-style: Bold;
+    letter-spacing: 0.3px;
+    text-align: center;
+    line-height: 18px;
+    text-transform: uppercase;
+  }
+
+  .product-card-reviews {
+    display: none;
+  }
+
+  .product-card-title {
+    font-size: 18px;
+    letter-spacing: -0.47px;
+    line-height: 19px;
+  }
+
+  .product-card-image {
+    max-width: 139px;
+    width: 100%;
+    height: 139px;
+    padding-top: 42px;
+  }
+  .product-card-image img {
+    margin-top: -20px;
+  }
+  .product-card-footer {
+    height: 84px;
+    display: flex;
+    flex-direction: column;
+    color: #002657;
+  }
+
+  .product-card-variant-size,
+  .product-card-add-to-cart {
+    width: 100%;
+    height: 42px;
+  }
+
+  /* If there's only one variant, make Add-to-Cart full width */
+  .product-card-footer.single-variant .product-card-add-to-cart {
+    height: 100%;
+    border-radius: 0;
+  }
+
+  .product-card-variant-size {
+    border-bottom: 1.5px solid #002657;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  .product-card-add-to-cart {
+    color: #fff;
+    border-radius: 0;
+    overflow: hidden;
+  }
+  .variant-options-container {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    font-size: 16px;
+    padding: 8px 0;
+  }
+  .variant-options-container.below {
+    top: 100%;
+    margin-top: -50px;
+  }
+  .variant-options {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+  .product-grid {
+    grid-template-columns: repeat(2, 181px);
+    gap: 40px;
+  }
+  .product-card-add-btn {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .collection-container {
+    padding: 20px 16px;
+  }
+  .collection-header {
+    width: 100%;
+    padding: 0px 10px;
+  }
+  h1.collection-page-title {
+    text-align: left !important;
+    margin-top: 24px;
+  }
+  .filter-list {
+    justify-content: space-between;
+    gap: 0px;
+  }
+  .product-grid {
+    grid-template-columns: repeat(2, 181px);
+    gap: 23px !important;
+    margin-top: 70px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .filter-link {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 434px) {
+  .filter-link {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .collection-header {
+    padding: 0px;
+  }
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+    gap: 15px;
+    max-width: 100%; /* Allow grid to use full available width */
+  }
+  .product-card-title {
+    font-size: 15px;
+    line-height: 15px;
+    max-width: 100px;
+    margin: auto;
+  }
+  .product-card-add-btn {
+    font-size: 15px;
+    line-height: 15px;
+  }
+  p.product-review-rating-number {
+    display: none;
+  }
+  .product-card-stars img {
+    margin-right: 2px;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 370px) {
+  .filter-link {
+    font-size: 10px;
+  }
+}
+
+/* ****************** */
+/* * Subscribe Card * */
+/* ****************** */
+
+.subscribe-card-section {
+  padding: 50px 0;
+}
+
+.subscribe-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1390px;
+  height: 122px;
+  font-family: "Goldplay";
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff0bd;
+  border-radius: 20px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 9;
+}
+
+/* Image Section */
+.subscribe-card-image {
+  width: auto;
+  height: 175px;
+  align-self: flex-end;
+  overflow: hidden;
+  margin-bottom: -70px;
+}
+
+/* Text Section */
+.subscribe-card-text {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.subscribe-card-text h2 {
+  font-size: 30px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-text p {
+  font-size: 18px;
+  color: #002657;
+  margin: 0;
+}
+
+/* CTA Section */
+
+.subscribe-card-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 33px;
+  font-family: "Goldplay";
+  font-size: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: #60d3f8;
+  color: #002657;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease;
+}
+
+.subscribe-card-btn:hover {
+  box-shadow: none;
+}
+
+/* ****************** */
+/* ***** Start ******* */
+/* * Subscribe Card * */
+/* Media Queries */
+/* ****************** */
+
+@media (max-width: 1400px) {
+  .subscribe-card {
+    margin: 0 50px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .subscribe-card {
+    width: 388px;
+    max-width: 92%;
+    height: 331px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .subscribe-card-text {
+    padding-left: 0;
+    padding-top: 25px;
+    margin: 0;
+    flex: 0;
+    order: -1;
+    text-align: center;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 26px;
+  }
+
+  .subscribe-card-image {
+    margin: 0 auto -70px;
+    order: 1;
+  }
+
+  .subscribe-card-cta {
+    order: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-card-btn {
+    padding: 14px 25px;
+  }
+}
+@media (max-width: 399px) {
+  .subscribe-card-section {
+    padding: 30px 22px;
+  }
+
+  .subscribe-card {
+    margin: 0;
+    padding: 20px 16px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-card-text p {
+    font-size: 16px;
+  }
+
+  .subscribe-card-image {
+    height: 140px;
+    margin-bottom: -70px;
+  }
+
+  .subscribe-card-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 349px) {
+  .subscribe-card-btn {
+    font-size: 14px;
+  }
+}
+
+/* ****************** */
+/* ***** END ******* */
+/* * Subscribe Card * */
+/* Media Queries */
+/* ****************** */
+
+/* ****************** */
+/* *******Start****** */
+/* * Background fruits * */
+/* ****************** */
+.background-fruit {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.background-fruit.blood_orange-bg {
+  top: 200px;
+  right: -30px;
+  width: auto !important;
+  height: 166px !important;
+}
+.background-fruit.grapefruit-bg {
+  top: 840px;
+  left: -15px;
+  width: 260px !important;
+  height: auto;
+  z-index: 0;
+}
+.background-fruit.mint_pink-bg {
+  top: 1710px;
+  right: -140px;
+  width: auto !important;
+  height: 230px !important;
+}
+.background-fruit.blueberry-bg {
+  top: 2050px;
+  left: -35px;
+  /* transform: rotate(160deg); */
+  width: auto !important;
+  height: 150px !important;
+}
+.background-fruit.palmtree-bg {
+  bottom: 880px;
+  right: -100px;
+  width: auto !important;
+  height: 275px !important;
+  z-index: 0;
+  /* z-index: -1; */
+}
+
+/* ****************** */
+/* * Background fruits * */
+/*  * Media Query* *  */
+@media screen and (max-width: 980px) {
+  .background-fruit.blood_orange-bg {
+    width: 105px !important;
+    height: 84px !important;
+  }
+}
+/* ****************** */
+/* * Background fruits * */
+/*  * Media Query* */
+@media screen and (max-width: 576px) {
+  .background-fruit.blood_orange-bg {
+    left: -40px;
+    top: 285px;
+  }
+  .background-fruit.grapefruit-bg {
+    left: -95px;
+    top: 1072px;
+    width: 200px !important;
+    height: auto !important;
+  }
+  .background-fruit.mint_pink-bg {
+    top: 1390px;
+    right: -95px;
+    width: auto !important;
+    height: 185px !important;
+  }
+  .background-fruit.blueberry-bg {
+    top: 1875px;
+    left: -20px;
+    /* transform: rotate(160deg); */
+    width: auto !important;
+    height: 90px !important;
+  }
+  .background-fruit.palmtree-bg {
+    bottom: 1400px;
+    right: -90px;
+    width: auto !important;
+    height: 260px !important;
+    z-index: 0;
+    /* z-index: -1; */
+  }
+}

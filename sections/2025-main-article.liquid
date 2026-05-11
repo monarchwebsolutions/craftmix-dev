@@ -1,0 +1,525 @@
+{% style %}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.article-page {
+  background-color: #ddf7f7;
+  position: relative;
+  overflow: hidden;
+}
+
+.article-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 45px 20px 90px 20px;
+}
+
+.article-hero-headings {
+  max-width: 467px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.article-hero-subheading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.article-hero-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: center;
+  line-height: 46px;
+  margin-bottom: 42px;
+  position:relative;
+}
+
+.hero-image-container {
+  margin: 0 auto;
+  position: relative;
+  max-width: 784px;
+  height: 566px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  background-color: rgba(0, 169, 224, 1);
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.article-info {
+  max-width: 784px;
+  margin: 30px auto 40px auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.article-tag {
+  border-radius: 23px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  background-color: rgba(255, 255, 255, 1);
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: center;
+  line-height: 22px;
+  padding: 10px 22px;
+}
+
+.article-card-read-time {
+  opacity: 0.5;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  line-height: 16px;
+}
+
+.article-main {
+  max-width: 784px;
+  margin: 0 auto;
+}
+
+.article-excerpt {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  text-align: left;
+  line-height: 34px;
+  margin-bottom: 39px;
+}
+
+.article-excerpt p {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  text-align: left;
+  line-height: 34px;
+  margin-bottom: 39px;
+}
+
+.featured-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: left;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.article-featured-product-card {
+  max-width: 100%;
+  height: 148px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 36px;
+}
+
+.article-featured-product-img-container {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  height: 148px;
+  width: 152px;
+  border-right: 1.5px solid rgba(0, 38, 87, 1);
+  overflow: hidden; 
+}
+
+.article-featured-product-img-container a:{
+
+}
+
+.article-featured-product-img {
+  max-width: 100%; 
+  max-height: 100%;
+  object-fit: contain; 
+  padding: 8px 4px;
+}
+
+.article-featured-product-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.article-featured-product {
+  padding-left: 30px;
+}
+
+.article-featured-product-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 24px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -0.63px;
+  text-align: left;
+  line-height: 30px;
+}
+.article-featured-product-variant {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+}
+
+.article-featured-product-add-to-cart {
+  padding-right: 40px;
+  display: flex;
+  justify-content: center; 
+}
+
+.add-to-cart {
+  display: inline-block; 
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  font-family: 'Goldplay', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.13px;
+  line-height: 1; 
+  padding: 12px 24px; 
+  text-decoration: none;
+  cursor: pointer; 
+}
+
+.article-main-text a:has(img) {
+  display:block;
+}
+
+.article-main-text p {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 26px;
+  margin-bottom: 20px;
+}
+
+/* ****************** */
+/* *******Start****** */
+/* * Background fruits * */
+/* ****************** */
+.background-fruit {
+  position: absolute;
+  z-index: 0;
+}
+.background-fruit.fruit-orangeflower {
+  top: 100px;
+  left: -90px;
+  width: 211px !important;
+  height: 225px !important; 
+  transform: rotate(170deg);
+}
+.background-fruit.fruit-mint {
+  bottom: 250px;
+  right: -90px;
+  width: 212px !important;
+  height: 254px !important;
+  transform: scaleX(-1)
+}
+
+.section-wave-container{
+  aspect-ratio: unset;
+}
+
+@media (max-width: 768px) {
+  .article-featured-product-info {
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+  .article-featured-product-variant {
+    margin-bottom: 10px;
+  }
+  .article-featured-product-add-to-cart {
+    padding-right: 0px;
+    padding-left: 25px;
+  }
+}
+@media (max-width: 480px) {
+  .article-wrapper {
+    padding: 35px 16px 90px 16px;
+  }
+  .article-hero-headings {
+    padding: 0 20px;
+  }
+  .article-hero-title {
+    font-size: 30px;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+    padding: 0 15px;
+  }
+  .hero-image-container {
+    height: 329px;
+  }
+  .article-tag {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    line-height: 20px;
+    padding: 8px 11px;
+  }
+  .article-excerpt {
+    font-size: 20px;
+    letter-spacing: -0.13px;
+    text-align: left;
+    line-height: 28px;
+    margin-bottom: 35px;
+  }
+  .article-featured-product-add-to-cart {
+    padding-right: 0px;
+    padding-left: 12px;
+  }
+  .article-featured-product {
+    padding-left:unset;
+    padding: 0 12px;
+    max-width: 180px;
+  }
+  .article-featured-product-card {
+    height: 162px;
+  }
+  .article-featured-product-img-container {
+    height: 162px;
+    width: 152px !important;
+  }
+
+  .article-featured-product-img {
+    width: 152px; 
+    max-height: 162px;
+    object-fit: contain; 
+    padding: 15px 10px;
+  }
+  .article-featured-product-info {
+    width: auto;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+  }
+  .article-featured-product-variant {
+    opacity: 1;
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    line-height: 29px;
+    margin-bottom: 10px;
+  }
+
+  .add-to-cart {
+    font-size: 18px;
+    letter-spacing: -0.11px;
+    line-height: 1;
+    padding: 8px 18px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .background-fruit.fruit-orangeflower {
+    top: 0px;
+    left: -60px;
+    width: 103px !important;
+    height: 110px !important; 
+    transform: rotate(170deg);
+  }
+  .background-fruit.fruit-mint {
+    bottom: 250px;
+    right: -60px;
+    width: 103px !important;
+    height: 124px !important;
+    transform: scaleX(-1)
+  }
+}
+
+{% endstyle %}
+
+<article class="article-page">
+  <img src="{{ 'orangeflower.svg' | asset_url }}" alt="Orange flower background fruit" class="background-fruit fruit-orangeflower" width="211" height="225" role="presentation">
+  <img src="{{ 'mint-leaf.svg' | asset_url }}" alt="Mint leaf background fruit" class="background-fruit fruit-mint" width="212" height="254" loading="lazy" role="presentation">
+  <div class="article-wrapper">
+    <div class="article-hero">
+      <div class="article-hero-headings">
+        <h3 class="article-hero-subheading">Blog</h3>
+        <h1 class="article-hero-title">{{ article.title }}</h1>
+      </div>
+
+      <div class="article-hero-img">
+
+        <div class="hero-image-container">
+          <img class="hero-image" src="{{ article.image | img_url: 'master' }}" alt="{{ article.title }}" width="782"  height="564">
+        </div>
+        <div class="article-info">
+          {% if article.tags.size > 0 %}
+            <span class="article-tag">{{ article.tags.first }}</span>
+          {% endif %}
+          
+          <span class="article-card-read-time">
+            {% assign word_count = article.content | strip_html | split: ' ' | size %}
+            {% assign read_time = word_count | divided_by: 200 | ceil %}
+            Read time: {{ read_time }} mins
+          </span>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="article-main">
+      {% if article.excerpt %}
+         <p class="article-excerpt">{{ article.excerpt | strip_html }}</p>
+      {% endif %}
+     
+      {% if article.metafields.custom.featured_product != blank %}
+        {% assign product_ref = article.metafields.custom.featured_product.value %}
+        {% assign featured_product = all_products[product_ref.handle] %}
+      {% else %}
+        {% assign featured_product = all_products['blood-orange-mai-tai'] %}
+      {% endif %}
+      {% assign color_1 = featured_product.metafields.custom.color_1 %}
+      {% assign color_2 = featured_product.metafields.custom.color_2 %}
+      {% assign color_3 = featured_product.metafields.custom.color_3 %}
+      {% assign btn_text_color = featured_product.metafields.custom.btn_text_color  | default: '#ffffff' %}
+      {% if featured_product %}
+        <h6 class="featured-title">Featured Product</h6>
+        <div class="article-featured-product-card" style="background-color: {{ color_2 }};">
+          <div class="article-featured-product-img-container" style="background-color: {{ color_3 }};">
+             <a href="{{ featured_product.url }}">
+              <img 
+                class="article-featured-product-img" 
+                src="{{ featured_product.images.last | img_url: 'medium' }}" 
+                alt="{{ featured_product.title }}"
+                width="120"
+                height="103"
+              >
+            </a>
+          </div>
+          <div class="article-featured-product-info">
+            <div class="article-featured-product">
+              <a href="{{ featured_product.url }}">
+                <h3 class="article-featured-product-title">{{ featured_product.title | replace_first: "2025 - ", "" }}</h3>
+              </a>
+              <p class="article-featured-product-variant">{{ featured_product.variants.first.title }}</p>
+            </div>
+                
+            <div class="article-featured-product-add-to-cart">
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ featured_product.variants.first.id }}">
+                <button style="background-color: {{ color_1 }}; color: {{ btn_text_color }}" type="submit" class="add-to-cart">Add - {{ featured_product.price | money }}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="article-main-text">
+        {{ article.content }}
+      </div>
+
+    </div>   
+  </div>
+  <div class="section-wave-container lottie-player">
+    <lottie-player class="section-wave" src="{{ 'wave-divider-l2r-blue.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+  </div>
+</article>
+<script>
+  function disableEmptyAnchors(root = document) {
+    const anchors = root.querySelectorAll('a');
+
+    anchors.forEach(a => {
+      const hasText = a.textContent.trim().length > 0;
+      const hasImg = a.querySelector('img, svg, picture');
+
+      if (!hasText && !hasImg) {
+        a.setAttribute('tabindex', '-1');
+        a.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    disableEmptyAnchors();
+  });
+
+</script>
+
+{% schema %}
+  {
+    "name": "2025 Main Article",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      }
+    ],
+    "presets" : [
+      {
+        "name": "2025 Main Article"
+      }
+    ]
+  }
+{% endschema %}
+
+
+

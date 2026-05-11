@@ -1,0 +1,115 @@
+<div class="homepage-hero-section-wrapper"> 
+  <div class="homepage-hero-section-container">
+    <div class="hero-section-left-column">
+      <div class="hero-section-content-wrapper">
+        <h2 class="hero-title">Craft drinks.<br>Made in seconds</h2>
+        <h3 class="hero-subheader">25% OFF 36-Packs for a Limited Time</h3>
+        <div class="hero-cta-container custom-cta-container"><a class="primary-cta custom-primary-cta" href="/collections/flavors-2024">Explore the flavors</a></div>
+        <img fetchpriority="high" height="90" width="420" src="/cdn/shop/{{ settings.hero_badges.src | replace: '.png', '_1024x.png'}}" class="homepage-hero-badges" alt="Craftmix benefits: convenient, natural flavors, low sugar, affordable.">
+        <img fetchpriority="high" class="homepage-hero-stars custom-homepage-hero-stars" src="{{ 'stars.svg' | asset_url }}" height="27" width="152" alt="Five orange star icons indicating a 5-star customer rating">
+        <div class="hero-review-count">OVER 5,000+ VERIFIED STAR REVIEWS</div>
+      </div>
+    </div>
+    <div class="hero-section-right-column">
+      <img fetchpriority="high" src="{{ settings.hero_image | image_url: width: 1200 }}" width="630" height="630" class="hero-image" alt="{{ settings.hero_image.alt | escape }}">
+      <img class="pineapple-bg" width="200" height="auto" src="{{ 'pineapple.svg' | asset_url }}" alt="Craftmix pineapple flavor icon">
+      <img class="leaf-bg" width="200" height="auto" src="{{ 'tropicalleaf.svg' | asset_url }}" alt="Craftmix tropical leaf icon">
+      <button class="hero-tool-tip-button primary-cta tool-tip-open">-</button>
+      <div class="hero-tool-tip tool-tip">
+        {% assign tool_tip_product = all_products[settings.hero_tool_tip_product] %}
+        <div class="tool-tip-left">
+          <span class="visually-hidden">{{ tool_tip_product.title }}</span>
+          <a href="{{ tool_tip_product.url }}">
+            <img fetchpriority="high" class="tool-tip-image" width="86" height="86" src="/cdn/shop/{{ tool_tip_product.featured_image.src | replace: '.png', '_200x.png' }}" alt="{{ tool_tip_product.title }}">
+          </a>
+        </div>
+        <div class="tool-tip-right">
+          <a href="{{ tool_tip_product.url }}" class="tool-tip-link">
+            <h3 class="tool-tip-product-title">
+              {{ tool_tip_product.title }}
+            </h3>
+            <div class="tool-tip-product-details">
+              36 Pack - <span class="tool-tip-final-price">$33.72</span> <span class="tool-tip-original-price strikethrough">$44.97</span>
+            </div>
+          </a>
+          <form method="post" action="/cart/add">
+            <input type="hidden" name="id" value="46082673115374">
+            <button type="submit" class="tool-tip-add-button">
+              Add
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+ <div class="section-wave-container">
+   <img 
+    class="section-wave-placeholder" 
+    src="{{ 'wave-placeholder.png' | asset_url }}" 
+    width="3024" 
+    height="173" 
+    loading="eager"
+    fetchpriority="high"
+    alt="Wavy light blue section divider"
+  >
+  </div>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const placeholder = document.querySelector('.section-wave-placeholder');
+    if (!placeholder) return;
+
+    const lottieScript = document.createElement('script');
+    lottieScript.src = "{{ 'lottie.js' | asset_url }}";
+    lottieScript.onload = function () {
+      const player = document.createElement('lottie-player');
+      player.src = "{{ 'wave-animation-left-to-right-pale-blue.json' | asset_url }}";
+      player.setAttribute('background', 'transparent');
+      player.setAttribute('speed', '1');
+      player.setAttribute('loop', '');
+      player.setAttribute('autoplay', '');
+      player.className = 'section-wave';
+      placeholder.replaceWith(player);
+    };
+    document.body.appendChild(lottieScript);
+  });
+</script>
+
+<script>
+  setupToolTip(".hero-tool-tip-button", ".hero-tool-tip");
+  // Select elements
+  // const button = document.querySelector(".hero-tool-tip-button");
+  // const toolTip = document.querySelector(".hero-tool-tip");
+
+  // // Initialize the state
+  // button.classList.add("tool-tip-open");
+  // toolTip.classList.remove("hidden");
+  // button.innerText = "-";
+
+  // // Toggle logic on button click
+  // button.addEventListener("click", () => {
+  //   // Toggle class "tool-tip-open" on button
+  //   button.classList.toggle("tool-tip-open");
+
+  //   // Toggle class "hidden" on tooltip div
+  //   toolTip.classList.toggle("hidden");
+
+  //   // Toggle button text between "-" and "+"
+  //   button.innerText = button.classList.contains("tool-tip-open") ? "-" : "+";
+  // });
+</script>
+{% schema %}
+{
+  "name": "Homepage Hero",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "Homepage Hero"
+    }
+  ],
+  "settings":[
+    
+  ]
+}
+{% endschema %}

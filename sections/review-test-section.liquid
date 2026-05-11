@@ -1,0 +1,39 @@
+<section class="custom-reviews-section">
+  <h2>Customer Reviews</h2>
+  
+
+  <!--Stamped - Begin Main Widget -->
+<div 
+id="stamped-main-widget"   
+data-product-id="{{ product.id }}"   
+data-name="{{ product.title | escape }}"   
+data-url="{{ shop.url }}{{ product.url }}"   
+data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" 
+data-description="{{ product.description | escape }}"   
+data-product-sku="{{product.handle}}" 
+data-product-type="{{product.type}}">    
+</div>
+<!-- Stamped - End Main Widget -->
+
+{{ product.metafields.stamped.revies.review
+  }}
+
+
+{% schema %}
+{
+  "name": "Test review section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Always Save Never Run Out"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Test review sectionr",
+    }
+  ]
+}
+{% endschema %}

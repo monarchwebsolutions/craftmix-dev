@@ -1,0 +1,324 @@
+{% schema %}
+  {
+    "name": "2025 Main Blog Hero",
+    "settings": [
+      {
+        "type": "article",
+        "id": "featured_article",
+        "label": "Select an article"
+      }
+    ],
+    "presets": [
+      {
+        "name": "2025 Main Blog Hero"
+      }
+    ]
+  }
+{% endschema %}
+
+{% style %}
+  *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* img {
+  width: 100%;
+} */
+
+.blog-header {
+  position: relative;
+  background-color: #ddf7f7;
+}
+
+.blog-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.blog-main-hero {
+  width: 100%;
+  min-height: 594px;
+  margin: 0 auto;
+  padding: 70px 0px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-main-hero-img,
+.blog-main-hero-text {
+  width: 50%;
+  min-height: 453px;
+}
+
+.blog-main-hero-img {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.blog-main-hero-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blog-image-container {
+  max-width: 534px;
+  width: 100%;
+  height: 453px;
+  position: relative;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(0, 169, 224, 1);
+  overflow: hidden;
+}
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blog-image-tag {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  padding: 6px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  color: rgba(0, 38, 87, 1);
+  background-color: #fff;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  letter-spacing: -0.09px;
+  text-align: center;
+  line-height: 16px;
+  z-index: 1;
+  border-radius: 18px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+}
+
+.hero-text-container {
+  max-width: 426px;
+}
+
+.hero-blog-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+  margin-bottom: 25px;
+}
+
+.hero-blog-text p {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  max-width: 378px;
+  margin-bottom: 20px;
+}
+
+.hero-blog-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: rgba(96, 211, 248, 1);
+  width: 284px;
+  height: 60px; 
+  cursor: pointer; 
+  transition: box-shadow 0.4s ease;
+}
+
+.hero-blog-cta:hover {
+   box-shadow: none; 
+}
+
+.hero-blog-cta a {
+  text-decoration: none;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0; 
+}
+
+@media (max-width: 1026px) {
+  .blog-main-hero {
+    padding: 50px 0px;
+  }
+  
+  .blog-image-container {
+    max-width: 388px;
+    width: 100%;
+    height: 329px;
+  }
+
+  .hero-blog-title {
+    font-size: 30px;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }
+}
+
+
+
+@media (max-width: 946px) {
+  .blog-main-hero {
+    width: 100%;
+    min-height: 594px;
+    margin: 0 auto;
+    padding: 70px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .blog-main-hero-img,
+  .blog-main-hero-text {
+    width: 100%;
+    min-height: 453px;
+  }
+  .blog-main-hero-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blog-image-container {
+    max-width: 534px;
+    width: 100%;
+    height: 453px;
+  }
+  .hero-text-container {
+    max-width: 534px;
+  }
+  .blog-main-hero-text {
+    width: 100%;
+    min-height: 200px;
+    height: auto;
+  }
+}
+
+
+@media (max-width: 562px) {
+   .blog-main-hero {
+    padding: 28px 0px 38px 0px;
+  }
+  
+   .blog-image-container {
+    max-width: 388px;
+    width: 100%;
+    height: 329px;
+  }
+  .blog-main-hero-img {
+    width: 100%;
+    min-height: 329px;
+  }
+  .hero-text-container {
+    max-width: 388px;
+  }
+  .hero-blog-cta {
+    width: 100%;
+  }
+}
+
+
+
+@media (max-width: 370px) {
+   .blog-main-hero {
+    gap: 10px;
+  }
+   .hero-blog-title {
+    font-size: 24px;
+    line-height: 24px;
+  }
+}
+
+
+{% endstyle %}
+
+
+<section class="blog-header">
+  <div class="blog-wrapper">
+  
+    <div class="blog-main-hero">
+      {% if section.settings.featured_article != blank %}
+        {% assign article = section.settings.featured_article %}
+     
+        <div class="blog-main-hero-img">
+          <div class="blog-image-container">
+            {% if article.tags.size > 0 %}
+              <p class="blog-image-tag">{{ article.tags.first }}</p>
+            {% endif %}
+            <img 
+              class="blog-image" 
+              src="{{ article.image | image_url }}" 
+              alt="{{ article.image.alt }}" 
+              width="532" 
+              height="451"
+              fetchpriority="high"
+            >
+          </div>
+        </div>
+    
+        <div class="blog-main-hero-text">
+          <div class="hero-text-container">
+            <h1 class="hero-blog-title">{{ article.title }}</h1>
+             {% if article.excerpt %}
+              <div class="hero-blog-text">
+                {{ article.excerpt }}
+              </div>
+            {% endif %}
+            <div class="hero-blog-cta">
+              <a href="{{ article.url }}">Read Article</a>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <p>No article selected. Please choose an article in the theme settings.</p>
+      {% endif %}
+    </div>
+  
+  </div>
+</section>
+
+

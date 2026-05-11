@@ -1,0 +1,453 @@
+<div>
+ <div class="custom-subscription-faq-section">
+      <div class="custom-subscription-faq-section-container">
+        <img class="bg-img mint-bg" width="200" height="auto" src="{{ 'mint-leaf.svg' | asset_url }}" alt="Mint leaf illustration">
+        <div class="subscription-faq-body">
+          <h2 class="subscription-faq-heading">Subscription Questions</h2>
+
+          <div class="faq active">
+            <div class="question">
+              <h3 class="question-title">What is Craftmix?</h3>
+              <div class="question-icon">
+                <div class="icon-circle">
+                  <div class="icon-line horizontal"></div>
+                  <div class="icon-line vertical"></div>
+                </div>
+              </div>
+            </div>
+            <div class="answer">
+              <p>Craftmix is a low sugar, low calorie cocktail mix in a convenient dry blend. Each packet makes one cocktail with just 25 calories and 5g of sugar—perfect for guilt-free happy hours anywhere.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <div class="question">
+              <h3 class="question-title">How do I make a Craftmix cocktail?</h3>
+              <div class="question-icon">
+                <div class="icon-circle">
+                  <div class="icon-line horizontal"></div>
+                  <div class="icon-line vertical"></div>
+                </div>
+              </div>
+            </div>
+            <div class="answer">
+              <p>Simply mix 1.5 oz of your favorite liquor with 3 oz of sparkling or still water, stir in one Craftmix packet, pour over ice, and enjoy!</p>
+            </div>
+          </div>
+
+            <div class="faq">
+            <div class="question">
+              <h3 class="question-title">Can I enjoy Craftmix without alcohol?</h3>
+              <div class="question-icon">
+                <div class="icon-circle">
+                  <div class="icon-line horizontal"></div>
+                  <div class="icon-line vertical"></div>
+                </div>
+              </div>
+            </div>
+            <div class="answer">
+              <p>Absolutely! Just swap the liquor for an extra 1.5 oz of sparkling water to make a refreshing mocktail.</p>
+            </div>
+          </div>
+
+          <div class="faq">
+            <div class="question">
+              <h3 class="question-title">Do you offer a subscription service?</h3>
+              <div class="question-icon">
+                <div class="icon-circle">
+                  <div class="icon-line horizontal"></div>
+                  <div class="icon-line vertical"></div>
+                </div>
+              </div>
+            </div>
+            <div class="answer">
+              <p>Yes! The Craftmix Club delivers your favorite flavors on a regular schedule—plus you get discounts and exclusive perks as a subscriber.</p>
+            </div>
+          </div>
+
+
+
+          <div class="faq-cta-container">
+            <a class="faq-cta primary-cta" href="/pages/faq">More Questions? Visit our FAQ Page</a>
+          </div>
+        </div>
+        <div class="sub-faq-image-wrapper">
+          <img class="bg-img palmtree-bg" width="200" height="auto" src="{{ 'palmtree.svg' | asset_url }}" alt="Palm tree illustration">
+          <img class="bg-img bloodorange-bg" width="200" height="auto" src="{{ 'bloodorange.svg' | asset_url }}" alt="Blood orange slice illustration">
+          <div class="subscription-faq-image-container">
+            <img class="subscription-faq-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/BPH_0335-min.jpg?v=1747048507" alt="Hand holding a bright yellow cocktail garnished with a lime wheel and green-striped straw in a ribbed glass.">
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+</div>
+
+{% style %}
+  *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.custom-subscription-faq-section {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  background-color: #fff9f5;
+}
+
+.custom-subscription-faq-section-container {
+  max-width: 1400px;
+  padding: 0 45px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position:relative;
+  z-index:1;
+}
+
+.subscription-faq-body {
+  max-width: 589px;
+}
+.subscription-faq-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+  margin-bottom: 45px;
+}
+
+.faq {
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  margin-bottom: 5px;
+}
+.faq .question {
+  min-height: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq .question-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+}
+
+.faq .question {
+  cursor: pointer;
+}
+
+.question-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.icon-circle {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #002657;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.3s ease;
+  background-color: #60d3f8;
+}
+
+.icon-line {
+  position: absolute;
+  background-color: #002657;
+  transition: all 0.3s ease;
+}
+
+.icon-line.horizontal {
+  width: 60%;
+  height: 2px;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+}
+
+.icon-line.vertical {
+  width: 2px;
+  height: 60%;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+}
+
+.faq.active .icon-circle {
+  background-color: #60d3f8;
+  border-color: #002657;
+}
+
+.faq.active .icon-line {
+  background-color: #002657;
+}
+.faq.active .icon-line.vertical {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+.faq .question-icon:hover {
+  cursor: pointer;
+}
+
+
+.faq .answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding-right: 80px;
+  padding-bottom: 0;
+}
+
+.faq.active .answer {
+  max-height: 1000px; 
+  transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+  padding-bottom: 26px;
+}
+
+.faq .question-icon {
+  width: 30px;
+  height: 30px;
+  transition: transform 0.3s ease;
+}
+
+.faq.active .question-icon {
+  transform: rotate(180deg);
+}
+
+.faq .answer p {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  padding-bottom: 26px;
+}
+
+.icon-open,
+.faq.active .icon-close {
+  display: none;
+}
+
+.icon-close,
+.faq.active .icon-open {
+  display: block;
+}
+.faq-cta-container{
+  text-align:center;
+}
+.faq-cta {
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: rgba(96, 211, 248, 1);
+  display: inline-block;
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  padding: 20px 89px;
+  margin-top: 62px;
+  display: inline-block;
+  max-width:90%;
+}
+
+.subscription-faq-image-container {
+  width: 471px;
+  height: 634px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  background-color: rgba(0, 169, 224, 1);
+  overflow: hidden;
+  max-width:100%;
+  z-index: 1;
+  position: relative;
+}
+
+.subscription-faq-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index:1;
+  position:relative;
+}
+
+
+
+.background-fruit {
+  position: absolute;
+  z-index: 0;
+  display: block;
+}
+.background-fruit.fruit-cherry {
+ 
+}
+.background-fruit.fruit-blueberry {
+  
+}
+.sub-faq-image-wrapper{
+  position:relative;
+}
+.palmtree-bg{
+  top: -8rem;
+  width: 250px;
+  height: auto;
+  left: -9rem;
+  transform: rotate(-15deg);
+}
+.bloodorange-bg{
+  right: -5rem;
+  bottom: -3rem;
+  width: 210px;
+  height: auto;
+  z-index: 0;
+}
+@media screen and (max-width: 1100px) {
+  .custom-subscription-faq-section-container {
+    padding: 0 25px;
+  }
+  .subscription-faq-body {
+    max-width: 388px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .custom-subscription-faq-section-container {
+    flex-direction: column;
+    padding: 0 25px;
+  }
+  .subscription-faq-body {
+    max-width: 388px;
+  }
+  .subscription-faq-image-container {
+    margin-top: 84px;
+    width: 100%;
+    height: auto;
+  }
+  .subscription-faq-heading {
+    font-size: 30px;
+    font-weight: 700;
+    font-style: Bold;
+    letter-spacing: -0.79px;
+    text-align: left;
+    line-height: 35px;
+  }
+  .faq .question-title {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    line-height: 20px;
+  }
+
+  .faq .answer p {
+    font-size: 16px;
+    letter-spacing: -0.1px;
+    text-align: left;
+    line-height: 19px;
+  }
+  .faq-cta{
+    max-width:100%;
+  }
+  .faq-cta-btn {
+    padding: 20px 23px;
+    margin-top: 62px;
+    margin-bottom: 62px;
+  }
+  .palmtree-bg{
+    top:1.5rem;
+    left:-5rem;
+    width:175px;
+  }
+  .bloodorange-bg{
+    width: 160px;
+    right: -3rem;
+    bottom:0;
+  }
+}
+{% endstyle %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function () {
+  const faqs = document.querySelectorAll('.faq');
+
+  faqs.forEach(faq => {
+    const question = faq.querySelector('.question');
+    const answer = faq.querySelector('.answer');
+    if (!question || !answer) return;
+
+    // Ensure focusability only
+    if (!question.hasAttribute('tabindex')) {
+      question.setAttribute('tabindex', '0');
+    }
+
+    // Initial state
+    const isActive = faq.classList.contains('active');
+    question.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+    answer.style.maxHeight = isActive ? answer.scrollHeight + 'px' : null;
+
+    function toggleFaq() {
+      const expanded = faq.classList.toggle('active');
+      question.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      answer.style.maxHeight = expanded ? answer.scrollHeight + 'px' : null;
+    }
+
+    // Mouse
+    question.addEventListener('click', toggleFaq);
+
+    // Keyboard
+    question.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); // stop Space from scrolling
+        toggleFaq();
+      }
+    });
+  });
+});
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Subscribe faqs",
+    "settings": [],
+    "presets": [{"name": "Subscribe faqs"}]
+  }
+{% endschema %}

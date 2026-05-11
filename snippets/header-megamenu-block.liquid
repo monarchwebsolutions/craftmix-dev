@@ -1,0 +1,559 @@
+{% liquid 
+  if settings.lang_direction contains request.locale.iso_code
+    assign is_rtl = true
+    assign class_image_ratio = "w-8 h-8 ml-4"
+  else
+    assign is_rtl = false
+    assign class_image_ratio = "w-8 h-8 mr-4"
+  endif
+  if section.settings.enable_highlight
+    assign menus = section.settings.menus | newline_to_br | strip_newlines | split: '<br />'
+  endif
+%}
+{%- style -%}
+  {% if section.settings.enable_highlight %}
+    .svg-highlight-{{ section.id }} {
+    {% if section.settings.highlight_color_light != blank and section.settings.highlight_color_light.alpha != 0.0 %}
+      --color-highlight: {{ section.settings.highlight_color_light }};
+    {% endif %}
+    }
+    .dark .svg-highlight-{{ section.id }} {
+      {% if section.settings.highlight_color_dark != blank and section.settings.highlight_color_dark.alpha != 0.0 %}
+        --color-highlight: {{ section.settings.highlight_color_dark }};
+      {% else %}
+        --color-highlight: {{ settings.colors_dark_heading_highlight }};
+      {% endif %}
+    }
+  {% endif %}
+{%- endstyle -%}
+<nav {% if section.settings.select_motion == 'click' %}x-on:click.away="$store.xHeaderMenu.hideMenu($el)"{% endif %} class="[grid-area:navigation] w-full pb-header{% if logo_above %} lg:[grid-area:navigation] mt-4{% else %}{% unless logo_center %} lg:[grid-area:auto]{% endunless %}{% endif %} order-3 hidden header__inline-menu lg:flex items-center{% if section.settings.logo_position == 'left-center' or section.settings.logo_position == "above-center" %} justify-center{% endif %}{% if section.settings.logo_position == 'left-right' %} justify-end pr-5{% endif %}">
+  
+  {% unless request.path == '/pages/2025-landing-page' %}
+
+  <ul class="list-menu inline-flex flex-wrap items-center{% if section.settings.logo_position == 'left-right' %} justify-end{% endif %}{% if section.settings.logo_position == 'left-center' or section.settings.logo_position == "above-center" %} justify-center{% endif %}">
+    
+      <li>
+        <a id="header-shop-button" href="#" class="cursor-pointer p-break-words flex items-center justify-center pt-1 pb-1 relative" x-init="$store.xHeaderMenu.isTouch &amp;&amp; $store.xHeaderMenu.touchItem($el)">
+          <span>Shop</span>
+            <span class="w-5 pl-2">
+              <svg width="100%" height="100%" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg" style="fill: none;" alt="Chevron">
+                <path d="M0.75 1.625L4.5 5.375L8.25 1.625" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+        </a>
+      </li>    
+      <div width="100%" height="400px" class="mega-menu-container">
+        <div class="mega-menu-inner-wrapper">
+          {% assign bestsellers = collections['megamenu-bestsellers'].products %}
+          {% assign bestseller_1 = bestsellers[0] %}
+          {% assign bestseller_2 = bestsellers[1] %}
+          {% assign bestseller_3 = bestsellers[2] %}
+          <div class="left-column">
+
+              
+              <a class="mega-menu-bestseller" id="shop-all-bestseller-3" style="background-color: {{ bestseller_3.metafields.custom.color_2 }}" href="{{ bestseller_3.url }}">
+                <div class="bestseller-img-container">
+                  <img class="bestseller-img lazy-img" height="100" width="100" data-src="{{ bestseller_3.images.last | image_url: width: 200 }}" alt="{{ bestseller_3.title }}">
+                </div>
+                <div class="bestseller-text">
+                  <div class="header-bestseller-badge">Bestseller</div>
+                  <h2>{{ bestseller_3.title }}</h2>
+                  <p class="bestseller-benefits">Get 25% OFF For a Limited Time</p>
+                </div>
+              </a>
+              <div class="mega-menu-cta-container">
+                <a class="primary-cta mega-menu-shop-all-cta" href="/collections/flavors-2024">Shop All Flavors</a>
+              </div>
+              <!-- <div class="mega-menu-category-selector"><button>Craftmix Merch</button></div> -->
+            
+            <div class="mega-menu-cta-container">
+              <a class="primary-cta mega-menu-subscribe-cta" href="/pages/subscriptions">Subscribe Today - Learn more</a>
+            </div>
+          </div>
+          <div class="middle-column">
+          
+            <!-- Bestseller 1 -->
+            {% if bestseller_1 and bestseller_1.featured_image %}
+              <a class="mega-menu-bestseller" id="shop-all-bestseller-1" style="background-color: {{ bestseller_1.metafields.custom.color_2 }}" href="{{ bestseller_1.url }}">
+                <div class="bestseller-img-container">
+                  <img class="bestseller-img lazy-img" height="100" width="100" data-src="{{ bestseller_1.images.last | image_url: width: 200 }}" alt="{{ bestseller_1.title }}">
+                </div>
+                <div class="bestseller-text">
+                  <div class="header-bestseller-badge">Bestseller</div>
+                  <h2>{{ bestseller_1.title }}</h2>
+                  <p class="bestseller-benefits">Get 25% OFF For a Limited Time</p>
+                </div>
+              </a>
+            {% else %}
+              <p>Bestseller 1 not available.</p>
+            {% endif %}
+          
+            <!-- Bestseller 2 -->
+            {% if bestseller_2 and bestseller_2.featured_image %}
+              <a class="mega-menu-bestseller" id="shop-all-bestseller-2" style="background-color: {{ bestseller_2.metafields.custom.color_2 }}" href="{{ bestseller_2.url }}">
+                <div class="bestseller-img-container">
+                  <img class="bestseller-img lazy-img" height="100px" width="100px" data-src="{{ bestseller_2.images.last | image_url: width: 200 }}" alt="{{ bestseller_2.title }}">
+                </div>
+                <div class="bestseller-text">
+                  <div class="header-bestseller-badge">Bestseller</div>
+                  <h2>{{ bestseller_2.title }}</h2>
+                  <p class="bestseller-benefits">Get 25% OFF For a Limited Time</p>
+                </div>
+              </a>
+            {% else %}
+              <p>Bestseller 2 not available.</p>
+            {% endif %}
+          </div>
+
+          <div class="right-column">
+            <div class="mega-menu-grid-container">
+              {% for product in collections['mega-menu-2025'].products %}
+                {% unless product.tags contains "price_test" %}
+                <a href="{{ product.url }}" class="mega-menu-grid-cell">
+                  <!-- Featured Image -->
+                  <img class="lazy-img" height="100px" width="100px" data-src="{{ product.metafields.custom.product_icon | img_url: '100x' }}" alt="{{ product.title }}">
+                  
+                  <!-- Product Title -->
+                  <h2>{{ product.title }}</h2>
+                </a>
+                {% if forloop.index == 12 %}
+                  {% break %}
+                {% endif %}
+                {% endunless %}
+              {% endfor %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
+          {%- liquid
+            assign is_link = false
+            assign is_active = false
+            if link.links != blank
+              assign is_link = true
+              for link_child in link.links
+                if link_child.current or link_child.child_active
+                 assign is_active = true
+                endif
+              endfor
+            endif
+          -%}
+          <li 
+            class="tree-menu pr-5{% if logo_center %} mr-7{% else %} pl-5{% endif %}{% if is_link %} relative has-dropdown{% endif %}"
+            
+          >
+            <div class="relative" x-data='{ active: false }' >
+              <a
+                href="#"
+                class="cursor-pointer tree-menu-item p-break-words{% if is_link %} flex items-center{% else %} inline-block{% endif %}{% if is_active or request.path == link.url %}  link-active{% endif %} justify-center pt-1 pb-1 relative duration-200 transition hover-text-link :link-active{% if request.path == link %} link-active{% endif %}" 
+                {% if is_link %}x-init="$store.xHeaderMenu.isTouch && $store.xHeaderMenu.touchItem($el)"{% endif %}
+                {% if select_motion == "click" and is_link %} 
+                  @click="$store.xHeaderMenu.clickItem($el, $event)"
+                {% endif %}
+              >
+                {% assign title = link.title %}
+                {% if section.settings.enable_highlight %}
+                  {% liquid
+                    assign is_highlight = false
+                    assign list_menu = menus | join: '||' | prepend: '||' | append: '||' | escape
+                    assign menu_item = '||' | append: title | append: '||' | escape
+                    if list_menu contains menu_item
+                      assign is_highlight = true
+                    endif
+                  %}
+                  {% if is_highlight %}
+                    {% render 'menu-highlight',
+                      highlight_type: section.settings.highlight_style,
+                      menu_title: title,
+                      section_id: section.id,
+                      transparent: transparent
+                    %}
+                  {% else %}
+                    <span>{{ title | escape }}</span>
+                  {% endif %}
+                {% else %}
+                  <span>{{ title | escape }}</span>
+                {% endif %}
+                {%- if is_link -%}
+                  <span class="w-5{% if is_rtl %} pr-2{% else %} pl-2{% endif %}">{% render 'icon-alls', icon: 'icon-caret' %}</span>
+                {%- endif -%}
+              </a>
+            </div>
+            {%- if is_link -%}
+              <template x-if="!runDispatch">
+                <div class="toggle-menu toggle-menu-hidden text-[rgba(var(--colors-text))] absolute z-50 background-header top-full w-48 xl:w-[222px] shadow-md :text-[rgba(var(--colors-text))] duration-300" 
+                  x-init="$store.xHeaderMenu.setPosition($el,1); $store.xHeaderMenu.resizeWindow($el,1)"
+                >
+                  <ul class="tree-menu-nav">
+                    {% assign level = 0 %}
+                    {%- for link in link.links -%}
+                      {%- liquid
+                        assign is_link = false
+                        if link.links != blank
+                          assign is_link = true
+                        endif
+                        if link.levels > level
+                          assign level = link.levels
+                        endif
+                      -%}
+                      <li 
+                        x-data="{ openSub: false }" 
+                        class="relative font-normal" 
+                        
+                      >
+                        <div class="sub-menu flex items-center">
+                          <span class="flex-1">
+                            <a href="{{ link.url }}" class="relative p-break-words{% if is_link %} flex items-center{% if is_rtl %} pl-5{% else %} pr-5{% endif %}{% else %} inline-block{% endif %} duration-200 transition hover-text-link :effect-inline{% if link.current or link.child_active %} flex border-b effect-inline{% endif %}"
+                              {% if select_motion == "click" and is_link %} @click="openSub = true; $store.xHeaderMenu.clickItem($el, $event, true, true)"{% endif %}
+                            >
+                              <span >{{ link.title | escape }}</span>
+                              {%- if is_link -%}
+                                <span class="icon z-10 w-5 h-4 p-1 rounded-full block absolute -rotate-90{% if is_rtl %} left-0{% else %} right-0{% endif %}">
+                                  {% render 'icon-alls', icon: 'icon-caret' %}
+                                </span>
+                              {%- endif -%}
+                               <img width="20px" height="7px" src="{{ 'craftmix-nav-arrow.svg' | asset_url }}" class="navigation-arrow" alt="Navigation Arrow">
+                            </a>
+                          </span>
+                        </div>
+                        {%- if is_link -%}
+                          <div class="sub-menu-toggle background-header child absolute{% if forloop.first %} -top-5{% else %} -top-2{% endif %} w-full shadow-showdownInset left-full" :class="openSub ? 'opacity-1 max-h-auto' : 'opacity-0 max-h-0 overflow-hidden' ">
+                            <ul class="pt-5 pb-5">
+                              {%- for childlink in link.links -%}
+                                <li class="relative{% if is_rtl %} pr-7 pl-6{% else %} pl-7 pr-6{% endif %}"
+                                >
+                                  <div class="flex items-center{% unless forloop.first %} pt-3{% endunless %}">
+                                    <span class="flex-1">
+                                      <a href="{{ childlink.url }}" class="inline-block p-break-words relative duration-200 hover-text-link transition -subchild:effect-inline{% if childlink.current or childlink.child_active %} border-b effect-inline{% endif %}">
+                                        <span>{{ childlink.title | escape }}</span>
+                                      </a>
+                                    </span>
+                                  </div>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  {% if level > 0 %}
+                    <div class="hidden {{ level }}" x-init="$store.xHeaderMenu.setPosition($el,{{ level | plus: 1 }}); $store.xHeaderMenu.resizeWindow($el,{{ level | plus: 1 }})"></div>
+                  {% endif %}
+                </div>
+              </template>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      {%- endif -%}
+  </ul>
+
+{% endunless %}  
+   
+</nav>
+
+<script defer>
+// Add arrows to About dropdown on hover
+const observer = new MutationObserver(() => {
+  const menuItems = document.querySelectorAll('header .sub-menu span.flex-1');
+  if (menuItems.length > 0) {
+    observer.disconnect(); // Stop observing once menu items are found
+    menuItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        const arrow = item.querySelector('.navigation-arrow');
+        if (arrow) arrow.style.display = 'inline-block';
+      });
+
+      item.addEventListener('mouseleave', () => {
+        const arrow = item.querySelector('.navigation-arrow');
+        if (arrow) arrow.style.display = 'none';
+      });
+    });
+  }
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
+
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Select all anchor elements with the class 'tree-menu-item'
+    const treeMenuItems = document.querySelectorAll("a.tree-menu-item");
+
+    treeMenuItems.forEach(item => {
+        item.addEventListener("click", (event) => {
+            event.preventDefault(); // Prevent default anchor behavior
+
+            // Find the closest parent 'li' with the class 'tree-menu'
+            const parentLi = item.closest("li.tree-menu");
+            if (!parentLi) return;
+
+            // Find the div inside the 'li' element with the class 'toggle-menu'
+            const toggleMenu = parentLi.querySelector(".toggle-menu");
+            if (toggleMenu) {
+                // Toggle the 'toggle-menu-hidden' class
+                toggleMenu.classList.toggle("toggle-menu-hidden");
+
+                // Find the first child div with the class 'relative' inside the 'li'
+                const relativeDiv = parentLi.querySelector(".relative");
+                if (relativeDiv) {
+                    if (toggleMenu.classList.contains("toggle-menu-hidden")) {
+                        // Set border to transparent when toggle-menu-hidden is added
+                        relativeDiv.style.background = "";
+                        relativeDiv.style.border = "2px solid transparent";
+                        relativeDiv.style.borderRadius = "";
+                    } else {
+                        // Add the custom styles if toggle-menu-hidden is removed
+                        relativeDiv.style.background = "var(--craftmix-light-blue)";
+                        relativeDiv.style.border = "2px solid var(--craftmix-dark-blue)";
+                        relativeDiv.style.borderRadius = "100px";
+                    }
+                }
+            }
+
+            // Rotate the SVG inside the clicked 'a.tree-menu-item'
+            const svg = item.querySelector("svg");
+            if (svg) {
+                svg.classList.toggle("rotated");
+            }
+        });
+    });
+
+    // Handle clicks outside of '#x-header-container'
+    document.addEventListener("click", (event) => {
+        const headerContainer = document.querySelector("#x-header-container");
+        if (headerContainer && headerContainer.contains(event.target)) {
+            return; // Do nothing if the click was inside '#x-header-container'
+        }
+        // Remove custom styles from all 'relative' divs
+        const relativeDivs = document.querySelectorAll("li.tree-menu > .relative");
+        relativeDivs.forEach(relativeDiv => {
+            relativeDiv.style.background = "";
+            relativeDiv.style.border = "2px solid transparent";
+            relativeDiv.style.borderRadius = "";
+        });
+        // Rotate all SVGs back (if they are rotated)
+        const toggleMenus = document.querySelectorAll("div.toggle-menu");
+        for (let i = 0; i < toggleMenus.length; i++) { 
+           const svg = document.querySelectorAll("a.tree-menu-item svg")[0];
+            if (!toggleMenus[i].classList.contains("toggle-menu-hidden")) {
+              svg.classList.toggle("rotated");
+            }
+        }
+
+        // Add 'toggle-menu-hidden' to all toggle-menu divs
+        toggleMenus.forEach(toggleMenu => {
+            if (!toggleMenu.classList.contains("toggle-menu-hidden")) {
+                toggleMenu.classList.add("toggle-menu-hidden");
+            }
+        });
+      
+    }); // <-- Fixed misplaced semicolon and closing bracket
+});
+
+</script>
+
+<script>
+  document.querySelector('a#header-shop-button').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default link behavior
+  
+    const shopButton = event.currentTarget;
+    const megaMenuContainer = document.querySelector('.mega-menu-container');
+    const svgIcon = shopButton.querySelector('svg');
+  
+    // 1. Toggle "dropdown-selected" class on the button
+    shopButton.classList.toggle('dropdown-selected');
+  
+    // 2. Toggle visibility on the mega-menu container
+    if (megaMenuContainer) {
+      const isVisible = megaMenuContainer.style.visibility === 'visible';
+      megaMenuContainer.style.visibility = isVisible ? 'hidden' : 'visible';
+    }
+  
+    // 3. Rotate the SVG within the button by 180 degrees
+    if (svgIcon) {
+      const currentRotation = svgIcon.style.transform || 'rotate(0deg)';
+      svgIcon.style.transform = currentRotation === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+      // svgIcon.style.transition = 'transform 0.3s ease'; // Smooth rotation transition
+    }
+  });
+
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const aboutBtn = document.querySelector('.tree-menu-item');
+    const shopBtn = document.getElementById('header-shop-button');
+
+    const isVisible = selector => {
+      const el = document.querySelector(selector);
+      return !!el && el.offsetParent !== null && getComputedStyle(el).visibility !== 'hidden';
+    };
+
+    const SHOP_MENU_SELECTOR = '.mega-menu-container';
+    const ABOUT_MENU_SELECTOR = '.toggle-menu';
+
+    let isSwitching = false;
+
+    function handleMenuToggle(clickedBtn, otherBtn, otherMenuSelector) {
+      return function (e) {
+        if (isSwitching) return;
+
+        const otherOpen = isVisible(otherMenuSelector);
+
+        if (otherOpen) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          isSwitching = true;
+
+          otherBtn.click();
+
+          setTimeout(() => {
+            const synthetic = new MouseEvent('click', { bubbles: true, cancelable: true });
+            clickedBtn.dispatchEvent(synthetic);
+            isSwitching = false;
+          }, 200); // Match this to Alpine's animation delay
+        }
+      };
+    }
+
+    aboutBtn.addEventListener('click', handleMenuToggle(aboutBtn, shopBtn, SHOP_MENU_SELECTOR), true);
+    shopBtn.addEventListener('click', handleMenuToggle(shopBtn, aboutBtn, ABOUT_MENU_SELECTOR), true);
+  });
+</script>
+<script>
+  document.querySelectorAll('.mega-menu-category-selector').forEach(selector => {
+  selector.addEventListener('mouseenter', () => {
+    const arrow = selector.querySelector('.navigation-arrow');
+    if (arrow) arrow.style.display = 'inline';
+  });
+
+  selector.addEventListener('mouseleave', () => {
+    const arrow = selector.querySelector('.navigation-arrow');
+    if (arrow) arrow.style.display = 'none';
+  });
+});
+</script>
+<script>
+// Focus trap logic
+document.addEventListener('DOMContentLoaded', () => {
+  const shopBtn = document.getElementById('header-shop-button');
+  const megaMenu = document.querySelector('.mega-menu-container');
+  if (!shopBtn || !megaMenu) return;
+
+  // Add basic ARIA without changing your markup structure
+  if (!megaMenu.id) megaMenu.id = 'header-mega-menu';
+  shopBtn.setAttribute('aria-controls', megaMenu.id);
+  shopBtn.setAttribute('aria-expanded', 'false');
+
+  let lastFocusedEl = null;
+  let trapActive = false;
+
+  const focusableSelector = [
+    'a[href]',
+    'button:not([disabled])',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  function getFocusable(container) {
+    return Array.from(container.querySelectorAll(focusableSelector))
+      .filter(el => el.offsetParent !== null);
+  }
+
+  function isMenuOpen() {
+    const style = getComputedStyle(megaMenu);
+    return style.visibility !== 'hidden' && style.display !== 'none';
+  }
+
+  function activateTrap() {
+    if (trapActive) return;
+    trapActive = true;
+
+    lastFocusedEl = document.activeElement;
+    shopBtn.setAttribute('aria-expanded', 'true');
+
+    // Move focus into menu (first focusable element)
+    const focusables = getFocusable(megaMenu);
+    if (focusables.length) {
+      focusables[0].focus();
+    }
+
+    document.addEventListener('keydown', onKeyDown, true);
+  }
+
+  function deactivateTrap() {
+    if (!trapActive) return;
+    trapActive = false;
+
+    shopBtn.setAttribute('aria-expanded', 'false');
+    document.removeEventListener('keydown', onKeyDown, true);
+
+    // Restore focus to the trigger (or previous focus)
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') {
+      lastFocusedEl.focus();
+    } else {
+      shopBtn.focus();
+    }
+  }
+
+  function onKeyDown(e) {
+    if (!isMenuOpen()) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      shopBtn.click(); // uses your existing close logic
+      return;
+    }
+
+    if (e.key !== 'Tab') return;
+
+    const focusables = getFocusable(megaMenu);
+    if (!focusables.length) {
+      e.preventDefault();
+      return;
+    }
+
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+
+    // If focus escaped, bring it back
+    if (!megaMenu.contains(document.activeElement)) {
+      e.preventDefault();
+      first.focus();
+      return;
+    }
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+      return;
+    }
+
+    if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+      return;
+    }
+  }
+
+  // Watch for open/close after your existing click handler runs
+  shopBtn.addEventListener('click', () => {
+    setTimeout(() => {
+      if (isMenuOpen()) activateTrap();
+      else deactivateTrap();
+    }, 0);
+  });
+
+  // Safety: if something else closes the menu, ensure trap is removed
+  const observer = new MutationObserver(() => {
+    if (!isMenuOpen() && trapActive) deactivateTrap();
+  });
+  observer.observe(megaMenu, { attributes: true, attributeFilter: ['style', 'class'] });
+});
+</script>

@@ -1,0 +1,347 @@
+/* Goldplay Thin */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Thin.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Thin.woff" | asset_url }}') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Thin Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-ThinIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-ThinIt.woff" | asset_url }}') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay Light */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Light.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Light.woff" | asset_url }}') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Light Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-LightIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-LightIt.woff" | asset_url }}') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay Regular */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Regular.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Regular.woff" | asset_url }}') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Regular Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-RegularIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-RegularIt.woff" | asset_url }}') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay Medium */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Medium.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Medium.woff" | asset_url }}') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Medium Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-MediumIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-MediumIt.woff" | asset_url }}') format('woff');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay SemiBold */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-SemiBold.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-SemiBold.woff" | asset_url }}') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay SemiBold Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-SemiBoldIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-SemiBoldIt.woff" | asset_url }}') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay Bold */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Bold.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Bold.woff" | asset_url }}') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Bold Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-BoldIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-BoldIt.woff" | asset_url }}') format('woff');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Goldplay Black */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-Black.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-Black.woff" | asset_url }}') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Goldplay Black Italic */
+@font-face {
+  font-family: 'Goldplay';
+  src: url('{{ "Goldplay-BlackIt.woff2" | asset_url }}') format('woff2'),
+       url('{{ "Goldplay-BlackIt.woff" | asset_url }}') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Thin (100) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Thin.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Thin.woff" | asset_url }}') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Thin Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-ThinItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-ThinItalic.woff" | asset_url }}') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Light (300) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Light.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Light.woff" | asset_url }}') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Light Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-LightItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-LightItalic.woff" | asset_url }}') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Regular (400) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Regular.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Regular.woff" | asset_url }}') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Regular Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Italic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Italic.woff" | asset_url }}') format('woff');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Medium (500) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Medium.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Medium.woff" | asset_url }}') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Medium Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-MediumItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-MediumItalic.woff" | asset_url }}') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* SemiBold (600) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-SemiBold.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-SemiBold.woff" | asset_url }}') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* SemiBold Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-SemiBoldItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-SemiBoldItalic.woff" | asset_url }}') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Bold (700) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Bold.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Bold.woff" | asset_url }}') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Bold Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-BoldItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-BoldItalic.woff" | asset_url }}') format('woff');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* ExtraBold (800) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-ExtraBold.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-ExtraBold.woff" | asset_url }}') format('woff');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ExtraBold Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-ExtraBoldItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-ExtraBoldItalic.woff" | asset_url }}') format('woff');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Black (900) */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-Black.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-Black.woff" | asset_url }}') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Black Italic */
+@font-face {
+    font-family: 'Hornbill';
+    src: url('{{ "Hornbill-BlackItalic.woff2" | asset_url }}') format('woff2'),
+         url('{{ "Hornbill-BlackItalic.woff" | asset_url }}') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+/* Appetite test: map several weights to the same file */
+@font-face {
+  font-family: "Appetite";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+       url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}
+@font-face { font-family: "AppetiteWeb"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+       url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}
+@font-face { font-family: "AppetiteWeb"; font-style: normal; font-weight: 700; font-display: swap;
+  src: url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+       url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}
+
+
+/* Appetite for Safari test */
+@font-face {
+  font-family: "AppetiteWeb";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+    url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}
+@font-face {
+  font-family: "AppetiteWeb";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+    url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}
+@font-face {
+  font-family: "AppetiteWeb";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    url({{ 'Appetite.woff2' | asset_url }}) format('woff2'),
+    url({{ 'Appetite.woff'  | asset_url }}) format('woff');
+}

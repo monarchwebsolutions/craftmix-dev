@@ -1,0 +1,125 @@
+<section class="about-hero">
+  <h1 class="about-hero-heading">Our Cocktail & <br>
+      Mocktail Tale</h1>
+     <div class="section-wave-container lottie-player">
+        <lottie-player class="section-wave" src="{{ 'wave-divider-l2r-light-blue.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+      </div>
+     
+</section>
+
+{% style %}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* img {
+  width: 100%;
+} */
+
+.about-hero {
+  position: relative;
+  height: 530px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background-color: #007d00;
+  background-image: url('https://cdn.shopify.com/s/files/1/2340/1623/files/about-hero-bg.png?v=1740166249'); 
+  background-size: cover;
+  background-position: center;
+  overflow: hidden; /* Ensures Lottie doesn't overflow */
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  z-index: 1;
+}
+
+.about-hero h1 {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-family: 'Hornbill';
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 3.375rem;
+}
+
+/* Working but too high */
+ .lottie-player {
+  position: absolute;
+  bottom: -30px;
+  left: 0; 
+  width: 100%;
+  height: auto; 
+  z-index: 3;
+}  
+
+
+@media (max-width: 768px) {
+ .lottie-player {
+    bottom: -10px;
+  }  
+}
+
+@media (max-width: 567px) {
+  .about-hero {
+    height: 437px;
+    background-image: url('https://cdn.shopify.com/s/files/1/2340/1623/files/about-hero-bg-mobile.png?v=1740166238'); 
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .about-hero h1 {
+    font-size: 2.875rem;
+    letter-spacing: -1.68px;
+    line-height: 2.875rem;
+    transform: translateY(-50px); 
+  }
+  .lottie-player {
+    bottom: -5px;
+  }  
+}
+
+@media (max-width: 360px) {
+  .about-hero {
+    height: 400px;
+  }
+
+  .about-hero h1 {
+    font-size: 2.4rem;
+    line-height: 2.4rem;
+  }
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Custom About Hero",
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "custom about hero",
+
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,466 @@
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+<script src="{{ 'custom-carousel-card-video.js' | asset_url }}" defer='defer'></script>
+
+<div>
+  {% assign cards = product.metafields.custom.pdp_video_carousel_cards.value %}
+
+  <div style="background-color: {{ product.metafields.custom.color_2 }} !important;" class="custom-sub-carousel-section">
+    <div class="custom-sub-carousel-header">
+      <h5 class="custom-sub-carousel-subheader">Customer Favorites</h5>
+      <h3 class="custom-sub-carousel-heading">What Our Fans Say</h3>
+    </div>
+    <div class="custom-video-review-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-sub--carousel-container">
+      <div class="custom-carousel">
+          {% for card in cards %}
+            <div class="carousel-cell">
+             {% render 'custom-carousel-card-video', card: card, forloop: forloop %}
+             {% if card.captions_title == blank %}
+                <div class="no-dialogue {% if forloop.first %} no-dialogue--first{% endif %}">This video contains no dialogue</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="section-wave-container video-carousel-section-wave-container">
+      <div
+        class="lazy-lottie-container section-wave pdp-video-carousel-wave"
+        data-src="{{ 'beige-divider-left-to-right.json' | asset_url }}}"
+        data-background="transparent"
+        data-speed="1"
+        data-autoplay="true"
+        data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+
+
+{% style %}
+.video-carousel-section-wave-container{
+  top:0;
+}
+.pdp-video-carousel-wave{
+  background-color:{{ product.metafields.custom.color_2 }};
+}
+.custom-sub-carousel-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.custom-sub-carousel-header{
+  padding-top:1rem;
+}
+.custom-sub-carousel-subheader {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.custom-sub-carousel-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 100px;
+}
+
+.custom-video-review-carousel-nav{
+  top:-85px;
+}
+
+.custom-sub-carousel-container {
+  margin-bottom: 60px;
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for the buttons */
+}
+
+.carousel-cell {
+  margin-right: 25px;
+}
+
+.custom-review-carousel-card {
+   height: 558px;
+   width: 332px;
+   border-radius: 30px;
+   border: 1.5px solid rgba(0, 38, 87, 1);
+   overflow: hidden;
+   position: relative;
+   background-color: #f0f0f0;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+/* first-card class added to first card in carousel for margin */
+.custom-video-review-carousel-card {
+  margin-left: 25px;
+}
+
+.custom-review-carousel-card.first-card {
+  margin-left: 25px;
+}
+
+
+.custom-video-review-carousel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-btn img {
+  width: 68px;
+  height: 68px;
+}
+
+.volume-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid rgba(0, 38, 87, 1);
+}
+
+.volume-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.volume-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.carousel-product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 12px 15px 10px 15px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+
+.carousel-product-info-text {
+  flex-grow: 1;
+}
+
+.stars img {
+  width: 55px;
+  height: auto;
+}
+
+.carousel-product-title {
+  margin: 5px 0 0 0;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+}
+
+.product-variant {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 15px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 19px;
+}
+
+.carousel-product-info-cta-btn {
+  background-color: rgba(96, 211, 248, 1);
+  color: rgba(0, 38, 87, 1);
+  padding: 10px 28px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Goldplay";
+  font-weight: 600;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  border-radius: 23px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+
+}
+
+.custom-video-review-carousel-cta {
+  text-align: center;
+}
+
+.custom-video-review-carousel-cta-btn {
+  display: inline-block;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 2px 0px rgba(0, 38, 87, 1);
+  border-radius: 30px;
+  opacity: 1;
+  background-color: rgba(96, 211, 248, 1);
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  padding: 20px;
+}
+.faq-cta{
+  padding: 1.25rem 0.5rem !important;
+  width:100%;
+}
+.custom-subscription-faq-section{
+  padding-bottom:0 !important;
+}
+
+.custom-video-review-carousel-video {
+  cursor: pointer; 
+}
+
+.custom-video-review-carousel-card .custom-video-review-carousel-video {
+  pointer-events: auto;
+}
+
+  
+/* Media Queries */
+@media (max-width: 768px) {
+  .custom-sub-carousel-heading {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1.05px;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 3.5rem;
+  }  
+  .custom-video-review-carousel-nav{
+    top:280px;
+  }
+}
+@media (max-width: 529px) {
+ .custom-review-carousel-card.first-card {
+  margin-left: 0px;
+}
+}
+
+{% endstyle %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = document.querySelectorAll('.custom-review-carousel-card');
+
+  // Pause all other videos when one plays
+  function pauseAllOtherVideos(currentVideo) {
+    const videos = document.querySelectorAll('.custom-video-review-carousel-video');
+
+    videos.forEach((video) => {
+      if (video !== currentVideo) {
+        video.pause();
+        const parentCard = video.closest('.custom-review-carousel-card');
+        const playBtn = parentCard ? parentCard.querySelector('.play-btn') : null;
+        if (playBtn) playBtn.style.display = 'block';
+      }
+    });
+  }
+
+  // Pause videos when they leave the viewport
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+
+        if (!entry.isIntersecting) {
+          video.pause();
+          const parentCard = video.closest('.custom-review-carousel-card');
+          const playBtn = parentCard ? parentCard.querySelector('.play-btn') : null;
+          if (playBtn) playBtn.style.display = 'block';
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  // Apply behavior to each video card
+  cards.forEach((card) => {
+    const video = card.querySelector('.custom-video-review-carousel-video');
+    const playBtn = card.querySelector('.play-btn');
+    const volumeBtn = card.querySelector('.volume-btn');
+    const volumeIcon = volumeBtn ? volumeBtn.querySelector('.volume-icon') : null;
+    const muteIcon = volumeBtn ? volumeBtn.querySelector('.mute-icon') : null;
+
+    if (!video || !playBtn || !volumeBtn || !volumeIcon || !muteIcon) return;
+
+    // Persisted user preference: default to whatever the video starts as
+    card.dataset.userMuted = video.muted ? 'true' : 'false';
+
+    function syncVolumeIcons() {
+      if (video.muted) {
+        volumeIcon.style.display = 'none';
+        muteIcon.style.display = 'block';
+      } else {
+        volumeIcon.style.display = 'block';
+        muteIcon.style.display = 'none';
+      }
+    }
+
+    // Ensure icons match initial state
+    syncVolumeIcons();
+
+    function toggleVideoPlay() {
+      const isPlaying = !video.paused;
+
+      if (isPlaying) {
+        video.pause();
+        playBtn.style.display = 'block';
+        return;
+      }
+
+      pauseAllOtherVideos(video);
+
+      // Respect user preference when starting playback
+      const prefMuted = card.dataset.userMuted === 'true';
+      video.muted = prefMuted;
+
+      video
+        .play()
+        .then(() => {
+          playBtn.style.display = 'none';
+        })
+        .catch((err) => {
+          // If unmuted play is blocked, fall back to muted and persist preference
+          video.muted = true;
+          card.dataset.userMuted = 'true';
+          syncVolumeIcons();
+
+          try {
+            const p2 = video.play();
+            if (p2 && typeof p2.catch === 'function') p2.catch(() => {});
+          } catch (e) {}
+
+          console.error('Video play failed:', err);
+        });
+    }
+
+    // video.addEventListener('click', (e) => {
+    //   e.stopPropagation();
+    //   toggleVideoPlay();
+    // });
+
+    // playBtn.addEventListener('click', (e) => {
+    //   e.stopPropagation();
+    //   toggleVideoPlay();
+    // });
+
+    video.addEventListener('ended', () => {
+      video.pause();
+      video.currentTime = 0;
+      video.load(); // This resets and shows the poster
+      playBtn.style.display = 'block';
+    });
+
+    volumeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+
+      // Toggle mute and persist preference, even if paused
+      video.muted = !video.muted;
+      card.dataset.userMuted = video.muted ? 'true' : 'false';
+
+      syncVolumeIcons();
+    });
+
+    // Start observing the video for scroll visibility
+    observer.observe(video);
+  });
+});
+{% endjavascript %}
+{% schema %}
+{
+  "name": "PDP - What Our Fans Say",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+   {
+  "type": "carousel_card",
+  "name": "Carousel Card",
+  "settings": [
+    {
+      "type": "url",
+      "id": "video_url",
+      "label": "Video URL",
+      "info": "Upload video to Content > Files, then paste the link here (e.g., .mp4, .mov)"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Thumbnail Image"
+    },
+    {
+      "type": "product",
+      "id": "linked_product",
+      "label": "Linked Product"
+    }
+  ]
+}
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "PDP - What Our Fans Say"
+    }
+  ]
+}
+{% endschema %}

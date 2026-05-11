@@ -1,0 +1,393 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "show_heading": true,
+        "heading_size": 170,
+        "heading_tag": "h1",
+        "show_breadcrumbs": true,
+        "show_breadcrumbs_border": false,
+        "full_width_breadcrumb": true,
+        "desktop_content_alignment": "text-left",
+        "mobile_content_alignment": "text-left",
+        "background_color_light": "#f2f2f2",
+        "text_color_light": "rgba(0,0,0,0)",
+        "textlink_color_light": "rgba(0,0,0,0)",
+        "background_color_dark": "#313131",
+        "text_color_dark": "rgba(0,0,0,0)",
+        "textlink_color_dark": "rgba(0,0,0,0)",
+        "padding_top": 28,
+        "padding_bottom": 28,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "espresso_martini_hero_wN4adg": {
+      "type": "espresso-martini-hero",
+      "blocks": {
+        "bullet_zBz6Yf": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/bottle.png",
+            "text": "Just add vodka, water, and ice"
+          }
+        },
+        "bullet_3GPdgn": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/bottle_1.png",
+            "text": "Enjoy as a cocktail or mocktail"
+          }
+        },
+        "bullet_zDRPzN": {
+          "type": "bullet",
+          "settings": {
+            "icon": "shopify://shop_images/Isolation_Mode.png",
+            "text": "12 packets = 12 drinks"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_zBz6Yf",
+        "bullet_3GPdgn",
+        "bullet_zDRPzN"
+      ],
+      "name": "Espresso martini hero",
+      "settings": {
+        "eyebrow": "You need to try our",
+        "title": "Espresso Martini",
+        "background": "linear-gradient(180deg, rgba(255, 245, 235, 1), rgba(237, 198, 164, 1) 100%)",
+        "show_rating": true,
+        "rating_stars": 5,
+        "rating_label": "600+ REVIEWS",
+        "main_image": "shopify://shop_images/Craftmix_Mango_Margarita_next_to_fresh_mango_lime_and_a_margarita_glass..png",
+        "decor_left": "shopify://shop_images/cinnamon_cleaned_flipped_svg.png",
+        "decor_left_bottom": "25%",
+        "decor_left_img_width": "",
+        "decor_right": "shopify://shop_images/Background_illustration.png",
+        "decor_max_width": 188,
+        "decor_max_height": 170,
+        "cta_label": "Shop Now",
+        "make_anchor_link": false,
+        "cta_anchor_id": "buy-box",
+        "cta_link": "",
+        "cta_background_color": "#6e493f"
+      }
+    },
+    "marquee_divider_eeXVF7": {
+      "type": "marquee-divider",
+      "custom_css": [
+        ".marquee-container {z-index: 4;}"
+      ],
+      "settings": {
+        "marquee_top_color": "#edc6a4",
+        "marquee_bottom_color": "#fff9f5",
+        "lottie_file": "value_prop_1440px.json"
+      }
+    },
+    "espresso_nutrition_section_yNcJbi": {
+      "type": "espresso-nutrition-section",
+      "name": "Espresso Nutrition",
+      "settings": {
+        "product": "espresso-martini",
+        "background_color": "#fff9f5",
+        "decor_right": "shopify://shop_images/pink-umbrella.svg_fill.png",
+        "decor_right_mobile_top": 17,
+        "heading_mobile_margin_left": "auto",
+        "subheading": "What's in CraftMix",
+        "heading": "Quality Ingredients, Amazing Taste",
+        "body": "<p>Craftmix <strong>never uses</strong> artificial flavors, sweeteners, or preservatives and each flavor is made from natural powders.</p>"
+      }
+    },
+    "main_product_lp_Hqz9di": {
+      "type": "main-product-lp",
+      "blocks": {
+        "product_name_3VXfiL": {
+          "type": "product_name",
+          "settings": {
+            "title_size": 100,
+            "heading_tag": "h1"
+          }
+        },
+        "product_details_rpFiG3": {
+          "type": "product_details",
+          "settings": {}
+        },
+        "product_selector_xWVKQx": {
+          "type": "product_selector",
+          "disabled": true,
+          "settings": {}
+        },
+        "variant_picker_WNJPHY": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "show_variant_option": true,
+            "enable_color_swatches": true,
+            "swatch_size": "small"
+          }
+        },
+        "selling_plan_selector_a7egPh": {
+          "type": "selling_plan_selector",
+          "settings": {}
+        },
+        "gift_wrapping_rEPgqA": {
+          "type": "gift_wrapping",
+          "settings": {
+            "text_gift": "",
+            "color_icon_light": "rgba(0,0,0,0)",
+            "color_icon_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "buy_buttons_QmAGcF": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_button_style": "secondary",
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "pickup_availability": false,
+            "hide_when_pre_order": false,
+            "preorder_button_label": "Pre-order",
+            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
+            "preorder_show_dynamic_button": false,
+            "show_background": false,
+            "box_type": "square",
+            "background_color_light": "rgba(0,0,0,0)",
+            "message_color_light": "rgba(0,0,0,0)",
+            "background_color_dark": "rgba(0,0,0,0)",
+            "message_color_dark": "rgba(0,0,0,0)",
+            "button_light": "rgba(0,0,0,0)",
+            "button_text_light": "rgba(0,0,0,0)",
+            "button_hover_light": "rgba(0,0,0,0)",
+            "button_text_hover_light": "rgba(0,0,0,0)",
+            "secondary_button_light": "rgba(0,0,0,0)",
+            "secondary_button_text_light": "rgba(0,0,0,0)",
+            "button_dark": "rgba(0,0,0,0)",
+            "button_text_dark": "rgba(0,0,0,0)",
+            "button_hover_dark": "rgba(0,0,0,0)",
+            "button_text_hover_dark": "rgba(0,0,0,0)",
+            "secondary_button_dark": "rgba(0,0,0,0)",
+            "secondary_button_text_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "text_7Rj7NT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Add additional information about your product.</p>",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        },
+        "text_c9xti3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Always FREE Shipping When You Subscribe</p>",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        },
+        "additional_content_igWbej": {
+          "type": "additional_content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_name_3VXfiL",
+        "product_details_rpFiG3",
+        "product_selector_xWVKQx",
+        "variant_picker_WNJPHY",
+        "selling_plan_selector_a7egPh",
+        "gift_wrapping_rEPgqA",
+        "buy_buttons_QmAGcF",
+        "text_7Rj7NT",
+        "text_c9xti3",
+        "additional_content_igWbej"
+      ],
+      "name": "Main product LP",
+      "settings": {
+        "section_id": "buy-box",
+        "lp_product": "espresso-martini",
+        "section_background_color": "#f4ddc8",
+        "hide_sub_discounts": true,
+        "hide_ot_discounts": false,
+        "pack_12_regular_discount": 0,
+        "pack_24_regular_discount": 0,
+        "pack_36_regular_discount": 36,
+        "pack_12_subscribe_discount": 15,
+        "pack_24_subscribe_discount": 15,
+        "pack_36_subscribe_discount": 15,
+        "enable_sticky_image": true,
+        "show_product_name": false,
+        "title_size": 100,
+        "heading_tag": "h1",
+        "show_vendor": false,
+        "link_vendor": false,
+        "make_content_center": false,
+        "desktop_layout": "left",
+        "desktop_media_layout": "2_columns",
+        "show_arrow_button": true,
+        "mobile_media_size": "full_width",
+        "show_thumnail_mobile": false,
+        "image_ratio": "square",
+        "thumbnail_position": "horizontal",
+        "enable_image_zoom": false,
+        "zoom_effect": "enlarge",
+        "enable_video_autoplay": false,
+        "enable_video_loop": false,
+        "show_first_image_avaiable": true,
+        "show_media_with_variant_selected": false,
+        "option_to_classify_variant_media": "",
+        "enable_microdata": true,
+        "show_breadcrumbs": false,
+        "show_breadcrumbs_border": false,
+        "full_width_breadcrumb": false,
+        "desktop_content_alignment": "text-left",
+        "mobile_content_alignment": "text-left",
+        "background_color_light": "#f2f2f2",
+        "text_color_light": "rgba(0,0,0,0)",
+        "textlink_color_light": "rgba(0,0,0,0)",
+        "background_color_dark": "#313131",
+        "text_color_dark": "rgba(0,0,0,0)",
+        "textlink_color_dark": "rgba(0,0,0,0)",
+        "full_width": true,
+        "spacing_col": "default",
+        "padding_top": 60,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 28
+      }
+    },
+    "easy_cocktails_XqG8NG": {
+      "type": "easy-cocktails",
+      "blocks": {
+        "video_slide_qC3Aiy": {
+          "type": "video_slide",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/4c2cbf26825b4583951b5394706ccf17.mp4",
+            "captions_title": "4c2cbf26825b4583951b5394706ccf17.vtt",
+            "video_thumbnail": "shopify://shop_images/video-thumbnail_12.png",
+            "reviewer_name": "",
+            "testimonial_name": "Rebekah D",
+            "review_text": "These are epic! Easy to transport and 100% delicious.",
+            "product": "espresso-martini"
+          }
+        },
+        "video_slide_AbXCBe": {
+          "type": "video_slide",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b58d908005224f41b65df18e17c21312.mp4",
+            "captions_title": "b58d908005224f41b65df18e17c21312.vtt",
+            "video_thumbnail": "shopify://shop_images/thumbnail-easy_cocktail-2.png",
+            "reviewer_name": "",
+            "testimonial_name": "Cole L",
+            "review_text": "So easy and tasty, my favorite",
+            "product": "variety-pack"
+          }
+        },
+        "video_slide_Tpq84G": {
+          "type": "video_slide",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/89ddc72eab6c473eb74769ec0f91663a.mp4",
+            "captions_title": "89ddc72eab6c473eb74769ec0f91663a.vtt",
+            "video_thumbnail": "shopify://shop_images/thumbnail-easy_cocktail-3.png",
+            "reviewer_name": "",
+            "testimonial_name": "Rodney S",
+            "review_text": "Craftmix is awesome! Black Cherry Old Fashioned is my favorite",
+            "product": "strawberry-mule"
+          }
+        }
+      },
+      "block_order": [
+        "video_slide_qC3Aiy",
+        "video_slide_AbXCBe",
+        "video_slide_Tpq84G"
+      ],
+      "settings": {
+        "tiny_heading": "Customer Favorites",
+        "heading": "<p>What Our<br/>Fans Say</p>",
+        "text": "<p>With Craftmix, making bar-quality cocktails or mocktails is as easy as mix, sip, repeat.</p>",
+        "umbrella_bottom": 700
+      }
+    },
+    "professional_bartender_H8BNCV": {
+      "type": "professional-bartender",
+      "name": "Professional Bartender",
+      "settings": {}
+    },
+    "espresso_comparison_graph_JGdFfG": {
+      "type": "espresso-comparison-graph",
+      "name": "Espresso Comparison Graph",
+      "settings": {
+        "background_color": "#c4f3c2",
+        "left_image_1": "shopify://shop_images/mint_9c2ccdef-84e3-46d1-b301-35f4f094d52c.svg",
+        "left_image_2": "shopify://shop_images/1ff964a2ad924096b48ab1134e626532f2e81fc2.png",
+        "left_image_3": "shopify://shop_images/pineapple_svg.png",
+        "right_image_1": "shopify://shop_images/Background_illustration_1.png",
+        "right_image_2": "shopify://shop_images/passionfruit.png",
+        "right_image_3": "shopify://shop_images/tropical_leaf.svg",
+        "cta_text": "Order Now",
+        "make_anchor_link": false,
+        "cta_anchor_id": "buy-box",
+        "cta_url": "",
+        "cta_bg_color": "#60d3f8",
+        "cta_text_color": "#002657"
+      }
+    },
+    "craftmix_is_better_dTb8y8": {
+      "type": "craftmix-is-better",
+      "name": "Craftmix Is Better",
+      "settings": {
+        "background_color": "#f4ddc8"
+      }
+    },
+    "pdp_flavor_carousel_yE3r6n": {
+      "type": "pdp-flavor-carousel",
+      "custom_css": [],
+      "name": "PDP Flavor Carousel",
+      "settings": {
+        "heading": "You May Also Like",
+        "carousel_collection": "find-your-flavor-carousel",
+        "background_color": "#ead1fa"
+      }
+    },
+    "espresso_shop_card_jrQgFD": {
+      "type": "espresso-shop-card",
+      "name": "Espresso Shop Card",
+      "settings": {
+        "background_color": "#ffffff",
+        "card_background_color": "#fff0bd",
+        "card_image": "shopify://shop_images/Img_-_Cocktail_illustration_margin_align-flex-end.svg",
+        "heading_text": "Never get left dry!",
+        "paragraph_text": "Subscribe & save 15% today",
+        "button_text": "Subscribe today - Learn more",
+        "shop_now_link": "shopify://pages/subscriptions"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "espresso_martini_hero_wN4adg",
+    "marquee_divider_eeXVF7",
+    "espresso_nutrition_section_yNcJbi",
+    "main_product_lp_Hqz9di",
+    "easy_cocktails_XqG8NG",
+    "professional_bartender_H8BNCV",
+    "espresso_comparison_graph_JGdFfG",
+    "craftmix_is_better_dTb8y8",
+    "pdp_flavor_carousel_yE3r6n",
+    "espresso_shop_card_jrQgFD"
+  ]
+}

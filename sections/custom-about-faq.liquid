@@ -1,0 +1,342 @@
+<section class="about-faq">
+      <div class="about-faq-wrapper">
+        <div class="faqs-container">
+          <div class="title-section">
+            <h2 class="about-faq-section-heading">{{ section.settings.headline }}</h2>
+          </div>
+          
+          <div class="faq-section">
+           
+            <!-- Faq -->
+            {% for block in section.blocks %}
+            <div class="faq {% if forloop.index == 2 %}active{% endif %}" tabindex="0">
+              <div class="faq-text">
+                <div class="faq-question">
+                  <h6 class="faq-question-text">{{ block.settings.question }}</h6>
+                </div>
+                <div class="faq-answer">
+                  <p class="faq-answer-text">{{ block.settings.answer }}</p>
+                </div>
+              </div>
+              <div class="faq-icons">
+                <div class="faq-icon faq-icon-open">
+                  <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/faq-blue-open-icon.png?v=1738862920" alt="Open" width="36" height="36" loading="lazy">
+                </div>
+                <div class="faq-icon faq-icon-closed">
+                  <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/faq-blue-close-icon.png?v=1738862306" alt="Close"  width="36" height="36" loading="lazy">
+                </div>
+              </div>
+            </div>
+            <!-- End Faq -->
+            {% endfor %}
+          </div>
+
+        </div>
+
+        <!-- CTA Container -->
+        <div class="faq-cta-container">
+          <a class="faq-cta" href="/pages/faq">More Questions? Visit our FAQ Page</a>
+        </div>
+      </div>
+
+      
+    </section>
+
+
+{% style %}
+ *,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.about-faq {
+  background-color: #fff9f5;
+}
+.about-faq-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 20px;
+}
+
+.faqs-container {
+  max-width: 1015px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 115px;
+  margin-bottom: 55px;
+}
+
+.title-section {
+  max-width: 332px;
+  width: 100%;
+}
+.faq-section {
+  max-width: 568px;
+  width: 100%;
+}
+
+.about-faq-section-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  text-align: left;
+  line-height: 46px;
+}
+
+.faq {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+}
+
+.faq-question {
+  max-width: 440px;
+  width: 100%;
+}
+
+.faq-question-text {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  padding: 22px 5px;
+}
+
+.faq-answer {
+  max-width: 440px;
+  width: 100%;
+}
+
+.faq-answer-text {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  padding: 22px 5px;
+}
+
+.faq-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.faq-icons {
+  padding-top: 15px;
+}
+
+.faq {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 1);
+  cursor: pointer;
+}
+
+.faq-answer {
+  display: none;
+  transition: all 0.3s ease-out;
+}
+
+.faq.active .faq-answer {
+  display: block;
+}
+
+
+.faq-icon-closed {
+  display: none;
+}
+
+.faq.active .faq-icon-open {
+  display: none;
+}
+
+.faq.active .faq-icon-closed {
+  display: block;
+}
+
+.faq-cta-container {
+  /* max-width: 510px; */
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.faq-cta {
+  display: inline-block;
+  text-decoration: none;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  border-radius: 33px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(96, 211, 248, 1);
+  padding: 20px 89px;
+  transition: all 0.4s ease
+}
+
+.faq-cta:hover {
+  box-shadow: none;
+}
+
+@media (max-width: 1024px) {
+  .faqs-container {
+    gap: 40px;
+  }
+}
+@media (max-width: 860px) {
+  .faq-section {
+    max-width: 388px;
+    width: 100%;
+  }
+  .faq-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .about-faq-section-heading {
+    text-align: center;
+  }
+  .faqs-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 576px) {
+   .about-faq-section-heading {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }
+  .faq-icons {
+    padding-left: 10px;
+  }
+  .faq-cta-container {
+    text-align: center;
+  }
+  .faq-cta {
+    font-size: 18px;
+    letter-spacing: -0.13px;
+    text-align: center;
+    line-height: 20px;
+    padding: 22px 20px;
+  }
+  .faq-question-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .faq-answer-text {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: -0.1px;
+    line-height: 19px;
+  }
+}
+@media (max-width: 400px) {
+  .faq-icons {
+    padding-left: 10px;
+  }
+  .faq-cta-container {
+    text-align: center;
+  }
+  .faq-cta {
+    font-size: 15px;
+    letter-spacing: -0.13px;
+    text-align: center;
+    line-height: 20px;
+    padding: 20px;
+  }
+}
+
+{% endstyle %}
+
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function() {
+  const faqs = document.querySelectorAll('.faq');
+  
+  faqs.forEach(faq => {
+    faq.addEventListener('click', () => {
+      // Close all other FAQs
+      faqs.forEach(item => {
+        if (item !== faq && item.classList.contains('active')) {
+            item.classList.remove('active');
+        }
+      });
+      
+      // Toggle the clicked FAQ
+      faq.classList.toggle('active');
+    });
+  });
+});
+{% endjavascript %}
+<script>
+  // Simulate click when enter is pressed on FAQ button
+  document.addEventListener('keydown', (e) => {
+    const el = document.activeElement;
+
+    if (!el || !el.classList.contains('faq')) return;
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); // prevent scroll on Space
+      el.click();
+    }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Custom about faq",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Headline",
+        "id": "headline"
+      }
+    ],
+    "blocks": [
+      {
+         "name": "question",
+        "type": "question",
+        "settings" : [
+          {
+            "type": "text",
+            "label": "question",
+            "id": "question"
+          },
+         {
+            "type": "text",
+            "label": "answer",
+            "id": "answer"
+          }
+        ]
+      }
+    ],
+    "presets" : [
+      {
+        "name": "custom about faq"
+      }
+    ]
+  }
+{% endschema %}

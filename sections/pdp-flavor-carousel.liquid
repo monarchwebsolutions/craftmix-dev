@@ -1,0 +1,36 @@
+{% if section.settings.carousel_collection != blank %}
+<div class="custom-carousel-container">
+  {% render 'custom-carousel-inner' %}
+</div>
+<style>
+  .custom-flavor-carousel-container{
+    z-index:2;
+  }
+</style>
+{% endif %}
+{% schema %}
+  {
+    "name": "PDP Flavor Carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading Text",
+        "default": "Find Your Flavor" 
+      },
+      {
+        "type": "collection",
+        "id": "carousel_collection",
+        "label": "Collection"
+      },
+      
+       {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      }
+    ],
+     "presets": [{"name": "PDP Flavor Carousel"}]
+   }
+{% endschema %}

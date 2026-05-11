@@ -1,0 +1,732 @@
+<script>
+  function runWhenTrulyReady(callback) {
+    requestAnimationFrame(() => {
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(callback);
+      } else {
+        setTimeout(callback, 200);
+      }
+    });
+  }
+</script>
+
+<script>
+  // Set product info in JS variable
+  window.craftmixSellingPlanProductData = {
+    title: {{ product.title | json }},
+    variants: {{ product.variants | json }}
+  };
+
+  window.craftmixGetSellingPlanVariants = function () {
+    const liquidVariants = window.craftmixSellingPlanProductData?.variants;
+    if (Array.isArray(liquidVariants) && liquidVariants.length > 0) {
+      return liquidVariants;
+    }
+
+    const variantJsonScripts = document.querySelectorAll('.variant-selects script[type="application/json"]');
+    for (const scriptEl of variantJsonScripts) {
+      try {
+        const parsed = JSON.parse((scriptEl.textContent || '').trim());
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      } catch (error) {
+        // Ignore malformed JSON and continue to the next source.
+      }
+    }
+
+    const variantsDataAttrEl = document.querySelector('[x-variants-data]');
+    if (variantsDataAttrEl) {
+      try {
+        const raw = variantsDataAttrEl.getAttribute('x-variants-data') || '';
+        const decoded = raw
+          .replace(/&quot;/g, '"')
+          .replace(/&#39;/g, "'")
+          .replace(/&amp;/g, '&');
+        const parsed = JSON.parse(decoded);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
+      } catch (error) {
+        // Ignore malformed attribute JSON and fall through.
+      }
+    }
+
+    return [];
+  };
+</script>
+
+<script>
+  console.log("🔥 1st script block loaded");
+  runWhenTrulyReady(() => {
+    console.log("🔥 1st DOM + Alpine ready");
+
+    const intervalSelect = document.getElementById("subscriptionIntervalSelect");
+    const subscribeRadio = document.getElementById("subscribe");
+    const oneTimeRadio = document.getElementById("one_time");
+    const subOptionsContainer = document.getElementById("subscription-option-content");
+
+    const subscribeLabel = document.querySelector(".sub-and-save-container");
+    const oneTimeLabel = document.querySelector(".otp-container");
+
+    function setDefaultInterval() {
+      if (!intervalSelect) return;
+      intervalSelect.value = "6_weeks";
+    }
+
+    function enableSubOptions() {
+      subOptionsContainer.style.display = "block";
+      if (intervalSelect) {
+        intervalSelect.disabled = false;
+        setDefaultInterval();
+      }
+    }
+
+    function disableSubOptions() {
+      subOptionsContainer.style.display = "none";
+      if (intervalSelect) {
+        intervalSelect.disabled = true;
+      }
+    }
+
+    function updateActiveContainerClass() {
+      if (subscribeRadio.checked) {
+        subscribeLabel.classList.add("active-container");
+        oneTimeLabel.classList.remove("active-container");
+      } else if (oneTimeRadio.checked) {
+        oneTimeLabel.classList.add("active-container");
+        subscribeLabel.classList.remove("active-container");
+      }
+    }
+    
+    function toggleShippingLine(type){
+      if (type == "subscription"){
+        document.querySelectorAll('div[id^="ProductInfo-template--"] .mb-5.w-full.rte')[1].style.display = "none";
+        document.querySelectorAll('div[id^="ProductInfo-template--"] .mb-5.w-full.rte')[0].style.display = "block";
+      } else if (type == "onetime"){
+        document.querySelectorAll('div[id^="ProductInfo-template--"] .mb-5.w-full.rte')[0].style.display = "none";
+        document.querySelectorAll('div[id^="ProductInfo-template--"] .mb-5.w-full.rte')[1].style.display = "block";
+      }
+    }
+
+    if (subscribeRadio.checked) {
+      enableSubOptions();
+    } else {
+      disableSubOptions();
+    }
+    updateActiveContainerClass();
+
+    subscribeRadio.addEventListener("change", () => {
+      if (subscribeRadio.checked) {
+        enableSubOptions();
+        updateActiveContainerClass();
+        toggleShippingLine("subscription");
+      }
+    });
+
+    oneTimeRadio.addEventListener("change", () => {
+      if (oneTimeRadio.checked) {
+        disableSubOptions();
+        updateActiveContainerClass();
+        toggleShippingLine("onetime");
+      }
+    });
+
+    // Dropdown change listener (optional guard)
+    intervalSelect?.addEventListener("change", () => {
+      if (!subscribeRadio.checked) return;
+    });
+  });
+
+  console.log("post script loaded");
+</script>
+
+<script>
+  console.log("🔥 2nd script block loaded");
+  let currentVariant;
+  const productTitle = document.querySelector("h1.product-title")?.innerText || "";
+  const isHappyHourKit = productTitle.includes("Happy Hour Kit");
+  if (isHappyHourKit){
+    currentVariant = "HappyHourKit";
+  } else {
+    // currentVariant = "12 Pack";
+  }
+
+  runWhenTrulyReady(() => {
+    console.log("🔥 2nd DOM + Alpine ready");
+    const radios = document.querySelectorAll('input[name="Size"]');
+    const getSellingPlanVariants = window.craftmixGetSellingPlanVariants || (() => []);
+
+    if (radios.length === 0) {
+      console.error("❌ No radio buttons with name='Size' found.");
+      return;
+    }
+
+    function formatMoney(cents) {
+      const dollars = cents / 100;
+      return dollars.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD"
+      });
+    }
+
+    function getCurrentPrice() {
+      const hiddenPriceEl = document.querySelector(".main-product-price .hidden");
+      if (hiddenPriceEl) {
+        const rawPrice = hiddenPriceEl.textContent.trim();
+        const cents = parseInt(rawPrice, 10);
+
+        if (!isNaN(cents)) {
+          return formatMoney(cents);
+        }
+
+        console.warn("⚠️ Price is not a number:", rawPrice);
+      }
+
+      const checkedSizeValue = document.querySelector('input[name="Size"]:checked')?.value || currentVariant;
+      const formVariantId = document.querySelector('[id^="product-form-template--"] input[name="id"]')?.value;
+      const productVariants = getSellingPlanVariants();
+
+      const matchedVariantByTitle = checkedSizeValue
+        ? productVariants.find((variant) => variant.title === checkedSizeValue)
+        : null;
+      const matchedVariantById = !matchedVariantByTitle && formVariantId
+        ? productVariants.find((variant) => String(variant.id) === String(formVariantId))
+        : null;
+      const fallbackVariant = matchedVariantByTitle || matchedVariantById || productVariants[0];
+
+      if (!fallbackVariant?.price) {
+        console.warn("⚠️ Could not resolve current price from product data");
+        return null;
+      }
+
+      return formatMoney(fallbackVariant.price);
+    }
+
+    if (isHappyHourKit){
+      const mirrors = document.querySelectorAll('.mirrored-price');
+      mirrors.forEach(el => {
+        el.textContent = getCurrentPrice();
+      });
+    } else {
+      function updateMirroredPrices() {
+        const formattedPrice = getCurrentPrice();
+        if (formattedPrice) {
+          const mirrors = document.querySelectorAll('.mirrored-price');
+          mirrors.forEach(el => {
+            el.textContent = formattedPrice;
+          });
+        } else {
+          console.warn("⚠️ Price not available after change.");
+        }
+      }
+
+      radios.forEach((radio) => {
+        if (radio.checked) {
+          currentVariant = radio.value;
+          setTimeout(updateMirroredPrices, 500);
+        }
+      });
+
+      radios.forEach((radio, index) => {
+        radio.addEventListener("change", () => {
+          currentVariant = radio.value;
+          setTimeout(updateMirroredPrices, 1000);
+        });
+      });
+    }
+  });
+</script>
+
+<script>
+  console.log("🔥 3rd script block loaded");
+  runWhenTrulyReady(() => {
+    console.log("🔥 3rd DOM + Alpine ready");
+    const productForm = document.querySelector('[id^="product-form-template--"]');
+    const subscribeRadio = document.getElementById("subscribe");
+    const oneTimeRadio = document.getElementById("one_time");
+    const intervalSelect = document.getElementById("subscriptionIntervalSelect");
+    const variantInputs = document.querySelectorAll("input[name='Size']");
+    const getSellingPlanVariants = window.craftmixGetSellingPlanVariants || (() => []);
+
+    function syncCurrentVariant() {
+      const checkedSizeInput = document.querySelector("input[name='Size']:checked");
+      if (checkedSizeInput?.value) {
+        currentVariant = checkedSizeInput.value;
+        return currentVariant;
+      }
+
+      const variantIdInput = productForm?.querySelector("input[name='id']");
+      const variantId = variantIdInput?.value;
+      const variants = getSellingPlanVariants();
+      if (variantId && Array.isArray(variants) && variants.length > 0) {
+        const variantById = variants.find((variant) => String(variant.id) === String(variantId));
+        if (variantById?.title) {
+          currentVariant = variantById.title;
+          return currentVariant;
+        }
+      }
+
+      if (!currentVariant && Array.isArray(variants) && variants[0]?.title) {
+        currentVariant = variants[0].title;
+      }
+
+      return currentVariant || null;
+    }
+
+    const sellingPlanMap = {
+      "12 Pack": {
+        "2_weeks": "4672651502",
+        "4_weeks": "4672684270",
+        "6_weeks": "4996727022",
+        "8_weeks": "4672717038",
+      },
+      "24 Pack": {
+        "2_weeks": "4672553198",
+        "4_weeks": "4672585966",
+        "6_weeks": "4996759790",
+        "8_weeks": "4672618734",
+      },
+      "36 Pack": {
+        "2_weeks": "4672454894",
+        "4_weeks": "4672487662",
+        "6_weeks": "4996792558",
+        "8_weeks": "4672520430",
+      },
+      "HappyHourKit": {
+        "2_weeks": "4672651502",
+        "4_weeks": "4672684270",
+        "6_weeks": "4996727022",
+        "8_weeks": "4672717038"
+      }
+    };
+
+    function getActiveSubscriptionInterval() {
+      return intervalSelect?.value || null;
+    }
+
+    function getSellingPlanId(variantId, interval) {
+      return sellingPlanMap[variantId]?.[interval] || null;
+    }
+
+    function removeSellingPlanInput() {
+      console.log("removeSellingPlanInput triggered");
+      if (!productForm) return;
+      const existingInput = productForm.querySelector("input[name='selling_plan']");
+      if (existingInput) {
+        existingInput.remove();
+      }
+    }
+
+    function addSellingPlanInput(planId) {
+      console.log("addSellingPlanInput triggered");
+      if (!productForm) return;
+      removeSellingPlanInput();
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = "selling_plan";
+      input.value = planId;
+      productForm.appendChild(input);
+    }
+
+    function updateSellingPlan() {
+      console.log("UpdateSellingPlan triggered...");
+      syncCurrentVariant();
+      const variantId = currentVariant;
+      console.log(`Current variant = ${variantId}`);
+      const isSubscribe = subscribeRadio.checked;
+      const interval = getActiveSubscriptionInterval();
+
+      if (!variantId) return;
+
+      if (isSubscribe && interval) {
+        const planId = getSellingPlanId(variantId, interval);
+        if (planId) {
+          addSellingPlanInput(planId);
+        } else {
+          console.warn("⚠️ No matching selling plan found for", variantId, interval);
+          removeSellingPlanInput();
+        }
+      } else {
+        removeSellingPlanInput();
+      }
+    }
+
+    function getDiscountRate() {
+      const el = document.querySelector(".discount-1");
+      if (!el) return 0;
+
+      const match = el.textContent.match(/(\d+)%/);
+      if (!match) return 0;
+
+      const percent = parseInt(match[1], 10);
+      return percent / 100;
+    }
+
+    function updateSubscribePricing() {
+      console.log("UpdateSubscribePricing triggered... ");
+      const originalPriceContainer = document.getElementById("sub-original-price");
+      const finalPriceContainer = document.getElementById("sub-final-price");
+      if (!originalPriceContainer || !finalPriceContainer) return;
+      const variants = getSellingPlanVariants();
+      if (!Array.isArray(variants) || variants.length === 0) {
+        console.warn("⚠️ Selling plan product data unavailable for subscribe pricing");
+        return;
+      }
+      originalPriceContainer.textContent = "";
+      finalPriceContainer.textContent = "";
+      console.log("textContent set...");
+      syncCurrentVariant();
+      const matchedVariant = variants.find(v => v.title === currentVariant);
+      if (!matchedVariant) {
+        console.warn("⚠️ No matched variant found for subscribe pricing:", currentVariant);
+        return;
+      }
+      console.log("Matched Variant:" + matchedVariant.title);
+      const packCount = parseInt(matchedVariant.title.split(" ")[0], 10);
+      const cents = matchedVariant ? matchedVariant.price : undefined;
+      let discountRate = 0;
+
+      if (matchedVariant) {
+        const variantToDiscountClass = {
+          "12 Pack": ".sub-discount-1",
+          "24 Pack": ".sub-discount-2",
+          "36 Pack": ".sub-discount-3"
+        };
+
+        const selector = variantToDiscountClass[matchedVariant.title];
+        if (selector) {
+          const el = document.querySelector(selector);
+          const match = el?.textContent.match(/(\d+)%/);
+          if (match) {
+            discountRate = parseInt(match[1], 10) / 100;
+          }
+        }
+      }
+
+      const discountedCents = Math.round(cents * (1 - discountRate));
+      if (discountRate != 0) {
+        document.getElementById("sub-original-price").textContent = (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("sub-final-price").textContent = (discountedCents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("sub-price-per-drink").textContent = `$${(discountedCents / packCount / 100).toFixed(2)}/DRINK`;
+      } else {
+        document.getElementById("sub-final-price").textContent = (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("sub-price-per-drink").textContent = `$${(cents / packCount / 100).toFixed(2)}/DRINK`;
+      }
+    }
+
+    function updateOneTimePricing() {
+      const originalPriceContainer = document.getElementById("ot-original-price");
+      const finalPriceContainer = document.getElementById("ot-final-price");
+      if (!originalPriceContainer || !finalPriceContainer) return;
+      const variants = getSellingPlanVariants();
+      if (!Array.isArray(variants) || variants.length === 0) {
+        console.warn("⚠️ Selling plan product data unavailable for one-time pricing");
+        return;
+      }
+      originalPriceContainer.textContent = "";
+      finalPriceContainer.textContent = "";
+      syncCurrentVariant();
+      const matchedVariant = variants.find(v => v.title === currentVariant);
+      if (!matchedVariant) {
+        console.warn("⚠️ No matched variant found for one-time pricing:", currentVariant);
+        return;
+      }
+      const packCount = parseInt(matchedVariant.title.split(" ")[0], 10);
+      const cents = matchedVariant ? matchedVariant.price : undefined;
+      let discountRate = 0;
+
+      if (matchedVariant) {
+        const variantToDiscountClass = {
+          "12 Pack": ".ot-discount-1",
+          "24 Pack": ".ot-discount-2",
+          "36 Pack": ".ot-discount-3"
+        };
+
+        const selector = variantToDiscountClass[matchedVariant.title];
+        if (selector) {
+          const el = document.querySelector(selector);
+          const match = el?.textContent.match(/(\d+)%/);
+          if (match) {
+            discountRate = parseInt(match[1], 10) / 100;
+          }
+        }
+      }
+
+      const discountedCents = Math.round(cents * (1 - discountRate));
+      if (discountRate != 0) {
+        document.getElementById("ot-original-price").textContent = (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("ot-final-price").textContent = (discountedCents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("ot-price-per-drink").textContent = `$${(discountedCents / packCount / 100).toFixed(2)}/DRINK`;
+      } else {
+        document.getElementById("ot-final-price").textContent = (cents / 100).toLocaleString("en-US", { style: "currency", currency: "USD" });
+        document.getElementById("ot-price-per-drink").textContent = `$${(cents / packCount / 100).toFixed(2)}/DRINK`;
+      }
+    }
+
+    function updateSubscriptionDiscount() {
+      const container = document.getElementById("selector-subscription-discount");
+      const percentSign = document.getElementById("subscription-discount-percent-sign");
+      if (!container || !percentSign) return;
+
+      const variants = getSellingPlanVariants();
+      const variantTitle = variants.find(v => v.title === currentVariant)?.title;
+
+      const discountsByTitle = {
+        "12 Pack": "{{ section.settings.pack_12_subscribe_discount }}",
+        "24 Pack": "{{ section.settings.pack_24_subscribe_discount }}",
+        "36 Pack": "{{ section.settings.pack_36_subscribe_discount }}"
+      };
+
+      const discount = (variantTitle ? (discountsByTitle[variantTitle] || "") : "").trim();
+      const shouldShow = discount !== "" && discount !== "0";
+
+      container.classList.toggle("is-hidden", !shouldShow);
+      percentSign.classList.toggle("is-hidden", !shouldShow);
+
+      if (shouldShow) container.textContent = discount;
+    }
+
+    function allClickUpdates() {
+      console.log("allClickUpdates function triggered...");
+      syncCurrentVariant();
+      console.log("Current variant = " + currentVariant);
+      if (currentVariant != "HappyHourKit") {
+        updateSubscribePricing();
+        updateOneTimePricing();
+        updateSubscriptionDiscount();
+      }
+      updateSellingPlan();
+    }
+
+    variantInputs.forEach(input => {
+      input.addEventListener("change", allClickUpdates);
+    });
+
+    intervalSelect?.addEventListener("change", allClickUpdates);
+
+    subscribeRadio?.addEventListener("change", allClickUpdates);
+    oneTimeRadio?.addEventListener("change", allClickUpdates);
+
+    console.log("Reached initial setup function...");
+    allClickUpdates();
+  });
+</script>
+
+<div class="step-heading frequency-selector-heading">
+  <span class="step-number nudge-step-left">
+    {% if product.handle == '5pm-happy-hour-kit' or request.page_type == 'page' or template contains 'page' %}2{% else %}3{% endif %}
+  </span>
+  <h5 class="variant-selection-heading">Choose Frequency</h5>
+</div>
+
+<div class="selling-plan-selector">
+  <!-- Subscription Type Radios -->
+  <div class="radio-group">
+    <label class="radio-label otp-container active-container" checked>
+      <input type="radio" name="selling_plan" value="one_time" id="one_time" checked>
+      <span class="selector-text">One-Time Purchase</span>
+      <div class="plan-selector-price-container">
+        {% if product.title == "5PM Happy Hour Kit" %}
+          <span id="">{{ all_products['5pm-happy-hour-kit'].price | money }}</span>
+        {% else %}
+          <span id="ot-original-price" class="original-price"></span>
+          <span id="ot-final-price"></span>
+          <div id="ot-price-per-drink" class="price-per-drink"></div>
+        {% endif %}
+      </div>
+    </label>
+
+    <label class="radio-label sub-and-save-container">
+      <input type="radio" name="selling_plan" value="subscribe" id="subscribe">
+      <span class="selector-text">Subscribe & Save <span id="selector-subscription-discount">{{ section.settings.pack_36_subscribe_discount }}</span><span id="subscription-discount-percent-sign">%</span></span>
+      <div class="plan-selector-price-container">
+        {% if product.title == "5PM Happy Hour Kit" %}
+          <span id="" class="original-price">{{ all_products['5pm-happy-hour-kit'].price | money }}</span>
+          {% assign discount_decimal = section.settings.pack_12_subscribe_discount | divided_by: 100.0 %}
+          {% assign multiplier = 1 | minus: discount_decimal %}
+          <span id="">{{ all_products['5pm-happy-hour-kit'].price | times: multiplier | money }}</span>
+        {% else %}
+          <span id="sub-original-price" class="original-price"></span>
+          <span id="sub-final-price"></span>
+          <div id="sub-price-per-drink" class="price-per-drink"></div>
+        {% endif %}
+      </div>
+
+      <div id="subscription-option-content">
+        <div class="subscription-selector-container">
+          <div class="subscription-interval-header">Delivery Frequency:</div>
+
+          <!-- Subscription Intervals (Dropdown; visible only for Subscribe & Save) -->
+          <div class="subscription-options" id="subscriptionOptions">
+            <select class="sub-option-select" id="subscriptionIntervalSelect" name="subscription_interval">
+              <option value="4_weeks">Every 4 Weeks</option>
+              <option value="6_weeks" selected>Every 6 Weeks</option>
+              <option value="8_weeks">Every 8 Weeks</option>
+            </select>
+          </div>
+        </div>
+        <div class="subscription-benefit-container">
+          <div class="subscription-benefit benefit-1">
+            <div class="benefit-icon">
+              <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/ic_outline-discount.png?v=1768093323" width=34 height=34 alt="Price tag icon">
+            </div>
+            <div class="benefit-text">
+              15% off and free shipping on every order
+            </div>
+          </div>
+          <div class="subscription-benefit benefit-2">
+            <div class="benefit-icon">
+              <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/line-md_edit.png?v=1768093323" width=34 height=34 alt="Pencil icon">
+            </div>
+            <div class="benefit-text">
+              Skip, edit, or cancel anytime
+            </div>
+          </div>
+          <div class="subscription-benefit benefit-3">
+            <div class="benefit-icon">
+              <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/tabler_gift.png?v=1768093324" width=34 height=34 alt="Gift box icon">
+            </div>
+            <div class="benefit-text">
+              Earn free samples & gifts with each order
+            </div>
+          </div>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
+
+<style>
+/* Container styling */
+.selling-plan-selector {
+  margin-top: 15px;
+}
+.plan-selector-price-container{
+  display: inline-block;
+  float: right;
+  font-size: 18px;
+  font-family: 'Goldplay';
+  text-align:right;
+  line-height:1;
+}
+.price-per-drink{
+  opacity:40%;
+  font-size:12px;
+  margin-top: 5px;
+}
+.selling-plan-selector .original-price{
+  opacity:40%;
+  text-decoration: line-through;
+}
+#sub-final-price,
+#ot-final-price{
+  opacity: 40%;
+}
+.active-container .original-price,
+.active-container .price-per-drink,
+.active-container #sub-final-price,
+.active-container #ot-final-price{
+  opacity:unset;
+}
+.radio-group {
+  margin-bottom: 15px;
+}
+
+/* Radio Buttons Visible */
+.radio-label {
+  display:block;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  gap: 8px;
+}
+.sub-and-save-container{
+  display:block;
+}
+
+.radio-label input[type="radio"] {
+  appearance: auto;
+  accent-color: black; /* optional: style the selected dot */
+}
+
+/* Interval Button Styling */
+.subscription-options {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.subscription-selector-container{
+  margin-left:30px;
+}
+.subscription-interval-header{
+  font-family: Goldplay;
+  font-size:15px;
+  margin-top: 8px;
+}
+
+.sub-option-select{
+    width: 300px;
+    height: 48px;
+    border-radius: 999px;
+    padding: 0 24px;
+    font-family: 'Goldplay';
+    font-weight: 600;
+    font-size: 18px;
+    border: 1px solid var(--craftmix-dark-blue);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='14' height='8' viewBox='0 0 14 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%230c2d5a' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+    background-size: 14px 8px;
+}
+
+.subscription-benefit-container{
+  margin-top:20px;
+  margin-left: 30px;
+  margin-right: 16px;
+  display:flex;
+  justify-content:space-between;
+  gap:4px;
+}
+.subscription-benefit-container .benefit-1{
+  width:130px
+}
+.subscription-benefit-container .benefit-2{
+  width:112px
+}
+.subscription-benefit-container .benefit-3{
+  width:120px
+}
+.benefit-icon{
+  margin-bottom:14px;
+}
+.benefit-icon img{
+  margin:auto;
+}
+.benefit-text{
+  font-family: Goldplay;
+  font-size: 15px;
+  text-align: center;
+}
+.mirrored-price{
+  display: inline-block;
+  float: right;
+  font-family: 'Goldplay';
+  font-size: 18px;
+  position: relative;
+  bottom: 3px;
+}
+@media screen and (max-width:480px){
+  .subscription-benefit-container{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .sub-option-select{
+    width:248px;
+  }
+}
+</style>

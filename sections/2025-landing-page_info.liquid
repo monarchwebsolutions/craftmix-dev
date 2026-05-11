@@ -1,0 +1,991 @@
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+{{ 'custom-carousel-card-video.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-carousel-card-video.js' | asset_url }}" defer></script>
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+<link rel="stylesheet" href="{{ 'people-love-it-custom.css' | asset_url }}">
+
+{% schema %}
+{
+  "name": "Landing Page Info Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "single_packet_image",
+      "label": "Single Packet Image",
+      "info": "Upload an image for the single packet display"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "carousel_card",
+      "name": "Carousel Card",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Upload video to Content > Files, then paste the link here (e.g., .mp4, .mov)"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Thumbnail Image"
+        },
+        {
+          "type": "product",
+          "id": "linked_product",
+          "label": "Linked Product"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Landing Page Info Section"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="landing-page_info-section">
+  <!-- Decorative BG Images -->
+  <img class="lp-bg_img bg-passionfruit_2" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg_passionfruit-2.png?v=1744315748" width="229" height="577" alt="passionfruit" role="presentation" loading="lazy">
+  <img class="lp-bg_img bg-pinkleaf_5" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg-pinkleaf-5.png?v=1744324693" width="167" height="533" alt="pink leaf" role="presentation" loading="lazy">
+  <img class="lp-bg_img bg-lime_1" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg-lime-1.png?v=1744316308" width="451" height="567" alt="lime" role="presentation" loading="lazy">
+  <img class="lp-bg_img bg-leaf_1" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg-leaf-1.png?v=1744316370" width="270" height="649" alt="leaf" role="presentation" loading="lazy">
+  <img class="lp-bg_img bg-melon_1" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg-melon-1.png?v=1744316418" width="150" height="575" alt="melon" role="presentation" loading="lazy">
+  <img class="lp-bg_img bg-pinkleaf_6" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-bg-pinkleaf-6.png?v=1744324699" width="482" height="732" alt="pink leaf" role="presentation" loading="lazy">
+
+  
+    <div class="landing-page_info-wrapper">
+      <div class="landing-page_info-header info-top-heading">
+        <h2 class="landing-page_info-heading info-top-heading">
+          Low Sugar, Instant<br>Pocket Sized Packets
+        </h2>
+      </div>
+      <div class="landing-page_info-images">
+        <div class="images-left">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-real-ingredients.png?v=1744195718" width="200" height="200"   alt="Made with real ingredients logo" class="images-left-1" loading="lazy">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-low-calorie.png?v=1744195712" width="200" height="200"  alt="Only 25 calories per serving logo" class="images-left-2" loading="lazy">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-vegan.png?v=1744195721" width="200" height="200"  alt="Vegan friendly logo" class="images-left-3" loading="lazy">
+        </div>
+        <div class="image-center">
+  {% if section.settings.single_packet_image != blank %}
+    <img 
+      class="image-center-main" 
+      src="{{ section.settings.single_packet_image | image_url: original }}"
+      alt="Enlarged Sinlge Packet Image" 
+      loading="lazy"
+      width="567"
+      height="609"
+    >
+  {% endif %}
+</div>
+        <div class="images-right">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-gluten-free.png?v=1744195708" width="200" height="200"  alt="Gluten-free logo" class="images-right-1" loading="lazy">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-non-gmo.png?v=1744195714" width="200" height="200"  alt="Non-GMO ingredients logo" class="images-right-2" loading="lazy">
+          <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-vegan.png?v=1744195721" width="200" height="200"  alt="Vegan friendly logo" class="images-right-3" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+   <div class="custom-video-review-carousel-section">
+    <div class="custom-video-review-carousel-header">
+      <div class="custom-video-review-carousel-header-stars">
+        <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/orangestars.svg?v=1738215358" width="101" height="18" alt="Stars" role="presentation" loading="lazy">
+      </div>
+      <div class="custom-video-review-carousel-header-stars-text">over 6,000 verified 5 star reviews</div>
+      <h3 class="custom-video-review-carousel-heading">People Love It</h3>
+      <p class="custom-video-review-carousel-header-optional-paragraph">Words from our Craftmix Fam</p>
+    </div>
+    <div class="custom-video-review-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-video-review-carousel-container">
+      {% render 'review-video-carousel-inner' %}
+    </div>
+  </div>
+
+
+  <!-- Table Comparison -->
+  <div class="landing-page_info-wrapper">
+    <div class="craftmix-love-section_table-container">
+      <div class="landing-page_info-header">
+        <h2 class="landing-page_info-heading">How do we stack up?</h2>
+      </div>
+      <div class="craftmix-love-table-card">
+         <div class="table-card-lg">
+            <div class="table-row">
+              <div class="left-item">Calories</div>
+              <div class="right-item">240</div>
+            </div>
+            <div class="table-row">
+              <div class="left-item">Sugar</div>
+              <div class="right-item">58g</div>
+            </div>
+            <div class="table-row">
+              <div class="left-item">Carbs</div>
+              <div class="right-item">60g</div>
+            </div>
+            <div class="table-row">
+              <div class="left-item">Real Ingredients</div>
+              <div class="right-item"><img class="cross"
+                  src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_cross.svg?v=1744231138" width="43" height="43" alt="cross" role="presentation" loading="lazy">
+              </div>
+            </div>
+            <div class="table-row">
+              <div class="left-item">Non GMO</div>
+              <div class="right-item"><img class="cross"
+                  src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_cross.svg?v=1744231138" width="43" height="43" alt="cross" role="presentation" loading="lazy">
+              </div>
+            </div>
+            <div class="table-row">
+              <div class="left-item">Makes Great Mocktails</div>
+              <div class="right-item"><img class="cross"
+                  src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_cross.svg?v=1744231138" width="43" height="43" alt="cross" role="presentation" loading="lazy">
+              </div>
+            </div>
+          </div>
+        <div class="table-card-sm">
+          <div class="table-row"><div class="row-item table-logo"><img class="craftmix-table-logo" src="https://cdn.shopify.com/s/files/1/2340/1623/files/Craftmix_Logo-table.png?v=1744202536"  width="213" height="39" alt="Craftmix logo"></div></div>
+          <div class="table-row"><div class="row-item">25</div></div>
+          <div class="table-row"><div class="row-item">5g</div></div>
+          <div class="table-row"><div class="row-item">6g</div></div>
+          <div class="table-row"><img class="row-item tick" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_tick.svg?v=1744230980" width="43" height="43" alt="tick" role="presentation" loading="lazy"></div>
+          <div class="table-row"><img class="row-item tick" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_tick.svg?v=1744230980" width="43" height="43" alt="tick" role="presentation" loading="lazy"></div>
+          <div class="table-row extra-row"><img class="row-item tick" src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-table_tick.svg?v=1744230980" width="43" height="43" alt="tick" role="presentation" loading="lazy"></div>
+        </div>
+        <div class="table-text-box"><span class="table-text-box-text">Other Mixers</span></div>
+      </div>
+      
+    </div>
+    
+    <div class="landing-page_info-section_cta">
+      <a class="landing-page_info-section_cta-btn" href="">See What The Hype Is About</a>
+    </div>
+  </div>
+  <lottie-player class="marquee landing-page-info-section-marquee" src="{{ 'value_prop_1440px.json' | asset_url }}" background="transparent"  speed="0.6"  loop autoplay></lottie-player>
+</section>
+<script src="{{ 'lp-embla.js' | asset_url }}" defer='defer'></script>
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', () => {
+    const carouselRoot = document.querySelector('.landing-page_info_carousel');
+    if (!carouselRoot) return;
+
+    const viewport = carouselRoot.querySelector('.info_carousel_embla__viewport');
+    EmblaCarousel(viewport, {
+      loop: true,
+      dragFree: true
+    });
+  });
+
+{% endjavascript %}
+{% style %}
+  *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+}
+
+section.landing-page_info-section {
+  background-color: #bfefff;
+  position: relative;
+  padding-top: 80px;
+}
+
+.landing-page_info-wrapper {
+  max-width: 1400px;
+  padding: 25px;
+  margin: 0 auto;
+}
+
+h2.landing-page_info-heading {
+  color: #002657;
+  font-size: 72px;
+  font-family: Hornbill;
+  font-weight: 800;
+  line-height: 86.4px;
+  text-align: center;
+  margin-bottom: 50px;
+  position:relative;
+}
+
+.landing-page_info-section_cta-btn {
+  font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 140%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  gap: 3px;
+  max-width: 492px;
+  height: 69px;
+  background: #fe6b00;
+  color: #fff;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  border-radius: 100px;
+  margin: 0 auto;
+  margin-top: 80px;
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 2;
+  margin-bottom: 150px;
+  transition: box-shadow 0.4s ease;
+}
+
+.landing-page_info-section_cta-btn:hover {
+  box-shadow: none;
+}
+
+.info-top-heading {
+  max-width: 803px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+}
+
+.landing-page_info-images {
+  position: relative;
+  /* border: 1px solid red; */
+}
+
+.images-left,
+.images-right {
+  position: absolute;
+  max-width: 300px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+}
+
+
+.images-left {
+  top: 0;
+  left: 0;
+}
+.images-right {
+  top: 0;
+  right: 0;
+}
+.images-left img,
+.images-right img {
+  max-width: 200px;
+  height: auto;
+}
+
+.images-left-1,
+.images-left-3,
+.images-right-2 {
+  align-self: flex-end;
+}
+
+.image-center {
+  text-align: center;
+}
+
+.image-center .image-center-main {
+  max-width: 561px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Carousel */
+.landing-page_info_carousel {
+  width: 100%;
+  overflow: hidden;
+  padding: 16px 0;
+}
+
+/* Scoped Embla for landing-page_info_carousel */
+.landing-page_info_carousel {
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.info_carousel_embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.info_carousel_embla__container {
+  display: flex;
+  gap: 41px;
+}
+
+
+.info_carousel_embla__slide {
+  flex: 0 0 80%;
+  scroll-snap-align: center;
+}
+
+.landing-page_info_carousel-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 508px; /* exact width */
+  height: 647px; /* exact height */
+  border-radius: 23px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.landing-page_info_carousel-card:last-of-type {
+    margin-right: 41px;
+}
+
+.landing-page_info_carousel-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.landing-page_info_carousel-card .card-label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 4px 10px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-right: 20px;
+  border-radius: 100px;
+  z-index: 2;
+}
+
+.landing-page_info_carousel-wrapper {
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+.landing-page_info_carousel-wrapper.dragging {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Table */
+.craftmix-love-table-card {
+  position: relative;
+  max-width: 1050px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 102px;
+  transform-origin: top center;
+}
+
+.table-card-lg {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 616px;
+  background-color: #ddf7f7;
+  border-radius: 32px;
+  border: 3px solid #000000;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.table-card-sm {
+  position: absolute;
+  width: 300px;
+  height: 753px;
+  background-color: #fff;
+  border: 3px solid #002657;
+  border-radius: 26px;
+  top: 0px;
+  right: 300px;
+  z-index: 2;
+  box-shadow: 3px 4px 0px 0px #002657;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.table-text-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 102px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-text-box-text {
+  font-family: "Goldplay";
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #000;
+}
+  
+.table-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* vertical centering */
+  height: calc(616px / 6); /* makes all rows exactly even */
+  border-bottom: 2px solid #000;
+  padding: 0 0; /* no vertical padding needed */
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.table-row .left-item {
+  padding-left: 24px;
+}
+
+.table-row .right-item,
+.table-row .left-item,
+.table-row .row-item {
+  font-family: 'Hornbill';
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 120%;
+}
+
+.table-row .right-item {
+  max-width: 300px;
+  width: 100%;
+  text-align: center;
+  color: #8a8989;
+}
+.table-row .left-item {
+  color: #000000;
+}
+.table-row .row-item {
+  color: #00945e;
+}
+
+.table-card-sm .table-row {
+  height: 101.67px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid #000;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.left-item,
+.right-item {
+  flex: 0 0 auto;
+}
+
+/* Last row - takes remaining height */
+.table-card-sm .extra-row {
+  height: auto;
+  flex: 1; /* take up remaining space */
+  border-bottom: none;
+}
+
+.row-item {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+}
+
+
+img.craftmix-table-logo {
+  max-width: 243px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+img.row-item.tick,
+img.cross {
+  width: 43px;
+  height: 43px;
+}
+img.cross {
+ margin: 0 auto;
+}
+
+lottie-player.marquee.landing-page-info-section-marquee{
+  position: absolute;
+   top: auto !important;
+  bottom: -50% !important;
+  z-index:1;
+  pointer-events: none;
+  height:revert-layer !important;
+}
+
+@media (max-width: 1050px) {
+  .table-card-sm {
+    width: 200px;
+    right: 200px;
+  }
+  .table-row .right-item {
+    max-width: 200px;
+  }
+  .table-text-box {
+    width: 200px;
+  }
+  .table-text-box-text {
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 140%;
+  }
+  .images-left img,
+  .images-right img {
+    max-width: 180px;
+    height: auto;
+  }
+  .images-left, 
+  .images-right {
+    max-width:260px;
+  }
+}
+
+@media (max-width: 850px) {
+  .landing-page_info_carousel-card {
+  flex: 0 0 auto;
+    width: 250px; /* exact width */
+    height: 325px; /* exact height */
+    border-radius: 23px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .table-card-sm {
+    width: 150px;
+    right: 150px;
+  }
+  .table-row .right-item {
+    max-width: 150px;
+  }
+  .table-text-box {
+    width: 150px;
+  }
+  .table-text-box-text {
+    font-size: 18px;
+    max-width: 100px;
+    font-weight: 700;
+    line-height: 120%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 840px) {
+  .landing-page_info-images {
+    position: relative;
+    margin: 0 auto;
+}
+  .image-center .image-center-main {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .images-left,
+  .images-right {
+    max-width: 200px;
+  }
+  .images-left img,
+  .images-right img {
+    max-width: 140px;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .landing-page_info-wrapper {
+    max-width: 1400px;
+    padding: 50px 16px;
+    margin: 0 auto;
+  }
+
+  h2.landing-page_info-heading {
+    margin-bottom: 0px;
+  }
+  .custom-video-review-carousel-container{
+    padding-top:30px;
+  }
+  .custom-video-review-carousel-nav {
+    position: relative;
+    top: 308px;
+  }
+  .craftmix-love-table-card {
+    position: relative;
+    max-width: 475px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 51px;
+    transform-origin: top center;
+  }
+
+  .table-card-lg {
+    width: 100%;
+    height: 315px;
+  }
+
+  .table-card-sm {
+    position: absolute;
+    max-width: 117px;
+    height: 371px;
+    background-color: #fff;
+    border: 3px solid #002657;
+    border-radius: 26px;
+    top: 0px;
+    right: 90px;
+    z-index: 2;
+    box-shadow: 1px 2px 0px 0px #002657;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .table-text-box {
+     width: 90px;
+     height: 50px;
+  }
+  .table-text-box-text {
+    font-size: 14px;
+    max-width: 100px;
+  }
+
+  .table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* vertical centering */
+    height: calc(616px / 6); /* makes all rows exactly even */
+    border-bottom: 2px solid #000;
+    padding: 0 0; /* no vertical padding needed */
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .table-row .left-item {
+    padding-left: 8px;
+    max-width: 114px;
+  }
+
+  .table-row .right-item,
+  .table-row .left-item,
+  .table-row .row-item {
+    font-family: 'Hornbill';
+    font-size: 16px;
+    font-weight: 800;
+    line-height: 120%;
+  }
+
+  .table-row .right-item {
+    max-width: 90px;
+    width: 100%;
+    text-align: center;
+    color: #8a8989;
+  }
+  .table-row .left-item {
+    color: #000000;
+  }
+  .table-row .row-item {
+    color: #00945e;
+  }
+
+  .table-card-sm .table-row {
+    height: 51.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #000;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .table-row:last-child {
+    border-bottom: none;
+  }
+
+  .table-card-sm .table-row:first-child {
+    border-bottom: none;
+  }
+
+  .left-item,
+  .right-item {
+    flex: 0 0 auto;
+  }
+
+  /* Last row - takes remaining height */
+  .table-card-sm .extra-row {
+    height: 60px;
+
+    border-bottom: none;
+  }
+
+  .row-item {
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    width: 100%;
+  }
+
+ 
+  img.craftmix-table-logo {
+    max-width: 117px;
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .tick,
+  .cross {
+    max-width: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-page_info-images {
+    position: relative;
+    margin: 0 auto;
+}
+  .image-center .image-center-main {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .images-left,
+  .images-right {
+    max-width: 140px;
+  }
+  .images-left img,
+  .images-right img {
+    max-width: 100px;
+    height: auto;
+  }
+}
+
+@media (max-width: 529px) {
+  section.landing-page_info-section {
+    padding-top: 50px;
+}
+  h2.landing-page_info-heading {
+    color: #002657;
+    font-size: 32px;
+    font-family: Hornbill;
+    font-weight: 800;
+    line-height: 120%;
+  }
+
+  .landing-page_info-wrapper {
+    padding: 40px 16px 40px 16px;
+  }
+
+  .landing-page_info-section_cta-btn {
+    font-size: 18px;
+    line-height: 140%;
+    padding: 11px 8px;
+    height: 50px;
+    z-index: 2;
+    margin-bottom: 60px;
+  }
+  .landing-page_info_carousel {
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .info_carousel_embla__container {
+  gap: 12px;
+  }
+  .landing-page_info_carousel-card:last-of-type {
+    margin-right: 12px;
+  }
+  .craftmix-love-table-card {
+  margin-top: 20px;
+}
+}
+
+@media (max-width: 450px) {
+  .landing-page_info-images {
+    position: relative;
+    margin: 0 auto;
+}
+  .image-center .image-center-main {
+    max-width: 220px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
+  .images-left,
+  .images-right {
+    max-width: 100px;
+  }
+  .images-left img,
+  .images-right img {
+    max-width: 75px;
+    height: auto;
+  }
+}
+@media (max-width: 380px){
+  .table-text-box-text {
+    font-size: 12px;
+    max-width: 70px;
+  }
+}
+/* Background Fruits */
+.lp-bg_img {
+  position: absolute;
+  z-index: 0;
+}
+
+/* left */
+.lp-bg_img.bg-passionfruit_2 {
+  top: 760px;
+  left: 0;
+}
+.lp-bg_img.bg-pinkleaf_5 {
+  top: 1550px;
+  left: 0;
+}
+.lp-bg_img.bg-lime_1 {
+  top: 2300px;
+  left: 0;
+}
+
+/* right */
+.lp-bg_img.bg-leaf_1 {
+  top: 910px;
+  right: 0;
+}
+.lp-bg_img.bg-melon_1 {
+  top: 1570px;
+  right: 0;
+}
+.lp-bg_img.bg-pinkleaf_6 {
+  top: 2150px;
+  right: 0;
+}
+
+@media (max-width: 860px) {
+   /*left */
+.lp-bg_img.bg-passionfruit_2 {
+  top: 415px;
+  left: 0;
+  height: 230px;
+  width: auto;
+}
+.lp-bg_img.bg-pinkleaf_5 {
+  top: 800px;
+  left: 0;
+  height: 230px;
+  width: auto;
+}
+.lp-bg_img.bg-lime_1 {
+  display: none;
+}
+
+/* right */
+.lp-bg_img.bg-leaf_1 {
+  top: 455px;
+  right: 0;
+  height: 270px;
+  width: auto;
+}
+.lp-bg_img.bg-melon_1 {
+  top: 750px;
+  right: 0;
+  height: 300px;
+  width: auto;
+}
+.lp-bg_img.bg-pinkleaf_6 {
+ display: none;
+}
+
+}
+@media screen and (max-width:450px){
+  .lp-bg_img.bg-leaf_1 {
+    top:340px;
+  }
+  .lp-bg_img.bg-passionfruit_2{
+    top:275px;
+  }
+}
+/* Default: desktop visible, mobile hidden */
+.info-carousel-desktop {
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.info-carousel-mobile {
+  display: none;
+}
+
+.info-scroll-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+  padding-left: 16px;
+  scroll-padding-left: 16px;
+
+/* Hide scrollbars */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE + Edge */
+}
+
+.info-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+
+.info-scroll-slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Mobile: Embla visible, scroll version hidden */
+@media (max-width: 767px) {
+  .info-carousel-desktop {
+    display: none;
+  }
+
+  .info-carousel-mobile {
+    display: block;
+  }
+}
+  
+
+{% endstyle %}

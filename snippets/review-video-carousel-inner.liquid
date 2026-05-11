@@ -1,0 +1,21 @@
+<div class="custom-carousel">    
+  <!-- Carousel Items Start  -->
+  {% for block in section.blocks %}
+    {% if block.type == "carousel_card" %}
+      <div class="carousel-cell">
+        {% render 'custom-carousel-card-video-homepage',
+          video_url: block.settings.video_url,
+          thumbnail: block.settings.thumbnail,
+          linked_product: block.settings.linked_product,
+          block: block,
+          section: section,
+          first: forloop.first
+        %}
+        {% if block.settings.captions_title == blank %}
+          <div class="no-dialogue {% if forloop.first %} no-dialogue--first{% endif %}">This video contains no dialogue</div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+  <!-- Carousel Items End  -->
+</div>

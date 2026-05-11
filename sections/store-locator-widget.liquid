@@ -1,0 +1,411 @@
+<div id="shopify-block-AaWRnUzVIU1RBY3ZTN__s_store_locator_storeify_storelocator_KmHdY4" class="shopify-block shopify-app-block">
+  <div class="storeifyapps-storelocator-shortcode ify-block" id="storeifyapps-storelocator-shortcode">
+		<div class="bootstrap-storeifyapps storeifyapps-storelocator-layout-1 storeifyapps-storelocator-shortcode">
+			<script type="text/javascript" defer="defer">
+				var layout = 2;
+				var owl_class="full-width";
+				var center_lat = '0';//'-122.748356';
+				var center_lng = '0';//'48.994323';
+				var initial_zoom = 2;//2;
+				var baseurl = '';
+				var search_result_zoom = 2;//2;
+				var radius_unit = 2;
+				var map;
+				var markers = [];
+				var infoWindow;
+				var locationDiv;
+				var randomID = 'main-slider-storelocator';
+				var trans= {
+							'link_detail':"View Details",
+							'getdirection':"Directions",
+							'email':"Email",
+							'phone':"Phone Number",
+							'phone_no':"Phone No",
+							'address':"Address",
+							'store_near':"There is no store near with",
+							'address_null':"is not found",
+							'no_result':"No results found",
+							'geocoder_failed':"Geocoder failed due to:",
+							'please_enter':"Please enter a location.",
+							'no_store':"There is no store.",
+							'no_store_product':"There is no store contain product name is:",
+							'no_store_name':"There is no store contain Store name is:",
+							'open_new_tab':"open_new_tab",
+						};
+				var icon_marker = "https://sl.storeify.app//images/base/store-1672299326.png";
+			</script>
+			<script type="text/javascript" defer="defer">
+				function storeifyOpentab(t,ele) {
+					// var element = document.getElementById("myDIV");
+						var ele_1 =  document.getElementsByClassName("map-tab-mobile-bnt-item");
+						var ele_2 = document.getElementsByClassName("map-tab-mobile");
+						for (var i = 0; i < ele_1.length; i++) {
+						ele_1[i].classList.remove('active');
+						ele_2[i].classList.remove('active');
+					}
+					t.classList.add('active');
+					document.getElementsByClassName(ele)[0].classList.add("active");
+				}
+					
+			</script>
+			<link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+		</div>
+	</div>
+</div>
+<style>
+/* STYLING FOR STORE LOCATOR WIDGET */
+.container-fluid:first-of-type{
+  display:none;
+}
+#frm-storelocator-search{
+  font-family:Goldplay;
+}
+div#storeifyapps-storelocator-index{
+  background:#fff4eb !important;
+}
+.storeifyapps-storelocator-shortcode{
+  background: var(--craftmix-pale-blue);
+}
+input#radius_search{
+  background: #FF5F00;
+  opacity: 1;
+}
+
+div#storeifyapps-storelocator-shortcode
+div.item-thumb img{
+  height:110px;
+  width:auto !important;
+}
+.storeifyapps-storelocator-layout-1{
+  width:1390px !important;
+  max-width:92% !important;
+}
+.chose-search-slt.form-control-storeify{
+  font-size:16px;
+  font-weight:500;
+}
+#main-slider-storelocator{
+  max-height:unset !important;
+}
+.storelocator-search{
+  margin-bottom:0 !important;
+}
+.bootstrap-storeifyapps .container-fluid{
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+#getbylocal,
+#skip-store-results-btn {
+  color: var(--craftmix-dark-blue);
+	font-family:Goldplay;
+}
+#reset-search{
+	display: flex !important;
+	justify-content: center;
+	flex-direction: column;
+}
+.skip-results-btn {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-results-btn:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  z-index: 100000;
+}
+@media (min-width: 992px) {
+  div#map,
+  form#frm-storelocator-search{
+    height:660px !important;
+  }
+  
+  div#main-slider-storelocator{
+    height:400px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  img#find-craftmix-header{
+    margin-top:100px;
+  }
+}
+
+@media (max-width: 550px) {
+  img#find-craftmix-header{
+    margin-top:70px;
+    padding: 0 25px;
+  }
+  div#find-craftmix-container{
+    padding: 40px 0px 80px;
+  }
+  div.storeify-sear-box{
+    border:none;
+  }
+}
+
+@media (max-width: 720px){
+  div.storeify-sear-box{
+    border:none;
+  }
+  button#submit-search{
+    margin:0 1% 0 0;
+    width:81%;
+    height:40px !important;
+  }
+  span#reset-search{
+    margin:0 0 0 1%;
+    width:16%;
+    text-align:center;
+    height:40px !important;
+  }
+}
+
+@media (max-width: 1023px){
+  button.cocktail_variety_pack_atc{
+    margin-top: 30px !important;
+  }
+}
+
+@media (max-width: 375px){
+  button.cocktail_variety_pack_atc{
+    margin-left: 8px !important;
+  }
+}
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // ---- reset-search handling ----
+    const TARGET_ID = 'reset-search';
+
+    function enhanceReset(el) {
+      if (!el || el.dataset.kbEnhanced === 'true') return;
+      if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+      if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+      el.dataset.kbEnhanced = 'true';
+    }
+
+    // Keydown delegation for #reset-search
+    document.addEventListener('keydown', function (e) {
+      const el =
+        (e.target && e.target.id === TARGET_ID)
+          ? e.target
+          : e.target?.closest?.('#' + TARGET_ID);
+
+      if (!el) return;
+
+      enhanceReset(el);
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+        el.click();
+      }
+    }, true);
+
+    // ---- Store locator tabs (#sl-tab-list, #sl-tab-map) ----
+    const TAB_SELECTOR = '#sl-tab-list, #sl-tab-map';
+
+    function enhanceTabs() {
+      document.querySelectorAll(TAB_SELECTOR).forEach((tab) => {
+        // Only add tabindex. Do NOT add role to avoid style collisions.
+        if (!tab.hasAttribute('tabindex')) tab.setAttribute('tabindex', '0');
+        tab.dataset.kbEnhancedTab = 'true';
+      });
+    }
+
+    // Keydown delegation for tabs (Enter/Space triggers native click)
+    document.addEventListener('keydown', function (e) {
+      const tab = e.target?.closest?.(TAB_SELECTOR);
+      if (!tab) return;
+
+      // If user is actually focused on a nested interactive control, don't override it
+      const nestedInteractive = e.target?.closest?.('a[href], button, input, select, textarea');
+      if (nestedInteractive && nestedInteractive !== tab) return;
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        tab.click();
+
+        // Keep focus on the tab after any DOM changes
+        requestAnimationFrame(() => {
+          tab.focus();
+        });
+      }
+    }, true);
+
+    // ---- Store locator cards keyboard behavior ----
+    const ITEM_SELECTOR = '#main-slider-storelocator .inner-item';
+    const ACTIVE_CLASS = 'inner-item-active';
+
+    // Flag used to suppress link navigation caused by our synthetic "select card" action
+    let suppressLinkNavigation = false;
+
+    function makeItemsFocusable() {
+      document.querySelectorAll(ITEM_SELECTOR).forEach((item) => {
+        if (!item.hasAttribute('tabindex')) item.setAttribute('tabindex', '0');
+        // Intentionally NOT adding role="button" to avoid global role-based styling collisions
+      });
+    }
+
+    function setActiveItem(activeItem) {
+      document.querySelectorAll(ITEM_SELECTOR).forEach((item) => {
+        item.classList.toggle(ACTIVE_CLASS, item === activeItem);
+      });
+    }
+
+    // Block Directions (or any link) from opening a new tab when activation came from the card keydown
+    document.addEventListener('click', function (e) {
+      if (!suppressLinkNavigation) return;
+
+      const link = e.target?.closest?.('a[href]');
+      if (!link) return;
+
+      if (link.closest(ITEM_SELECTOR)) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+      }
+    }, true);
+
+    // Keydown on the card should "select" it (same as clicking the card) without activating nested links
+    document.addEventListener('keydown', function (e) {
+      const item = e.target?.closest?.(ITEM_SELECTOR);
+      if (!item) return;
+
+      // If focus is actually on an interactive element inside the card, let it behave normally
+      const interactive = e.target?.closest?.('a[href], button, input, select, textarea, [role="button"]');
+      if (interactive && interactive !== item) return;
+
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        e.stopPropagation();
+
+        setActiveItem(item);
+
+        suppressLinkNavigation = true;
+        item.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+        suppressLinkNavigation = false;
+
+        // Prevent focus from being stolen by the map iframe/popup
+        requestAnimationFrame(() => {
+          item.focus();
+        });
+      }
+    }, true);
+
+    // Keep active class synced for actual mouse clicks too
+    document.addEventListener('click', function (e) {
+      const item = e.target?.closest?.(ITEM_SELECTOR);
+      if (!item) return;
+
+      const link = e.target?.closest?.('a[href]');
+      if (link) return;
+
+      setActiveItem(item);
+    }, true);
+
+    // ---- Observe rerenders (Storeify injects/updates DOM) ----
+    const observer = new MutationObserver(() => {
+      const el = document.getElementById(TARGET_ID);
+      if (el) enhanceReset(el);
+
+      makeItemsFocusable();
+      enhanceTabs();
+    });
+
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    // Initial run
+    enhanceReset(document.getElementById(TARGET_ID));
+    makeItemsFocusable();
+    enhanceTabs();
+  });
+</script>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const RESULTS_ID = 'results-slt';
+		const SKIP_BTN_ID = 'skip-store-results-btn';
+		const MAP_CONTAINER_SELECTOR = '.map-tab-ggmap';
+		const MOBILE_SHOP_SELECTOR = 'a.shop-now-card-btn';
+		const DESKTOP_MIN_WIDTH = 993;
+
+		function focusDesktopTarget() {
+			const mapContainer = document.querySelector(MAP_CONTAINER_SELECTOR);
+			if (!mapContainer) return false;
+
+			if (!mapContainer.hasAttribute('tabindex')) {
+				mapContainer.setAttribute('tabindex', '0');
+			}
+
+			mapContainer.focus();
+			return true;
+		}
+
+		function focusMobileTarget() {
+			const shopBtn = document.querySelector(MOBILE_SHOP_SELECTOR);
+			if (!shopBtn) return false;
+
+			shopBtn.focus();
+			return true;
+		}
+
+		function handleSkipAction() {
+			const isDesktop = window.innerWidth >= DESKTOP_MIN_WIDTH;
+
+			if (isDesktop) {
+				if (focusDesktopTarget()) return;
+			} else {
+				if (focusMobileTarget()) return;
+			}
+
+			// Final fallback: do nothing (focus remains on skip button)
+		}
+
+		function injectSkipButton() {
+			const results = document.getElementById(RESULTS_ID);
+			if (!results) return;
+
+			if (document.getElementById(SKIP_BTN_ID)) return;
+
+			const btn = document.createElement('button');
+			btn.type = 'button';
+			btn.id = SKIP_BTN_ID;
+			btn.className = 'skip-results-btn';
+			btn.textContent = 'Skip store results';
+
+			btn.addEventListener('click', handleSkipAction);
+
+			results.insertAdjacentElement('beforebegin', btn);
+		}
+
+		injectSkipButton();
+
+		const observer = new MutationObserver(injectSkipButton);
+		observer.observe(document.documentElement, { childList: true, subtree: true });
+	});
+</script>
+
+{% schema %}
+{
+  "name": "Store Locator Widget",
+  "tag": "section",
+  "class": "store-locator-widget",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Store Locator Widget"
+    }
+  ]
+}
+{% endschema %}

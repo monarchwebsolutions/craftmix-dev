@@ -1,0 +1,1527 @@
+{% schema %}
+{
+  "name": "Squishy Pillow Main",
+  "settings": [
+    {
+      "type": "product",
+      "id": "main_product",
+      "label": "Main Product"
+    },
+    {
+      "type": "number",
+      "id": "price_per_drink",
+      "label": "Price Per Drink"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Squishy Pillow Main"
+    }
+  ]
+}
+{% endschema %}
+
+{% style %}
+ *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  /* overflow-x: hidden; */
+  overflow-y: auto; 
+  overflow:visible !important;
+}
+.main-container{
+  overflow:visible !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+section.landing-page-main {
+  background-color: #ddf7f7;
+  position: relative;
+}
+
+/* Hide carousel by default (desktop/tablet) */
+.image-carousel-wrapper {
+  display: none;
+}
+
+.lp-main-wrapper {
+  max-width: 1400px;
+  padding: 80px 20px;
+  margin: 0 auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  gap: 74px;
+  margin-bottom: 40px;
+  position:relative;
+}
+
+.flex-item-left {
+  width: 100%;
+  display: flex;
+  max-width: 776px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 12px;
+  flex-wrap: wrap;
+  position:sticky;
+  top:120px;
+}
+
+.flex-item-left .gallery{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.flex-item-right {
+  max-width: 514px;
+  width: 100%;
+}
+
+.lp_image_carousel_embla__viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.lp_image_carousel_embla__container {
+  display: flex;
+  gap: 12px;
+}
+
+.lp_image_carousel_embla__slide {
+  flex: 0 0 auto;
+  height: auto;
+  scroll-snap-align: center;
+}
+.lp_image_carousel_embla__slide:last-of-type {
+  margin-right: 12px;
+}
+.small-img-container {
+  border: 1px solid #002657;
+  border-radius: 20px;
+  overflow: hidden;
+}
+  
+.lp-carousel-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-lg-container {
+  width: 100%;
+  max-width: 774px;
+  position: relative;
+}
+
+
+.img-wrapper-lg img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.imgs-sm-container {
+  max-width: 776px;
+  width: 100%;
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+  cursor:pointer;
+}
+
+.img-wrapper-sm img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-wrapper-lg,
+.img-wrapper-sm {
+  position: relative;
+  border: 2px solid #002657;
+  border-radius: 26px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio:1/1;
+}
+
+.img-wrapper-sm {
+  width: calc(50% - 8.9195px);
+  border: 2px solid #000; 
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.img-wrapper-lg img,
+.img-wrapper-sm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.lp-main-prev-btn,
+.lp-main-next-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  background-color: transparent;
+  width: 62px;
+  height: 62px;
+}
+
+.lp-main-prev-btn{
+  left: 24px;
+}
+
+.lp-main-next-btn {
+  right: 24px;
+}
+
+.lp-main-prev-btn img {
+  transform: scaleX(-1);
+}
+
+
+
+.reviews {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding-bottom:12px;
+}
+
+.reviews .review-stars {
+  height: 22px;
+  margin-right:6px;
+  width:auto;
+}
+.reviews .review-text {
+  color: #6e493f;
+  font-size: 16px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 30.8px;
+  font-weight:normal;
+}
+.reviews .review-text-b{
+  font-weight:600;
+}
+.review-text-separator{
+  padding: 0 12px;
+}
+h1.heading-text {
+  color: #6e493f;
+  font-size: 36px;
+  font-family: Hornbill;
+  font-weight: 900;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+p.paragraph-text {
+  color: #6e493f;
+  font-size: 24px;
+  font-family: Goldplay;
+  font-weight: 500;
+  line-height: 33.6px;
+  margin-bottom: 24px;
+}
+
+.buy-option{
+  cursor:pointer;
+}
+
+.buy-option-container {
+  display: flex;
+  flex-direction: column; 
+  border-radius: 18px;
+  border: 2px solid rgba(0, 38, 87, 0.1);
+  background: rgba(255, 255, 255, 0.7);
+  margin-bottom: 24px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.buy-option-row {
+  display: flex;
+  flex-direction: row; /* row layout for the main content */
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+.buy-option-row-left{
+  display:flex;
+  gap:6px;
+}
+.buy-option-row-left input{
+  margin-top:4px;
+}
+
+.buy-option-2 .buy-option-row{
+  padding-bottom:0;
+}
+.buy-option-2 .product-contents{
+  padding-bottom:16px;
+  padding-left:49px;
+  padding-right:14px;
+  background:white;
+}
+  
+.buy-option-container-lg {
+  border-radius: 18px;
+  margin-bottom: 8px;
+  border: 2px solid rgba(0, 38, 87, 0.1);
+  overflow: hidden;
+}
+
+.buy-option-container-lg-product {
+  display: flex;
+  padding: 16px 20px;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 1);
+  gap:2px;
+}
+
+.sale-bar {
+  background-color: #FFE9DA;
+  padding: 4px 10px;
+  text-align: center;
+  border-bottom: 2px solid rgba(0, 38, 87, 0.1)
+}
+
+.sale-bar-text {
+  color: #002657;
+  font-size: 24px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 28.8px;
+}
+
+.buy-option-container.selected,
+.buy-option-container-lg.selected {
+  border: 2px solid rgba(0, 38, 87, 1); 
+}
+
+.buy-option-container.selected .sale-bar,
+.buy-option-container-lg.selected .sale-bar {
+  border-bottom: 2px solid rgba(0, 38, 87, 1);
+}
+
+.buy-option-container-lg-footer {
+  background: rgba(255, 255, 255, 1);
+  padding: 0px 20px 16px 20px;
+}
+
+.club-benifits-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.club-benifits img {
+  margin-right: 5px;
+}
+
+.club-benifits-items img {
+  height: 10px;
+  width: 17px;
+}
+.club-benifits span {
+  color: #000;
+  font-size: 20px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 28px;
+}
+.club-benifits-top,
+.club-benifits-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 24px;
+}
+
+.buy-option-info .product-name {
+  color: #002657;
+  font-size: 28px;
+  font-family: Hornbill;
+  font-weight: 800;
+  line-height: 36px;
+  padding-right:6px;
+}
+.product-contents {
+  color: #fe6b00;
+  font-size: 14px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.buy-option-pricing {
+  display: flex;
+  flex-direction: column;
+}
+
+.buy-option-pricing-comparison {
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+}
+
+.buy-option-pricing-comparison-before {
+  color: #002657;
+  font-size: 26px;
+  font-family: Goldplay;
+  font-weight: 600;
+  text-decoration: line-through;
+  line-height: 31.2px;
+  opacity: 0.4;
+}
+.buy-option-pricing-comparison-after {
+  color: #002657;
+  font-size: 26px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 31.2px;
+}
+
+.buy-option-pricing-per-drink-text {
+  color: #002657;
+  font-size: 20px;
+  font-family: Goldplay;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 28px;
+  text-align: right;
+  opacity: 0.4;
+}
+
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #002657;
+  display: inline-block;
+  position: relative;
+  background: white;
+  cursor: pointer;
+}
+
+input[type="radio"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px; 
+  height: 12px;
+  background-color: #002657;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+input[type="radio"]:checked::after {
+  opacity: 1;
+}
+
+.buy-button {
+  font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 140%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  gap: 3px;
+  width: 100%;
+  height: 69px;
+  background: #6e493f;
+  color: #fff;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  transition: box-shadow 0.4s ease;
+  border-radius: 100px;
+  margin: 0 auto 24px;
+  text-transform: uppercase;
+  cursor: pointer;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.buy-button:hover {
+  box-shadow: none;
+}
+
+.flavor-container {
+  margin: 24px 0px;
+  padding: 16px 0px;
+  max-width: 100%;
+}
+
+h2.flavor-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay' !important;
+  font-size: 22px;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  text-align: left;
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+/* FLAVOR GRID SMALL */
+.flavor-card-grid-single-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  justify-content: center;
+  place-items: center;
+  gap: 16px;
+}
+
+
+
+.flavor-card-single {
+  border-radius: 12px;
+  overflow: hidden;
+  width:25%;
+  max-width:25%;
+  flex: 1 0 23%;
+}
+
+.flavor-card-single-image-container {
+  max-width: 118px;
+  max-height: 124px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 38, 87, 0.08);
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flavor-card-single-image {
+  width: 100%;
+  height: auto;
+}
+
+.flavor-card-single-heading {
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 16px;
+  padding-top: 10px;
+}
+/* END FLAVOR GRID SMALL */
+
+/* FLAVOR GRID LARGE */
+.flavor-card-grid-double-row {
+  display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  justify-content: center;
+  place-items: center;
+  gap: 10px;
+}
+
+.flavor-card-double {
+  width: 90px;
+  height: 130px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.flavor-card-double-image-container {
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 38, 87, 0.08);
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flavor-card-double-image {
+  width: 100%;
+  height: auto;
+}
+
+.flavor-card-double-heading {
+  font-family: 'Goldplay';
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 16px;
+  padding-top: 10px;
+}
+/* END FLAVOR GRID LARGE */
+
+/* FOR GRID DISPLAY WITH JS */
+.flavor-card-grid-single-row,
+.flavor-card-grid-double-row {
+  display: none;
+}
+
+.flavor-card-grid-single-row.active,
+.flavor-card-grid-double-row.active {
+  display: grid;
+}  
+/* END GRID DISPLAY WITH JS */  
+
+/* MAIN PRODUCT REVIEWS */
+
+.main-product-reviews-container{
+  margin-bottom:32px;
+}
+.main-product-reviews-container h2{
+  font-family: 'Goldplay' !important;
+  font-size: 22px;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px;
+  text-align: left;
+  margin-bottom: 16px;
+  color:#6e493f !important;
+}
+.main-product-review-stars{
+  width:100px;
+  height:18px;
+}
+.main-product-review{
+  background: rgba(255, 255, 255, 0.6);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom:12px;
+}
+.main-product-review-name{
+  font-size:15px;
+  font-family:Goldplay;
+  font-weight:500;
+  line-height:1;
+  min-width:90px;
+}
+
+.main-product-review-headline{
+  font-size: 18px;
+  font-family:Hornbill;
+  font-weight:600;
+  line-height:1;
+}
+
+.main-product-review-content{
+  font-family:Goldplay;
+  font-weight:500;
+  font-style: italic;
+}
+.main-product-review-top{
+  display:flex;
+  margin-bottom:14px;
+  align-items:center;
+  gap:16px;
+}
+@media screen and (max-width: 529px){
+  .main-product-reviews-container h2{
+    font-size:18px;
+  }
+}
+@media screen and (max-width: 399px){
+  .main-product-review-top{
+    gap:12px;
+  }
+  .main-product-review-stars{
+    width:90px;
+    height:16px;
+  }
+  .main-product-review-headline{
+    font-size: 16px;
+  }
+  .main-product-review-name{
+    font-size:14px;
+  }
+}
+
+/* FAQs */
+
+.faq-container {
+  width: 100%;
+  color:#6e493f;
+}
+
+.faq-question-body {
+  margin-bottom: 24px;
+}
+
+.faq-answer {
+  display: none;
+  margin-top: 8px;
+}
+
+.faq-question h6 {
+  color: #6e493f;
+  font-size: 24px;
+  font-family: Goldplay;
+  font-weight: 600;
+  line-height: 28.8px;
+}
+
+.faq-answer p {
+  color: #6e493f;
+  font-size: 20px;
+  font-family: Goldplay;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-icon::before {
+  content: '+';
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+/* when open */
+.faq-question.open + .faq-answer {
+  display: block;
+}
+
+.faq-question.open .faq-icon::before {
+  content: '−'; 
+}
+
+.landing-page-heading-section-marquee {
+  position: absolute;
+   top: auto !important;
+  bottom: -50% !important;
+  z-index:1;
+  pointer-events: none;
+  height:revert-layer !important;
+}
+
+/* Hide carousel by default (desktop/tablet) */
+.image-carousel-wrapper {
+  display: none;
+}
+.buy-options-wrapper [class*="buy-option-container"],
+.buy-options-wrapper .buy-option-row{
+  background-color:#f5fdfd;
+}
+.buy-options-wrapper .selected [class*="buy-option-container"],
+.buy-options-wrapper .selected .buy-option-row{
+  background-color:white !important;
+}
+
+/* Variety Lander CSS */
+
+.variety-lander-benefits-header{
+  font-family:Goldplay;
+  font-weight:600;
+  font-size:16px;
+  text-transform:uppercase;
+  text-align:center;
+}
+
+.variety-lander-benefits-container{
+  display:flex;
+  justify-content:space-between;
+  gap:4px;
+  padding-top:16px;
+}
+.variety-lander-benefit{
+  position:relative;
+  width:25%;
+}
+
+.benefit-included-price{
+  background-color:#C8202F;
+  font-size:10px;
+  text-transform:uppercase;
+  text-align: center;
+  color: white;
+  font-family: 'Goldplay';
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  top:-8px;
+}
+.benefit-img-container{
+  border: 1px dashed #2a2552;
+  border-radius:4px;
+  max-height: 114px;
+  display: flex;
+  align-items: center;
+}
+.benefit-img{
+  padding:8px 5px 0;
+}
+.benefit-img-3{
+  /* padding-top: 10px; */
+}
+.benefit-text{
+    font-family: 'Goldplay';
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 4px;
+}
+.included-flavors{
+  display: flex;
+  /* justify-content: space-between; */
+  max-width: 492px;
+  gap:4px;
+  flex-wrap: wrap;
+}
+.buy-options-wrapper{
+  margin-bottom:24px;
+}
+.flavor-title{
+  font-family:Goldplay;
+  font-size:16px;
+  font-weight:600;
+  text-align:center;
+}
+@media (max-width: 1040px) {
+  .flex-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .flex-item-left {
+    position:relative;
+    top:unset;
+  }
+}
+@media (max-width: 829px) {
+  .flex-item-right,
+  .flex-item-left {
+    max-width: 492px;
+  }
+  .buy-button{
+    position: fixed;
+    bottom: 0;
+    z-index: 3;
+    max-width: 90vw;
+    margin: auto;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
+@media (max-width: 768px) {
+  input[type="radio"] {
+    width: 15px;
+    min-width:15px;
+    height: 15px;
+  }
+
+  input[type="radio"]::after {
+    width: 8px;
+    height: 8px;
+  }
+  .buy-option-2 .product-contents{
+    padding-left:44px;
+  }
+}
+/* Show on mobile */
+@media (max-width: 529px) {
+  .img-lg-container,
+  .imgs-sm-container {
+    /* display: none; */
+  }
+
+  .lp-main-prev-btn, .lp-main-next-btn{
+    width:45px;
+    height:45px;
+  }
+
+  .lp-main-prev-btn {
+    left: -15px;
+  }
+
+  .lp-main-next-btn {
+    right: -15px;
+  }
+
+  .img-wrapper-sm{
+    border: 1.5px solid #002657;
+    border-radius:10px;
+  }
+
+  .flex-item-left{
+    margin-bottom:12px;
+  }
+
+  .buy-option-2 .product-contents{
+    padding-left:37px;
+  }
+
+
+  .image-carousel-wrapper {
+    /* display: block; */
+    display:none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0; 
+    padding: 24px 16px 0px 16px;
+  }
+
+  .image-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .lp-image-carousel {
+    display: flex;
+    gap: 12px;
+    scroll-snap-type: x mandatory;
+    margin-right: 16px;
+  }
+
+  .lp-carousel-image {
+    flex: 0 0 auto;
+    height: 260px;
+    width: auto;
+    scroll-snap-align: center;
+    object-fit: cover;
+  }
+
+  .lp-main-wrapper {
+    padding: 25px 16px;
+    margin: 0 auto;
+  }
+
+  .flex-container {
+    gap: 0px;
+  }
+
+  .reviews .review-stars {
+    height: 16px;
+  }
+
+  .reviews .review-text {
+    font-size: 12px;
+    line-height: 140%;
+  }
+
+  h1.heading-text {
+    font-size: 24px;
+    font-family: Hornbill;
+    font-weight: 900;
+    line-height: 120%;
+    margin-bottom: 16px;
+  }
+
+  p.paragraph-text {
+    font-size: 17px;
+    line-height: 140%;
+    margin-bottom: 16px;
+  }
+
+  .buy-option-row,
+  .buy-option-container-lg-product {
+    padding: 11px 14px;
+  }
+
+  .buy-option-info .product-name {
+    font-size: 19px;
+    line-height: 120%;
+  }
+.product-contents {
+    font-size: 12px;
+    line-height: 140%;
+  }
+
+  .buy-option-pricing {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buy-option-pricing-comparison {
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+  }
+
+  .buy-option-pricing-comparison-before {
+    color: #002657;
+    font-size: 18px;
+    font-family: Goldplay;
+    font-weight: 600;
+    text-decoration: line-through;
+    line-height: 120%;
+    opacity: 0.4;
+  }
+  .buy-option-pricing-comparison-after {
+    color: #002657;
+    font-size: 18px;
+    font-family: Goldplay;
+    font-weight: 600;
+    line-height: 120%;
+  }
+
+  .buy-option-pricing-per-drink-text {
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  .sale-bar {
+    padding: 4px 10px;
+  }
+
+  .sale-bar-text {
+    font-size: 16px;
+    line-height: 120%;
+  }
+
+  .buy-option-container-lg-footer {
+    background: rgba(255, 255, 255, 1);
+    padding: 0px 16px 11px 16px;
+  }
+
+  .club-benifits-top,
+  .club-benifits-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+  }
+
+  .club-benifits-items img {
+    width: 12px;
+    height: 7px;
+  }
+
+  .club-benifits span {
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  .buy-button {
+    font-size: 18px;
+    line-height: 140%;
+    padding: 11px 8px;
+    gap: 3px;
+    width: 100%;
+    height: 50px;
+  }
+
+  .flavor-heading {
+    font-size: 16px;
+    line-height: 120%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .faq-question h6 {
+    font-size: 18px;
+    line-height: 120%;
+  }
+
+  .faq-answer p {
+    font-size: 16px;
+    line-height: 140%;
+  }
+  
+  /* Variety Lander Mobile CSS */
+  .flavor-title{
+    font-size:12px;
+  }
+  .benefit-included-price{
+    white-space:unset;
+    font-size:8px;
+    top:-14px;
+  }
+  .variety-lander-benefits-container{
+    padding-top:20px;
+  }
+  .review-text-separator{
+    padding: 0 4px;
+  }
+  .reviews .review-stars {
+    margin-right:0;
+  }
+  h2.flavor-heading{
+    font-size:18px;
+  }
+  .reviews{
+    gap:4px;
+  }
+  .variety-lander-benefits-header{ 
+    font-size:13px;
+  }
+}
+@media screen and (max-width:399px){
+  .buy-option-info .product-name {
+    font-size: 18px;
+  }
+  .buy-option-info .product-contents{
+    font-size:12px;
+  }
+}
+
+{% endstyle %}
+{% assign main_product = section.settings.main_product %}
+
+{% assign product_1 = all_products['espresso-martini-pillow-12-pack'] %}
+{% assign product_2 = all_products['espresso-martini-pillow'] %}
+
+<section class="landing-page-main">
+
+  <div class="lp-main-wrapper ">
+    <div class="flex-container">
+      <div class="flex-item-left">
+        {% assign raw = page.metafields.custom.photos %}
+        {% assign cleaned = raw
+          | remove: '['
+          | remove: ']'
+          | remove: '"' %}
+        {% assign image_urls = cleaned | split: ',' %}
+
+        {%- comment -%} PRODUCT 1 GALLERY {%- endcomment -%}
+        <div class="gallery gallery-1">
+          <div class="img-lg-container">
+            <div class="img-wrapper-lg">
+              <img
+                src="{{ product_1.featured_image | img_url: 'original' }}"
+                alt="{{ product_1.featured_image.alt }}"
+                width="704"
+                height="704"
+              >
+            </div>
+            <button class="lp-main-prev-btn" aria-label="Previous slide">
+              <img src="{{ 'lp-carousel-btn.svg' | asset_url }}" alt="Left facing arrow icon inside circle" width="62" height="62">
+            </button>
+            <button class="lp-main-next-btn" aria-label="Next slide">
+              <img src="{{ 'lp-carousel-btn.svg' | asset_url }}" alt="Right facing arrow icon inside circle" width="62" height="62">
+            </button>
+          </div>
+
+          <div class="imgs-sm-container">
+            {% for image in product_1.images %}
+              {% if forloop.index > 1 %}
+                <div class="img-wrapper-sm">
+                  <img
+                    src="{{ image | img_url: 'original' }}"
+                    alt="{{ image.alt }}"
+                    width="770"
+                    height="770"
+                    tabindex="0"
+                  >
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+
+        {%- comment -%} PRODUCT 2 GALLERY (HIDDEN BY DEFAULT) {%- endcomment -%}
+        <div class="gallery gallery-2" style="display:none;">
+          <div class="img-lg-container">
+            <div class="img-wrapper-lg">
+              <img
+                src="{{ product_2.featured_image | img_url: 'original' }}"
+                alt="{{ product_2.featured_image.alt }}"
+                width="704"
+                height="704"
+              >
+            </div>
+            <button class="lp-main-prev-btn" aria-label="Previous slide">
+              <img src="{{ 'lp-carousel-btn.svg' | asset_url }}" alt="Left facing arrow icon inside circle" width="62" height="62">
+            </button>
+            <button class="lp-main-next-btn" aria-label="Next slide">
+              <img src="{{ 'lp-carousel-btn.svg' | asset_url }}" alt="Right facing arrow icon inside circle" width="62" height="62">
+            </button>
+          </div>
+
+          <div class="imgs-sm-container">
+            {% for image in product_2.images %}
+              {% if forloop.index > 1 %}
+                <div class="img-wrapper-sm">
+                  <img
+                    src="{{ image | img_url: 'original' }}"
+                    alt="{{ image.alt }}"
+                    width="770"
+                    height="770"
+                    tabindex="0"
+                  >
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="flex-item-right">
+        <div class="reviews">
+          <img class="review-stars"
+            src="https://cdn.shopify.com/s/files/1/2340/1623/files/brown-stars.svg?v=1764968584" width="124" height="22" alt="Review stars" role="presentation">
+          <span class="review-text"><span class="review-text-a">"Fun, Easy, and Delicious"</span> <span class="review-text-separator">|</span> <span class="review-text-b"> 7120+ Reviews</span></span>
+        </div>
+        <div class="heading">
+          <h1 class="heading-text">Get the Limited Edition<br>Espresso Martini Pillow</h1>
+        </div>
+        <div class="paragraph">
+          <p class="paragraph-text">Squishy comfort for your couch, bed, or wherever you take post-cocktail naps... 😴</p>
+        </div>
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="form_type" value="product">
+          <input type="hidden" name="utf8" value="✓">
+
+          <input type="hidden" name="id" value="{{ product_1.variants.first.id }}">
+          <button type="submit" class="buy-button">Checkout</button>
+          <div class="buy-options-wrapper">
+
+            <!-- PILLOW & 12-PACK -->
+            <div class="buy-option-container-lg buy-option buy-option-1 selected">
+              <div class='sale-bar sale-bar_lg'>
+                <span class='sale-bar-text'>40% OFF Espresso Martini 12-Pack</span>
+              </div>
+              <div class="buy-option-container-lg-product">
+                <div class="buy-option-row-left">
+                  <input type="radio" name="product_selector" id="pillow-bundle-selector" value="{{ product_1.variants.first.id }}" checked>
+                  <label for="pillow-bundle-selector" class="buy-option-info">
+                    <h3 class="product-name">Pillow & 12-Pack</h3>
+                    <p class="product-contents">(12 Drink Packets Included)</p>
+                  </label>
+                </div>
+                <div class="buy-option-pricing">
+                  <div class="buy-option-pricing-comparison">
+                    <p class="buy-option-pricing-comparison-before">{{product_1.variants.first.compare_at_price | money}}</p>
+                    <p class="buy-option-pricing-comparison-after">{{product_1.variants.first.price | money}}</p>
+                  </div>
+                  <div class="buy-option-pricing-per-drink">
+                    <p class="buy-option-pricing-per-drink-text">$0.83/drink</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <!-- SQUISHY PILLOW ONLY -->
+            <div class="buy-option-container buy-option buy-option-2">
+              <div class="buy-option-row">
+                <div class="buy-option-row-left">
+                  <input type="radio" name="product_selector" id="pillow-selector" value="{{ product_2.variants.first.id }}">
+                  <label for="pillow-selector" class="buy-option-info">
+                    <h3 class="product-name">Cozy Pillow ONLY</h3>
+                  </label>
+                </div>
+                <div class="buy-option-pricing">
+                  <div class="buy-option-pricing-comparison">
+                    <p class="buy-option-pricing-comparison-after">{{product_2.variants.first.price | money}}</p>
+                  </div>
+                </div>
+              </div>
+              <p class="product-contents">(12 Espresso Martini Drink Packets NOT Included)</p>
+            </div>
+
+          </div>
+
+        </form>
+         
+        <div class="main-product-reviews-container">
+          <h2>WHAT OUR CUSTOMERS HAVE TO SAY</h2>
+          <div class="main-product-review">
+            <div class="main-product-review-top">
+              <img class="main-product-review-stars" src="https://cdn.shopify.com/s/files/1/2340/1623/files/stars-orange.svg?v=1763470457" alt="Five Orange Review Stars">
+              <span class="main-product-review-headline">Excellent</span>
+              <span class="main-product-review-name">by Randie S</span>
+            </div>
+            <div class="main-product-review-content">I was so surprised how tasty this mix is. This tastes like it is made with fresh espresso. The size of the packets also make it so easy to take with you!</div>
+          </div>
+          <div class="main-product-review">
+            <div class="main-product-review-top">
+              <img class="main-product-review-stars" src="https://cdn.shopify.com/s/files/1/2340/1623/files/stars-orange.svg?v=1763470457" alt="Five Orange Review Stars">
+              <span class="main-product-review-headline">Amazing</span>
+              <span class="main-product-review-name">by Annie J</span>
+            </div>
+            <div class="main-product-review-content">This is better than some espresso martinis I have had in restaurants! Really recommend!</div>
+          </div>
+          <div class="main-product-review">
+            <div class="main-product-review-top">
+              <img class="main-product-review-stars" src="https://cdn.shopify.com/s/files/1/2340/1623/files/stars-orange.svg?v=1763470457" alt="Five Orange Review Stars">
+              <span class="main-product-review-headline">Best Drink Mixer I've Ever Had</span>
+              <span class="main-product-review-name">by Jennifer P</span>
+            </div>
+            <div class="main-product-review-content">Craftmix has the best drink mixers i’ve ever had. Ringing in at only 25 calories per packet, they are an amazing addition to cocktails and mocktails alike. Mango and Espresso are my favorites and the strawberry mule is not far behind.</div>
+          </div>
+        </div>
+        
+        <div class="faq-container">
+        
+          {% for block in section.blocks %}
+            {% if block.type == 'faq' %}
+              <div class="faq-question-body" {{ block.shopify_attributes }}>
+                <div class="faq-question{% comment %}{% if forloop.index == 1 %} open{% endif %}{% endcomment %}">
+                  <h6>{{ block.settings.question }}</h6>
+                  <div class="faq-icon"></div>
+                </div>
+                <div class="faq-answer">
+                  <p>{{ block.settings.answer }}</p>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        
+
+        </div>
+      </div>
+    </div>
+  </div>
+   <lottie-player class="marquee landing-page-heading-section-marquee" src="{{ 'pr_banner_1440px.json' | asset_url }}" background="transparent"  speed="0.6"  loop autoplay></lottie-player>
+</section>
+<script src="{{ 'lp-embla.js' | asset_url }}" defer='defer'></script>
+<script>
+  window.allSources = [];
+</script>
+
+<script>
+  // Product selection functionality
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.querySelector('form[action="/cart/add"]');
+    if (!form) return;
+
+    var option1 = form.querySelector('.buy-option-1');
+    var option2 = form.querySelector('.buy-option-2');
+
+    var radio1 = form.querySelector('#pillow-bundle-selector');
+    var radio2 = form.querySelector('#pillow-selector');
+
+    var hiddenIdInput = form.querySelector('input[name="id"]');
+
+    var PRODUCT_1_ID = '{{ product_1.variants.first.id }}';
+    var PRODUCT_2_ID = '{{ product_2.variants.first.id }}';
+
+    function selectOption1() {
+      if (!hiddenIdInput) return;
+      if (radio1) radio1.checked = true;
+      if (radio2) radio2.checked = false;
+
+      hiddenIdInput.value = PRODUCT_1_ID;
+
+      if (option1) option1.classList.add('selected');
+      if (option2) option2.classList.remove('selected');
+    }
+
+    function selectOption2() {
+      if (!hiddenIdInput) return;
+      if (radio2) radio2.checked = true;
+      if (radio1) radio1.checked = false;
+
+      hiddenIdInput.value = PRODUCT_2_ID;
+
+      if (option2) option2.classList.add('selected');
+      if (option1) option1.classList.remove('selected');
+    }
+
+    // Click anywhere on the container
+    if (option1) {
+      option1.addEventListener('click', function () {
+        selectOption1();
+      });
+    }
+
+    if (option2) {
+      option2.addEventListener('click', function () {
+        selectOption2();
+      });
+    }
+
+    // Also handle direct clicks on radios (for accessibility / keyboard)
+    if (radio1) {
+      radio1.addEventListener('click', function (e) {
+        e.stopPropagation();
+        selectOption1();
+      });
+    }
+
+    if (radio2) {
+      radio2.addEventListener('click', function (e) {
+        e.stopPropagation();
+        selectOption2();
+      });
+    }
+  });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // --- Initialize each gallery independently ---
+  document.querySelectorAll('.gallery').forEach((gallery) => {
+    const lgImg   = gallery.querySelector('.img-wrapper-lg img');
+    const nextBtn = gallery.querySelector('.img-lg-container .lp-main-next-btn');
+    const prevBtn = gallery.querySelector('.img-lg-container .lp-main-prev-btn');
+    const thumbs  = Array.from(gallery.querySelectorAll('.img-wrapper-sm img'));
+
+    if (!lgImg) return;
+
+    const slides = [
+      {
+        src: lgImg.getAttribute('src'),
+        alt: lgImg.getAttribute('alt') || ''
+      },
+      ...thumbs.map(img => ({
+        src: img.getAttribute('src'),
+        alt: img.getAttribute('alt') || ''
+      }))
+    ];
+
+    let currentIndex = 0;
+
+    const updateLgImage = () => {
+      const slide = slides[currentIndex];
+      lgImg.src = slide.src;
+      lgImg.alt = slide.alt;
+    };
+
+    const rotateForward = () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateLgImage();
+    };
+
+    const rotateBackward = () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateLgImage();
+    };
+
+    // Reset function attached to the gallery element
+    gallery.resetGallery = () => {
+      currentIndex = 0;
+      updateLgImage();
+    };
+
+    // Main image click
+    lgImg.addEventListener('click', rotateForward);
+
+    // Arrows
+    if (nextBtn) nextBtn.addEventListener('click', rotateForward);
+    if (prevBtn) prevBtn.addEventListener('click', rotateBackward);
+
+    // Thumbnails: click + keydown
+    thumbs.forEach((thumb, index) => {
+      thumb.style.cursor = 'pointer';
+      thumb.setAttribute('tabindex', '0');
+
+      const activateThumb = () => {
+        currentIndex = index + 1;
+        updateLgImage();
+      };
+
+      thumb.addEventListener('click', activateThumb);
+
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activateThumb();
+        }
+      });
+    });
+  });
+
+  // --- Toggle which gallery is visible when buy options are clicked ---
+  const gallery1 = document.querySelector('.gallery-1');
+  const gallery2 = document.querySelector('.gallery-2');
+  const option1  = document.querySelector('.buy-option-1');
+  const option2  = document.querySelector('.buy-option-2');
+
+  function showGallery1() {
+    if (!gallery1 || !gallery2) return;
+    gallery1.style.display = '';
+    gallery2.style.display = 'none';
+    if (gallery1.resetGallery) gallery1.resetGallery();
+  }
+
+  function showGallery2() {
+    if (!gallery1 || !gallery2) return;
+    gallery1.style.display = 'none';
+    gallery2.style.display = '';
+    if (gallery2.resetGallery) gallery2.resetGallery();
+  }
+
+  if (option1) option1.addEventListener('click', showGallery1);
+  if (option2) option2.addEventListener('click', showGallery2);
+
+  // --- FAQ toggle: click + keydown, tabindex set here ---
+  document.querySelectorAll('.faq-question').forEach((question) => {
+    question.setAttribute('tabindex', '0');
+
+    const toggleFAQ = () => {
+      question.classList.toggle('open');
+    };
+
+    question.addEventListener('click', toggleFAQ);
+
+    question.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleFAQ();
+      }
+    });
+  });
+
+});
+</script>

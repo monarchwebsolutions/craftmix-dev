@@ -1,0 +1,23 @@
+<div class="custom-carousel-container">
+  {% render 'custom-carousel-inner' %}
+</div>
+{% schema %}
+  {
+    "name": "SL Flavor Carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading Text",
+        "default": "Find Your Flavor" 
+      }, 
+       {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      }
+    ],
+     "presets": [{"name": "SL Flavor Carousel"}]
+   }
+{% endschema %}

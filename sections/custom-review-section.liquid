@@ -1,0 +1,447 @@
+<div class="custom-review-section">
+  <div class="product-review-container">
+    <div class="product-review-main">
+      <div class="product-review-header">
+        <div class="product-review-info">
+          <h2 class="product-review-header-title">Product Reviews</h2>
+          <div class="product-review-header-stars">
+            <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/starsstars.svg?v=1738088370" alt="">
+            <p>5.0</p>
+          </div>
+          <p class="product-reviews-header-number">100 reviews</p>
+          <div class="product-review-header-gallery">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-1.png?v=1739298888" alt="Gallery image of cocktails and mocktails">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-2.png?v=1739298889" alt="Gallery image of cocktails and mocktails">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-3.png?v=1739298888" alt="Gallery image of cocktails and mocktails">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-4.png?v=1739298888" alt="Gallery image of cocktails and mocktails">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-5.png?v=1739298888" alt="Gallery image of cocktails and mocktails">
+            <img class="product-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-6.png?v=1739298888" alt="Gallery image of cocktails and mocktails">
+          </div>
+        </div>
+    
+      </div>
+      <div class="product-review-body" id="custom-reviews">
+        <p>Loading reviews...</p>
+      </div>
+
+      
+      <div class="product-review-footer">
+        <nav class="footer-pagination">
+          <ul class="pagination">
+            <li class="pagination-item"><a href1>1</a></li>
+            <li class="pagination-item">2<a href2></a></li>
+            <li class="pagination-item">3<a href3></a></li>
+            <li class="pagination-item">4<a href4></a></li>
+            <li class="pagination-item">5<a href5></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+    <div class="section-wave-container">
+      <lottie-player class="section-wave" src="{{ 'wave-animation-left-to-right-pale-blue.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+    </div>
+</div>
+{% style %}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.custom-review-section {
+  padding-top: 50px;
+  /* padding-bottom: 50px; */
+  background-color: #fff9f5;
+}
+
+.product-review-container {
+  margin: 0 auto;
+  max-width: 1400px;
+}
+.product-review-main {
+  width: 753px;
+  margin: 0 auto;
+}
+
+.product-review-header {
+}
+.product-review-info {
+}
+.product-review-header-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+}
+
+.product-review-header-stars {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Goldplay';
+  color: #002657;
+  margin-bottom: 15px;
+}
+
+.product-review-header-stars p {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.43px;
+  text-align: left;
+  line-height: 17px;
+  text-transform: uppercase;
+}
+
+.product-reviews-header-number {
+  opacity: 1;
+  color: #002657;
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: center;
+  line-height: 16px;
+}
+
+.product-review-header-gallery {
+  width: 100%;
+  padding-top: 47px;
+  padding-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 11px;
+  border-bottom: 1.5px solid #002657;
+}
+
+.product-review-gallery-image {
+  height: 116px;
+  width: 116px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.product-review {
+  display: flex;
+  flex-direction: row;
+  padding-top: 37px;
+  padding-bottom: 33px;
+  border-bottom: 1.5px solid rgba(0, 38, 87, 0.08);
+  opacity: 1;
+}
+
+.product-review-client-details {
+  width: 344px;
+}
+
+.product-review-client-review {
+  width: 409px;
+}
+
+.product-review-client-details .client-name {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+}
+.product-review-client-details .credentials {
+  display: flex;
+  flex-direction: column;
+}
+.product-review-client-details .credentials .recommend,
+.product-review-client-details .credentials .verified {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 14px;
+}
+.product-review-client-details .credentials .recommend p,
+.product-review-client-details .credentials .verified p {
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+}
+.product-review-client-details .credentials .recommend img,
+.product-review-client-details .credentials .verified img {
+  width: 14px;
+  height: auto;
+}
+
+.product-review-client-review .review-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 22px;
+  margin-bottom: 19px;
+}
+.product-review-client-review .review-text {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.11px;
+  text-align: left;
+  line-height: 24px;
+  padding-right: 5px;
+}
+
+.product-review-footer {
+  height: 42px;
+}
+
+nav ul.pagination {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+nav ul.pagination li {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: 8.91px;
+  text-align: center;
+  line-height: 16px;
+}
+
+nav ul.pagination li:active a {
+  border: 1.5px solid rgba(0, 38, 87, 1);
+}
+
+@media screen and (max-width: 798px) {
+  .product-review-main {
+    max-width: 389px;
+  }
+  .product-review-header-title {
+    font-size: 40px;
+    letter-spacing: -1.05px;
+    line-height: 40px;
+  }
+  .product-review-header-stars {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Goldplay';
+    color: #002657;
+    margin-bottom: 15px;
+  }
+
+  .product-review {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-review-client-review {
+    max-width: 380px;
+    margin-top: 33px;
+  }
+  .review-text {
+    padding-right: 25px;
+  }
+}
+
+@media screen and (max-width: 798px) {
+  .product-review-main {
+    max-width: 389px;
+  }
+
+  .product-review-header-gallery {
+    justify-content: start;
+    gap: 5px;
+  }
+
+  .product-review-gallery-image {
+    height: 91px;
+    width: 91px;
+    border-radius: 12px;
+  }
+}
+
+@media screen and (max-width: 798px) {
+  .product-review-main {
+    max-width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  .product-review-header-title {
+    font-size: 32px;
+    letter-spacing: -0.84px;
+    line-height: 36px;
+  }
+
+  .product-review-header-stars {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .product-review {
+    flex-direction: column;
+  }
+
+  .product-review-client-details,
+  .product-review-client-review {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .product-review-client-review {
+    margin-top: 20px;
+  }
+
+  .review-text {
+    padding-right: 0;
+  }
+
+  .product-review-header-gallery {
+    justify-content: start;
+    gap: 5px;
+  }
+
+  .product-review-gallery-image {
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .product-review-main {
+    padding: 0 10px;
+  }
+
+  .product-review-header-title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+
+{% endstyle %}
+
+{% javascript %}
+  document.addEventListener("DOMContentLoaded", function () {
+    const productId = "{{ product.id }}"; 
+    const apiKey = "pubkey-h1PPDjY5cY7uYdSLPag1Hy61c4mXa3"; 
+    const storeUrl = "craftmix.myshopify.com"; 
+    const apiUrl = `https://stamped.io/api/widget/reviews?store=${storeUrl}&productId=${productId}&apiKey=${apiKey}`;
+
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const reviewsContainer = document.getElementById("custom-reviews");
+        reviewsContainer.innerHTML = ""; // Clear existing content
+
+        if (data.reviews && data.reviews.length > 0) {
+          data.reviews.forEach(review => {
+            const verifiedBadge = review.verified ? `
+              <div class="verified">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/tick-icon.png?v=1739131445" alt="Verified">
+                <p>Verified buyer</p>
+              </div>` : '';
+
+            const recommendedBadge = review.recommend ? `
+              <div class="recommend">
+                <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/tick-icon.png?v=1739131445" alt="Recommended">
+                <p>I recommend this product</p>
+              </div>` : '';
+
+            const reviewHtml = `
+              <div class="product-review">
+                <div class="product-review-client-details">
+                  <h5 class="client-name">${review.author}</h5>
+                  <div class="credentials">
+                    ${verifiedBadge}
+                    ${recommendedBadge}
+                  </div>
+                </div>
+                <div class="product-review-client-review">
+                  <div class="stars">${renderStars(review.rating)}</div>
+                  <h5 class="review-title">${review.title}</h5>
+                  <p class="review-text">${review.message}</p>
+                </div>
+              </div>
+            `;
+            reviewsContainer.innerHTML += reviewHtml;
+          });
+        } else {
+          reviewsContainer.innerHTML = "<p>No reviews yet. Be the first to review this product!</p>";
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching reviews:", error);
+        document.getElementById("custom-reviews").innerHTML = "<p>Failed to load reviews.</p>";
+      });
+
+    // Helper function to render stars dynamically
+    function renderStars(rating) {
+      let starHtml = '';
+      for (let i = 0; i < 5; i++) {
+        if (i < rating) {
+          starHtml += '<img src="https://cdn.shopify.com/s/files/1/2340/1623/files/star-filled.svg?v=123456789" alt="★">';
+        } else {
+          starHtml += '<img src="https://cdn.shopify.com/s/files/1/2340/1623/files/star-empty.svg?v=123456789" alt="☆">';
+        }
+      }
+      return starHtml;
+    }
+  });
+{% endjavascript %}
+
+{% schema %}
+  {
+    "name": "Custom Review Section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Custom Review Section"
+      }
+    ]
+  }
+{% endschema %}

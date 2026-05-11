@@ -1,0 +1,174 @@
+<div class="flavor-for-everybody-container">
+  <div
+      class="lazy-lottie-container marquee flavor-for-everybody-marquee"
+      data-src="{{ 'customers-use-craftmix_1440px.json' | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  {% if section.settings.featured_image %}
+    <div class="featured-image-banner" style="">
+      <div class="image-banner-inner-container">
+        <div class="content-left">
+          <h2>There's a flavor for everybody</h2>
+          <div class="text-bubble-container">
+            <img loading="lazy" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/text-bubble-stars.png?v=1747766620" width="100" height="36" alt="Graphic of a five-star rating above an empty text message bubble on a white background" class="text-bubble-stars lazy-img">
+            <img loading="lazy" class="text-bubble flavor-for-everybody-bubble lazy-img" width="400" height="125" alt="Empty text message bubble with a navy blue outline on a transparent background" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/empty-text-bubble.png?v=1737954370">
+            <div class="content-block">
+              <div class="testimonial-name">
+                <img class="lazy-img" width="16" height="16" alt="Dark blue checkmark on light blue badge" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/testimonial-check-min.png?v=1734412519">
+                Jack L.
+              </div>
+              <div class="testimonial-text">Excellent mix for drinks, I love them - all are really good 100% recommended</div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="hero-tool-tip-button primary-cta tool-tip-open product-1-tip-button">-</button>
+        <div class="hero-tool-tip tool-tip product-1-tip">
+          {% assign product_1 = all_products[section.settings.product_1] %}
+          <div class="tool-tip-left">
+            <a href="{{ product_1.url }}">
+              <span class="visually-hidden">{{ product_1.title }}</span>
+              <img loading="lazy" class="tool-tip-image lazy-img" width="86" height="86" alt="{{ product_1.title }}" data-src="/cdn/shop/{{ product_1.featured_image.src | replace: '.png', '_200x.png' }}">
+            </a>
+          </div>
+          <div class="tool-tip-right">
+            <h3 class="tool-tip-product-title">
+              {{ product_1.title | remove_first: "2025 - " }}
+            </h3>
+            <div class="tool-tip-product-details">
+              12 Pack - $16.99
+            </div>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product_1.variants.first.id }}">
+              <button type="submit" class="tool-tip-add-button">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <button class="hero-tool-tip-button primary-cta tool-tip-open product-2-tip-button">-</button>
+        <div class="hero-tool-tip tool-tip product-2-tip">
+          {% assign product_2 = all_products[section.settings.product_2] %}
+          <div class="tool-tip-left">
+            <a href="{{ product_2.url }}">
+              <span class="visually-hidden">{{ product_2.title }}</span>
+              <img loading="lazy" class="tool-tip-image lazy-img" width="86" height="86" alt="{{ product_2.title }}" data-src="/cdn/shop/{{ product_2.featured_image.src | replace: '.png', '_200x.png' }}">
+            </a>
+          </div>
+          <div class="tool-tip-right">
+            <h3 class="tool-tip-product-title">
+              {{ product_2.title | remove_first: "2025 - " }}
+            </h3>
+            <div class="tool-tip-product-details">
+              12 Pack - $14.99
+            </div>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product_2.variants.first.id }}">
+              <button type="submit" class="tool-tip-add-button">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+        
+        <button class="hero-tool-tip-button primary-cta tool-tip-open product-3-tip-button">-</button>
+        <div class="hero-tool-tip tool-tip product-3-tip">
+          {% assign product_3 = all_products[section.settings.product_3] %}
+          <div class="tool-tip-left">
+            <a href="{{ product_3.url }}">
+              <span class="visually-hidden">{{ product_3.title }}</span>
+              <img loading="lazy" class="tool-tip-image lazy-img" width="86" height="86" alt="{{ product_3.title }}" data-src="/cdn/shop/{{ product_3.featured_image.src | replace: '.png', '_200x.png' }}">
+            </a>
+          </div>
+          <div class="tool-tip-right">
+            <h3 class="tool-tip-product-title">
+              {{ product_3.title | remove_first: "2025 - " }}
+            </h3>
+            <div class="tool-tip-product-details">
+              12 Pack - $14.99
+            </div>
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product_3.variants.first.id }}">
+              <button type="submit" class="tool-tip-add-button">
+                Add
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>  
+    </div>
+  {% endif %}
+</div>
+<style>
+  .featured-image-banner{
+    background-image: url('{{ section.settings.featured_image | image_url }}');
+  }
+  @media screen and (max-width: 768px){
+    .featured-image-banner{
+      background-image: url('{{ section.settings.featured_image_mobile | image_url }}');
+      background-size: cover; /* Ensures it covers the div */
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100%; /* Set the width as per requirement */
+      padding-bottom: 125%; 
+      position: relative;
+    }
+  }
+</style>
+<script>
+  setupToolTip(".product-1-tip-button", ".product-1-tip", false);
+  setupToolTip(".product-2-tip-button", ".product-2-tip", false);
+  setupToolTip(".product-3-tip-button", ".product-3-tip", false);
+  setupToolTip(".product-4-tip-button", ".product-4-tip", false);
+</script>
+
+{% schema %}
+{
+  "name": "Flavor for Everybody",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "Flavor for Everybody"
+    }
+  ],
+  "settings":[
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image_mobile",
+      "label": "Featured Image Mobile"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Product 1"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Product 2"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Product 3"
+    },
+    {
+      "type": "product",
+      "id": "product_4",
+      "label": "Product 4"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,792 @@
+{%  liquid 
+if settings.lang_direction contains request.locale.iso_code
+  assign is_rtl = true
+else
+  assign is_rtl = false
+endif
+%}
+<div class="customer-login">
+  <div class="customer-login-form_container">
+    <!-- Background fruit images -->
+     <img class="background-fruit fruit-blueberry" width="104px" height="110px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/blueberry.svg?v=1738881007" alt="Blueberry illustration">
+    <img class="background-fruit fruit-pineapple" width="240px" height="312px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/pineapple.svg?v=1738879807" alt="Pineapple illustration">
+    <img class="background-fruit fruit-cherry" width="104px" height="181px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/cherry.svg?v=1738879947" alt="Cherry illustration">
+    <img class="background-fruit fruit-passionfruit" width="150px" height="144px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/passionfruit.svg?v=1738880574" alt="Passionfruit illustration">
+    <img class="background-fruit fruit-tropical-leaf" width="200px" height="215px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/tropical-leaf.svg?v=1738880888" alt="Troical leaf illustration">
+    <img class="background-fruit fruit-orangepeel" width="208px" height="157px" src="https://cdn.shopify.com/s/files/1/2340/1623/files/orangepeel.svg?v=1738880141" alt="Orange peel illustration">
+    
+    <h2 class="customer-login-form-title">Create account</h2>
+
+    {% form 'create_customer' %}
+      {% if form.errors %}
+        <div class="customer-login-form_error-container">
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="FirstName">
+          <span class="visually-hidden">First Name</span>
+          <input type="text"
+            name="customer[first_name]"
+            id="FirstName"
+            placeholder="First Name"
+            {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+            autocomplete="given-name">
+        </label>
+      </div>
+
+      <div class="form-group">
+        <label for="LastName">
+          <span class="visually-hidden">Last Name</span>
+          <input type="text"
+            name="customer[last_name]"
+            id="LastName"
+            placeholder="Last Name"
+            {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+            autocomplete="family-name">
+          </label>
+      </div>
+
+      <div class="form-group">
+        <label for="Email">
+          <span class="visually-hidden">Email</span>
+          <input type="email"
+            name="customer[email]"
+            id="Email"
+            placeholder="Email"
+            {% if form.email %}value="{{ form.email }}"{% endif %}
+            autocomplete="email">
+          </label>
+      </div>
+
+      <div class="form-group">
+        <label for="CreatePassword">
+          <span class="visually-hidden">Password</span>
+          <input type="password"
+            name="customer[password]"
+            id="CreatePassword"
+            placeholder="Password">
+          </label>
+      </div>
+
+      <div class="form-login">
+        <button type="submit" class="btn-login">Create</button>
+      </div>
+
+      <div class="form-links">
+        <p>
+          <a href="{{ routes.account_login_url }}">Already have an account? Log in</a>
+        </p>
+      </div>
+    {% endform %}
+  </div>
+</div>
+
+<div class="subscribe-card-section">
+  <div class="subscribe-card">
+    <img class="subscribe-card-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/subscribe-card.svg?v=1737762251" alt="Cocktail illustration">
+
+    <div class="subscribe-card-text">
+      <h2>Never get left dry!</h2>
+      <p>Subscribe & save 15% today</p>
+    </div>
+    <div class="subscribe-card-cta">
+      <a href="/pages/subscriptions" class="subscribe-card-btn">
+        Subscribe today - Learn more
+      </a>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% style %}
+
+/* ****************** */
+/* ***** Start ******* */
+/* ****************** */
+/* * * Login Form * * */
+/* ****************** */
+.customer-login #recover {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.customer-login #recover .form-links {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.customer-login #recover .form-links a {
+  color: #002657;
+  text-decoration: underline;
+}
+
+  .customer-login {
+    background-color: #ddf7f7;
+  }
+  section.customer-login {
+    background-color: #ddf7f7;
+    min-height: 500px;
+  }
+  /* position relative for placement of background svgs */
+  .customer-login {
+    position: relative;
+  }
+
+  .customer-login-form-title {
+    opacity: 1;
+    color: rgba(0, 38, 87, 1);
+    font-family: "Hornbill";
+    font-size: 64px;
+    font-weight: 700;
+    font-style: Bold;
+    letter-spacing: -1.68px;
+    text-align: center;
+    line-height: 54px;
+    position: relative; 
+    z-index: 2;
+  }
+
+  
+  .customer-login-form_container {
+    position: relative;
+    margin: 0 auto;
+    padding-top: 70px;
+    padding-bottom: 65px;
+    padding: 70px 10px 65px 10px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+  }
+
+  .customer-login-form_error-container {
+    font-family: "Hornbill";
+    color: red;
+  }
+  
+  .customer-login-form-title {
+    font-size: 64px;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+   .form-group input {
+    border-radius: 30px;
+    border: 1.5px solid #002657;
+    opacity: 1;
+    background-color: #ffffff;
+    width: 480px;
+    padding-top: 18px;
+    padding-bottom: 17px;
+    padding-left: 33px;
+    padding-right: auto;
+    margin-bottom: 20px;
+    color: rgba(0, 38, 87, 1);
+    font-family: 'Goldplay';
+    font-size: 18px;
+    font-weight: 500;
+    font-style: Medium;
+    letter-spacing: -0.11px;
+    text-align: left;
+    line-height: 24px;
+  }
+
+  .form-group input::placeholder {
+    opacity: 0.5;
+    color: rgba(0, 38, 87, 1);
+    font-family: 'Goldplay';
+    font-size: 18px;
+    font-weight: 500;
+    font-style: Medium;
+    letter-spacing: -0.11px;
+    text-align: left;
+    line-height: 24px;
+  }
+
+
+  .form-login .btn-login {
+    border-radius: 33px;
+    border: 1.5px solid #002657;
+    box-shadow: 2px 6px 0px #002657;
+    opacity: 1;
+    background-color: #60d3f8;
+    font-family: 'Goldplay';
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 74px;
+    width: 388px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+  }
+
+  .form-login .btn-login:hover {
+     box-shadow: none;
+  }
+  
+  .form-links p {
+    font-family: 'Goldplay';
+    font-weight: 600;
+    font-size: 18px;
+    color: #002657;
+    display: block;
+    text-align: center;
+}
+  .form-links .break hr {
+    width: 213px;
+    margin: 14px auto;
+    color: #002657;
+    border: 1.5px solid #002657;
+    opacity: 1;
+}
+
+/* ****************** */
+/* ***** Start ******* */
+/* *  Login Form * */
+  /* Media Queries */
+/* ****************** */
+
+  
+@media screen and (max-width: 578px) {
+
+  h2.customer-login-form-title {
+    opacity: 1;
+    color: rgba(0, 38, 87, 1);
+    font-family: "Hornbill-Bold";
+    font-size: 40px;
+    font-weight: 700;
+    font-style: Bold;
+    letter-spacing: -1.05px;
+    text-align: center;
+    line-height: 40px;
+  }
+  
+  .customer-login-form_container {
+    margin: 0 auto;
+    padding: 70px 10px 65px 10px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+  }
+  .form-group input {
+    /* max-width: 400px; */
+    padding-top: 18px;
+    padding-bottom: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+
+  }
+
+  .form-login .btn-login {
+    margin-top: 25px;
+    margin-bottom: 74px;
+    width: 360px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+  }
+}  
+
+  @media screen and (max-width: 480px) {
+    
+  .customer-login-form_container {
+    margin: 0 auto;
+    padding: 70px 10px 65px 10px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    text-align: center;
+  }
+  .form-group input {
+    max-width: 360px;
+    padding-top: 18px;
+    padding-bottom: 17px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+
+  }
+
+  .form-login .btn-login {
+    margin-top: 25px;
+    margin-bottom: 74px;
+    max-width: 360px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+  }
+    
+}
+
+
+@media screen and (max-width: 400px) {
+  .customer-login-form_container {
+    padding: 100px 15px;
+  }
+
+  h2.customer-login-form-title {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 80px;
+  }
+
+  .form-group input {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .form-login .btn-login {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .form-links p {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .customer-login-form_container {
+    padding: 100px 15px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  h2.customer-login-form-title {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 60px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-group input {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 12px;
+    margin: 0 0 15px 0;
+    font-size: 13px;
+    box-sizing: border-box;
+  }
+
+  #create_customer, 
+  .form-login {
+    width: 100%;
+  }
+
+  .form-login .btn-login {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+
+  .form-links {
+    width: 100%;
+  }
+
+  .form-links p {
+    font-size: 13px;
+  }
+
+  .form-links .break hr {
+    width: 80%;
+    max-width: 213px;
+  }
+}
+
+/* ****************** */
+/* ***** END ******* */
+/* *  Login Form * */ 
+/* ****************** */
+
+
+  
+  /* ****************** */
+/* *******START****** */
+/* * Subscribe Card * */
+/* ****************** */
+.subscribe-card-section {
+  background-color: #ddf7f7;
+  padding: 50px 0;
+  position: relative;
+}
+
+.subscribe-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1390px;
+  height: 122px;
+  font-family: 'Goldplay', sans-serif;
+  font-weight: 600;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #fff0bd;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.13);
+  opacity: 1;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.subscribe-card-image {
+  width: auto;
+  height: 175px;
+  align-self: flex-end;
+  overflow: hidden;
+  margin-bottom: -70px;
+}
+
+.subscribe-card-text {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.subscribe-card-text h2 {
+  font-size: 30px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-text p {
+  font-size: 18px;
+  color: #002657;
+  margin: 0;
+}
+
+.subscribe-card-btn {
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 33px;
+  font-family: 'Goldplay', sans-serif;
+  font-size: 20px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 6px 0px rgba(0, 38, 87, 1);
+  background-color: #60d3f8;
+  color: #002657;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.subscribe-card-btn:hover {
+  box-shadow: none;
+}
+
+  /* ***** Start ******* */
+/* * Subscribe Card * */
+  /* Media Queries */
+/* ****************** */
+
+@media (max-width: 1400px) {
+  .subscribe-card {
+    margin: 0 50px;
+  }
+}
+
+@media (max-width: 1040px) {
+  .subscribe-card {
+    max-width: 388px;
+    height: 331px;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .subscribe-card-text {
+    padding-left: 0;
+    padding-top: 25px;
+    margin: 0;
+    flex: 0;
+    order: -1;
+    text-align: center;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 26px;
+  }
+
+  .subscribe-card-image {
+    margin: 0 auto ;
+    order: 1;
+    margin-bottom: -70px;
+  }
+
+  .subscribe-card-cta {
+    order: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscribe-card-btn {
+    padding: 14px 25px;
+  }
+}
+@media (max-width: 399px) {
+  .subscribe-card-section {
+    padding: 30px 16px;
+  }
+
+  .subscribe-card {
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 16px;
+    height: auto;
+    min-height: 300px;
+  }
+
+  .subscribe-card-text h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-card-text p {
+    font-size: 16px;
+  }
+
+  .subscribe-card-image {
+    height: 140px;
+    margin-bottom: -70px;
+  }
+
+  .subscribe-card-btn {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 349px) {
+  .subscribe-card-btn {
+    font-size: 14px;       
+  }
+}
+
+/* ****************** */
+/* ***** END ******* */
+/* * Subscribe Card * */
+/* ****************** */
+
+
+      
+
+
+
+/* ****************** */
+/* ***** START******* */
+/**********************/
+/* Background Fruits */
+/**********************/
+.customer-login {
+  position: relative;
+  z-index: 1;
+}
+
+.background-fruit {
+  position: absolute;
+  z-index: 0;
+}
+
+.background-fruit.fruit-blueberry {
+  top: 30px;
+  left: -250px;
+  width: 103px !important;
+  height: 110px !important
+}
+
+.background-fruit.fruit-pineapple {
+  top: 130px;
+  left: -570px;
+  width: 240px !important;
+  height: 312px !important
+}
+
+.background-fruit.fruit-cherry {
+  top: 440px;
+  left: -160px;
+  width: 104px !important;
+  height: 181px !important
+}
+
+.background-fruit.fruit-passionfruit {
+  top: 30px;
+   right: -250px;
+  width: 149px !important;
+  height: 158px !important
+}
+
+.background-fruit.fruit-tropical-leaf {
+  top: 170px;
+  right: -600px; 
+  width: 200px !important;
+  height: 215px !important
+}
+
+.background-fruit.fruit-orangepeel {
+  top: 430px;
+  right: -350px; 
+  width: 208px !important;
+  height: 157px !important
+}
+
+ 
+
+
+  @media (max-width: 830px) {
+
+.background-fruit.fruit-blueberry {
+  top: 30px;
+  left: -100px;
+}
+
+.background-fruit.fruit-pineapple {
+  top: 130px;
+  left: -570px;
+}
+
+.background-fruit.fruit-cherry {
+  top: 640px;
+  left: 10px;
+}
+
+.background-fruit.fruit-passionfruit {
+  top: 30px;
+  right: -80px;  
+}
+
+.background-fruit.fruit-tropical-leaf {
+  top: 170px;
+  right: -400px; 
+}
+
+.background-fruit.fruit-orangepeel{
+  top: 600px;
+  right: -100px; 
+}
+  
+}  
+  @media (max-width: 530px) {
+
+.background-fruit.fruit-blueberry {
+  top: 30px;
+  left: -50px;
+}
+
+.background-fruit.fruit-pinapple {
+  top: 130px;
+  left: -570px;
+}
+
+.background-fruit.fruit-cherry {
+  top: 490px;
+  left: -30px;
+}
+
+.background-fruit.fruit-passionfruit {
+  top: 30px;
+  right: -80px;  
+}
+
+.background-fruit.fruit-tropical-leaf {
+  top: 170px;
+  right: -400px; 
+}
+
+.background-fruit.fruit-orangepeel{
+  top: 600px;
+  right: -100px; 
+}
+  
+}  
+/* ****************** */
+/* ***** END******* */
+/**********************/
+/* Background Fruits */
+/**********************/
+{% endstyle %}
+
+
+
+
+
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "top_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_layout_mobile"
+    },
+    {
+      "type": "range",
+      "id": "top_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "bottom_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 44
+    }
+  ]
+}
+{% endschema %}

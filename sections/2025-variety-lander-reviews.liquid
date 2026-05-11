@@ -1,0 +1,530 @@
+{% schema %}
+{
+  "name": "Variety Lander Reviews",
+  "tag": "section",
+  "class": "landing-page-reviews",
+  "settings": [],
+   "blocks": [],
+  "presets": [
+    {
+      "name": "Variety Lander Reviews",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
+
+<section class="landing-page-reviews">
+
+  {% render 'find-your-flavor-snippet' %}
+
+  <!-- REVIEW CAROUSEL (MOBILE - Embla) -->
+  <div class="craftmix-lovers embla embla--reviews review-carousel-mobile">
+    <h2 class="craftmix-lovers-heading">Join Over 3000+ Craftmix Lovers</h2>
+    <div class="embla__viewport">
+      <div class="embla__container craftmix-lovers__container">
+        
+        <div class="embla__slide craftmix-lovers__slide">
+          <div class="craftmix-lovers-list-item-card">
+            <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" alt="Starts" width="150" height="29" role="presentation" loading="lazy">
+            <p class="craftmix-lovers-list-item-card-text">
+              I always have excellent customer service with you. Never any issues. You go above and beyond. Thank you!
+            </p>
+            <p class="craftmix-lovers-list-item-card-name">- Gina G</p>
+          </div>
+        </div>
+
+         <div class="embla__slide craftmix-lovers__slide">
+          <div class="craftmix-lovers-list-item-card">
+            <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" alt="Starts" width="150" height="29" role="presentation" loading="lazy">
+            <p class="craftmix-lovers-list-item-card-text">
+              I was very pleased with the taste. Easy to mix. I would recommend to anyone. I plan to order more.
+            </p>
+            <p class="craftmix-lovers-list-item-card-name">- Cathy J</p>
+          </div>
+        </div>
+
+         <div class="embla__slide craftmix-lovers__slide">
+          <div class="craftmix-lovers-list-item-card">
+            <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" alt="Stars" width="150" height="29" role="presentation" loading="lazy">
+            <p class="craftmix-lovers-list-item-card-text">
+              The individual pouches NEED to be bigger! Otherwise the taste is great!
+            </p>
+            <p class="craftmix-lovers-list-item-card-name">- Ellen K</p>
+          </div>
+        </div>
+
+         <div class="embla__slide craftmix-lovers__slide">
+          <div class="craftmix-lovers-list-item-card">
+            <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" alt="Stars" width="150" height="29" role="presentation" loading="lazy">
+            <p class="craftmix-lovers-list-item-card-text">
+              I love margaritas but being on a low carb regime can be tough to enjoy one. These are low sugar and taste great!
+            </p>
+            <p class="craftmix-lovers-list-item-card-name">- Lynda</p>
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+
+  <!-- REVIEW CAROUSEL (DESKTOP - Scrollable) -->
+  <div class="review-carousel-desktop craftmix-lovers">
+    <h2 class="craftmix-lovers-heading">Join Over 3000+ Craftmix Lovers</h2>
+    <div class="review-scroll-container">
+      
+      <div class="review-scroll-slide">
+        <div class="craftmix-lovers-list-item-card">
+            <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" width="150" height="29" alt="Stars" role="presentation" loading="lazy">
+          <p class="craftmix-lovers-list-item-card-text"> I always have excellent customer service with you. Never any issues. You go above and beyond. Thank you!</p>
+          <p class="craftmix-lovers-list-item-card-name">- Gina G</p>
+        </div>
+      </div>
+  
+      <div class="review-scroll-slide">
+        <div class="craftmix-lovers-list-item-card">
+          <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" width="150" height="29" alt="Stars" role="presentation" loading="lazy">
+          <p class="craftmix-lovers-list-item-card-text"> I was very pleased with the taste. Easy to mix. I would recommend to anyone. I plan to order more.</p>
+          <p class="craftmix-lovers-list-item-card-name">- Cathy J</p>
+        </div>
+      </div>
+  
+      <div class="review-scroll-slide">
+        <div class="craftmix-lovers-list-item-card">
+          <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" width="150" height="29" alt="Stars" role="presentation" loading="lazy">
+          <p class="craftmix-lovers-list-item-card-text">The individual pouches NEED to be bigger! Otherwise the taste is great!</p>
+          <p class="craftmix-lovers-list-item-card-name">- Ellen K</p>
+        </div>
+      </div>
+  
+      <div class="review-scroll-slide">
+        <div class="craftmix-lovers-list-item-card">
+          <img class="craftmix-lovers-list-item-card-stars" src="{{ 'yellow-stars.png' | asset_url }}" width="150" height="29" alt="Stars" role="presentation" loading="lazy">
+          <p class="craftmix-lovers-list-item-card-text">I love margaritas but being on a low carb regime can be tough to enjoy one. These are low sugar and taste great!</p>
+          <p class="craftmix-lovers-list-item-card-name">- Lynda</p>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+
+
+</section>
+<script src="{{ 'lp-embla.js' | asset_url }}" defer='defer'></script>
+{% javascript %}
+ document.addEventListener('DOMContentLoaded', () => {
+  const carousels = [
+    {
+      rootSelector: '.check-out-each-flavor',
+      viewportSelector: '.embla__viewport'
+    },
+    {
+      rootSelector: '.craftmix-lovers',
+      viewportSelector: '.embla__viewport'
+    }
+  ];
+
+  carousels.forEach(({ rootSelector, viewportSelector }) => {
+    const root = document.querySelector(rootSelector);
+    if (!root) return;
+
+    const viewport = root.querySelector(viewportSelector);
+    if (!viewport) return;
+
+    EmblaCarousel(viewport, {
+      dragFree: true,
+      loop: true
+    });
+  });
+});
+{% endjavascript %}
+
+{% style %}
+  *,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+section.landing-page-reviews {
+  background-color: #ddf7f7;
+  padding: 48px 0;
+  overflow:hidden;
+}
+
+.check-out-each-flavor {
+  margin-bottom: 80px;
+}
+
+.check-out-each-flavor-heading,
+.craftmix-lovers-heading {
+  max-width: 731px;
+  width: 100%;
+  font-family: 'Hornbill';
+  font-weight: 800;
+  font-size: 72px;
+  line-height: 86px;
+  text-align: center;
+  letter-spacing: -0.03em;
+  color: #002657;
+  margin: 0 auto;
+  margin-bottom: 60px;
+}
+
+.craftmix-flavor-list {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  margin-left: 40px;
+  margin-right: 40px;
+  margin-bottom: 38px;
+}
+
+.craftmix-flavor-list-item-card {
+  max-width: 332px;
+  width: 100%;
+  height: 438px;
+}
+
+.craftmix-flavor-list-item-card-img {
+  max-width: 332px;
+  width: 100%;
+  height: auto;
+  padding: 32px 18px;
+  background-color: #ffffff;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.craftmix-flavor-list-item-card-img img {
+  width: 100%;
+}
+
+.craftmix-flavor-list-item-card-stars {
+  max-width: 110px;
+}
+
+.craftmix-flavor-list-item-card-title {
+  font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 120%;
+  letter-spacing: -0.02em;
+  color: #000000;
+}
+
+.check-out-each-flavor-btn {
+  font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 22px;
+  text-transform: uppercase;
+  line-height: 140%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  gap: 3px;
+  max-width: 492px;
+  height: 69px;
+  background: #fe6b00;
+  color: #fff;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 0px #000000;
+  border-radius: 100px;
+  margin: 0 auto;
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  transition: box-shadow 0.4s ease;
+}
+
+.check-out-each-flavor-btn:hover {
+  box-shadow: none;
+} 
+
+/* Lovers Cards Section */
+
+.craftmix-lovers {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.craftmix-lovers-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.craftmix-lovers-list-item-card {
+  max-width: 396px;
+  width: 100%;
+  height: auto;
+  border: 2px solid #484594;
+  background-color: #ffffff;
+  border-radius: 33px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  padding: 30px 32px;
+  gap: 18px;
+}
+
+.craftmix-lovers-list-item-card-stars {
+  max-width: 150px;
+  height: auto;
+  margin-bottom: 18px;
+}
+.craftmix-lovers-list-item-card-text {
+  font-family: 'Goldplay';
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  color: #000000;
+  text-align: left;
+}
+.craftmix-lovers-list-item-card-name {
+  font-family: 'Hornbill';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 29px;
+  color: #000000;
+}
+
+.embla {
+  overflow: hidden;
+  padding: 16px 0;
+}
+
+.embla__viewport {
+  overflow: hidden;
+  width: 100%;
+  margin: 38px 0;
+}
+
+.check-out-each-flavor__container,
+.craftmix-lovers__container {
+  display: flex;
+  gap: 24px;
+}
+
+.check-out-each-flavor__slide,
+.craftmix-lovers__slide {
+  flex: 0 0 auto;
+}
+.check-out-each-flavor__slide {
+  max-width: 332px; /* adjust per card */
+  width: 100%;
+}
+.craftmix-lovers__slide {
+  max-width: 396px; /* adjust per card */
+  width: 100%;
+}
+.craftmix-lovers__slide:last-of-type,
+.check-out-each-flavor__slide:last-of-type {
+  margin-right: 24px;
+}
+
+
+
+@media (max-width: 829px) {
+  .check-out-each-flavor-heading,
+  .craftmix-lovers-heading {
+    max-width: 731px;
+    width: 100%;
+    font-size: 54px;
+    line-height: 120%;
+    text-align: center;
+    margin-bottom: 60px;
+  }
+}
+@media (max-width: 529px) {
+  .check-out-each-flavor {
+  margin-bottom: 50px;
+}
+  .check-out-each-flavor-heading,
+  .craftmix-lovers-heading {
+    max-width: 345px;
+    width: 100%;
+    font-size: 32px;
+    line-height: 120%;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
+  .check-out-each-flavor__container,
+  .craftmix-lovers__container {
+    gap: 12px;
+  }
+
+  .check-out-each-flavor__slide {
+    width: 164px;
+  }
+  .craftmix-lovers__slide {
+    width: 280px;
+  }
+
+  .craftmix-lovers__slide:last-of-type,
+  .check-out-each-flavor__slide:last-of-type {
+    margin-right: 12px;
+  }
+
+  .craftmix-flavor-list-item-card {
+  max-width: 332px;
+  width: 100%;
+  height: auto;
+}
+
+.craftmix-flavor-list-item-card-img {
+  max-width: 332px;
+  width: 100%;
+  height: auto;
+  padding: 16px 24px;
+  background-color: #ffffff;
+  border-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.craftmix-flavor-list-item-card-img img {
+  width: 100%;
+}
+
+.craftmix-flavor-list-item-card-stars {
+  max-width: 64px;
+}
+
+.craftmix-flavor-list-item-card-title {
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: -0.28px;
+}
+
+  .craftmix-lovers-list-item-card {
+    border-radius: 33px;
+    padding: 24px 20px;
+    gap: 12px;
+  }
+
+  .craftmix-lovers-list-item-card-stars {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 0px;
+  }
+  .craftmix-lovers-list-item-card-text {
+    font-size: 16px;
+    line-height: 140%;
+  }
+  .craftmix-lovers-list-item-card-name {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 120%;
+  }
+
+  .check-out-each-flavor a {
+    font-family: 'Goldplay';
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 140%;
+    display: flex;
+    padding: 11px 8px;
+    gap: 3px;
+    max-width: 342px;
+    height: 50px;
+    background: #fe6b00;
+    color: #fff;
+    border: 2px solid #000000;
+    box-shadow: 2.7px 2.7px 0px #000000;
+    border-radius: 100px;
+    margin: 0 auto;
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+}
+/* SCROLL/CAROUSEL */
+/* Default: Desktop styles (scrollable visible, embla hidden) */
+.flavor-carousel-desktop,
+.review-carousel-desktop {
+  display: block;
+}
+
+.flavor-carousel-mobile,
+.review-carousel-mobile  {
+  display: none;
+}
+
+.flavor-scroll-container,
+.review-scroll-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-left: 16px;
+
+   /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer and Edge */
+}
+
+.flavor-scroll-container::-webkit-scrollbar,
+.review-scroll-container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.flavor-scroll-container {
+  margin-bottom: 40px;
+}
+
+.flavor-scroll-slide,
+.review-scroll-slide {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+
+.review-scroll-container{
+  cursor: grab;
+  justify-content:space-around;
+}
+
+/* Mobile: Use Embla instead */
+@media (max-width: 767px) {
+  .flavor-carousel-desktop,
+  .review-carousel-desktop {
+    display: none;
+  }
+
+  .flavor-carousel-mobile,
+  .review-carousel-mobile {
+    display: block;
+  }
+}
+
+{% endstyle %}

@@ -1,0 +1,163 @@
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const cabinetCards = document.querySelectorAll(".cabinet-card");
+  const featuredImage = document.querySelector("#craftmix-cabinet-featured-image");
+
+  cabinetCards.forEach((card, index) => {
+    card.addEventListener("click", () => {
+      // Remove 'active' class from all cabinet cards
+      cabinetCards.forEach(otherCard => otherCard.classList.remove("active"));
+
+      // Remove 'active' class from all product forms
+      const allAtcContainers = document.querySelectorAll(".craftmix-cabinet-featured-photo-container .media-atc-container");
+      allAtcContainers.forEach(container => container.classList.remove("active"));
+
+      // Add 'active' class to the product form at the current index
+      if (allAtcContainers[index]) {
+        allAtcContainers[index].classList.add("active");
+      }
+
+      // Add 'active' class to the clicked card
+      card.classList.add("active");
+
+      // Update featured image data-src and alt
+      const featuredPhotoUrl = card.getAttribute("data-featured-photo");
+      const featuredPhotoAlt = card.getAttribute("data-alt");
+
+      if (featuredImage) {
+        if (featuredPhotoUrl) {
+          featuredImage.setAttribute("src", featuredPhotoUrl);
+        }
+        if (featuredPhotoAlt) {
+          featuredImage.setAttribute("alt", featuredPhotoAlt);
+        }
+      }
+    });
+  });
+});
+
+</script>
+
+<div class="section-container hey-bartender-container">
+  <div class="page-max-width">
+    <div class="tiny-header">See The Mixes</div>
+    <h2>Hey Bartender</h2>
+    <p class="center-text subheading">What are you making?</p>
+    <div class="craftmix-cabinet-container flex-reverse page-max-width media-border">
+      <img loading="lazy" class="bg-img mint-leaf-bg lazy-img" width="224" height="210" alt="Mint Leaf Illustration" data-src="{{ 'mint-leaf.svg' | asset_url }}">
+      <img loading="lazy" class="bg-img blueberry-bg lazy-img" width="80" height="78" alt="Blueberry Illustration" data-src="{{ 'blueberry.svg' | asset_url }}">
+      <div class="craftmix-cabinet-left flex-left">
+        <div class="craftmix-cabinet-featured-photo-container">
+          <img id="craftmix-cabinet-featured-image" class="lazy-img" loading="lazy" height="600" width="600" alt="{{ section.blocks[0].settings.featured_photo.alt }}" data-src="{{ section.blocks[0].settings.featured_photo | image_url }}">
+          {% for block in section.blocks %}
+            <div class="media-atc-container {% if forloop.index == 1 %}active{% endif %}">
+              <div class="media-atc-product-info">
+                <div class="media-atc-product-title">{{ block.settings.product.title }}</div>
+                <div class="media-atc-product-details">12 pack - <span class="igPrice" data-product-id="{{ block.settings.product.id }}">$14.99</span></div>
+                <div
+                  class="stamped-product-reviews-badge media-atc-review-stars"
+                  data-id="{{ block.settings.product.id }}"
+                  data-product-handle="{{ block.settings.product.handle }}"
+                  data-product-title="{{ block.settings.product.title }}"
+                  data-review-count="true"
+                ></div>
+              </div>
+              <div class="media-atc-button-container">
+                  <form method="post" action="/cart/add" class="media-atc-form">
+                    <input id="cabinet-atc-value" data-featured-product="{{ block.settings.product.handle }}" type="hidden" name="id" value="{{ block.settings.product.variants.first.id }}">
+                    <button type="submit" class="secondary-cta">Add</button>
+                  </form>     
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="craftmix-cabinet-right flex-right">
+        <div class="cabinet-header-container">
+          <div class="cabinet-logo-container">
+            <img class="lazy-img" alt="Craftmix Logo - Dark Blue" loading="lazy" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839">
+          </div>
+          <div class="tiny-header">
+            Cabinet
+          </div>
+        </div>
+        <div class="cabinet-grid">
+          {% for block in section.blocks %}
+            <div 
+              class="cabinet-card {% if forloop.index == 1 %}active{% endif %}" 
+              id="cabinet-card-{{ forloop.index0 }}" 
+              data-featured-photo="{{ block.settings.featured_photo | image_url }}"
+              data-alt="{{ block.settings.featured_photo.alt }}"
+            >
+              {% assign product = all_products[block.settings.product] %}
+              {% if product %}
+                <button class="cabinet-card-button" id="cabinet-card-button-{{ forloop.index0 }}">
+                  <div class="cabinet-card-icon-container">
+                    <img class= "lazy-img" loading="lazy" data-src="{{ block.settings.product_icon | img_url: 'medium' }}" alt="{{ product.title }}" class="cabinet-product-image" />
+                  </div>
+                  <h3 class="cabinet-product-title">{{ product.title }}</h3>
+                </button>
+              {% endif %}
+            </div>
+          {% endfor %}
+          </div>
+      </div>
+    </div>
+    <div class="promo-bar-container">
+      <div class="promo-bar-title">Subscribe & save 15%</div>
+      <div class="promo-bar-blurb">Get your favorite mixers on repeat,<br> delivered straight to your door!</div>
+      <div class="promo-bar-cta-container">
+        <a href="/pages/subscriptions" class="secondary-cta">Subscribe today</a>
+      </div>
+    </div>
+  </div>
+  <div class="hp-cart-animation">
+    <div
+      class="lazy-lottie-container"
+      data-src="{{ 'cart-wave-2400px.json' | asset_url }}"
+      data-background="transparent"
+      data-speed="0.6"
+      data-autoplay="true"
+      data-loop="true"
+    >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Hey Bartender",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "Hey Bartender"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select product"
+        },
+        {
+          "type": "image_picker",
+          "id": "featured_photo",
+          "label": "Featured Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_icon",
+          "label": "Product Icon"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 50,
+  "settings": []
+}
+{% endschema %}

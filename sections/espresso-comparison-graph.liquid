@@ -1,0 +1,798 @@
+{% liquid
+  if section.settings.left_image_1 != blank
+    assign left_image_1_src = section.settings.left_image_1 | image_url: width: 400
+  else
+    assign left_image_1_src = 'tropical-leaf-1.svg' | asset_url
+  endif
+
+  if section.settings.left_image_2 != blank
+    assign left_image_2_src = section.settings.left_image_2 | image_url: width: 220
+  else
+    assign left_image_2_src = 'blueberry.svg' | asset_url
+  endif
+
+  if section.settings.left_image_3 != blank
+    assign left_image_3_src = section.settings.left_image_3 | image_url: width: 260
+  else
+    assign left_image_3_src = 'lemon-bg.svg' | asset_url
+  endif
+
+  if section.settings.right_image_1 != blank
+    assign right_image_1_src = section.settings.right_image_1 | image_url: width: 180
+  else
+    assign right_image_1_src = 'grapefruit.svg' | asset_url
+  endif
+
+  if section.settings.right_image_2 != blank
+    assign right_image_2_src = section.settings.right_image_2 | image_url: width: 220
+  else
+    assign right_image_2_src = 'bloodorange.svg' | asset_url
+  endif
+
+  if section.settings.right_image_3 != blank
+    assign right_image_3_src = section.settings.right_image_3 | image_url: width: 280
+  else
+    assign right_image_3_src = 'mint-leaf.svg' | asset_url
+  endif
+
+  if section.settings.other_mixes_bottle_icon != blank
+    assign other_mixes_bottle_icon_src = section.settings.other_mixes_bottle_icon | image_url: width: 80
+  else
+    assign other_mixes_bottle_icon_src = 'https://cdn.shopify.com/s/files/1/2340/1623/files/bottle-icon.png?v=1739046888'
+  endif
+
+  if section.settings.red_cross_icon != blank
+    assign red_cross_icon_src = section.settings.red_cross_icon | image_url: width: 80
+  else
+    assign red_cross_icon_src = 'https://cdn.shopify.com/s/files/1/2340/1623/files/red-cross.png?v=1739046865'
+  endif
+
+  if section.settings.craftmix_logo_image != blank
+    assign craftmix_logo_src = section.settings.craftmix_logo_image | image_url: width: 400
+  else
+    assign craftmix_logo_src = 'https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839'
+  endif
+
+  if section.settings.green_tick_icon != blank
+    assign green_tick_icon_src = section.settings.green_tick_icon | image_url: width: 100
+  else
+    assign green_tick_icon_src = 'https://cdn.shopify.com/s/files/1/2340/1623/files/green-tick.png?v=1739046872'
+  endif
+%}
+
+
+<div class="custom-comparison-section">
+   <img src="{{ left_image_1_src }}" class="comparison-decor comparison-decor--left-1" width="180" height="180" alt="" aria-hidden="true" loading="lazy">
+   <img src="{{ right_image_1_src }}" class="comparison-decor comparison-decor--right-1" width="120" height="120" alt="" aria-hidden="true" loading="lazy">
+   <img src="{{ right_image_3_src }}" class="comparison-decor comparison-decor--right-3" width="180" height="180" alt="" aria-hidden="true" loading="lazy">
+      <img src="{{ left_image_2_src }}" width="90" height="90" alt="" aria-hidden="true" class="comparison-decor comparison-decor--left-2" loading="lazy">
+            <img src="{{ left_image_3_src }}" width="180" height="180" alt="" aria-hidden="true" class="comparison-decor comparison-decor--left-3" loading="lazy">
+   <div class="custom-comparison-section-container">
+      <div class="lower-section" >
+         <h4 class="lower-section-subheading">how we compare</h4>
+         <h2 class="lower-section-heading">Why Craftmix</h2>
+         <div class="main-why-craftmix-card">
+         
+            <img src="{{ right_image_2_src }}" width="120" height="120" alt="" aria-hidden="true" class="comparison-decor comparison-decor--right-2" loading="lazy">
+            <div class="main-why-craftmix-card-lg">
+               <table class="craftmix-table-lg">
+                  <thead>
+                     <tr>
+                        <th><span class="visually-hidden">Blank header</span></th>
+                        <th><span class="visually-hidden">Blank header</span></th>
+                        <th class="right-item table-top-right"><img class="mix-bottle"
+                           src="{{ other_mixes_bottle_icon_src }}" alt="Bottle Illustration"  width="27" height="48" loading="lazy">
+                           <span class="table-top-right-text">Other Mixes</span>
+                        </th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td class="left-item">Bar Fresh Taste</td>
+                        <td></td>
+                        <td class="right-item"><img class="red-cross" src="{{ red_cross_icon_src }}"
+                           alt="red cross"  width="38" height="37" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td class="left-item">Great for Mocktails</td>
+                        <td></td>
+                        <td class="right-item"><img class="red-cross" src="{{ red_cross_icon_src }}"
+                           alt="red cross"  width="38" height="37" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td class="left-item">Calories</td>
+                        <td></td>
+                        <td class="right-item">280</td>
+                     </tr>
+                     <tr>
+                        <td class="left-item">Sugar</td>
+                        <td></td>
+                        <td class="right-item">58g</td>
+                     </tr>
+                     <tr>
+                        <td class="left-item">No Artificial Ingredients</td>
+                        <td></td>
+                        <td class="right-item"><img class="red-cross" alt="Red Cross" src="{{ red_cross_icon_src }}"
+                           alt="red cross" width="38" height="37" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td class="left-item">~$1 per drink</td>
+                        <td></td>
+                        <td class="right-item"><img class="red-cross" src="{{ red_cross_icon_src }}"
+                           alt="red cross" width="38" height="37" loading="lazy"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div class="main-why-craftmix-card-sm">
+               <table class="craftmix-table">
+                  <thead>
+                     <tr>
+                        <th><img class="card-craftmix-logo"
+                           src="{{ craftmix_logo_src }}"
+                           alt="Craftmix Logo" width="200" height="37" loading="lazy"></th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td><img class="card-tick" alt="Green Tick" src="{{ green_tick_icon_src }}"
+                           width="49" height="40" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td><img class="card-tick" alt="Green Tick" src="{{ green_tick_icon_src }}"
+                           width="49" height="40" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td>25 or less</td>
+                     </tr>
+                     <tr>
+                        <td>5g or less</td>
+                     </tr>
+                     <tr>
+                        <td><img class="card-tick"  alt="Green Tick" src="{{ green_tick_icon_src }}"
+                           width="49" height="40" loading="lazy"></td>
+                     </tr>
+                     <tr>
+                        <td><img class="card-tick"  alt="Green Tick" src="{{ green_tick_icon_src }}"
+                           width="49" height="40" loading="lazy"></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         {% if section.settings.cta_text != blank %}
+           {% liquid
+             assign cta_href = '#'
+             if section.settings.make_anchor_link and section.settings.cta_url != blank
+               assign cta_href = section.settings.cta_url
+             elsif section.settings.make_anchor_link == false and section.settings.cta_anchor_id != blank
+               assign anchor_id_clean = section.settings.cta_anchor_id | remove_first: '#'
+               assign cta_href = '#' | append: anchor_id_clean
+             endif
+           %}
+           <div class="comparison-cta-wrapper">
+             <a href="{{ cta_href }}" class="comparison-cta-btn">{{ section.settings.cta_text }}</a>
+           </div>
+         {% endif %}
+      </div>
+   </div>
+</div>
+{% liquid
+  if template.name == 'product'
+    assign comparison_wave_asset = 'wave-divider-right-to-left-2400px-sky-blue.json'
+  elsif template.name == 'page' and template.suffix == 'espresso-martini'
+    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-beige.json'
+  else
+    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-lavender.json'
+  endif
+%}
+<div class="section-wave-container comparison-section-wave-container">
+   <div
+      class="lazy-lottie-container section-wave"
+      data-src="{{ comparison_wave_asset | asset_url }}"
+      data-background="transparent"
+      data-speed="1"
+      data-autoplay="true"
+      data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+   </div>
+</div>
+
+     
+
+{% style %}
+.comparison-section-wave-container{
+  background-color: {{ section.settings.background_color }};
+  bottom:0;
+}
+.comparison-section-wave-container .section-wave{
+  z-index:2;
+}
+.custom-comparison-section {
+  padding-top: 60px;
+  background-color: {{ section.settings.background_color }};
+  position: relative;
+  z-index:1;
+}
+
+.custom-comparison-section-container {
+  margin: 0 auto;
+  padding: 0 45px;
+
+  position: relative;
+      z-index: 50
+}
+
+/* Comparison section */
+.lower-section {
+  text-align: center;
+position: relative;
+  padding-bottom:80px;
+}
+
+.lower-section-subheading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.lower-section-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 80px;
+}
+
+.comparison-cta-wrapper {
+  margin-top: 65px;
+}
+@media (min-width: 768px) {
+  .comparison-cta-wrapper {
+    margin-top: 90px;
+  }
+}
+.custom-comparison-section .comparison-cta-btn {
+  background-color: {{ section.settings.cta_bg_color }};
+  color: {{ section.settings.cta_text_color }};
+  font-family: 'Goldplay', sans-serif !important;
+  font-weight: 600 !important;
+  border: 2px solid {{ section.settings.cta_text_color }};
+  border-radius: 6.25rem !important;
+  box-shadow: 2px 6px 0 0 {{ section.settings.cta_text_color }};
+  max-width: 362px;
+  max-height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.25s ease !important;
+  padding: 16px 32px;
+  font-size: 1.25rem !important;
+  transform: translateZ(0);
+  text-decoration: none;
+}
+.custom-comparison-section .comparison-cta-btn:hover {
+  box-shadow: none;
+}
+
+.main-why-craftmix-card {
+     position: relative;
+  width: 828px;
+  height: 570px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.main-why-craftmix-card-lg {
+  z-index: 3;
+  position: absolute;
+  width: 828px;
+  background-color: #ffffff;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  color: #002657;
+  overflow: hidden;
+}
+
+.main-why-craftmix-card-sm {
+  position: absolute;
+  z-index: 10;
+  width: 303px;
+  background-color: #60d3f8;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 2px 0px rgba(0, 38, 87, 1);
+  color: #002657;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+/* Small card table */
+.craftmix-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.craftmix-table th {
+  height: 98px;
+  background-color: #60d3f8;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #002657;
+}
+
+.craftmix-table td {
+  height: 89px;
+  background-color: #60d3f8;
+  color: #002657;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #002657;
+  font-family: "Goldplay";
+  font-size: 20px;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+}
+
+.craftmix-table td img {
+  margin: 0 auto;
+}
+
+.craftmix-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Large table */
+.craftmix-table-lg {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.craftmix-table-lg th,
+.craftmix-table-lg td {
+  width: 33.33%;
+}
+
+.craftmix-table-lg th {
+  height: 98px;
+  background-color: #ffffff;
+  color: #002657;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #002657;
+}
+
+.craftmix-table-lg td {
+  height: 89px;
+  background-color: #ffffff;
+  color: #002657;
+  font-size: 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #002657;
+  font-family: "Goldplay";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.13px;
+  line-height: 20px;
+}
+
+.craftmix-table-lg tr:last-child td {
+  border-bottom: none;
+}
+
+.craftmix-table-lg .left-item {
+  text-align: center;
+}
+
+.craftmix-table-lg .right-item {
+  text-align: center;
+}
+
+.craftmix-table-lg .right-item img {
+  margin: 0 auto;
+}
+
+.card-craftmix-logo {
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 200px;
+  text-align: center;
+}
+
+.table-top-right-text {
+  color: #002657;
+  font-size: 18px;
+  vertical-align: middle;
+  font-family: "Hornbill";
+  font-weight: 700;
+  letter-spacing: -0.47px;
+  line-height: 20px;
+}
+
+/* Marquee */
+.pdp-comparison-section-marquee {
+  position: absolute;
+  bottom: -50%;
+  z-index: 1;
+  pointer-events: none;
+  height: 100% !important;
+}
+
+/* Decorative images */
+.comparison-decor {
+  position: absolute;
+  display: block;
+  height: auto;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.comparison-decor--left-1 {
+  top: 18px;
+  left: -24px;
+  width: 150px;
+
+}
+
+.comparison-decor--right-1 {
+  top: 20%;
+  right: 0px;
+  max-width: 158px;
+ 
+}
+
+.comparison-decor--right-3 {
+bottom: -27px;
+    right: 0;
+    max-width: 94px;
+ 
+}
+
+.main-why-craftmix-card > .comparison-decor {
+  z-index: 2;
+}
+
+.comparison-decor--left-2 {
+    top: 50%;
+    left: 100px;
+  max-width: 127px;
+
+}
+
+.comparison-decor--left-3 {
+     bottom: 0;
+   left: 0;
+
+
+}
+
+.comparison-decor--right-2 {
+    bottom: 0%;
+    right: -19%;
+   width:206px
+ 
+}
+
+/* Media queries */
+@media screen and (max-width: 1050px) {
+  .custom-comparison-section-container {
+    padding: 0 20px;
+  }
+}
+@media screen and (max-width:1024px){
+  .comparison-decor--left-1 {
+    width: 125px;
+    top: 30px;
+    left: -18px;
+  }
+
+  .comparison-decor--right-1 {
+   
+    top: 88px;
+    right: 14px;
+  }
+
+  .comparison-decor--right-3 {
+    width: 145px;
+    right: -14px;
+    bottom: -42px;
+  }
+}
+@media screen and (max-width: 875px) {
+  .lower-section-heading {
+    font-size: 46px;
+    letter-spacing: -1.21px;
+    line-height: 46px;
+    margin-bottom: 60px;
+  }
+
+  .main-why-craftmix-card {
+    width: 100%;
+    max-width: 388px;
+    height: 498px;
+    z-index: 10;
+  }
+
+  .main-why-craftmix-card-lg {
+    z-index: 100;
+    width: 100%;
+    max-width: 388px;
+  }
+
+  .main-why-craftmix-card-sm {
+    z-index: 102;
+    width: 142px;
+  }
+
+  .craftmix-table-lg th {
+    height: 88px;
+    font-size: 18px;
+  }
+
+  .craftmix-table-lg td {
+    height: 77px;
+    font-size: 16px;
+  }
+
+  .craftmix-table th {
+    height: 87px;
+    font-size: 18px;
+  }
+
+  .craftmix-table td {
+    height: 77px;
+    font-size: 16px;
+  }
+
+  td img.red-cross {
+    width: 23px;
+    height: 22px;
+  }
+
+  td img.card-tick {
+    width: 30px;
+    height: 24px;
+  }
+
+  th img.mix-bottle {
+    width: 21px;
+    height: 40px;
+  }
+
+  .card-craftmix-logo {
+    width: 112px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .custom-comparison-section lottie-player.marquee {
+    left: -200px;
+    width: 1000px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .custom-comparison-section-container {
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+/* Decorative image media queries */
+@media (max-width: 768px) {
+  .comparison-decor--left-1 {
+    top: 40px;
+    left: -10px;
+   
+  }
+.lower-section {
+   
+    padding-bottom: 0;
+}
+  .comparison-decor--right-1 {
+    top: 98px;
+    right: 10px;
+   
+  }
+
+  .comparison-decor--left-2 {
+  top: 303px;
+        left: 0;
+   
+  }
+
+  .comparison-decor--left-3 {
+    bottom: -42px;
+    left: 0px;
+    
+  }
+
+  .comparison-decor--right-2 {
+            bottom: 143px;
+       right: -26%;
+   
+  }
+
+  .comparison-decor--right-3 {
+    bottom: -16px;
+    right: -4px;
+   
+  }
+
+  .craftmix-table-lg .left-item {
+    padding-left: 4px;
+    padding-right: 16px;
+  }
+
+  .craftmix-table-lg .right-item {
+    padding-right: 4px;
+    padding-left: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .comparison-decor--left-1 {
+ display:none;
+  }
+
+  .comparison-decor--right-1 {
+    display:none;
+  }
+
+  .comparison-decor--left-2 {
+    display:none;;
+  }
+
+  .comparison-decor--left-3 {
+   display:none;
+  }
+
+  .comparison-decor--right-2 {
+                 bottom: 95px;
+        right: -55px;
+    width: 100px;
+  }
+.custom-comparison-section {
+    padding-top: 0px;
+
+}
+  .comparison-decor--right-3 {
+    display:none;
+  }
+  .custom-comparison-section-container{
+    padding: 0 12px;
+  }
+}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Espresso Comparison Graph",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C4F3C2"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_1",
+      "label": "Left image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_2",
+      "label": "Left image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_3",
+      "label": "Left image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image_1",
+      "label": "Right image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image_2",
+      "label": "Right image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image_3",
+      "label": "Right image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "other_mixes_bottle_icon",
+      "label": "Other mixes bottle icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "red_cross_icon",
+      "label": "Red cross icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "craftmix_logo_image",
+      "label": "Craftmix logo image"
+    },
+    {
+      "type": "image_picker",
+      "id": "green_tick_icon",
+      "label": "Green tick icon"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "make_anchor_link",
+      "label": "Make Anchor Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_anchor_id",
+      "label": "ID",
+      "info": "Target section ID to scroll to when Make Anchor Link is off"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "info": "Used when Make Anchor Link is on"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA Background color",
+      "default": "#60D3F8"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA Text color",
+      "default": "#002657"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Espresso Comparison Graph"
+    }
+  ]
+}
+{% endschema %}

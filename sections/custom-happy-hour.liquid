@@ -1,0 +1,108 @@
+<div class="happy-hour-section">
+  <div class="content-wrapper">
+  <h3 class="happy-hour-section-header">&#8220;Happy Hour <br> just  got better&#8221;</h3>
+  </div>
+</div>
+
+{% style %}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.happy-hour-section {
+  background-image: url('https://cdn.shopify.com/s/files/1/2340/1623/files/happyhour.png?v=1739371492');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 893px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: -120px;
+}
+
+.happy-hour-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.1
+  ); /* This adds a slight dark overlay to make text more readable */
+}
+
+.content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 70px; /* This sets the top padding to 70px */
+}
+
+.happy-hour-section-header {
+  opacity: 1;
+  color: #ffffff;
+  font-family: 'Hornbill', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: left;
+  line-height: 75px;
+  max-width: 80%;
+}
+
+@media screen and (max-width: 900px) {
+  .happy-hour-section {
+    height: 584px;
+  }
+  .happy-hour-section-header {
+    font-family: 'Hornbill', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    font-style: Bold;
+    letter-spacing: -1.05px;
+    line-height: 40px;
+    color: #ffffff;
+  }
+}
+
+
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "custom happy hour",
+    "settings": [],
+    "presets": [{"name": "custom happy hour"}]
+  }
+{% endschema %}

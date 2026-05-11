@@ -1,0 +1,218 @@
+<section class="faq-hero">
+  <h1 class="faq-hero-heading">Frequently Asked<br>
+      Questions</h1>
+     <div class="section-wave-container lottie-player">
+        <lottie-player class="section-wave" src="{{ 'wave-divider-l2r-light-blue.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+      </div>
+     
+</section>
+
+{% style %}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.faq-hero {
+  position: relative;
+  height: 608px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 140px 20px 20px 20px;
+  background-color: #007d00;
+  background-image: url('{{ 'faq-main-hero-img.png' | asset_url }}'); 
+  background-size: 110%;
+  background-position: center;
+  overflow: hidden; 
+}
+
+.faq-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1); /* Dark overlay */
+  z-index: 1;
+}
+
+.faq-hero h1 {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 74px;
+}
+
+.faq-hero .section-wave-container{
+  aspect-ratio:unset;
+}
+
+.lottie-player {
+  position: absolute;
+  bottom: -30px;
+  left: 0; 
+  width: 100%;
+  height: auto; 
+  z-index: 3;
+}  
+
+@media (max-width: 968px) {
+  .faq-hero {
+    justify-content: center;
+    padding: 20px;
+    background-image: url('{{ 'faq-main-hero-img.png' | asset_url }}'); 
+    background-size: cover;
+    background-position: center;
+  }
+}
+  
+@media (max-width: 768px) {
+ .lottie-player {
+    bottom: -10px;
+  }  
+}
+
+@media (max-width: 567px) {
+  .faq-hero {
+    height: 437px;
+    background-image: url('{{ 'faq-main-hero-img.png' | asset_url }}'); 
+    background-size: 200%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  h1.faq-hero-heading {
+    font-size: 2.875rem;
+    letter-spacing: -1.68px;
+    line-height: 2.875rem;
+    transform: translateY(-50px); 
+  }
+  .lottie-player {
+    bottom: -5px;
+  }  
+}
+
+@media (max-width: 360px) {
+  .faq-hero {
+    height: 400px;
+  }
+
+   h1.faq-hero-heading {
+    font-size: 2.4rem;
+    line-height: 2.4rem;
+  }
+}
+
+{% endstyle %}
+{% javascript %}
+document.addEventListener('DOMContentLoaded', function () {
+  const FAQ_GROUP_SELECTORS = [
+    '.account-faq',
+    '.ingredient-faq',
+    '.product-faq',
+    '.shipping-faq'
+  ];
+
+  const ACTIVATION_KEYS = new Set(['Enter', ' ']);
+
+  function isInteractiveEl(el, root) {
+    if (!el) return false;
+
+    // Native interactive elements
+    const native = el.closest('a[href], button, input, select, textarea');
+    if (native) return true;
+
+    // Role-based buttons, but ignore the FAQ root itself
+    const roleBtn = el.closest('[role="button"]');
+    return !!(roleBtn && roleBtn !== root);
+  }
+
+  FAQ_GROUP_SELECTORS.forEach((selector) => {
+    const faqs = Array.from(document.querySelectorAll(selector));
+    if (!faqs.length) return;
+
+    faqs.forEach((faq) => {
+      if (!faq.hasAttribute('tabindex')) faq.setAttribute('tabindex', '0');
+      if (!faq.hasAttribute('role')) faq.setAttribute('role', 'button');
+      if (!faq.hasAttribute('aria-expanded')) {
+        faq.setAttribute('aria-expanded', faq.classList.contains('active') ? 'true' : 'false');
+      }
+
+      const answer = faq.querySelector('.faq-answer');
+
+      if (faq.classList.contains('active') && answer) {
+        answer.style.height = answer.scrollHeight + 'px';
+        faq.setAttribute('aria-expanded', 'true');
+      } else {
+        if (answer) answer.style.height = '0px';
+        faq.setAttribute('aria-expanded', 'false');
+      }
+
+      function closeItem(item) {
+        item.classList.remove('active');
+        item.setAttribute('aria-expanded', 'false');
+        const itemAnswer = item.querySelector('.faq-answer');
+        if (itemAnswer) itemAnswer.style.height = '0px';
+      }
+
+      function openItem(item) {
+        item.classList.add('active');
+        item.setAttribute('aria-expanded', 'true');
+        const itemAnswer = item.querySelector('.faq-answer');
+        if (itemAnswer) itemAnswer.style.height = itemAnswer.scrollHeight + 'px';
+      }
+
+      function toggleCurrent() {
+        const isActive = faq.classList.contains('active');
+
+        faqs.forEach((item) => {
+          if (item !== faq) closeItem(item);
+        });
+
+        if (isActive) closeItem(faq);
+        else openItem(faq);
+      }
+
+      faq.addEventListener('click', (e) => {
+        if (isInteractiveEl(e.target, faq)) return;
+        toggleCurrent();
+      });
+
+      faq.addEventListener('keydown', (e) => {
+        if (isInteractiveEl(e.target, faq) && e.target !== faq) return;
+
+        if (ACTIVATION_KEYS.has(e.key)) {
+          e.preventDefault();
+          toggleCurrent();
+        }
+      });
+    });
+  });
+});
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Custom Faq Hero",
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "custom faq hero",
+
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,215 @@
+<link rel="stylesheet" href="{{ 'pdp-quote-section-custom.css' | asset_url }}">
+
+<div class="pdp-quote-section-container">
+  {% if section.settings.featured_image %}
+    <div class="featured-image-banner">
+      <div class="section-wave-container quote-top-wave">
+        <div
+          class="lazy-lottie-container section-wave"
+          style="transform: scaleY(-1);"
+          data-src="{{ product.metafields.custom.main_product_wave | asset_url }}"
+          data-background="transparent"
+          data-speed="1"
+          data-autoplay="true"
+          data-loop="true"
+        >
+          <!-- lottie-player will be injected here -->
+        </div>
+      </div>
+      <div class="image-banner-inner-container">
+        <div class="content-left">
+          <h2>"Happy Hour<br>just got better"</h2>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  <div
+    class="lazy-lottie-container marquee pdp-quote-section-marquee"
+    data-src="{{ 'value_prop_1440px.json' | asset_url }}"
+    data-background="transparent"
+    data-speed="0.6"
+    data-autoplay="true"
+    data-loop="true"
+  >
+  </div>
+</div>
+
+<style>
+  .featured-image-banner{
+    background-image: url('{{ section.settings.featured_image | image_url }}');
+  }
+  .quote-top-wave{
+    bottom:1px;
+  }
+  @media screen and (max-width: 768px){
+    .featured-image-banner{
+      background-image: url('{{ section.settings.featured_image_mobile | image_url }}');
+      background-size: cover; /* Ensures it covers the div */
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100%; /* Set the width as per requirement */
+      padding-bottom: 125%; 
+      position: relative;
+    }
+  }
+  .pdp-quote-section-container{
+    position:relative;
+  }
+  .pdp-quote-section-container .section-wave-container{
+    /* height:9rem; */
+    bottom:-1;
+  }
+  .pdp-quote-section-container .section-wave{
+    transform: scaleX(-1);
+  }
+  .featured-image-banner {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    /* height: 57vw; */
+    position:relative;
+  }
+  .image-banner-inner-container{
+    height:57vw;
+  }
+  .pdp-quote-section-container h2{
+    padding-top: 2rem;
+    color: #0036CD !important;
+    margin-left: 5rem;
+  }
+  .product-1-tip-button{
+    top: 24%;
+    left: 62%;
+  }
+  .product-1-tip{
+    top: calc(24% - 5.25rem);
+    left: calc(62% - 10rem);
+  }
+  .product-2-tip-button{
+    left: 80%;
+  }
+  .product-2-tip{
+    top: calc(50% - 5.25rem);
+    left: calc(80% - 10rem);
+  }
+  .product-3-tip-button{
+    top: 75%;
+    left: 73%;
+  }
+  .product-3-tip{
+    top: calc(75% - 5.25rem);
+    left: calc(73% - 10rem);
+  }
+  .product-4-tip{
+    left: calc(50% - 10rem);
+  }
+  .pdp-quote-section-bubble{
+    width:25rem;
+    margin-top: 1.5rem;
+    margin-left: 5rem;
+  }
+  .content-left .text-bubble-container{
+    position:relative;
+  }
+  .content-left .content-block{
+    position:absolute;
+    top:1.25rem;
+    left:8rem;
+  }
+  .testimonial-name{
+    font-size:1rem;
+    text-transform:uppercase;
+    font-family:'Goldplay';
+    font-weight:600;
+  }
+  .testimonial-name img{
+    display:inline-block;
+    top: -.125rem;
+    margin-right:0.25rem;
+    position:relative;
+  }
+  .testimonial-text{
+    font-size: 1.125rem;
+    font-family:'Goldplay';
+    font-weight:600;
+    max-width:21rem;
+    margin-top:0.5rem;
+  }
+  .pdp-quote-section-container .content-left{
+    text-align:center;
+  }
+  .pdp-quote-section-container .content-left h2{
+    margin:auto;
+    font-size:64px;
+  }
+  @media screen and (max-width:1023px){
+    .pdp-quote-section-bubble{
+      width:21rem;
+    }
+    .testimonial-name,
+    .testimonial-text{
+      font-size:.875rem;
+    }
+    .testimonial-text{
+      max-width:17rem;
+    }
+    .pdp-quote-section-container h2,
+    .pdp-quote-section-bubble{
+      margin-left:2rem;
+    }
+    .content-left .content-block{
+      left:5rem;
+    }
+  }
+  @media screen and (max-width:768px){
+    .content-left .content-block{
+      left: calc(50% - 7.5rem);
+    }
+    .pdp-quote-section-container h2{
+      padding-top:0;
+      text-align: center;
+      margin: auto;
+      font-size: 3.5rem;
+      max-width: 80%;
+    }
+    .pdp-quote-section-container .featured-image-banner{
+      padding-bottom:63%;
+    }
+    .pdp-quote-section-container .content-left h2{
+      font-size:40px;
+    }
+  }
+  @media screen and (max-width: 500px){
+    .featured-image-banner{
+      /* padding-top:150% !important; */
+    }
+    .pdp-quote-section-container h2{
+      font-size:2.25rem;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "PDP Quote Section",
+  "tag": "section",
+  "class": "section",
+  "presets": [
+    {
+      "name": "PDP Quote Section"
+    }
+  ],
+  "settings":[
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image_mobile",
+      "label": "Featured Image Mobile"
+    }
+  ]
+}
+{% endschema %}

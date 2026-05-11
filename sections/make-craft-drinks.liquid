@@ -1,0 +1,63 @@
+<div class="make-craft-drinks-wrapper">
+  <div class="make-craft-drinks-section page-max-width">
+    <div class="craft-drinks-card-container">
+      <div class="craft-drinks-card">
+        <div class="craft-drinks-card-header">
+          <span class="card-subheading">make</span>
+          <h3 class="card-title">Craft Drinks</h3>
+          <p class="card-paragraph">in under 30 seconds</p>
+        </div>
+        <div class="craft-drinks-card-list-container">
+          <ul class="craft-drinks-card-list">
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>1</span></div>Pour 4oz water & optionally 1oz liquor
+            </li>
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>2</span></div>Stir in 1 Craftmix packet (30-60s)
+            </li>
+            <li class="craft-drinks-card-list-item">
+              <div class="circle"><span>3</span></div>Serve over a lot of ice and enjoy
+            </li>
+          </ul>
+        </div>
+  
+        <div class="craft-drinks-card-cta">
+          <a class="craft-drinks-card-cta-btn" href="/collections/flavors-2024">Find your flavor</a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="craft-drinks-image-container">
+      <div
+        class="lazy-lottie-container preparation-animation"
+        data-src="{{ 'preparation-animation.json' | asset_url }}"
+        data-background="transparent"
+        data-speed="0.6"
+        data-autoplay="true"
+        data-loop="true"
+      >
+        <!-- lottie-player will be injected here -->
+      </div>
+    </div>
+  
+  </div>
+  <div class="promo-bar-wrapper">
+    <div class="promo-bar-container make-craft-drinks-promo-bar">
+      <img width="100p" height="100" alt="Perfect for Mocktails badge graphic featuring a tropical drink illustration with umbrellas and a straw inside a starburst-shaped label on a light green background" class="promo-bar-badge lazy-img" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/perfect-for-mocktails-badge.png?v=1738039738">
+      <div class="promo-bar-title">Zero alcohol, <br class="mobile-break-sm">all the flavor!</div>
+      <div class="promo-bar-blurb">Mix up the perfect <strong>mocktail</strong> with Craftmix! <br class="desktop-break-lg"><a class="promo-learn-more" aria-label="Learn more about Craftmix on our About Us page" href="/pages/about-us"><span class="sr-only">Learn more about Craftmix on our About Us page</span>Learn more</a></div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Make Craft Drinks",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Make Craft Drinks"
+      }
+    ]
+  }
+{% endschema %}

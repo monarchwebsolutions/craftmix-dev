@@ -1,0 +1,41 @@
+<section style="background-color: {{ section.settings.background_color }} !important;" class="shop-now-card-section">
+  <div class="shop-now-card">
+    <img loading="lazy" width="298" height="175" alt="Illustration of three colorful tropical cocktails in different glasses with fruit garnishes, umbrellas, sprinkles, and straws" class="shop-now-card-image lazy-img" data-src="https://cdn.shopify.com/s/files/1/2340/1623/files/shop-now-card.svg?v=1737762225">
+
+    <div class="shop-now-card-text">
+      <h2>Thirsty? Lets get sipping!</h2>
+      <p>Free US shipping on orders over $40</p>
+    </div>
+    <div class="shop-now-card-cta">
+      <a href="/collections/flavors-2024"  class="shop-now-card-btn">
+         Shop now
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Shop Now Card",
+    "settings": [
+      {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#f8f9fa"
+    },
+      {
+        "type": "url",
+        "id": "shop_now_link",
+        "label": "Shop Now Button Link",
+        "default": "/collections/all"
+      }
+
+    ],
+    "presets" : [
+      {
+        "name": "Shop Now Card"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ns1="http://www.w3.org/1999/xlink" width="213px" height="170px" viewBox="0 0 213 170" version="1.1">
+    <g transform="translate(213.0, 0) scale(-1, 1)"><title>illustration/ingredient/lemon@2x</title>
+    <defs>
+        <polygon id="path-1" points="6.84731948e-15 0 213.431949 0 213.431949 170.424988 6.84731948e-15 170.424988" />
+    </defs>
+    <g id="illustration/ingredient/lemon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-6" transform="translate(0, -0)">
+            <g id="Group-3">
+                <mask id="mask-2" fill="white">
+                    <use ns1:href="#path-1" />
+                </mask>
+                <g id="Clip-2" />
+                <path d="M213.431949,112.1605 C150.536949,74.2135 87.0529491,30.7775 19.8379491,-0.0005 C5.45594909,16.3535 -34.6600509,106.0255 68.2189491,161.2265 C113.613949,185.5845 192.638949,158.9395 213.431949,112.1605" id="Fill-1" fill="#F0E854" mask="url(#mask-2)" />
+            </g>
+            <path d="M113.198749,149.6681 C149.882749,152.6031 178.537749,127.0671 202.215749,105.3411 C146.483749,71.2381 90.1407491,33.6991 31.0167491,5.2641 C-5.93725091,74.8461 45.6467491,144.2631 113.198749,149.6681" id="Fill-4" fill="#F6F3AC" />
+        </g>
+    </g>
+</g></svg>

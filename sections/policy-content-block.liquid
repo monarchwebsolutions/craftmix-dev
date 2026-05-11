@@ -1,0 +1,105 @@
+<section class="policy-content-block">
+  <img class="bg-img policy-tropical-leaf" width=200 height=215 src="{{ "tropical-leaf-1.svg" | asset_url }}" alt="Tropical leaf illustration">
+  <img class="bg-img policy-blueberry" width=105 height=110 src="{{ "blueberry.svg" | asset_url }}" alt="Blueberry illustration">
+  <img class="bg-img policy-orange-flower" width=208 height=222 src="{{ "orangeflower.svg" | asset_url }}" alt="Orange flower illustration">
+  <img class="bg-img policy-blood-orange" width=161 height=125 src="{{ "bloodorange.svg" | asset_url }}" alt="Blood orange slice illustration">
+  <img class="bg-img policy-mint-leaf" width=220 height=260 src="{{ "mint-light.svg" | asset_url }}" alt="Mint leaf illustration">
+  <div class="policy-content-block__inner page-width">
+    <h1 class="policy-content-block__title">{{ page.title }}</h1>
+    <div class="policy-content-block__content rte">
+      {{ page.content }}
+    </div>
+  </div>
+</section>
+<style>
+  .policy-content-block{
+    background-color:var(--craftmix-beige);
+    padding:20px 0;
+  }
+  .policy-content-block__inner{
+    z-index: 2;
+    position: relative;
+  }
+  .policy-content-block__content{
+    max-width:784px;
+    width:80%;
+    margin: auto;
+  }
+  .policy-content-block h1{
+    font-family: 'Hornbill';
+    font-weight: 600;
+    font-size: 40px;
+    text-align: center;
+    padding-top: 64px;
+    padding-bottom:40px;
+    color:var(--craftmix-dark-blue);
+  }
+  .policy-content-block__content p,
+  .policy-content-block__content ul
+  {
+    font-size:18px;
+    font-family:Goldplay;
+  }
+  .policy-tropical-leaf{
+    left: -60px;
+    top: 140px;
+    transform: rotate(270deg);
+    position:fixed;
+  }
+  .policy-blueberry{
+    transform: rotate(250deg);
+    top:420px;
+    left:100px;
+    
+  }
+  .policy-blood-orange{
+    transform: scaleX(-1);
+    right: -20px;
+    top: 182px;
+    transform: rotate(400deg);
+  }
+  .policy-orange-flower{
+    top:550px;
+    left:-100px;
+  }
+  .policy-content-block .bg-img{
+    position:fixed;
+  }
+  .policy-mint-leaf {
+    right: -120px;
+    top: 480px;
+    transform: rotate(95deg);
+  }
+  @media screen and (max-width:1199px){
+  .policy-blueberry{
+    display:none;
+  }
+  @media screen and (max-width:1023px){
+    .policy-tropical-leaf{
+      width:130px;
+    }
+    .policy-blood-orange{
+      width:94px;
+    }
+    .policy-mint-leaf{
+      width:113px;
+      right:-50px;
+    }
+    .policy-orange-flower{
+      display:none;
+    }
+  }
+</style>
+{% schema %}
+{
+  "name": "Policy Content Block",
+  "tag": "section",
+  "class": "policy-content-block-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Policy Content Block"
+    }
+  ]
+}
+{% endschema %}

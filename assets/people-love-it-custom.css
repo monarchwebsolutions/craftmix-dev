@@ -1,0 +1,227 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+.people-love-it-wrapper{
+  background-color:var(--craftmix-sky-blue);
+}
+.circled-quote-img-container{
+  width:3.75rem;
+  margin:auto;
+  margin-bottom:3rem;
+}
+.quote-text{
+  display:none;
+  text-align:center;
+  font-family: Hornbill;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.testimonial-selector-section{
+  padding-top:4rem;
+  padding-bottom:7rem;
+  position:relative;
+}
+.testimonial-selector-section .lime-bg{
+  right: 0rem;
+  top: -3rem;
+  width: 15rem;
+}
+.testimonial-selector-section .tropicalleaf-1-bg{
+  transform: rotate(70deg);
+  right: -3rem;
+  width: 13rem;
+  top: -2rem;
+}
+.testimonial-selector-section .tropicalleaf-2-bg{
+  bottom: -11rem;
+  z-index: 1;
+  left: -5rem;
+  width: 17rem;
+}
+.testimonial-selector-section .mint-leaf-bg{
+  right: -6rem;
+  transform: rotate(-70deg);
+  bottom: -7rem;
+  z-index: 1;
+  width:14rem;
+}
+.testimonial-selector-section .orangepeel-bg{
+  left: 6rem;
+  bottom: 1rem;
+  width: 11rem;
+}
+.testimonial-selector-section blueberry{
+  top: 0;
+  left: 3rem;
+  transform: rotate(75deg);
+}
+.testimonial-selector-content{
+  max-width:38rem;
+  margin:auto;
+}
+.quote-logo{
+  padding:1rem 2.5rem;
+  opacity:0.2;
+  flex:1;
+}
+.quote-logo.active-logo{
+  border-radius: 1.25rem;
+  opacity:1;
+  background: white;
+}
+.quote-text.active{
+  display:block;
+}
+.quote-logo-container{
+  margin:auto;
+  margin-top:3rem;
+  padding:0 1rem;
+}
+.custom-video-review-carousel-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #bfefff ;
+  overflow:hidden;
+}
+.custom-video-review-carousel-header{
+  padding-top:1rem;
+}
+.custom-video-review-carousel-header-stars {
+  text-align: center;
+  margin: 0 auto 1rem;
+}
+.custom-video-review-carousel-header-stars img{
+  margin:auto;
+  height:1.125rem;
+}
+.custom-video-review-carousel-header-stars-text {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 18px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.custom-video-review-carousel-subheading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.custom-video-review-carousel-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 22px;
+}
+
+.custom-video-review-carousel-header-optional-paragraph {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: -0.16px;
+  text-align: center;
+  line-height: 32px;
+}
+
+.custom-video-review-carousel-container {
+  margin-bottom: 60px;
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for the buttons */
+}
+
+.custom-video-review-carousel-cta-btn:hover {
+  box-shadow: none;
+}
+
+.people-love-it-wrapper .section-wave-container lottie-player{
+  position:absolute;
+  height:11vw;
+  transform: scaleX(-1);
+}
+/* Testimonial Selector */
+.quote-logo-container{
+  display:flex;
+}
+@media screen and (max-width:1023px){
+  .testimonial-selector-section .tropicalleaf-2-bg{
+    bottom:-8rem;
+    width:12rem;
+  }
+  .testimonial-selector-section .mint-leaf-bg{
+    width:11rem;
+    bottom:-5rem;
+  }
+  .testimonial-selector-section .orangepeel-bg {
+    left: -5rem;
+    bottom: 9rem;
+    width: 9rem;
+  }
+  .testimonial-selector-section .tropicalleaf-1-bg{
+    display:none;
+  }
+  .testimonial-selector-section .blueberry-bg{
+    top: -2rem;
+    width: 7rem;
+  }
+  .testimonial-selector-section .lime-bg {
+    right: -6rem;
+    width: 12rem;
+  }
+}
+@media (max-width: 768px) {
+  .custom-video-review-carousel-heading { 
+    font-size: 40px;
+    letter-spacing: -1.05px;
+    line-height: 40px;
+    margin-bottom: 17px;
+  }
+
+  .custom-video-review-carousel-header-optional-paragraph {
+    font-size: 20px;
+    line-height: 28px;
+  } 
+}
+@media (max-width:500px){
+  .quote-logo{
+    padding:1rem;
+  }
+  .quote-text{
+    line-height: 1.2;
+    font-size: 1.75rem;
+    padding: 0 1.5rem;
+  }
+}

@@ -1,0 +1,410 @@
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+
+<div> 
+  <div style="background-color: {{ section.settings.background_color }} !important;" class="custom-flavor-carousel-section">
+    <div class="custom-flavor-carousel-header">
+      <h3 class="custom-flavor-carousel-heading">{{ section.settings.heading }}</h3>
+    </div>
+  
+    <div class="custom-flavor-carousel-container">
+      <div class="custom-carousel">
+  
+        <!-- Carousel Items Start  -->
+        
+          
+      {% for product in collections['find-your-flavor-carousel'].products %}
+        {% unless product.tags contains "price_test" %}
+    
+
+
+          <div class="cell-container">
+            <div class="custom-flavor-carousel-cell ">
+              <div class="product-carousel-card">
+                <div class="product-card-container">
+
+                  <div class="product-card-container">
+                   <div class="product-card"
+                         data-color1="{{ product.metafields.custom.color_1 | default: '#8c4a84' }}"
+                         data-color2="{{ product.metafields.custom.color_2 | default: '#e6dbf7' }}"
+                         data-color3="{{ product.metafields.custom.color_3 | default: '#f8f3fa' }}"
+                         style="background-color: {{ product.metafields.custom.color_3 | default: '#f8f3fa' }};">
+                      <div class="product-card-info">
+                        <div class="product-card-stars">
+                          <!-- <img src=""> -->
+                          <p>4.9</p>
+                        </div>
+                       <h3 class="product-card-title">{{ product.title | replace_first: "2025 - ", "" }}</h3>
+                      </div>
+                      <div class="product-card-image">
+                        {% if product.featured_image %}
+                          {{ product.featured_image | img_url: '278x278' | img_tag: product.title }}
+                        {% else %}
+                          {{ 'product-placeholder.png' | asset_url | img_tag: 'Placeholder image' }}
+                        {% endif %}
+                      </div>
+                    
+                     <div class="product-card-footer">
+                           <div class="product-card-variant-size custom-select" style="background-color: {{ product.metafields.custom.color_2 | default: '#e6dbf7' }};">
+                           <select name="product-variant-size" id="product-variant-size-{{ product.id }}" style="background-color: {{ product.metafields.custom.color_2 | default: '#e6dbf7' }};">
+                            {% for variant in product.variants %}
+                              <option value="{{ variant.id }}" data-price="{{ variant.price }}" {% if forloop.first %}selected{% endif %}>
+                                {{ variant.title }}
+                              </option>
+                            {% endfor %}
+                          </select>
+                            <span class="custom-arrow"></span>
+                          </div>
+                           <div class="product-card-add-to-cart" style="background-color: {{ product.metafields.custom.color_1 | default: '#8c4a84' }};">
+                            <button class="product-card-add-btn" data-product-id="{{ product.id }}">
+                              Add - <span class="variant-price igPrice" data-product-id="{{product.id }}">{{ product.price | money }}</span>
+                            </button>
+                          </div>
+                        </div>
+                    
+                     
+                    </div>
+                  </div> 
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endunless %}
+        {% endfor %}
+
+        <!-- Carousel Items End  -->
+       </div>   
+    </div>
+
+      <div class="section-wave-container lottie-player">
+      <lottie-player class="section-wave" src="{{ 'wave-divider-right-to-left-offwhite-1440px.json' | asset_url }}" background="transparent"  speed="1"  loop autoplay></lottie-player>
+    </div>
+    
+  </div>
+  
+</div> 
+ 
+        
+        
+        
+        
+
+
+{% style %}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+.custom-flavor-carousel-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
+  /* background-color: #fff9f5; */
+}
+
+.custom-flavor-carousel-container {
+  margin-bottom: 60px;
+  position: relative;
+  padding-top: 86px; /* Add padding to make room for the buttons */
+}
+
+.custom-flavor-carousel-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+}
+
+.custom-flavor-carousel-cell {
+  width: 332px;
+  margin: 0 15px;
+}
+
+.product-carousel-card {
+  width: 100%;
+ 
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  background-color: rgba(248, 243, 250, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product-card-container {
+  position: relative;
+  width: 332px;
+  height: 443px;
+}
+
+.product-card-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  z-index: 100;
+  height: 90px;
+  width: 90px;
+}
+
+
+.product-card {
+  height: 443px;
+  width: 332px;
+  border-radius: 30px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  opacity: 1;
+  background-color: rgba(248, 243, 250, 1);
+  overflow: hidden;
+  padding-top: 20px;
+}
+
+.product-card-info {
+}
+
+.product-card-stars {
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* max-width: ; */
+}
+.product-card-stars img {
+  margin-right: 8px;
+}
+.product-card-stars p {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -0.47px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.product-card-title {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -0.47px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.product-card-image {
+  width: 278px;
+  height: 278px;
+  margin: 0 auto;
+  margin-bottom: 28px;
+}
+/* .product-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.product-card-footer {
+  width: 100%;
+  max-height: 59px;
+  border-top: 1px solid #002657;
+  display: flex;
+}
+
+.product-card-variant-size,
+.product-card-add-to-cart {
+  min-width: 50%;
+  height: 59px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-card-variant-size {
+  border-right: 1px solid #002657;
+}
+
+select {
+  font-size: 20px;
+  padding: 15px 24px 15px 10px;
+  font-family: 'Goldplay';
+  font-weight: 600;
+  color: #002657;
+  /* appearance: none; */
+  border: 0;
+}
+
+select:focus,
+select:focus-visible {
+  border: 0;
+  outline: none;
+}
+
+.product-card-add-btn {
+  opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+}
+
+
+select:focus,
+select:focus-visible {
+  border: 0;
+  outline: none;
+}
+
+.custom-select {
+  position: relative;
+}
+
+.product-card-add-btn {
+  opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Goldplay";
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+}
+
+.lottie-player {
+  
+}
+
+@media (max-width: 768px) {
+  .custom-flavor-carousel-container {
+    margin-bottom: 60px;
+  }
+  
+  .custom-flavor-carousel-heading {
+    font-size: 30px;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }  
+}
+
+{% endstyle %}
+
+{% javascript %}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const addToCartButtons = document.querySelectorAll('.product-card-add-btn');
+  const variantSelects = document.querySelectorAll('select[name="product-variant-size"]');
+
+  addToCartButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      const productId = this.getAttribute('data-product-id');
+      const variantSelect = document.getElementById(`product-variant-size-${productId}`);
+      const variantId = variantSelect.value;
+      const quantity = 1;
+
+      addToCart(variantId, quantity);
+    });
+  });
+
+  variantSelects.forEach(select => {
+    select.addEventListener('change', function() {
+      const productId = this.id.split('-').pop();
+      const selectedVariant = this.options[this.selectedIndex];
+      const variantPrice = selectedVariant.getAttribute('data-price');
+      const priceElement = this.closest('.product-card').querySelector('.variant-price');
+      
+      if (priceElement && variantPrice) {
+        priceElement.textContent = formatMoney(variantPrice);
+      }
+    });
+  });
+
+  function addToCart(variantId, quantity) {
+    fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        items: [{
+          id: variantId,
+          quantity: quantity
+        }]
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Product added to cart:', data);
+     
+    })
+    .catch(error => {
+      console.error('Error adding product to cart:', error);
+      
+    });
+  }
+
+  function formatMoney(cents) {
+    return (cents / 100).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+  }
+});
+
+  
+{% endjavascript %}
+
+
+
+{% schema %}
+  {
+    "name": "Custom Flavor Carousel",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading Text",
+        "default": "Find Your Flavor" 
+      }, 
+       {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ffffff"
+      }
+    ],
+     "presets": [{"name": "Custom Flavor Carousel"}]
+   }
+{% endschema %}
