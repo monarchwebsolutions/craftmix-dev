@@ -40,28 +40,28 @@
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/bottle.png",
-            "text": "Just add vodka, water, and ice"
+            "text": "Our CEO has no idea this page exists."
           }
         },
         "bullet_3GPdgn": {
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/strawberry_65010ed7-9c1b-429a-b1ed-91c06fc5e847.png",
-            "text": "Enjoy as a cocktail or mocktail"
+            "text": "He has no idea that $1 from every purchase goes toward pranking him again."
           }
         },
         "bullet_zDRPzN": {
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/Melon_Slice_Illustration.png",
-            "text": "Four delicious flavors"
+            "text": "And he definitely has no idea what we're already planning next."
           }
         },
         "bullet_9NtqFB": {
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/margarita.png",
-            "text": "12 packets = 12 drinks"
+            "text": "If this page is suddenly gone tomorrow, you'll know why but until then, grab a drink and help us out."
           }
         }
       },
@@ -73,8 +73,8 @@
       ],
       "name": "Espresso martini hero",
       "settings": {
-        "eyebrow": "You need to try our",
-        "title": "Cocktail Variety Pack",
+        "eyebrow": "Our CEO Got Pranked (again)",
+        "title": "Help us do it again",
         "background": "linear-gradient(180deg, rgba(254, 233, 232, 1), rgba(249, 188, 185, 1) 100%)",
         "show_rating": true,
         "rating_stars": 5,
@@ -102,20 +102,6 @@
         "marquee_top_color": "#f9bcb9",
         "marquee_bottom_color": "#f7ecfd",
         "lottie_file": "value_prop_1440px.json"
-      }
-    },
-    "espresso_nutrition_section_yNcJbi": {
-      "type": "espresso-nutrition-section",
-      "name": "Espresso Nutrition",
-      "settings": {
-        "product": "variety-pack",
-        "background_color": "#f7ecfd",
-        "decor_right": "shopify://shop_images/pink-umbrella.svg_fill.png",
-        "decor_right_mobile_top": 90,
-        "heading_mobile_margin_left": "initial",
-        "subheading": "What's in CraftMix",
-        "heading": "Quality Ingredients, Amazing Taste",
-        "body": "<p>Craftmix <strong>never uses</strong> artificial flavors, sweeteners, or preservatives and each flavor is made from natural powders.</p>"
       }
     },
     "main_product_lp_Hqz9di": {
@@ -278,6 +264,20 @@
         "padding_bottom_mobile": 28
       }
     },
+    "espresso_nutrition_section_yNcJbi": {
+      "type": "espresso-nutrition-section",
+      "name": "Espresso Nutrition",
+      "settings": {
+        "product": "variety-pack",
+        "background_color": "#f7ecfd",
+        "decor_right": "shopify://shop_images/pink-umbrella.svg_fill.png",
+        "decor_right_mobile_top": 90,
+        "heading_mobile_margin_left": "initial",
+        "subheading": "What's in CraftMix",
+        "heading": "Quality Ingredients, Amazing Taste",
+        "body": "<p>Craftmix <strong>never uses</strong> artificial flavors, sweeteners, or preservatives and each flavor is made from natural powders.</p>"
+      }
+    },
     "easy_cocktails_qWm37r": {
       "type": "easy-cocktails",
       "blocks": {
@@ -388,8 +388,8 @@
     "main",
     "espresso_martini_hero_wN4adg",
     "marquee_divider_eeXVF7",
-    "espresso_nutrition_section_yNcJbi",
     "main_product_lp_Hqz9di",
+    "espresso_nutrition_section_yNcJbi",
     "easy_cocktails_qWm37r",
     "professional_bartender_3VVnEX",
     "espresso_comparison_graph_LaAArg",
