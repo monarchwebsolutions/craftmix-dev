@@ -63,13 +63,58 @@
             "icon": "shopify://shop_images/margarita.png",
             "text": "If this page is suddenly gone tomorrow, you'll know why but until then, grab a drink and help us out."
           }
+        },
+        "image_slide_tattoo": {
+          "type": "image_slide",
+          "settings": {
+            "image": "",
+            "asset_image": "prank-hero-tattoo.jpeg",
+            "asset_alt": "Pranking our CEO tattoo prank image"
+          }
+        },
+        "image_slide_snack_meeting": {
+          "type": "image_slide",
+          "settings": {
+            "image": "",
+            "asset_image": "prank-hero-snack-meeting.jpeg",
+            "asset_alt": "Pranking our CEO snack meeting prank image"
+          }
+        },
+        "image_slide_wedding": {
+          "type": "image_slide",
+          "settings": {
+            "image": "",
+            "asset_image": "prank-hero-wedding.jpeg",
+            "asset_alt": "Pranking our CEO wedding prank image"
+          }
+        },
+        "image_slide_despicable": {
+          "type": "image_slide",
+          "settings": {
+            "image": "",
+            "asset_image": "prank-hero-despicable.jpeg",
+            "asset_alt": "Pranking our CEO despicable prank image"
+          }
+        },
+        "image_slide_harry_potter": {
+          "type": "image_slide",
+          "settings": {
+            "image": "",
+            "asset_image": "prank-hero-harry-potter.jpeg",
+            "asset_alt": "Pranking our CEO Harry Potter prank image"
+          }
         }
       },
       "block_order": [
         "bullet_zBz6Yf",
         "bullet_3GPdgn",
         "bullet_zDRPzN",
-        "bullet_9NtqFB"
+        "bullet_9NtqFB",
+        "image_slide_tattoo",
+        "image_slide_snack_meeting",
+        "image_slide_wedding",
+        "image_slide_despicable",
+        "image_slide_harry_potter"
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
