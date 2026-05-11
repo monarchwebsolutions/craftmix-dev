@@ -396,12 +396,12 @@
 <section id="espresso-hero-{{ section.id }}" class="espresso-hero section">
   {% if s.decor_left != blank %}
     <div class="espresso-hero__decor espresso-hero__decor--left">
-      {{ s.decor_left | image_url: width: 240 | image_tag: loading: 'lazy', alt: s.decor_left.alt | escape }}
+      {{ s.decor_left | image_url: width: 240 | image_tag: loading: 'lazy', alt: s.decor_left.alt }}
     </div>
   {% endif %}
   {% if s.decor_right != blank %}
     <div class="espresso-hero__decor espresso-hero__decor--right">
-      {{ s.decor_right | image_url: width: 260 | image_tag: loading: 'lazy', alt: s.decor_right.alt | escape }}
+      {{ s.decor_right | image_url: width: 260 | image_tag: loading: 'lazy', alt: s.decor_right.alt }}
     </div>
   {% endif %}
 
@@ -440,7 +440,6 @@
                   block.settings.icon
                   | image_url: width: 40
                   | image_tag: class: 'espresso-hero__bullet-icon', loading: 'lazy', alt: block.settings.icon.alt
-                  | escape
                 }}
               {% endif %}
               <span class="espresso-hero__bullet-text">{{ block.settings.text }}</span>
@@ -485,7 +484,6 @@
                         block.settings.image
                         | image_url: width: 1100
                         | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                        | escape
                       }}
                     </li>
                   {% endif %}
@@ -510,12 +508,11 @@
                 block.settings.image
                 | image_url: width: 1100
                 | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                | escape
               }}
             {% endif %}
           {% endfor %}
         {% elsif s.main_image != blank %}
-          {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt | escape }}
+          {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt }}
         {% else %}
           {{ 'image' | placeholder_svg_tag }}
         {% endif %}
