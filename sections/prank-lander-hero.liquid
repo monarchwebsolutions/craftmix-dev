@@ -3,7 +3,7 @@
   assign bullet_blocks = section.blocks | where: 'type', 'bullet'
   assign hero_image_count = 0
   for block in section.blocks
-    if block.type == 'image_slide' and (block.settings.image != blank or block.settings.asset_image != blank)
+    if block.type == 'image_slide' and block.settings.image != blank
       assign hero_image_count = hero_image_count | plus: 1
     endif
   endfor
@@ -479,22 +479,14 @@
             <div class="splide__track">
               <ul class="splide__list">
                 {% for block in section.blocks %}
-                  {% if block.type == 'image_slide' and (block.settings.image != blank or block.settings.asset_image != blank) %}
+                  {% if block.type == 'image_slide' and block.settings.image != blank %}
                     <li class="splide__slide espresso-hero__slide" {{ block.shopify_attributes }}>
-                      {% if block.settings.image != blank %}
-                        {{
-                          block.settings.image
-                          | image_url: width: 1100
-                          | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                          | escape
-                        }}
-                      {% elsif block.settings.asset_image != blank %}
-                        <img
-                          src="{{ block.settings.asset_image | asset_url }}"
-                          alt="{{ block.settings.asset_alt | escape }}"
-                          loading="lazy"
-                        >
-                      {% endif %}
+                      {{
+                        block.settings.image
+                        | image_url: width: 1100
+                        | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                        | escape
+                      }}
                     </li>
                   {% endif %}
                 {% endfor %}
@@ -513,21 +505,13 @@
           </div>
         {% elsif hero_image_count == 1 %}
           {% for block in section.blocks %}
-            {% if block.type == 'image_slide' and (block.settings.image != blank or block.settings.asset_image != blank) %}
-              {% if block.settings.image != blank %}
-                {{
-                  block.settings.image
-                  | image_url: width: 1100
-                  | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                  | escape
-                }}
-              {% elsif block.settings.asset_image != blank %}
-                <img
-                  src="{{ block.settings.asset_image | asset_url }}"
-                  alt="{{ block.settings.asset_alt | escape }}"
-                  loading="lazy"
-                >
-              {% endif %}
+            {% if block.type == 'image_slide' and block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 1100
+                | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                | escape
+              }}
             {% endif %}
           {% endfor %}
         {% elsif s.main_image != blank %}
@@ -628,9 +612,7 @@
       "name": "Image slide",
       "limit": 10,
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "asset_image", "label": "Theme asset image filename", "info": "Optional fallback for images stored in theme assets." },
-        { "type": "text", "id": "asset_alt", "label": "Asset image alt text" }
+        { "type": "image_picker", "id": "image", "label": "Image" }
       ]
     }
   ],
