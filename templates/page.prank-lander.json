@@ -36,6 +36,36 @@
     "espresso_martini_hero_wN4adg": {
       "type": "prank-lander-hero",
       "blocks": {
+        "image_slide_HQiwzp": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Wedding_Prank_1ea349f9-a056-454b-a4dc-191203152393.jpg"
+          }
+        },
+        "image_slide_LUXTwL": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Despicable_Prank.jpg"
+          }
+        },
+        "image_slide_FWiExG": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Harry_Potter_Prank.jpg"
+          }
+        },
+        "image_slide_Na4Rz4": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Snack_Meeting_Prank.jpg"
+          }
+        },
+        "image_slide_JWqPpE": {
+          "type": "image_slide",
+          "settings": {
+            "image": "shopify://shop_images/Tattoo_Prank.jpg"
+          }
+        },
         "bullet_zBz6Yf": {
           "type": "bullet",
           "settings": {
@@ -66,6 +96,11 @@
         }
       },
       "block_order": [
+        "image_slide_HQiwzp",
+        "image_slide_LUXTwL",
+        "image_slide_FWiExG",
+        "image_slide_Na4Rz4",
+        "image_slide_JWqPpE",
         "bullet_zBz6Yf",
         "bullet_3GPdgn",
         "bullet_zDRPzN",
