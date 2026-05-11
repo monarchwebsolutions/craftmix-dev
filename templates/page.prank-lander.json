@@ -50,18 +50,21 @@
         },
         "image_slide_FWiExG": {
           "type": "image_slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Harry_Potter_Prank.jpg"
           }
         },
         "image_slide_Na4Rz4": {
           "type": "image_slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Snack_Meeting_Prank.jpg"
           }
         },
         "image_slide_JWqPpE": {
           "type": "image_slide",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/Tattoo_Prank.jpg"
           }
