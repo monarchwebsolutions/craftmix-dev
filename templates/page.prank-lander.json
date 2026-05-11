@@ -72,7 +72,8 @@
         "bullet_9NtqFB"
       ],
       "custom_css": [
-        ".custom-primary-cta {padding:16px !important;}"
+        ".custom-primary-cta {padding: 16px !important;}",
+        "@media screen and (max-width:480px){.custom-primary-cta {font-size:18px !important; }}"
       ],
       "name": "Espresso martini hero",
       "settings": {
