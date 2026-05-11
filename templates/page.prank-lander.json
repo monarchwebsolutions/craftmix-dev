@@ -73,7 +73,7 @@
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
-        "@media screen and (max-width:480px){.custom-primary-cta {font-size:18px !important; }}"
+        "@media screen and (max-width: 480px) {.custom-primary-cta {font-size: 18px !important; }}"
       ],
       "name": "Prank lander hero",
       "settings": {
