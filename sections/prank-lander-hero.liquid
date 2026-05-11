@@ -1,5 +1,6 @@
 {% liquid
   assign s = section.settings
+  assign hero_image_crop = s.image_crop | default: 'original'
   assign bullet_blocks = section.blocks | where: 'type', 'bullet'
   assign image_slide_blocks = section.blocks | where: 'type', 'image_slide'
   assign hero_image_count = 0
@@ -164,6 +165,34 @@
     height: auto;
     display: block;
     border-radius: 26.43px;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media {
+    width: 100%;
+    border-radius: 26.43px;
+    overflow: hidden;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media--square {
+    aspect-ratio: 1 / 1;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media--5-4 {
+    aspect-ratio: 5 / 4;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media--3-2 {
+    aspect-ratio: 3 / 2;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media--16-9 {
+    aspect-ratio: 16 / 9;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__media--cropped img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   #espresso-hero-{{ section.id }} .espresso-hero__slider {
@@ -477,11 +506,13 @@
                       aria-hidden="true"
                       {{ block.shopify_attributes }}
                     >
-                      {{
-                        block.settings.image
-                        | image_url: width: 1100
-                        | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                      }}
+                      <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+                        {{
+                          block.settings.image
+                          | image_url: width: 1100
+                          | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                        }}
+                      </div>
                     </div>
                   {% endif %}
                 {% endfor %}
@@ -511,15 +542,19 @@
         {% elsif hero_image_count == 1 %}
           {% for block in image_slide_blocks %}
             {% if block.settings.image != blank %}
-              {{
-                block.settings.image
-                | image_url: width: 1100
-                | image_tag: loading: 'lazy', alt: block.settings.image.alt
-              }}
+              <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+                {{
+                  block.settings.image
+                  | image_url: width: 1100
+                  | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                }}
+              </div>
             {% endif %}
           {% endfor %}
         {% elsif s.main_image != blank %}
-          {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt }}
+          <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+            {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt }}
+          </div>
         {% else %}
           {{ 'image' | placeholder_svg_tag }}
         {% endif %}
@@ -642,6 +677,19 @@
     { "type": "checkbox", "id": "show_rating", "label": "Show rating row", "default": true },
     { "type": "range", "id": "rating_stars", "min": 0, "max": 5, "step": 1, "default": 5, "label": "Star count" },
     { "type": "text", "id": "rating_label", "label": "Rating text", "default": "600+ Reviews" },
+    {
+      "type": "select",
+      "id": "image_crop",
+      "label": "Image crop",
+      "default": "original",
+      "options": [
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "5:4", "label": "5:4" },
+        { "value": "3:2", "label": "3:2" },
+        { "value": "16:9", "label": "16:9" }
+      ]
+    },
     { "type": "image_picker", "id": "main_image", "label": "Main image fallback", "info": "Used when no image slide blocks are added." },
     { "type": "image_picker", "id": "decor_left", "label": "Left decorative image" },
     { "type": "text", "id": "decor_left_bottom", "label": "Left decor bottom position", "default": "25%", "info": "e.g. 25% or 20px" },
