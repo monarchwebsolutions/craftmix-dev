@@ -1,0 +1,448 @@
+{% liquid
+  assign s = section.settings
+%}
+<style>
+    #espresso-hero-{{ section.id }} {
+      position: relative;
+      overflow: hidden;
+      padding: 51px 137px  26px 193px ;
+      background: {{ s.background | default: 'linear-gradient(180deg, #FFF5EB 0%, #EDC6A4 100%)' }};
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__grid {
+      display: grid;
+      gap: clamp(1.75rem, 3vw, 3.25rem);
+      align-items: center;
+      grid-template-columns: 1fr;
+      padding:0;
+    }
+
+    .custom-primary-cta {
+    background-color: {{ s.cta_background_color | default: '#6E493F' }};
+      font-family: 'Goldplay'!important;
+      font-weight: 600 !important;
+      border: 2px solid #002657 !important;
+      border-radius: 6.25rem !important;
+  box-shadow: 2px 6px 0px 0px #002657;
+  max-width:362px;
+  max-height:60px;
+  display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: box-shadow .25s ease !important;
+      border-color: var(--craftmix-dark-blue) !important;
+      padding: 16px 32px;
+      font-size: 1.25rem !important;
+      transform: translateZ(0);
+  }
+
+   .custom-primary-cta:hover{
+  box-shadow: none;
+  }
+
+    @media (min-width: 900px) {
+      #espresso-hero-{{ section.id }} .espresso-hero__grid {
+        grid-template-columns: 1fr 1.2fr;
+      }
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+        margin-left:auto;
+      margin-right:auto;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__eyebrow {
+    font-family:'Goldplay';
+  font-weight: 600;
+  margin-bottom:21.62px;
+  font-size: 18px;
+
+  line-height: 17px;
+  letter-spacing: 0.43px;
+
+  text-transform: uppercase;
+  color:#002657;
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__title {
+
+  font-weight: 700;
+
+  font-size: 54px;
+  margin-bottom:22.5px;
+  line-height: 54px;
+  letter-spacing: -1.68px;
+
+  color:#002657;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__rating {
+      display: inline-flex;
+      align-items: center;
+      gap: 21.84px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__stars {
+      display: inline-flex;
+      gap: 0.25rem;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__star {
+      color: #ff7300;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__rating-label {
+    font-family: 'Goldplay';
+  font-weight: 600;
+  font-size: 14px;
+  color:#002657;
+  line-height: 19.25px;
+  letter-spacing: 0.3px;
+  text-transform:uppercase;
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__bullets {
+      list-style: none;
+      padding: 0;
+      margin: 0 ;
+      display: grid;
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__bullet {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 16px;
+   font-family: 'Hornbill';
+  font-weight: 700;
+  margin-bottom:17px;
+  font-size: 30px;
+
+  line-height: 44px;
+  letter-spacing: -0.79px;
+
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__bullet-icon {
+      width: 40px;
+      height: 45px;
+      object-fit: contain;
+    }
+
+    #espresso-hero-{{ section.id }} .espresso-hero__cta.custom-cta-container {
+      margin-top: 48px;
+
+
+    }
+
+    #espresso-hero-{{ section.id }} .espresso-hero__visual {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__card {
+      width: min(555px, 100%);
+      border-radius: 26.43px;
+   border-top: 0.88px solid var(--color-azure-17, #002657);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__decor {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__decor--left {
+      left: 0;
+      bottom: {{ s.decor_left_bottom | default: '25%' }};
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__decor.espresso-hero__decor--left img {
+      max-width: {{ s.decor_max_width | default: 188 }}px;
+      max-height: {{ s.decor_max_height | default: 170 }}px;
+      {% if s.decor_left_img_width != blank %}
+        {% assign left_img_w = s.decor_left_img_width | strip %}
+        {% if left_img_w contains 'px' or left_img_w contains '%' %}
+          width: {{ left_img_w }};
+        {% else %}
+          width: {{ left_img_w }}px;
+        {% endif %}
+      {% else %}
+        width: 100%;
+      {% endif %}
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__decor--right {
+      right: 0;
+      top: 25%;
+
+    }
+    #espresso-hero-{{ section.id }} .espresso-hero__decor img {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-width: 188px;
+      max-height: 170px;
+    }
+   @media (max-width: 1300px) {
+       #espresso-hero-{{ section.id }} {
+
+      padding: 51px 100px  26px;
+
+    }
+     #espresso-hero-{{ section.id }} .espresso-hero__decor--left {
+      left:-33px;
+
+
+    }
+     #espresso-hero-{{ section.id }} .espresso-hero__bullet {
+
+  font-size:22px;
+
+
+
+    }
+     #espresso-hero-{{ section.id }} .espresso-hero__title {
+
+
+
+  font-size: 40px;
+
+
+    }
+
+  }
+    @media (max-width: 900px) {
+       #espresso-hero-{{ section.id }} .espresso-hero__decor--left {
+      top:50%;
+
+
+    }
+      #espresso-hero-{{ section.id }} .espresso-hero__grid {
+      gap:30px;
+      }
+         #espresso-hero-{{ section.id }} .espresso-hero__decor--right {
+      top:80%;
+
+
+    }
+     #espresso-hero-{{ section.id }} .espresso-hero__cta.custom-cta-container {
+      margin-top: 24px;
+
+
+    }
+    }
+      @media (max-width: 600px) {
+
+    #espresso-hero-{{ section.id }} {
+
+      padding: 34px 23.5px 47px;
+
+    }
+   #espresso-hero-{{ section.id }} .espresso-hero__eyebrow {
+
+  margin-bottom:6px;
+  font-size: 16px;
+          text-align: center;
+  line-height: 17px;
+  letter-spacing: 0.43px;
+
+    }
+       #espresso-hero-{{ section.id }} .espresso-hero__title {
+
+
+
+  margin-bottom:12px;
+
+
+    }
+
+      #espresso-hero-{{ section.id }} .espresso-hero__rating-label {
+
+  font-size: 12px;
+
+
+
+
+    }
+      #espresso-hero-{{ section.id }} .espresso-hero__rating {
+
+      gap: 12px;
+      margin-bottom: 12px;
+
+    }
+      #espresso-hero-{{ section.id }} .espresso-hero__bullet {
+
+  font-size:18px;
+  margin-bottom: 6px;
+
+
+    }
+      #espresso-hero-{{ section.id }} .espresso-hero__content {
+
+      max-width:320px;
+    
+    }
+    
+       #espresso-hero-{{ section.id }} .espresso-hero__grid {
+  
+      gap:77px;
+  
+    }
+         #espresso-hero-{{ section.id }} .espresso-hero__decor--right {
+  z-index:3;
+
+
+    }
+          #espresso-hero-{{ section.id }} .espresso-hero__decor--left {
+
+        top: 48%;
+        left: -20px;
+    }
+
+      }
+</style>
+
+{% liquid
+  assign star_count = s.rating_stars | default: 5
+%}
+<section id="espresso-hero-{{ section.id }}" class="espresso-hero section">
+  {% if s.decor_left != blank %}
+    <div class="espresso-hero__decor espresso-hero__decor--left">
+      {{ s.decor_left | image_url: width: 240 | image_tag: loading: 'lazy', alt: s.decor_left.alt | escape }}
+    </div>
+  {% endif %}
+  {% if s.decor_right != blank %}
+    <div class="espresso-hero__decor espresso-hero__decor--right">
+      {{ s.decor_right | image_url: width: 260 | image_tag: loading: 'lazy', alt: s.decor_right.alt | escape }}
+    </div>
+  {% endif %}
+
+  <div class="page-width espresso-hero__grid">
+    <div class="espresso-hero__content">
+      {% if s.eyebrow != blank %}
+        <p class="espresso-hero__eyebrow">{{ s.eyebrow }}</p>
+      {% endif %}
+      {% if s.title != blank %}
+        <h2 class="espresso-hero__title">{{ s.title }}</h2>
+      {% endif %}
+
+      {% if s.show_rating %}
+        <div class="espresso-hero__rating">
+          <div class="espresso-hero__stars" aria-hidden="true">
+            {% for i in (1..star_count) %}
+              <span class="espresso-hero__star" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+                  <path d="M23.5587 7.33403L19.1144 6.83359C18.2228 6.73694 17.4491 6.18784 17.0791 5.38848L15.1934 1.41304C14.914 0.845632 14.4255 0.402682 13.8261 0.172562C13.2268 -0.0575207 12.5606 -0.0575207 11.9613 0.172562C11.3618 0.402645 10.8734 0.845586 10.594 1.41304L8.73125 5.39963C8.36106 6.19899 7.58757 6.74826 6.696 6.84493L2.2517 7.34537C1.60246 7.4206 1.0075 7.7369 0.589626 8.22855C0.171528 8.72038 -0.037526 9.35024 0.00554576 9.98831C0.0484034 10.6266 0.339987 11.2242 0.82022 11.6582L4.12027 14.6159C4.76217 15.2187 5.03675 16.1051 4.84472 16.955L3.95349 21.2453C3.82473 21.8748 3.94881 22.5284 4.29991 23.0707C4.65081 23.6131 5.20197 24.0022 5.83885 24.1576C6.47553 24.313 7.14892 24.2226 7.71935 23.905L11.6173 21.7514C12.3983 21.3183 13.3545 21.3183 14.1356 21.7514L18.068 23.905C18.6401 24.2226 19.3154 24.3119 19.9532 24.1545C20.591 23.9969 21.142 23.6048 21.4912 23.0596C21.8407 22.5145 21.9612 21.8584 21.8281 21.2284L20.9427 16.955C20.7636 16.0962 21.0582 15.2083 21.7188 14.616L25.0189 11.6582C25.5051 11.2226 25.8001 10.6198 25.8422 9.97625C25.8841 9.3327 25.6698 8.6981 25.2442 8.20572C24.8185 7.71314 24.2145 7.40085 23.5587 7.33403Z" fill="#FF5F00"/>
+                </svg>
+              </span>
+            {% endfor %}
+          </div>
+          {% if s.rating_label != blank %}
+            <span class="espresso-hero__rating-label">{{ s.rating_label }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <ul class="espresso-hero__bullets" role="list">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'bullet' %}
+                <li class="espresso-hero__bullet" {{ block.shopify_attributes }}>
+                  {% if block.settings.icon != blank %}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 40
+                      | image_tag: class: 'espresso-hero__bullet-icon', loading: 'lazy', alt: block.settings.icon.alt
+                      | escape
+                    }}
+                  {% endif %}
+                  <span class="espresso-hero__bullet-text">{{ block.settings.text }}</span>
+                </li>
+            {% endcase %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if s.cta_label != blank %}
+        {% liquid
+          assign hero_cta_href = '#'
+          if s.make_anchor_link and s.cta_link != blank
+            assign hero_cta_href = s.cta_link
+          elsif s.make_anchor_link == false and s.cta_anchor_id != blank
+            assign hero_anchor_id_clean = s.cta_anchor_id | remove_first: '#'
+            assign hero_cta_href = '#' | append: hero_anchor_id_clean
+          endif
+        %}
+        <div class="espresso-hero__cta hero-cta-container custom-cta-container">
+          <a class="button  custom-primary-cta" href="{{ hero_cta_href }}">{{ s.cta_label }}</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="espresso-hero__visual">
+      <div class="espresso-hero__card">
+        {% if s.main_image != blank %}
+          {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt | escape }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Prank lander hero",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "You need to try our" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Espresso Martini" },
+    { "type": "color_background", "id": "background", "label": "Background gradient", "default": "linear-gradient(180deg, #FFF5EB 0%, #EDC6A4 100%)" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating row", "default": true },
+    { "type": "range", "id": "rating_stars", "min": 0, "max": 5, "step": 1, "default": 5, "label": "Star count" },
+    { "type": "text", "id": "rating_label", "label": "Rating text", "default": "600+ Reviews" },
+    { "type": "image_picker", "id": "main_image", "label": "Main image" },
+    { "type": "image_picker", "id": "decor_left", "label": "Left decorative image" },
+    { "type": "text", "id": "decor_left_bottom", "label": "Left decor bottom position", "default": "25%", "info": "e.g. 25% or 20px" },
+    { "type": "text", "id": "decor_left_img_width", "label": "Left decor image width", "info": "Leave blank for 100%. Enter number for px (e.g. 240).", "placeholder": "e.g. 240" },
+    { "type": "image_picker", "id": "decor_right", "label": "Right decorative image" },
+    { "type": "range", "id": "decor_max_width", "min": 100, "max": 300, "step": 2, "default": 188, "unit": "px", "label": "Decor image max width" },
+    { "type": "range", "id": "decor_max_height", "min": 100, "max": 300, "step": 2, "default": 170, "unit": "px", "label": "Decor image max height" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop Now" },
+    { "type": "checkbox", "id": "make_anchor_link", "label": "Make Anchor Link", "default": false },
+    { "type": "text", "id": "cta_anchor_id", "label": "ID", "info": "Target section ID to scroll to when Make Anchor Link is off" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Used when Make Anchor Link is on" },
+    { "type": "color", "id": "cta_background_color", "label": "Button background color", "default": "#6E493F" }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Just add vodka, water, and ice" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Prank lander hero",
+      "blocks": [
+        { "type": "bullet", "settings": { "text": "Just add vodka, water, and ice" } },
+        { "type": "bullet", "settings": { "text": "Enjoy as a cocktail or mocktail" } },
+        { "type": "bullet", "settings": { "text": "12 packets = 12 drinks" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

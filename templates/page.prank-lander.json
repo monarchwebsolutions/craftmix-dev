@@ -34,7 +34,7 @@
       }
     },
     "espresso_martini_hero_wN4adg": {
-      "type": "espresso-martini-hero",
+      "type": "prank-lander-hero",
       "blocks": {
         "bullet_zBz6Yf": {
           "type": "bullet",
@@ -75,7 +75,7 @@
         ".custom-primary-cta {padding: 16px !important;}",
         "@media screen and (max-width:480px){.custom-primary-cta {font-size:18px !important; }}"
       ],
-      "name": "Espresso martini hero",
+      "name": "Prank lander hero",
       "settings": {
         "eyebrow": "Our CEO Got Pranked (again)",
         "title": "Help us do it again",
