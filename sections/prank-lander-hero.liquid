@@ -49,7 +49,7 @@
     line-height: 17px;
     letter-spacing: 0.43px;
     text-transform: uppercase;
-    color: #002657;
+    color: var(--badge-color, #002657);
   }
 
   #espresso-hero-{{ section.id }} .espresso-hero__title {
@@ -529,7 +529,7 @@
                       {{ block.shopify_attributes }}
                     >
                       {% if block.settings.badge_text != blank %}
-                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %};">{{ block.settings.badge_text | newline_to_br }}</div>
+                        <div class="espresso-hero__badge" style="--badge-color: {{ block.settings.badge_color | default: '#002657' }}; --badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %};">{{ block.settings.badge_text | newline_to_br }}</div>
                       {% endif %}
                       <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                         {{
@@ -573,7 +573,7 @@
                 {{ block.shopify_attributes }}
               >
                 {% if block.settings.badge_text != blank %}
-                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %};">{{ block.settings.badge_text | newline_to_br }}</div>
+                  <div class="espresso-hero__badge" style="--badge-color: {{ block.settings.badge_color | default: '#002657' }}; --badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %};">{{ block.settings.badge_text | newline_to_br }}</div>
                 {% endif %}
                 <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                   {{
@@ -774,6 +774,7 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "textarea", "id": "badge_text", "label": "Badge text" },
+        { "type": "color", "id": "badge_color", "label": "Badge text and border color", "default": "#002657" },
         { "type": "checkbox", "id": "badge_text_center", "label": "Center badge text", "default": false },
         { "type": "range", "id": "badge_border_thickness", "min": 1, "max": 16, "step": 1, "unit": "px", "label": "Badge border thickness", "default": 4 },
         { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Badge horizontal padding", "default": 8 },
