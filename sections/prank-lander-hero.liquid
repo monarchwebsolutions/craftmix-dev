@@ -216,6 +216,20 @@
     flex: 0 0 100%;
     width: 100%;
     line-height: 0;
+    position: relative;
+  }
+
+  #espresso-hero-{{ section.id }} .espresso-hero__badge {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    z-index: 2;
+    color: #002657;
+    font-family: 'Goldplay';
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   #espresso-hero-{{ section.id }} .espresso-hero__arrow {
@@ -510,6 +524,9 @@
                       aria-hidden="true"
                       {{ block.shopify_attributes }}
                     >
+                      {% if block.settings.badge_text != blank %}
+                        <div class="espresso-hero__badge">{{ block.settings.badge_text }}</div>
+                      {% endif %}
                       <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                         {{
                           block.settings.image
@@ -546,12 +563,21 @@
         {% elsif hero_image_count == 1 %}
           {% for block in image_slide_blocks %}
             {% if block.settings.image != blank %}
-              <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
-                {{
-                  block.settings.image
-                  | image_url: width: 1100
-                  | image_tag: loading: 'lazy', alt: block.settings.image.alt
-                }}
+              <div
+                class="espresso-hero__slide"
+                data-slide-block-id="{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {% if block.settings.badge_text != blank %}
+                  <div class="espresso-hero__badge">{{ block.settings.badge_text }}</div>
+                {% endif %}
+                <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+                  {{
+                    block.settings.image
+                    | image_url: width: 1100
+                    | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                  }}
+                </div>
               </div>
             {% endif %}
           {% endfor %}
@@ -742,7 +768,8 @@
       "name": "Image slide",
       "limit": 10,
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" }
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "badge_text", "label": "Badge text" }
       ]
     }
   ],
