@@ -387,7 +387,7 @@
       "name": "Espresso Nutrition",
       "settings": {
         "product": "variety-pack",
-        "espresso_martini_wave_lottie_file": "wave-divider-right-to-left-2400px-brown.json",
+        "espresso_martini_wave_lottie_file": "",
         "default_wave_lottie_file": "wave-divider-left-to-right-2400px-light-blue.json",
         "background_color": "#f7ecfd",
         "decor_right": "shopify://shop_images/pink-umbrella.svg_fill.png",
