@@ -525,7 +525,7 @@
                       {{ block.shopify_attributes }}
                     >
                       {% if block.settings.badge_text != blank %}
-                        <div class="espresso-hero__badge">{{ block.settings.badge_text }}</div>
+                        <div class="espresso-hero__badge">{{ block.settings.badge_text | newline_to_br }}</div>
                       {% endif %}
                       <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                         {{
@@ -569,7 +569,7 @@
                 {{ block.shopify_attributes }}
               >
                 {% if block.settings.badge_text != blank %}
-                  <div class="espresso-hero__badge">{{ block.settings.badge_text }}</div>
+                  <div class="espresso-hero__badge">{{ block.settings.badge_text | newline_to_br }}</div>
                 {% endif %}
                 <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                   {{
@@ -769,7 +769,7 @@
       "limit": 10,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "badge_text", "label": "Badge text" }
+        { "type": "textarea", "id": "badge_text", "label": "Badge text" }
       ]
     }
   ],
