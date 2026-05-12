@@ -224,7 +224,7 @@
     top: 8%;
     left: 8%;
     z-index: 2;
-    padding: var(--badge-padding-y, 0.25em) var(--badge-padding-x, 0.5em);
+    padding: var(--badge-padding-y, 4px) var(--badge-padding-x, 8px);
     border: var(--badge-border-width, 4px) solid currentColor;
     border-radius: 0;
     color: #002657;
@@ -528,7 +528,7 @@
                       {{ block.shopify_attributes }}
                     >
                       {% if block.settings.badge_text != blank %}
-                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 0.5 }}em; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 0.3 }}em;">{{ block.settings.badge_text | newline_to_br }}</div>
+                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px;">{{ block.settings.badge_text | newline_to_br }}</div>
                       {% endif %}
                       <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                         {{
@@ -572,7 +572,7 @@
                 {{ block.shopify_attributes }}
               >
                 {% if block.settings.badge_text != blank %}
-                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 0.5 }}em; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 0.3 }}em;">{{ block.settings.badge_text | newline_to_br }}</div>
+                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px;">{{ block.settings.badge_text | newline_to_br }}</div>
                 {% endif %}
                 <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                   {{
@@ -774,8 +774,8 @@
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "textarea", "id": "badge_text", "label": "Badge text" },
         { "type": "range", "id": "badge_border_thickness", "min": 1, "max": 16, "step": 1, "unit": "px", "label": "Badge border thickness", "default": 4 },
-        { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 3, "step": 0.1, "label": "Badge horizontal padding", "default": 0.5 },
-        { "type": "range", "id": "badge_padding_vertical", "min": 0, "max": 2, "step": 0.1, "label": "Badge vertical padding", "default": 0.3 }
+        { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Badge horizontal padding", "default": 8 },
+        { "type": "range", "id": "badge_padding_vertical", "min": 0, "max": 32, "step": 1, "unit": "px", "label": "Badge vertical padding", "default": 4 }
       ]
     }
   ],
