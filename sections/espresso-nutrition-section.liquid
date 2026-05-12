@@ -726,9 +726,9 @@ letter-spacing: -0.16px;
    
   <div class="section-wave-container" style="background: {{ section_bg }};">
     {% if request.path contains 'espresso-martini' %}
-      <lottie-player class="section-wave" src="{{ section.settings.espresso_martini_wave_lottie_file | default: 'wave-divider-right-to-left-2400px-brown.json' | asset_url }}" background="{{ section_bg }}" speed="1" loop autoplay></lottie-player>
+      <lottie-player class="section-wave" src="{{ section.settings.espresso_martini_wave_lottie_file | default: 'wave-divider-right-to-left-2400px-brown.json' | asset_url }}" background="{{ section_bg }}" speed="1" loop autoplay{% if section.settings.reverse_wave_animation %} direction="-1"{% endif %}></lottie-player>
     {% else %}
-      <lottie-player class="section-wave" src="{{ section.settings.default_wave_lottie_file | default: 'wave-divider-right-to-left-2400px-fee9e8.json' | asset_url }}" background="{{ section_bg }}" speed="1" loop autoplay></lottie-player>
+      <lottie-player class="section-wave" src="{{ section.settings.default_wave_lottie_file | default: 'wave-divider-right-to-left-2400px-fee9e8.json' | asset_url }}" background="{{ section_bg }}" speed="1" loop autoplay{% if section.settings.reverse_wave_animation %} direction="-1"{% endif %}></lottie-player>
     {% endif %}
   </div>
 
@@ -812,6 +812,12 @@ letter-spacing: -0.16px;
       "label": "Default wave lottie asset filename",
       "default": "wave-divider-right-to-left-2400px-fee9e8.json",
       "info": "Enter a theme asset filename, including .json."
+    },
+    {
+      "type": "checkbox",
+      "id": "reverse_wave_animation",
+      "label": "Reverse wave animation",
+      "default": false
     },
     {
       "type": "color",
