@@ -40,35 +40,50 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Wedding_Prank_1ea349f9-a056-454b-a4dc-191203152393.jpg",
-            "badge_text": "THE DESPICABLE\nINCIDENT"
+            "badge_text": "THE DESPICABLE\nINCIDENT",
+            "badge_border_thickness": 6,
+            "badge_padding_horizontal": 4,
+            "badge_padding_vertical": 0
           }
         },
         "image_slide_LUXTwL": {
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Despicable_Prank.jpg",
-            "badge_text": ""
+            "badge_text": "",
+            "badge_border_thickness": 4,
+            "badge_padding_horizontal": 8,
+            "badge_padding_vertical": 4
           }
         },
         "image_slide_FWiExG": {
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Harry_Potter_Prank.jpg",
-            "badge_text": ""
+            "badge_text": "",
+            "badge_border_thickness": 4,
+            "badge_padding_horizontal": 8,
+            "badge_padding_vertical": 4
           }
         },
         "image_slide_Na4Rz4": {
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Snack_Meeting_Prank.jpg",
-            "badge_text": ""
+            "badge_text": "",
+            "badge_border_thickness": 4,
+            "badge_padding_horizontal": 8,
+            "badge_padding_vertical": 4
           }
         },
         "image_slide_JWqPpE": {
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Tattoo_Prank.jpg",
-            "badge_text": ""
+            "badge_text": "",
+            "badge_border_thickness": 4,
+            "badge_padding_horizontal": 8,
+            "badge_padding_vertical": 4
           }
         },
         "bullet_zBz6Yf": {
