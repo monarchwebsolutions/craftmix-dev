@@ -330,6 +330,7 @@
       "name": "Main product LP",
       "settings": {
         "section_id": "buy-box",
+        "wave_lottie_file": "wave-divider-left-to-right-2400px-purple.json",
         "lp_product": "variety-pack",
         "section_background_color": "#fee9e8",
         "hide_sub_discounts": true,
