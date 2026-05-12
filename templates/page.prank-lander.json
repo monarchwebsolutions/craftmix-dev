@@ -50,6 +50,7 @@
             "badge_top_mobile": 8,
             "badge_left_mobile": 8,
             "badge_border_thickness": 6,
+            "badge_font_size": 28,
             "badge_padding_horizontal": 4,
             "badge_padding_vertical": 0
           }
@@ -68,6 +69,7 @@
             "badge_top_mobile": 8,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
+            "badge_font_size": 24,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
@@ -86,6 +88,7 @@
             "badge_top_mobile": 8,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
+            "badge_font_size": 24,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
@@ -104,6 +107,7 @@
             "badge_top_mobile": 8,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
+            "badge_font_size": 24,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
@@ -122,6 +126,7 @@
             "badge_top_mobile": 8,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
+            "badge_font_size": 24,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
