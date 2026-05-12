@@ -813,6 +813,7 @@
       full_width_main_page: section.settings.full_width,
       show_first_image_avaiable: section.settings.show_first_image_avaiable,
       enable_microdata: section.settings.enable_microdata,
+      wave_lottie_file: section.settings.wave_lottie_file,
       default_pack_size: '24 pack'
   -%}
 </div>
@@ -7013,6 +7014,13 @@
       "id": "section_id",
       "label": "ID",
       "info": "Optional. Set an ID (e.g. main-product) so other sections can link here for anchor scrolling."
+    },
+    {
+      "type": "text",
+      "id": "wave_lottie_file",
+      "label": "Wave lottie asset filename",
+      "default": "wave-divider-left-to-right-2400px-light-blue.json",
+      "info": "Enter a theme asset filename, including .json."
     },
     {
       "type": "product",

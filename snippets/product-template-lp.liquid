@@ -2404,7 +2404,7 @@
     <div class="section-wave-container">
       <div
         class="lazy-lottie-container section-wave"
-        data-src="{{ 'wave-divider-left-to-right-2400px-light-blue.json' | asset_url }}"
+        data-src="{{ wave_lottie_file | default: 'wave-divider-left-to-right-2400px-light-blue.json' | asset_url }}"
         data-background="transparent"
         data-speed="1"
         data-autoplay="true"
