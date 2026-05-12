@@ -237,10 +237,16 @@
   }
 
   {% for block in image_slide_blocks %}
-    {% if block.settings.badge_color != blank %}
+    {% assign badge_bg_alpha = block.settings.badge_bg_opacity | default: 0 | times: 0.01 %}
+    {% if block.settings.badge_color != blank or block.settings.badge_bg_color != blank %}
       #espresso-hero-{{ section.id }} [data-slide-block-id="{{ block.id }}"] .espresso-hero__badge {
-        color: {{ block.settings.badge_color }} !important;
-        border-color: {{ block.settings.badge_color }} !important;
+        {% if block.settings.badge_color != blank %}
+          color: {{ block.settings.badge_color }} !important;
+          border-color: {{ block.settings.badge_color }} !important;
+        {% endif %}
+        {% if block.settings.badge_bg_color != blank %}
+          background-color: {{ block.settings.badge_bg_color | color_modify: 'alpha', badge_bg_alpha }} !important;
+        {% endif %}
       }
     {% endif %}
   {% endfor %}
@@ -784,6 +790,8 @@
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "textarea", "id": "badge_text", "label": "Badge text" },
         { "type": "color", "id": "badge_color", "label": "Badge text and border color", "default": "#002657" },
+        { "type": "color", "id": "badge_bg_color", "label": "Badge background color", "default": "#ffffff" },
+        { "type": "range", "id": "badge_bg_opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge background opacity", "default": 0 },
         { "type": "checkbox", "id": "badge_text_center", "label": "Center badge text", "default": false },
         { "type": "range", "id": "badge_border_thickness", "min": 1, "max": 16, "step": 1, "unit": "px", "label": "Badge border thickness", "default": 4 },
         { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Badge horizontal padding", "default": 8 },
