@@ -234,6 +234,8 @@
     line-height: 1;
     text-transform: uppercase;
     text-align: var(--badge-text-align, left);
+    transform: rotate(var(--badge-rotation, 0deg));
+    transform-origin: center center;
   }
 
   {% for block in image_slide_blocks %}
@@ -549,7 +551,7 @@
                       {{ block.shopify_attributes }}
                     >
                       {% if block.settings.badge_text != blank %}
-                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">{{ block.settings.badge_text | newline_to_br }}</div>
+                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-rotation: {{ block.settings.badge_rotation | default: 0 }}deg; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">{{ block.settings.badge_text | newline_to_br }}</div>
                       {% endif %}
                       <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                         {{
@@ -593,7 +595,7 @@
                 {{ block.shopify_attributes }}
               >
                 {% if block.settings.badge_text != blank %}
-                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">{{ block.settings.badge_text | newline_to_br }}</div>
+                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-rotation: {{ block.settings.badge_rotation | default: 0 }}deg; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">{{ block.settings.badge_text | newline_to_br }}</div>
                 {% endif %}
                 <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
                   {{
@@ -804,6 +806,7 @@
         { "type": "range", "id": "badge_left_mobile", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge left position on mobile", "default": 8 },
         { "type": "range", "id": "badge_border_thickness", "min": 1, "max": 16, "step": 1, "unit": "px", "label": "Badge border thickness", "default": 4 },
         { "type": "range", "id": "badge_font_size", "min": 8, "max": 72, "step": 1, "unit": "px", "label": "Badge font size", "default": 24 },
+        { "type": "range", "id": "badge_rotation", "min": -45, "max": 45, "step": 1, "unit": "deg", "label": "Badge rotation", "default": 0 },
         { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Badge horizontal padding", "default": 8 },
         { "type": "range", "id": "badge_padding_vertical", "min": 0, "max": 32, "step": 1, "unit": "px", "label": "Badge vertical padding", "default": 4 }
       ]
