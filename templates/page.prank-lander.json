@@ -63,8 +63,8 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Despicable_Prank.jpg",
-            "badge_text": "THE DESPICABLE\nINCIDENT",
-            "badge_text_secondary": "",
+            "badge_text": "EVIDENCE",
+            "badge_text_secondary": "CASE #9526",
             "badge_color": "#a90000",
             "badge_bg_color": "#ffffff",
             "badge_bg_opacity": 90,
@@ -86,8 +86,8 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Harry_Potter_Prank.jpg",
-            "badge_text": "Solemnly Swear We \nWere Up to No Good",
-            "badge_text_secondary": "",
+            "badge_text": "EVIDENCE",
+            "badge_text_secondary": "CASE # 4204",
             "badge_color": "#a90000",
             "badge_bg_color": "#ffffff",
             "badge_bg_opacity": 90,
@@ -109,8 +109,8 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Snack_Meeting_Prank.jpg",
-            "badge_text": "Unhinged \nSnack Attack",
-            "badge_text_secondary": "",
+            "badge_text": "EVIDENCE",
+            "badge_text_secondary": "CASE #6712",
             "badge_color": "#a90000",
             "badge_bg_color": "#ffffff",
             "badge_bg_opacity": 90,
@@ -132,8 +132,8 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Tattoo_Prank.jpg",
-            "badge_text": "We Took Brand Loyalty \na Little Too Far",
-            "badge_text_secondary": "",
+            "badge_text": "EVIDENCE",
+            "badge_text_secondary": "CASE #4098",
             "badge_color": "#a90000",
             "badge_bg_color": "#ffffff",
             "badge_bg_opacity": 90,
