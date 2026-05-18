@@ -40,7 +40,7 @@
           "type": "image_slide",
           "settings": {
             "image": "shopify://shop_images/Wedding_Prank_1ea349f9-a056-454b-a4dc-191203152393.jpg",
-            "badge_text": "GETTING \nHITCHED!",
+            "badge_text": "EVIDENCE",
             "badge_color": "#a90000",
             "badge_bg_color": "#ffffff",
             "badge_bg_opacity": 90,
@@ -152,21 +152,21 @@
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/strawberry_65010ed7-9c1b-429a-b1ed-91c06fc5e847.png",
-            "text": "He has no idea that $1 from every purchase goes toward pranking him again."
+            "text": "$1 from every purchase goes toward pranking him again."
           }
         },
         "bullet_zDRPzN": {
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/Melon_Slice_Illustration.png",
-            "text": "And he definitely has no idea what we're already planning next."
+            "text": "He has no idea what we're already planning next."
           }
         },
         "bullet_9NtqFB": {
           "type": "bullet",
           "settings": {
             "icon": "shopify://shop_images/margarita.png",
-            "text": "If this page is suddenly gone tomorrow, you'll know why but until then, grab a drink and help us out."
+            "text": "If this page suddenly disappears, you'll know why... so grab a drink in the meantime!"
           }
         }
       },
@@ -183,6 +183,7 @@
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
+        ".espresso-hero__bullet-icon {display: none;}",
         "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 18px !important; }}",
         "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 16px !important; }}"
       ],
@@ -195,8 +196,8 @@
         "rating_stars": 5,
         "rating_label": "7,000+ REVIEWS",
         "image_crop": "9:16",
-        "image_max_width": 450,
-        "image_max_width_mobile": 450,
+        "image_max_width": 420,
+        "image_max_width_mobile": 420,
         "main_image": "shopify://shop_images/Craftmix_Mango_Margarita_next_to_fresh_mango_lime_and_a_margarita_glass._1.png",
         "decor_left": "shopify://shop_images/Craftmix_pineapple_flavor_icon_cbd90e7b-b816-4aab-a8e4-037177538791.png",
         "decor_left_bottom": "19%",
