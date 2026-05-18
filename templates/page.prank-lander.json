@@ -74,7 +74,7 @@
             "badge_top_mobile": 25,
             "badge_left_mobile": 17,
             "badge_border_thickness": 6,
-            "badge_font_size": 38,
+            "badge_font_size": 48,
             "badge_secondary_font_size": 16,
             "badge_font_size_mobile": 28,
             "badge_rotation": 10,
@@ -189,7 +189,6 @@
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
-        ".espresso-hero__bullet-icon {/* display: none; */}",
         "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 18px !important; }}",
         "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 16px !important; }}"
       ],
