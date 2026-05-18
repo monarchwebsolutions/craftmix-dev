@@ -53,7 +53,7 @@
             "badge_border_thickness": 6,
             "badge_font_size": 48,
             "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 36,
+            "badge_font_size_mobile": 38,
             "badge_rotation": 8,
             "badge_padding_horizontal": 4,
             "badge_padding_vertical": 0
@@ -62,7 +62,7 @@
         "image_slide_LUXTwL": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/Despicable_Prank.jpg",
+            "image": "shopify://shop_images/despicable-prank.webp",
             "badge_text": "EVIDENCE",
             "badge_text_secondary": "CASE #9526",
             "badge_color": "#a90000",
@@ -71,13 +71,13 @@
             "badge_text_center": true,
             "badge_top_desktop": 24,
             "badge_left_desktop": 24,
-            "badge_top_mobile": 25,
-            "badge_left_mobile": 17,
+            "badge_top_mobile": 81,
+            "badge_left_mobile": 10,
             "badge_border_thickness": 6,
             "badge_font_size": 48,
             "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 28,
-            "badge_rotation": 10,
+            "badge_font_size_mobile": 38,
+            "badge_rotation": 0,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
@@ -85,7 +85,7 @@
         "image_slide_FWiExG": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/Harry_Potter_Prank.jpg",
+            "image": "shopify://shop_images/harry-shotter.webp",
             "badge_text": "EVIDENCE",
             "badge_text_secondary": "CASE #4204",
             "badge_color": "#a90000",
@@ -94,13 +94,13 @@
             "badge_text_center": true,
             "badge_top_desktop": 23,
             "badge_left_desktop": 8,
-            "badge_top_mobile": 24,
+            "badge_top_mobile": 82,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
             "badge_font_size": 48,
             "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 24,
-            "badge_rotation": -3,
+            "badge_font_size_mobile": 38,
+            "badge_rotation": -8,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
           }
@@ -108,7 +108,7 @@
         "image_slide_Na4Rz4": {
           "type": "image_slide",
           "settings": {
-            "image": "shopify://shop_images/Snack_Meeting_Prank.jpg",
+            "image": "shopify://shop_images/snack-meeting-prank.webp",
             "badge_text": "EVIDENCE",
             "badge_text_secondary": "CASE #6712",
             "badge_color": "#a90000",
@@ -117,12 +117,12 @@
             "badge_text_center": true,
             "badge_top_desktop": 31,
             "badge_left_desktop": 20,
-            "badge_top_mobile": 27,
+            "badge_top_mobile": 79,
             "badge_left_mobile": 16,
             "badge_border_thickness": 4,
             "badge_font_size": 48,
             "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 32,
+            "badge_font_size_mobile": 38,
             "badge_rotation": 10,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
@@ -145,7 +145,7 @@
             "badge_border_thickness": 4,
             "badge_font_size": 48,
             "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 22,
+            "badge_font_size_mobile": 38,
             "badge_rotation": -10,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
