@@ -178,7 +178,7 @@
         "bullet_4RpceD": {
           "type": "bullet",
           "settings": {
-            "text": "Just add Use code GOTCHA - you deserve it after that."
+            "text": "Just add Use code <span style=\"color:var(--craftmix-light-blue)\">GOTCHA</span> - you deserve it after that."
           }
         }
       },
