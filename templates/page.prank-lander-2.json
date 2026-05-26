@@ -154,25 +154,31 @@
         "bullet_zBz6Yf": {
           "type": "bullet",
           "settings": {
-            "text": "Our CEO has no idea this page exists."
+            "text": "We've been pranking our CEO for years."
           }
         },
         "bullet_3GPdgn": {
           "type": "bullet",
           "settings": {
-            "text": "$1 from every purchase goes toward pranking him again."
+            "text": "He never sees it coming. Neither did you."
           }
         },
         "bullet_zDRPzN": {
           "type": "bullet",
           "settings": {
-            "text": "He has no idea what we're already planning next."
+            "text": "Consider yourself an official member of the prank club."
           }
         },
         "bullet_9NtqFB": {
           "type": "bullet",
           "settings": {
-            "text": "If this page suddenly disappears, you'll know why... so grab a drink in the meantime!"
+            "text": "As an official apology, here's $5 off your next order!"
+          }
+        },
+        "bullet_4RpceD": {
+          "type": "bullet",
+          "settings": {
+            "text": "Just add Use code GOTCHA - you deserve it after that."
           }
         }
       },
@@ -185,7 +191,8 @@
         "bullet_zBz6Yf",
         "bullet_3GPdgn",
         "bullet_zDRPzN",
-        "bullet_9NtqFB"
+        "bullet_9NtqFB",
+        "bullet_4RpceD"
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
@@ -195,8 +202,8 @@
       ],
       "name": "Prank lander hero",
       "settings": {
-        "eyebrow": "Our CEO Got Pranked (again)",
-        "title": "Help us do it again",
+        "eyebrow": "Hate to break it to you…",
+        "title": "You’ve Been Pranked!",
         "background": "linear-gradient(180deg, rgba(254, 233, 232, 1), rgba(249, 188, 185, 1) 100%)",
         "show_rating": true,
         "rating_stars": 5,
