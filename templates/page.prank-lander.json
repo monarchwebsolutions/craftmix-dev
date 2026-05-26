@@ -189,7 +189,7 @@
       ],
       "custom_css": [
         ".custom-primary-cta {padding: 16px !important;}",
-        ".espresso-hero__rating{display:none;}",
+        ".espresso-hero__rating {display: none;}",
         "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 18px !important; }}",
         "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 16px !important; }}"
       ],
@@ -211,7 +211,7 @@
         "decor_right": "shopify://shop_images/strawberry_svg.png",
         "decor_max_width": 200,
         "decor_max_height": 260,
-        "cta_label": "Shop Before He Shuts This Down",
+        "cta_label": "Shop Before He Shuts This Dow",
         "make_anchor_link": false,
         "cta_anchor_id": "buy-box",
         "cta_link": "",
