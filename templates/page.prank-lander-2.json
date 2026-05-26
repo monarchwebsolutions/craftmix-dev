@@ -195,10 +195,11 @@
         "bullet_4RpceD"
       ],
       "custom_css": [
-        ".custom-primary-cta {padding: 16px !important;}",
+        ".custom-primary-cta {padding: 12px !important;}",
         ".espresso-hero__rating {display: none;}",
-        "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 18px !important; }}",
-        "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 16px !important; }}"
+        ".custom-primary-cta {font-size: 18px !important;}",
+        "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 16px !important; }}",
+        "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 14px !important; }}"
       ],
       "name": "Prank lander hero",
       "settings": {
@@ -218,7 +219,7 @@
         "decor_right": "shopify://shop_images/strawberry_svg.png",
         "decor_max_width": 200,
         "decor_max_height": 260,
-        "cta_label": "Shop Before He Shuts This Down",
+        "cta_label": "Save $5 Before We Prank You Again!",
         "make_anchor_link": false,
         "cta_anchor_id": "buy-box",
         "cta_link": "",
