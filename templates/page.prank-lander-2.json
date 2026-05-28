@@ -154,23 +154,19 @@
         "bullet_zBz6Yf": {
           "type": "bullet",
           "settings": {
-            "text": "We've been pranking our CEO for years."
-          }
-        },
-        "bullet_3GPdgn": {
-          "type": "bullet",
-          "settings": {
-            "text": "He never sees it coming. Neither did you."
+            "text": "We've been pranking our CEO for years. He never sees it coming. Neither did you."
           }
         },
         "bullet_zDRPzN": {
           "type": "bullet",
+          "disabled": true,
           "settings": {
             "text": "Consider yourself an official member of the prank club."
           }
         },
         "bullet_9NtqFB": {
           "type": "bullet",
+          "disabled": true,
           "settings": {
             "text": "As an official apology, here's $5 off your next order!"
           }
@@ -178,7 +174,7 @@
         "bullet_4RpceD": {
           "type": "bullet",
           "settings": {
-            "text": "Just add Use code <span style=\"color:var(--craftmix-light-blue)\">GOTCHA</span> - you deserve it after that."
+            "text": "As an official apology, use code  <span style=\"color:#dd571c\">GOTCHA</span> at checkout for $5 Off your next order"
           }
         }
       },
@@ -189,7 +185,6 @@
         "image_slide_Na4Rz4",
         "image_slide_JWqPpE",
         "bullet_zBz6Yf",
-        "bullet_3GPdgn",
         "bullet_zDRPzN",
         "bullet_9NtqFB",
         "bullet_4RpceD"
