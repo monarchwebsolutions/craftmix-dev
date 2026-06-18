@@ -58,65 +58,67 @@
         >
 
         <div class="hydration-comparison__table-shell">
-          <table class="hydration-comparison__table">
-            <thead>
-              <tr>
-                <th scope="col" class="hydration-comparison__feature-heading">
-                  <span class="visually-hidden">Comparison feature</span>
-                </th>
-                <th scope="col" class="hydration-comparison__brand hydration-comparison__brand--craftmix">
-                  <img
-                    class="hydration-comparison__logo"
-                    src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839"
-                    alt="Craftmix Logo"
-                    width="240"
-                    height="45"
-                    loading="lazy"
-                  >
-                </th>
-                <th scope="col" class="hydration-comparison__brand">Liquid IV</th>
-                <th scope="col" class="hydration-comparison__brand">Gatorade</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Sugar</th>
-                <td class="hydration-comparison__craftmix-cell">5g</td>
-                <td>11g</td>
-                <td>28g</td>
-              </tr>
-              <tr>
-                <th scope="row">Calories</th>
-                <td class="hydration-comparison__craftmix-cell">35</td>
-                <td>50</td>
-                <td>140</td>
-              </tr>
-              <tr>
-                <th scope="row">Electrolytes</th>
-                <td class="hydration-comparison__craftmix-cell">1125mg</td>
-                <td>870mg</td>
-                <td>442mg</td>
-              </tr>
-              <tr>
-                <th scope="row">Magnesium (Electrolyte)</th>
-                <td class="hydration-comparison__craftmix-cell">60mg</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <th scope="row">Calcium (Electrolyte)</th>
-                <td class="hydration-comparison__craftmix-cell">60mg</td>
-                <td>0</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <th scope="row">Best Flavor</th>
-                <td class="hydration-comparison__craftmix-cell">Smily Face</td>
-                <td>Frowny Face</td>
-                <td>Frowny Face</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="hydration-comparison__table-frame">
+            <table class="hydration-comparison__table">
+              <thead>
+                <tr>
+                  <th scope="col" class="hydration-comparison__feature-heading">
+                    <span class="visually-hidden">Comparison feature</span>
+                  </th>
+                  <th scope="col" class="hydration-comparison__brand hydration-comparison__brand--craftmix">
+                    <img
+                      class="hydration-comparison__logo"
+                      src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839"
+                      alt="Craftmix Logo"
+                      width="240"
+                      height="45"
+                      loading="lazy"
+                    >
+                  </th>
+                  <th scope="col" class="hydration-comparison__brand">Liquid IV</th>
+                  <th scope="col" class="hydration-comparison__brand">Gatorade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Sugar</th>
+                  <td class="hydration-comparison__craftmix-cell">5g</td>
+                  <td>11g</td>
+                  <td>28g</td>
+                </tr>
+                <tr>
+                  <th scope="row">Calories</th>
+                  <td class="hydration-comparison__craftmix-cell">35</td>
+                  <td>50</td>
+                  <td>140</td>
+                </tr>
+                <tr>
+                  <th scope="row">Electrolytes</th>
+                  <td class="hydration-comparison__craftmix-cell">1125mg</td>
+                  <td>870mg</td>
+                  <td>442mg</td>
+                </tr>
+                <tr>
+                  <th scope="row">Magnesium (Electrolyte)</th>
+                  <td class="hydration-comparison__craftmix-cell">60mg</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">Calcium (Electrolyte)</th>
+                  <td class="hydration-comparison__craftmix-cell">60mg</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">Best Flavor</th>
+                  <td class="hydration-comparison__craftmix-cell">Smily Face</td>
+                  <td>Frowny Face</td>
+                  <td>Frowny Face</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -192,6 +194,8 @@
   }
 
   .hydration-comparison__table-wrap {
+    --hydration-feature-col: 31%;
+    --hydration-value-col: 23%;
     position: relative;
     max-width: 1040px;
     margin: 0 auto;
@@ -200,6 +204,26 @@
   .hydration-comparison__table-shell {
     position: relative;
     z-index: 3;
+    overflow: visible;
+  }
+
+  .hydration-comparison__table-shell::before {
+    content: '';
+    position: absolute;
+    top: -18px;
+    bottom: -12px;
+    left: var(--hydration-feature-col);
+    width: var(--hydration-value-col);
+    background: #60d3f8;
+    border: 1.5px solid #002657;
+    border-radius: 30px;
+    box-shadow: 0 6px 0 0 #002657;
+    z-index: 1;
+  }
+
+  .hydration-comparison__table-frame {
+    position: relative;
+    z-index: 2;
     background: #ffffff;
     border: 1.5px solid #002657;
     border-radius: 30px;
@@ -216,6 +240,8 @@
   .hydration-comparison__table thead th,
   .hydration-comparison__table tbody th,
   .hydration-comparison__table tbody td {
+    position: relative;
+    z-index: 3;
     border-right: 1px solid #002657;
     border-bottom: 1px solid #002657;
   }
@@ -255,7 +281,7 @@
   }
 
   .hydration-comparison__feature-heading {
-    width: 31%;
+    width: var(--hydration-feature-col);
   }
 
   .hydration-comparison__brand {
@@ -268,7 +294,18 @@
 
   .hydration-comparison__brand--craftmix,
   .hydration-comparison__craftmix-cell {
-    background: #60d3f8 !important;
+    background: transparent !important;
+  }
+
+  .hydration-comparison__brand--craftmix {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+  }
+
+  .hydration-comparison__craftmix-cell {
+    border-left: none !important;
+    border-right: none !important;
   }
 
   .hydration-comparison__logo {
@@ -388,6 +425,11 @@
       max-width: 100%;
     }
 
+    .hydration-comparison__table-shell::before {
+      top: -14px;
+      bottom: -10px;
+    }
+
     .hydration-comparison__table thead th {
       height: 88px;
       padding: 14px 8px;
@@ -414,7 +456,14 @@
       padding: 0 12px;
     }
 
-    .hydration-comparison__table-shell {
+    .hydration-comparison__table-shell::before {
+      top: -10px;
+      bottom: -8px;
+      border-radius: 24px;
+      box-shadow: 0 4px 0 0 #002657;
+    }
+
+    .hydration-comparison__table-frame {
       border-radius: 24px;
     }
 
