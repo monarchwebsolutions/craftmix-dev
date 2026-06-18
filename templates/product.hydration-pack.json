@@ -143,11 +143,9 @@
       "settings": {
         "hide_sub_discounts": true,
         "hide_ot_discounts": false,
-        "pack_12_regular_discount": 0,
-        "pack_24_regular_discount": 0,
+        "pack_18_regular_discount": 0,
         "pack_36_regular_discount": 25,
-        "pack_12_subscribe_discount": 15,
-        "pack_24_subscribe_discount": 15,
+        "pack_18_subscribe_discount": 15,
         "pack_36_subscribe_discount": 15,
         "enable_sticky_image": true,
         "show_product_name": false,
