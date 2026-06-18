@@ -197,6 +197,7 @@
     },
     "pdp_make_craft_drinks_fLDEPe": {
       "type": "pdp-make-craft-drinks",
+      "disabled": true,
       "settings": {}
     },
     "v2_pdp_faq_section_yNjAaJ": {
