@@ -224,7 +224,7 @@
       "type": "pdp-flavor-carousel",
       "settings": {
         "heading": "You May Also Like",
-        "carousel_collection": "find-your-flavor-carousel",
+        "carousel_collection": "hydration-packs",
         "background_color": "#bfefff"
       }
     },
