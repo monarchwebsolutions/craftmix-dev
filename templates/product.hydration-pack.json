@@ -218,6 +218,7 @@
     },
     "pdp_comparison_graph_pcRkY9": {
       "type": "pdp-comparison-graph",
+      "disabled": true,
       "name": "PDP - Comparison Graph",
       "settings": {
         "background_color": "#ead1fa",
@@ -226,6 +227,19 @@
         "cta_anchor_id": "",
         "cta_url": "",
         "cta_bg_color": "#60d3f8",
+        "cta_text_color": "#002657"
+      }
+    },
+    "hydration_comparison_graph_GenQBm": {
+      "type": "hydration-comparison-graph",
+      "name": "Hydration Comparison",
+      "settings": {
+        "background_color": "#EAD1FA",
+        "cta_text": "",
+        "make_anchor_link": false,
+        "cta_anchor_id": "",
+        "cta_url": "",
+        "cta_bg_color": "#60D3F8",
         "cta_text_color": "#002657"
       }
     },
@@ -481,6 +495,7 @@
     "pdp_make_craft_drinks_fLDEPe",
     "v2_pdp_faq_section_yNjAaJ",
     "pdp_comparison_graph_pcRkY9",
+    "hydration_comparison_graph_GenQBm",
     "pdp_flavor_carousel_RNmhy9",
     "marquee_divider_RNMnJe",
     "product-recommendations",
