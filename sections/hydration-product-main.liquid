@@ -796,7 +796,8 @@
       spacing_col: section.settings.spacing_col,
       full_width_main_page: section.settings.full_width,
       show_first_image_avaiable: section.settings.show_first_image_avaiable,
-      enable_microdata: section.settings.enable_microdata
+      enable_microdata: section.settings.enable_microdata,
+      bold_bullets_before_colon: section.settings.bold_bullets_before_colon
   -%}
 </div>
 <script src="{{ 'custom-product.js' | asset_url }}" defer></script>
@@ -7038,6 +7039,12 @@
       "id": "show_product_name",
       "default": true,
       "label": "t:sections.featured-product.settings.show_product_name.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold_bullets_before_colon",
+      "default": true,
+      "label": "Bold bullet text before colon"
     },
     {
       "type": "range",

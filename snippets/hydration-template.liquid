@@ -270,7 +270,15 @@
                           {% if product.metafields.custom.product_description_bullets.value != blank %}
                             <ul class="product-description-bullets">
                               {% for bullet in product.metafields.custom.product_description_bullets.value %}
-                                <li>{{ bullet }}</li>
+                                <li>
+                                  {% if bold_bullets_before_colon and bullet contains ':' %}
+                                    {% assign bullet_lead = bullet | split: ':' | first %}
+                                    {% assign bullet_rest = bullet | remove_first: bullet_lead | remove_first: ':' %}
+                                    <strong>{{ bullet_lead }}:</strong>{{ bullet_rest }}
+                                  {% else %}
+                                    {{ bullet }}
+                                  {% endif %}
+                                </li>
                               {% endfor %}
                             </ul>
                           {% else %}
