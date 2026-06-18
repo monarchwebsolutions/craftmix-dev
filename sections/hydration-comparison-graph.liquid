@@ -294,18 +294,28 @@
 
   .hydration-comparison__brand--craftmix,
   .hydration-comparison__craftmix-cell {
-    background: transparent !important;
+    background: #60d3f8 !important;
   }
 
   .hydration-comparison__brand--craftmix {
-    border-left: none !important;
-    border-right: none !important;
-    border-top: none !important;
+    border-left: 1.5px solid #002657 !important;
+    border-right: 1.5px solid #002657 !important;
+    border-top: 1.5px solid #002657 !important;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    overflow: hidden;
   }
 
   .hydration-comparison__craftmix-cell {
-    border-left: none !important;
-    border-right: none !important;
+    border-left: 1.5px solid #002657 !important;
+    border-right: 1.5px solid #002657 !important;
+  }
+
+  .hydration-comparison__table tbody tr:last-child .hydration-comparison__craftmix-cell {
+    border-bottom: 1.5px solid #002657 !important;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    overflow: hidden;
   }
 
   .hydration-comparison__logo {
@@ -465,6 +475,16 @@
 
     .hydration-comparison__table-frame {
       border-radius: 24px;
+    }
+
+    .hydration-comparison__brand--craftmix {
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .hydration-comparison__table tbody tr:last-child .hydration-comparison__craftmix-cell {
+      border-bottom-left-radius: 24px;
+      border-bottom-right-radius: 24px;
     }
 
     .hydration-comparison__table thead th {
