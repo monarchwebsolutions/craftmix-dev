@@ -211,12 +211,27 @@
     content: '';
     position: absolute;
     top: -18px;
-    bottom: -12px;
+    height: 22px;
     left: calc(var(--hydration-feature-col) - 1.5px);
-    width: calc(var(--hydration-value-col) + 3px);
+    width: calc(var(--hydration-value-col) + 4px);
     background: #60d3f8;
     border: 1.5px solid #002657;
-    border-radius: 30px;
+    border-bottom: none;
+    border-radius: 30px 30px 0 0;
+    z-index: 1;
+  }
+
+  .hydration-comparison__table-shell::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    height: 22px;
+    left: calc(var(--hydration-feature-col) - 1.5px);
+    width: calc(var(--hydration-value-col) + 4px);
+    background: #60d3f8;
+    border: 1.5px solid #002657;
+    border-top: none;
+    border-radius: 0 0 30px 30px;
     box-shadow: 0 6px 0 0 #002657;
     z-index: 1;
   }
@@ -434,7 +449,12 @@
 
     .hydration-comparison__table-shell::before {
       top: -14px;
+      height: 18px;
+    }
+
+    .hydration-comparison__table-shell::after {
       bottom: -10px;
+      height: 18px;
     }
 
     .hydration-comparison__table thead th {
@@ -465,8 +485,16 @@
 
     .hydration-comparison__table-shell::before {
       top: -10px;
-      bottom: -8px;
+      height: 14px;
       border-radius: 24px;
+      border-bottom: none;
+      border-radius: 24px 24px 0 0;
+    }
+
+    .hydration-comparison__table-shell::after {
+      bottom: -8px;
+      height: 14px;
+      border-radius: 0 0 24px 24px;
       box-shadow: 0 4px 0 0 #002657;
     }
 
