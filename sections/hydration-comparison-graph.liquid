@@ -119,6 +119,24 @@
               </tbody>
             </table>
           </div>
+          <div class="hydration-comparison__craftmix-overlay" aria-hidden="true">
+            <div class="hydration-comparison__craftmix-overlay-row hydration-comparison__craftmix-overlay-row--header">
+              <img
+                class="hydration-comparison__logo"
+                src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839"
+                alt=""
+                width="240"
+                height="45"
+                loading="lazy"
+              >
+            </div>
+            <div class="hydration-comparison__craftmix-overlay-row">5g</div>
+            <div class="hydration-comparison__craftmix-overlay-row">35</div>
+            <div class="hydration-comparison__craftmix-overlay-row">1125mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">Smily Face</div>
+          </div>
         </div>
       </div>
 
@@ -207,35 +225,6 @@
     overflow: visible;
   }
 
-  .hydration-comparison__table-shell::before {
-    content: '';
-    position: absolute;
-    top: -18px;
-    height: 22px;
-    left: calc(var(--hydration-feature-col) - 1.5px);
-    width: calc(var(--hydration-value-col) + 4px);
-    background: #60d3f8;
-    border: 1.5px solid #002657;
-    border-bottom: none;
-    border-radius: 30px 30px 0 0;
-    z-index: 1;
-  }
-
-  .hydration-comparison__table-shell::after {
-    content: '';
-    position: absolute;
-    bottom: -12px;
-    height: 22px;
-    left: calc(var(--hydration-feature-col) - 1.5px);
-    width: calc(var(--hydration-value-col) + 4px);
-    background: #60d3f8;
-    border: 1.5px solid #002657;
-    border-top: none;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 6px 0 0 #002657;
-    z-index: 1;
-  }
-
   .hydration-comparison__table-frame {
     position: relative;
     z-index: 2;
@@ -309,25 +298,61 @@
 
   .hydration-comparison__brand--craftmix,
   .hydration-comparison__craftmix-cell {
-    background: #60d3f8 !important;
+    background: transparent !important;
+    color: transparent !important;
   }
 
   .hydration-comparison__brand--craftmix {
     border-left: none !important;
     border-right: none !important;
     border-top: none !important;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-bottom: none !important;
   }
 
   .hydration-comparison__craftmix-cell {
     border-left: none !important;
     border-right: none !important;
+    border-bottom: none !important;
   }
 
-  .hydration-comparison__table tbody tr:last-child .hydration-comparison__craftmix-cell {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  .hydration-comparison__craftmix-overlay {
+    position: absolute;
+    top: -18px;
+    bottom: -12px;
+    left: calc(var(--hydration-feature-col) - 1.5px);
+    width: calc(var(--hydration-value-col) + 4px);
+    z-index: 4;
+    display: grid;
+    grid-template-rows: 110px repeat(6, 88px);
+    background: #60d3f8;
+    border: 1.5px solid #002657;
+    border-radius: 30px;
+    box-shadow: 0 6px 0 0 #002657;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+    color: #002657;
+    font-family: 'Goldplay';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.13px;
+    border-bottom: 1px solid #002657;
+    text-align: center;
+  }
+
+  .hydration-comparison__craftmix-overlay-row:last-child {
+    border-bottom: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row--header {
+    padding: 20px 16px;
   }
 
   .hydration-comparison__logo {
@@ -447,14 +472,10 @@
       max-width: 100%;
     }
 
-    .hydration-comparison__table-shell::before {
+    .hydration-comparison__craftmix-overlay {
       top: -14px;
-      height: 18px;
-    }
-
-    .hydration-comparison__table-shell::after {
       bottom: -10px;
-      height: 18px;
+      grid-template-rows: 88px repeat(6, 78px);
     }
 
     .hydration-comparison__table thead th {
@@ -483,23 +504,25 @@
       padding: 0 12px;
     }
 
-    .hydration-comparison__table-shell::before {
+    .hydration-comparison__craftmix-overlay {
       top: -10px;
-      height: 14px;
-      border-radius: 24px;
-      border-bottom: none;
-      border-radius: 24px 24px 0 0;
-    }
-
-    .hydration-comparison__table-shell::after {
       bottom: -8px;
-      height: 14px;
-      border-radius: 0 0 24px 24px;
+      border-radius: 24px;
       box-shadow: 0 4px 0 0 #002657;
+      grid-template-rows: 72px repeat(6, 64px);
     }
 
     .hydration-comparison__table-frame {
       border-radius: 24px;
+    }
+
+    .hydration-comparison__craftmix-overlay-row {
+      font-size: 12px;
+      line-height: 1.15;
+    }
+
+    .hydration-comparison__craftmix-overlay-row--header {
+      padding: 14px 8px;
     }
 
     .hydration-comparison__table thead th {
