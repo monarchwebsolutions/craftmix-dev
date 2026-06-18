@@ -149,6 +149,7 @@
         "pack_36_subscribe_discount": 15,
         "enable_sticky_image": true,
         "show_product_name": false,
+        "bold_bullets_before_colon": true,
         "title_size": 100,
         "heading_tag": "h1",
         "show_vendor": false,
@@ -190,9 +191,17 @@
     },
     "pdp_nutrition_facts_new_9nAJcX": {
       "type": "pdp-nutrition-facts-new",
+      "disabled": true,
       "name": "Nutrition Facts New",
       "settings": {
         "background_color": "#000000"
+      }
+    },
+    "hydration_nutrition_facts_FwBp9U": {
+      "type": "hydration-nutrition-facts",
+      "name": "Hydration Nutrition",
+      "settings": {
+        "background_color": "#ffffff"
       }
     },
     "pdp_make_craft_drinks_fLDEPe": {
@@ -468,6 +477,7 @@
   "order": [
     "main",
     "pdp_nutrition_facts_new_9nAJcX",
+    "hydration_nutrition_facts_FwBp9U",
     "pdp_make_craft_drinks_fLDEPe",
     "v2_pdp_faq_section_yNjAaJ",
     "pdp_comparison_graph_pcRkY9",
