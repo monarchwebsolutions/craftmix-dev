@@ -462,13 +462,8 @@
                   >
                   </div>
                   <div class="product-brief">
-                    <p class="make-a-delicious">Make a delicious, flavorful {% if product.metafields.custom.variety_pack_products.value != blank %}cocktail{% else %}{{ product.title }}{% endif %} in 30 seconds,</p>
-                    {% if product.metafields.custom.just_add != blank %}
-                      <p class="product-metafield-just_add-text">
-                        {{ product.metafields.custom.just_add }} or enjoy as a mocktail.
-                      </p>
-                    {% endif %}
-                    <p class="each-packet">Each packet makes 1 drink.</p>
+                    <p class="product-brief-line">We spent a year formulating the best tasting hydration mix on the market</p>
+                    <p class="product-brief-line">Better hydration. Bolder flavor. Nearly 3x the electrolytes of leading sports drinks. Just add water and ice.</p>
                     {% if product.title == "5PM Happy Hour Kit" %}
                       <div class="variety-includes-container">
                         <div class="includes-header">Includes:</div>
