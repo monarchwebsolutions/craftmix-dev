@@ -112,9 +112,33 @@
                 </tr>
                 <tr>
                   <th scope="row">Best Flavor</th>
-                  <td class="hydration-comparison__craftmix-cell">Smily Face</td>
-                  <td>Frowny Face</td>
-                  <td>Frowny Face</td>
+                  <td class="hydration-comparison__craftmix-cell">
+                    <span class="visually-hidden">Smiley face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--smile" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#D6F2A3" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 38c3.5 5 7.5 7 11 7s7.5-2 11-7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
+                  <td>
+                    <span class="visually-hidden">Frowny face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--frown" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#FFD4E6" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 44c3.5-5 7.5-7 11-7s7.5 2 11 7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
+                  <td>
+                    <span class="visually-hidden">Frowny face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--frown" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#FFD4E6" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 44c3.5-5 7.5-7 11-7s7.5 2 11 7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -136,7 +160,14 @@
             <div class="hydration-comparison__craftmix-overlay-row">1125mg</div>
             <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
             <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
-            <div class="hydration-comparison__craftmix-overlay-row">Smily Face</div>
+            <div class="hydration-comparison__craftmix-overlay-row">
+              <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--smile" viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="26" fill="#D6F2A3" stroke="#002657" stroke-width="3"></circle>
+                <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                <path d="M21 38c3.5 5 7.5 7 11 7s7.5-2 11-7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
             <div class="hydration-comparison__craftmix-overlay-row hydration-comparison__craftmix-overlay-row--spacer"></div>
           </div>
         </div>
@@ -371,6 +402,13 @@
     display: block;
     width: min(240px, 100%);
     height: auto;
+    margin: 0 auto;
+  }
+
+  .hydration-comparison__face-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
     margin: 0 auto;
   }
 
