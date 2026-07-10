@@ -634,7 +634,7 @@ h1.collection-page-title {
   .product-grid {
     grid-template-columns: repeat(2, 181px);
     gap: 23px !important;
-    margin-top: 0;
+    margin-top: 16px;
   }
 }
 @media screen and (max-width: 470px) {
