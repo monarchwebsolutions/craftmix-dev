@@ -608,9 +608,28 @@ h1.collection-page-title {
     text-align: left !important;
     margin-top: 24px;
   }
+  .filters {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar {
+    display: none;
+  }
   .filter-list {
-    justify-content: space-between;
-    gap: 0px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: max-content;
+    min-width: 100%;
+    padding-bottom: 2px;
+  }
+  .filter-list li {
+    flex: 0 0 auto;
+  }
+  .filter-link {
+    white-space: nowrap;
   }
   .product-grid {
     grid-template-columns: repeat(2, 181px);
