@@ -86,13 +86,13 @@
     background-color:var(--light-color);
     border: 2px solid var(--craftmix-dark-blue);
     font-size:18px;
-    max-width:164px;
+    /* max-width:164px; */
     height:44px;
     border-radius:100px;
     font-family: Goldplay;
     font-weight:600;
     padding: 0 !important;
-    width:calc(33.3% - 5px);
+    width:calc(50% - 5px);
   }
   fieldset[id^="Option-template--"]{
     justify-content: space-between;
@@ -781,7 +781,7 @@
     {% endif %}
   </div>
   {%- 
-    render 'product-template',
+    render 'hydration-template',
       product: product,
       product_form_id: product_form_id,
       is_product_page: true,
@@ -795,7 +795,8 @@
       spacing_col: section.settings.spacing_col,
       full_width_main_page: section.settings.full_width,
       show_first_image_avaiable: section.settings.show_first_image_avaiable,
-      enable_microdata: section.settings.enable_microdata
+      enable_microdata: section.settings.enable_microdata,
+      bold_bullets_before_colon: section.settings.bold_bullets_before_colon
   -%}
 </div>
 <script src="{{ 'custom-product.js' | asset_url }}" defer></script>
@@ -804,7 +805,7 @@
 <script src="{{ 'preview-color-swatches.js' | asset_url }}" defer></script> -->
 {% schema %}
 {
-  "name": "t:sections.main-product.name",
+  "name": "Hydration Product - Main",
   "tag": "section",
   "class": "x-section section-product-info",
   "blocks": [
@@ -7004,14 +7005,8 @@
     },
     {
       "type": "number",
-      "id": "pack_12_regular_discount",
-      "label": "12 Pack Regular Discount",
-      "default": 0
-    },
-    {
-      "type": "number",
-      "id": "pack_24_regular_discount",
-      "label": "24 Pack Regular Discount",
+      "id": "pack_18_regular_discount",
+      "label": "18 Pack Regular Discount",
       "default": 0
     },
     {
@@ -7022,14 +7017,8 @@
     },
     {
       "type": "number",
-      "id": "pack_12_subscribe_discount",
-      "label": "12 Pack Subscribe Discount",
-      "default": 0
-    },
-    {
-      "type": "number",
-      "id": "pack_24_subscribe_discount",
-      "label": "24 Pack Subscribe Discount",
+      "id": "pack_18_subscribe_discount",
+      "label": "18 Pack Subscribe Discount",
       "default": 0
     },
     {
@@ -7049,6 +7038,12 @@
       "id": "show_product_name",
       "default": true,
       "label": "t:sections.featured-product.settings.show_product_name.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold_bullets_before_colon",
+      "default": true,
+      "label": "Bold bullet text before colon"
     },
     {
       "type": "range",

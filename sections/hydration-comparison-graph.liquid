@@ -1,0 +1,684 @@
+{% liquid
+  if template.name == 'product'
+    assign comparison_wave_asset = 'wave-divider-right-to-left-2400px-sky-blue.json'
+  elsif template.name == 'page' and template.suffix == 'espresso-martini'
+    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-beige.json'
+  else
+    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-lavender.json'
+  endif
+%}
+
+<div class="hydration-comparison">
+  <img
+    src="{{ 'tropicalleaf.svg' | asset_url }}"
+    class="hydration-comparison__fruit hydration-comparison__fruit--top"
+    width="268"
+    height="289"
+    alt="Tropical Leaf Illustration"
+    loading="lazy"
+  >
+  <img
+    src="{{ 'tropicalleaf.svg' | asset_url }}"
+    class="hydration-comparison__fruit hydration-comparison__fruit--bottom-left"
+    width="268"
+    height="289"
+    alt="Tropical Leaf Illustration"
+    loading="lazy"
+  >
+  <img
+    src="{{ 'mint-light.svg' | asset_url }}"
+    class="hydration-comparison__fruit hydration-comparison__fruit--bottom-right"
+    width="294"
+    height="350"
+    alt="Mint Leaf Illustration"
+    loading="lazy"
+  >
+
+  <div class="hydration-comparison__inner">
+    <div class="hydration-comparison__content">
+      <h4 class="hydration-comparison__eyebrow">how we compare</h4>
+      <h2 class="hydration-comparison__heading">Why Craftmix</h2>
+
+      <div class="hydration-comparison__table-wrap">
+        <img
+          src="{{ 'strawberry.svg' | asset_url }}"
+          width="156"
+          height="143"
+          alt="Strawberry Illustration"
+          class="hydration-comparison__fruit hydration-comparison__fruit--card-left"
+          loading="lazy"
+        >
+        <img
+          src="{{ 'grapefruit.svg' | asset_url }}"
+          width="230"
+          height="230"
+          alt="Grapefruit Illustration"
+          class="hydration-comparison__fruit hydration-comparison__fruit--card-right"
+          loading="lazy"
+        >
+
+        <div class="hydration-comparison__table-shell">
+          <div class="hydration-comparison__table-frame">
+            <table class="hydration-comparison__table">
+              <thead>
+                <tr>
+                  <th scope="col" class="hydration-comparison__feature-heading">
+                    <span class="visually-hidden">Comparison feature</span>
+                  </th>
+                  <th scope="col" class="hydration-comparison__brand hydration-comparison__brand--craftmix">
+                    <img
+                      class="hydration-comparison__logo"
+                      src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839"
+                      alt="Craftmix Logo"
+                      width="240"
+                      height="45"
+                      loading="lazy"
+                    >
+                  </th>
+                  <th scope="col" class="hydration-comparison__brand">Liquid IV</th>
+                  <th scope="col" class="hydration-comparison__brand">Gatorade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Sugar</th>
+                  <td class="hydration-comparison__craftmix-cell">5g</td>
+                  <td>11g</td>
+                  <td>28g</td>
+                </tr>
+                <tr>
+                  <th scope="row">Calories</th>
+                  <td class="hydration-comparison__craftmix-cell">35</td>
+                  <td>50</td>
+                  <td>140</td>
+                </tr>
+                <tr>
+                  <th scope="row">Electrolytes</th>
+                  <td class="hydration-comparison__craftmix-cell">1125mg</td>
+                  <td>870mg</td>
+                  <td>442mg</td>
+                </tr>
+                <tr>
+                  <th scope="row">Magnesium (Electrolyte)</th>
+                  <td class="hydration-comparison__craftmix-cell">60mg</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">Calcium (Electrolyte)</th>
+                  <td class="hydration-comparison__craftmix-cell">60mg</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <th scope="row">Best Flavor</th>
+                  <td class="hydration-comparison__craftmix-cell">
+                    <span class="visually-hidden">Smiley face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--smile" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#D6F2A3" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 38c3.5 5 7.5 7 11 7s7.5-2 11-7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
+                  <td>
+                    <span class="visually-hidden">Frowny face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--frown" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#FFD4E6" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 44c3.5-5 7.5-7 11-7s7.5 2 11 7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
+                  <td>
+                    <span class="visually-hidden">Frowny face</span>
+                    <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--frown" viewBox="0 0 64 64" aria-hidden="true">
+                      <circle cx="32" cy="32" r="26" fill="#FFD4E6" stroke="#002657" stroke-width="3"></circle>
+                      <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                      <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                      <path d="M21 44c3.5-5 7.5-7 11-7s7.5 2 11 7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="hydration-comparison__craftmix-overlay" aria-hidden="true">
+            <div class="hydration-comparison__craftmix-overlay-row hydration-comparison__craftmix-overlay-row--spacer"></div>
+            <div class="hydration-comparison__craftmix-overlay-row hydration-comparison__craftmix-overlay-row--header">
+              <img
+                class="hydration-comparison__logo"
+                src="https://cdn.shopify.com/s/files/1/2340/1623/files/craftmix-logo-dark-blue-min_1.png?v=1733286839"
+                alt=""
+                width="240"
+                height="45"
+                loading="lazy"
+              >
+            </div>
+            <div class="hydration-comparison__craftmix-overlay-row">5g</div>
+            <div class="hydration-comparison__craftmix-overlay-row">35</div>
+            <div class="hydration-comparison__craftmix-overlay-row">1125mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">60mg</div>
+            <div class="hydration-comparison__craftmix-overlay-row">
+              <svg class="hydration-comparison__face-icon hydration-comparison__face-icon--smile" viewBox="0 0 64 64" aria-hidden="true">
+                <circle cx="32" cy="32" r="26" fill="#D6F2A3" stroke="#002657" stroke-width="3"></circle>
+                <circle cx="23" cy="26" r="3" fill="#002657"></circle>
+                <circle cx="41" cy="26" r="3" fill="#002657"></circle>
+                <path d="M21 38c3.5 5 7.5 7 11 7s7.5-2 11-7" fill="none" stroke="#002657" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <div class="hydration-comparison__craftmix-overlay-row hydration-comparison__craftmix-overlay-row--spacer"></div>
+          </div>
+        </div>
+      </div>
+
+      {% if section.settings.cta_text != blank %}
+        {% liquid
+          assign cta_href = '#'
+          if section.settings.make_anchor_link and section.settings.cta_url != blank
+            assign cta_href = section.settings.cta_url
+          elsif section.settings.make_anchor_link == false and section.settings.cta_anchor_id != blank
+            assign anchor_id_clean = section.settings.cta_anchor_id | remove_first: '#'
+            assign cta_href = '#' | append: anchor_id_clean
+          endif
+        %}
+        <div class="hydration-comparison__cta-wrap">
+          <a href="{{ cta_href }}" class="hydration-comparison__cta">{{ section.settings.cta_text }}</a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="section-wave-container hydration-comparison__wave-wrap">
+  <div
+    class="lazy-lottie-container section-wave"
+    data-src="{{ comparison_wave_asset | asset_url }}"
+    data-background="transparent"
+    data-speed="1"
+    data-autoplay="true"
+    data-loop="true"
+  >
+  </div>
+</div>
+
+{% style %}
+  .hydration-comparison {
+    position: relative;
+    background: {{ section.settings.background_color }};
+    padding-top: 60px;
+  }
+
+  .hydration-comparison__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+  }
+
+  .hydration-comparison__content {
+    position: relative;
+    text-align: center;
+    padding-bottom: 80px;
+  }
+
+  .hydration-comparison__eyebrow {
+    margin: 0 0 8px;
+    color: #002657;
+    font-family: 'Goldplay';
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0.43px;
+    text-transform: uppercase;
+  }
+
+  .hydration-comparison__heading {
+    margin: 0 0 80px;
+    color: #002657;
+    font-family: 'Hornbill';
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 54px;
+    letter-spacing: -1.68px;
+  }
+
+  .hydration-comparison__table-wrap {
+    --hydration-feature-col: 31%;
+    --hydration-value-col: 23%;
+    position: relative;
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+
+  .hydration-comparison__table-shell {
+    position: relative;
+    z-index: 3;
+    overflow: visible;
+  }
+
+  .hydration-comparison__table-frame {
+    position: relative;
+    z-index: 2;
+    background: #ffffff;
+    border: 1.5px solid #002657;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .hydration-comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: #002657;
+  }
+
+  .hydration-comparison__table thead th,
+  .hydration-comparison__table tbody th,
+  .hydration-comparison__table tbody td {
+    position: relative;
+    z-index: 3;
+    border-right: 1px solid #002657;
+    border-bottom: 1px solid #002657;
+  }
+
+  .hydration-comparison__table tr > *:last-child {
+    border-right: none;
+  }
+
+  .hydration-comparison__table tbody tr:last-child > * {
+    border-bottom: none;
+  }
+
+  .hydration-comparison__table thead th {
+    height: 110px;
+    padding: 20px 16px;
+    background: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .hydration-comparison__table tbody th,
+  .hydration-comparison__table tbody td {
+    height: 88px;
+    padding: 18px 16px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Goldplay';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.13px;
+    background: #ffffff;
+  }
+
+  .hydration-comparison__table tbody th {
+    width: 31%;
+  }
+
+  .hydration-comparison__feature-heading {
+    width: var(--hydration-feature-col);
+  }
+
+  .hydration-comparison__brand {
+    font-family: 'Hornbill';
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .hydration-comparison__brand--craftmix,
+  .hydration-comparison__craftmix-cell {
+    background: transparent !important;
+    color: transparent !important;
+  }
+
+  .hydration-comparison__brand--craftmix {
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+
+  .hydration-comparison__craftmix-cell {
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+  }
+
+  .hydration-comparison__craftmix-overlay {
+    position: absolute;
+    top: -18px;
+    bottom: -12px;
+    left: calc(var(--hydration-feature-col) - 1.5px);
+    width: calc(var(--hydration-value-col) + 4px);
+    z-index: 4;
+    display: grid;
+    grid-template-rows: 18px 110px repeat(6, 88px) 12px;
+    background: #60d3f8;
+    border: 1.5px solid #002657;
+    border-radius: 30px;
+    box-shadow: 0 6px 0 0 #002657;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+    color: #002657;
+    font-family: 'Goldplay';
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.13px;
+    border-bottom: 1px solid #002657;
+    text-align: center;
+  }
+
+  .hydration-comparison__craftmix-overlay-row:last-child {
+    border-bottom: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row:nth-last-child(2) {
+    border-bottom: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row--spacer {
+    padding: 0;
+    border-bottom: none;
+  }
+
+  .hydration-comparison__craftmix-overlay-row--header {
+    padding: 20px 16px;
+  }
+
+  .hydration-comparison__logo {
+    display: block;
+    width: min(240px, 100%);
+    height: auto;
+    margin: 0 auto;
+  }
+
+  .hydration-comparison__face-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+  }
+
+  .hydration-comparison__cta-wrap {
+    margin-top: 90px;
+  }
+
+  .hydration-comparison__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 362px;
+    max-height: 60px;
+    padding: 16px 32px;
+    background-color: {{ section.settings.cta_bg_color }};
+    color: {{ section.settings.cta_text_color }};
+    border: 2px solid {{ section.settings.cta_text_color }};
+    border-radius: 6.25rem;
+    box-shadow: 2px 6px 0 0 {{ section.settings.cta_text_color }};
+    font-family: 'Goldplay', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: box-shadow 0.25s ease;
+  }
+
+  .hydration-comparison__cta:hover {
+    box-shadow: none;
+  }
+
+  .hydration-comparison__wave-wrap {
+    background-color: {{ section.settings.background_color }};
+    bottom: 0;
+  }
+
+  .hydration-comparison__wave-wrap .section-wave {
+    z-index: 2;
+  }
+
+  .hydration-comparison__fruit {
+    position: absolute;
+  }
+
+  .hydration-comparison__fruit--top {
+    top: 245px;
+    right: -100px;
+    width: auto;
+    height: 289px;
+    transform: rotate(70deg);
+  }
+
+  .hydration-comparison__fruit--bottom-left {
+    bottom: -120px;
+    left: -100px;
+    width: 268px;
+    height: auto;
+    transform: rotate(75deg);
+    z-index: 2;
+  }
+
+  .hydration-comparison__fruit--bottom-right {
+    bottom: -200px;
+    right: -82px;
+    width: 294px;
+    height: auto;
+    z-index: 2;
+  }
+
+  .hydration-comparison__fruit--card-left {
+    top: 100px;
+    left: -125px;
+    width: 156px;
+    height: auto;
+    transform: rotate(40deg);
+  }
+
+  .hydration-comparison__fruit--card-right {
+    top: -105px;
+    right: -140px;
+    width: auto;
+    height: 230px;
+    transform: rotate(308deg);
+  }
+
+  @media screen and (max-width: 1150px) {
+    .hydration-comparison__table tbody th,
+    .hydration-comparison__table tbody td {
+      font-size: 18px;
+    }
+
+    .hydration-comparison__brand {
+      font-size: 24px;
+    }
+  }
+
+  @media screen and (max-width: 1024px) {
+    .hydration-comparison__fruit--top {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 875px) {
+    .hydration-comparison__heading {
+      font-size: 46px;
+      line-height: 46px;
+      letter-spacing: -1.21px;
+      margin-bottom: 60px;
+    }
+
+    .hydration-comparison__table-wrap {
+      max-width: 100%;
+    }
+
+    .hydration-comparison__craftmix-overlay {
+      top: -14px;
+      bottom: -10px;
+      grid-template-rows: 14px 88px repeat(6, 78px) 10px;
+    }
+
+    .hydration-comparison__table thead th {
+      height: 88px;
+      padding: 14px 8px;
+    }
+
+    .hydration-comparison__table tbody th,
+    .hydration-comparison__table tbody td {
+      height: 78px;
+      padding: 12px 8px;
+      font-size: 14px;
+    }
+
+    .hydration-comparison__brand {
+      font-size: 18px;
+    }
+
+    .hydration-comparison__logo {
+      width: min(140px, 100%);
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .hydration-comparison__inner {
+      padding: 0 12px;
+    }
+
+    .hydration-comparison__craftmix-overlay {
+      top: -10px;
+      bottom: -8px;
+      border-radius: 24px;
+      box-shadow: 0 4px 0 0 #002657;
+      grid-template-rows: 10px 72px repeat(6, 64px) 8px;
+    }
+
+    .hydration-comparison__table-frame {
+      border-radius: 24px;
+    }
+
+    .hydration-comparison__craftmix-overlay-row {
+      font-size: 12px;
+      line-height: 1.15;
+    }
+
+    .hydration-comparison__craftmix-overlay-row--header {
+      padding: 14px 8px;
+    }
+
+    .hydration-comparison__table thead th {
+      height: 72px;
+    }
+
+    .hydration-comparison__table tbody th,
+    .hydration-comparison__table tbody td {
+      height: 64px;
+      font-size: 12px;
+      line-height: 1.15;
+    }
+
+    .hydration-comparison__brand {
+      font-size: 15px;
+    }
+
+    .hydration-comparison__logo {
+      width: min(112px, 100%);
+    }
+
+    .hydration-comparison__cta-wrap {
+      margin-top: 65px;
+    }
+
+    .hydration-comparison__fruit--bottom-left {
+      bottom: -50px;
+      left: -70px;
+      width: 148px;
+      transform: rotate(75deg);
+    }
+
+    .hydration-comparison__fruit--bottom-right {
+      bottom: -100px;
+      right: -65px;
+      width: 166px;
+    }
+
+    .hydration-comparison__fruit--card-left {
+      top: 170px;
+      left: -90px;
+      width: 110px;
+      height: 100px;
+      transform: rotate(34deg);
+    }
+
+    .hydration-comparison__fruit--card-right {
+      top: -85px;
+      right: -70px;
+      width: 172px;
+      height: 180px;
+      transform: rotate(306deg);
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Hydration Comparison",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#EAD1FA"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "make_anchor_link",
+      "label": "Make Anchor Link",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_anchor_id",
+      "label": "ID",
+      "info": "Target section ID to scroll to when Make Anchor Link is off"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "info": "Used when Make Anchor Link is on"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_color",
+      "label": "CTA Background color",
+      "default": "#60D3F8"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA Text color",
+      "default": "#002657"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hydration Comparison"
+    }
+  ]
+}
+{% endschema %}

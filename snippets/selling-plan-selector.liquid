@@ -281,6 +281,11 @@
         "6_weeks": "4996727022",
         "8_weeks": "4672717038",
       },
+      "18 Pack": {
+        "4_weeks": "4672684270",
+        "6_weeks": "4996727022",
+        "8_weeks": "4672717038",
+      },
       "24 Pack": {
         "2_weeks": "4672553198",
         "4_weeks": "4672585966",
@@ -390,6 +395,7 @@
       if (matchedVariant) {
         const variantToDiscountClass = {
           "12 Pack": ".sub-discount-1",
+          "18 Pack": ".sub-discount-1b",
           "24 Pack": ".sub-discount-2",
           "36 Pack": ".sub-discount-3"
         };
@@ -474,6 +480,7 @@
 
       const discountsByTitle = {
         "12 Pack": "{{ section.settings.pack_12_subscribe_discount }}",
+        "18 Pack": "{{ section.settings.pack_18_subscribe_discount }}",
         "24 Pack": "{{ section.settings.pack_24_subscribe_discount }}",
         "36 Pack": "{{ section.settings.pack_36_subscribe_discount }}"
       };

@@ -1,0 +1,512 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "hydration-product-main",
+      "blocks": {
+        "rating_AeRdFJ": {
+          "type": "rating",
+          "disabled": true,
+          "settings": {}
+        },
+        "stamped_reviews_star_rating_badge_cBJPC3": {
+          "type": "shopify://apps/stamped-reviews/blocks/star-rating-badge/a103faaf-2125-4b0e-89fa-de5149736723",
+          "disabled": true,
+          "settings": {
+            "use_metafields": false,
+            "sku_tagtype": "sku",
+            "is_featured_product": false,
+            "featured_product_handle": ""
+          }
+        },
+        "product_name_xkPbAa": {
+          "type": "product_name",
+          "settings": {
+            "title_size": 100,
+            "heading_tag": "h1"
+          }
+        },
+        "product_details_j36bBx": {
+          "type": "product_details",
+          "settings": {}
+        },
+        "product_selector_e7VD6U": {
+          "type": "product_selector",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "disabled": true,
+          "settings": {
+            "show_tax_and_shipping": false,
+            "text_size_price": 70
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "show_variant_option": true,
+            "enable_color_swatches": true,
+            "swatch_size": "small"
+          }
+        },
+        "selling_plan_selector_r4jTCJ": {
+          "type": "selling_plan_selector",
+          "settings": {}
+        },
+        "gift_wrapping_EK3NQn": {
+          "type": "gift_wrapping",
+          "settings": {
+            "text_gift": "",
+            "color_icon_light": "rgba(0,0,0,0)",
+            "color_icon_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_button_style": "secondary",
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": true,
+            "pickup_availability": false,
+            "hide_when_pre_order": false,
+            "preorder_button_label": "Pre-order",
+            "preorder_message": "<p>This product will be available for sale in 2 weeks, but you can pre-order now to receive 10% discount!</p>",
+            "preorder_show_dynamic_button": false,
+            "show_background": false,
+            "box_type": "square",
+            "background_color_light": "rgba(0,0,0,0)",
+            "message_color_light": "rgba(0,0,0,0)",
+            "background_color_dark": "rgba(0,0,0,0)",
+            "message_color_dark": "rgba(0,0,0,0)",
+            "button_light": "rgba(0,0,0,0)",
+            "button_text_light": "rgba(0,0,0,0)",
+            "button_hover_light": "rgba(0,0,0,0)",
+            "button_text_hover_light": "rgba(0,0,0,0)",
+            "secondary_button_light": "rgba(0,0,0,0)",
+            "secondary_button_text_light": "rgba(0,0,0,0)",
+            "button_dark": "rgba(0,0,0,0)",
+            "button_text_dark": "rgba(0,0,0,0)",
+            "button_hover_dark": "rgba(0,0,0,0)",
+            "button_text_hover_dark": "rgba(0,0,0,0)",
+            "secondary_button_dark": "rgba(0,0,0,0)",
+            "secondary_button_text_dark": "rgba(0,0,0,0)"
+          }
+        },
+        "text_8Dzbe9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Always FREE Shipping When You Subscribe</p>",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        },
+        "text_YUgEdp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Free Shipping on $40 Orders in the USA</p>",
+            "number_of_lines_shown": "none",
+            "read_more_label": "Read more",
+            "see_less_label": "See less"
+          }
+        },
+        "additional_content_adURFq": {
+          "type": "additional_content",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "rating_AeRdFJ",
+        "stamped_reviews_star_rating_badge_cBJPC3",
+        "product_name_xkPbAa",
+        "product_details_j36bBx",
+        "product_selector_e7VD6U",
+        "price",
+        "variant_picker",
+        "selling_plan_selector_r4jTCJ",
+        "gift_wrapping_EK3NQn",
+        "buy_buttons",
+        "text_8Dzbe9",
+        "text_YUgEdp",
+        "additional_content_adURFq"
+      ],
+      "settings": {
+        "hide_sub_discounts": true,
+        "hide_ot_discounts": false,
+        "pack_18_regular_discount": 0,
+        "pack_36_regular_discount": 25,
+        "pack_18_subscribe_discount": 15,
+        "pack_36_subscribe_discount": 15,
+        "enable_sticky_image": true,
+        "show_product_name": false,
+        "bold_bullets_before_colon": true,
+        "title_size": 100,
+        "heading_tag": "h1",
+        "show_vendor": false,
+        "link_vendor": false,
+        "make_content_center": false,
+        "desktop_layout": "left",
+        "desktop_media_layout": "2_columns",
+        "show_arrow_button": true,
+        "mobile_media_size": "full_width",
+        "show_thumnail_mobile": false,
+        "image_ratio": "3/4",
+        "thumbnail_position": "vertical",
+        "enable_image_zoom": false,
+        "zoom_effect": "enlarge",
+        "enable_video_autoplay": false,
+        "enable_video_loop": false,
+        "show_first_image_avaiable": true,
+        "show_media_with_variant_selected": false,
+        "option_to_classify_variant_media": "",
+        "enable_microdata": true,
+        "show_breadcrumbs": false,
+        "show_breadcrumbs_border": false,
+        "full_width_breadcrumb": false,
+        "desktop_content_alignment": "text-center",
+        "mobile_content_alignment": "text-center",
+        "background_color_light": "rgba(0,0,0,0)",
+        "text_color_light": "rgba(0,0,0,0)",
+        "textlink_color_light": "rgba(0,0,0,0)",
+        "background_color_dark": "rgba(0,0,0,0)",
+        "text_color_dark": "rgba(0,0,0,0)",
+        "textlink_color_dark": "rgba(0,0,0,0)",
+        "full_width": true,
+        "spacing_col": "small",
+        "padding_top": 60,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 28
+      }
+    },
+    "pdp_nutrition_facts_new_9nAJcX": {
+      "type": "pdp-nutrition-facts-new",
+      "disabled": true,
+      "name": "Nutrition Facts New",
+      "settings": {
+        "background_color": "#000000"
+      }
+    },
+    "hydration_nutrition_facts_FwBp9U": {
+      "type": "hydration-nutrition-facts",
+      "name": "Hydration Nutrition",
+      "settings": {
+        "background_color": "#ffffff"
+      }
+    },
+    "pdp_make_craft_drinks_fLDEPe": {
+      "type": "pdp-make-craft-drinks",
+      "disabled": true,
+      "settings": {}
+    },
+    "v2_pdp_faq_section_yNjAaJ": {
+      "type": "v2-pdp-faq-section",
+      "name": "V2-PDP Faq Section",
+      "settings": {
+        "heading": "Got Questions"
+      }
+    },
+    "pdp_comparison_graph_pcRkY9": {
+      "type": "pdp-comparison-graph",
+      "disabled": true,
+      "name": "PDP - Comparison Graph",
+      "settings": {
+        "background_color": "#ead1fa",
+        "cta_text": "",
+        "make_anchor_link": false,
+        "cta_anchor_id": "",
+        "cta_url": "",
+        "cta_bg_color": "#60d3f8",
+        "cta_text_color": "#002657"
+      }
+    },
+    "hydration_comparison_graph_GenQBm": {
+      "type": "hydration-comparison-graph",
+      "name": "Hydration Comparison",
+      "settings": {
+        "background_color": "#EAD1FA",
+        "cta_text": "",
+        "make_anchor_link": false,
+        "cta_anchor_id": "",
+        "cta_url": "",
+        "cta_bg_color": "#60D3F8",
+        "cta_text_color": "#002657"
+      }
+    },
+    "pdp_flavor_carousel_RNmhy9": {
+      "type": "pdp-flavor-carousel",
+      "settings": {
+        "heading": "You May Also Like",
+        "carousel_collection": "hydration-packs",
+        "background_color": "#bfefff"
+      }
+    },
+    "marquee_divider_RNMnJe": {
+      "type": "marquee-divider",
+      "custom_css": [
+        ".marquee-container {z-index: 1;}"
+      ],
+      "name": "Marquee Divider",
+      "settings": {
+        "marquee_top_color": "#bfefff",
+        "marquee_bottom_color": "{{ product.metafields.custom.color_2.value }}",
+        "lottie_file": "value_prop_1440px.json"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "heading": "You May Also Like...",
+        "highlight_type": "underline",
+        "heading_size": 100,
+        "heading_tag": "h2",
+        "heading_alignment": "center",
+        "products_to_show": 5,
+        "background_color_light": "",
+        "background_color_dark": "",
+        "show_vendor": false,
+        "show_rating": true,
+        "show_quickview": true,
+        "enable_carousel_desktop": false,
+        "enable_swiper_mobile": true,
+        "columns_desktop": 5,
+        "full_width": true,
+        "show_section_divider": false,
+        "spacing": 28,
+        "padding_top": 56,
+        "padding_bottom": 88,
+        "columns_mobile": "1",
+        "show_section_divider_mobile": false,
+        "spacing_mobile": 16,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "pdp_video_carousel_3JFfV3": {
+      "type": "pdp-video-carousel",
+      "blocks": {
+        "carousel_card_aJLLiK": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/80a0c6d017ad4692bcf531a692de7bd4.mp4",
+            "linked_product": "mint-mojito"
+          }
+        },
+        "carousel_card_QqahBW": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/6efe47f0e0f04de7b795f941ebae6dad.mp4",
+            "linked_product": "blood-orange-mai-tai"
+          }
+        },
+        "carousel_card_Dae7dN": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/deaacc7722d94b479ee4077a60989ec9.mp4",
+            "linked_product": "variety-pack"
+          }
+        },
+        "carousel_card_CVLNTa": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/7f1fc25e2c5148e7bff86865d5de6d81.mov",
+            "linked_product": "strawberry-mule"
+          }
+        },
+        "carousel_card_z9Jz4J": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/cff169ffa0604753bcef15544e8c1619.mp4",
+            "linked_product": "skinny-margarita"
+          }
+        },
+        "carousel_card_RjGgX7": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/84d8a3855b224f2e9d7410a92f2cb2d4.mov",
+            "linked_product": "espresso-martini"
+          }
+        },
+        "carousel_card_iPpamL": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b9c1b3a2cbb241f9b08f145f7d1ace21.mov",
+            "linked_product": "cranberry-vanilla"
+          }
+        },
+        "carousel_card_phMeWP": {
+          "type": "carousel_card",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/625b47627b724e22a2a2ea476e8a720b.mov",
+            "linked_product": "mango-margarita"
+          }
+        }
+      },
+      "block_order": [
+        "carousel_card_aJLLiK",
+        "carousel_card_QqahBW",
+        "carousel_card_Dae7dN",
+        "carousel_card_CVLNTa",
+        "carousel_card_z9Jz4J",
+        "carousel_card_RjGgX7",
+        "carousel_card_iPpamL",
+        "carousel_card_phMeWP"
+      ],
+      "settings": {
+        "background_color": "#ffffff"
+      }
+    },
+    "pdp_quote_section_i9D6EL": {
+      "type": "pdp-quote-section",
+      "disabled": true,
+      "settings": {
+        "featured_image": "shopify://shop_images/5-Copy_of_BPH_1156-min.jpg",
+        "featured_image_mobile": "shopify://shop_images/5-Copy_of_BPH_1156-min.jpg"
+      }
+    },
+    "pdp_nutrition_section_9DRRXH": {
+      "type": "pdp-nutrition-section",
+      "disabled": true,
+      "name": "PDP Nutrition Section",
+      "settings": {}
+    },
+    "1744458253b1e6f7fb": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_main_widget_YHqH4j": {
+          "type": "shopify://apps/stamped-reviews/blocks/main-widget/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "animation": true,
+            "tags_exclude": "",
+            "tags_include": "",
+            "search": "",
+            "linkify": true,
+            "use_metafields": false,
+            "sku_tagtype": "sku"
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_main_widget_YHqH4j"
+      ],
+      "custom_css": [
+        "#stamped-main-widget {height: 0; margin: 0;}"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "custom_pdp_review_main_mBXy6z": {
+      "type": "custom-pdp-review-main",
+      "settings": {}
+    },
+    "custom_liquid_AqKaPg": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script>\n(function () {\n  function deheadEmptyStamped(root=document){\n    root.querySelectorAll('h1,h2,h3,h4,h5,h6.stamped-review-header-title')\n      .forEach(h => {\n        if (h.textContent.trim() === '') {\n          const d = document.createElement('div');\n          // copy attributes/classes so styles remain\n          for (const a of h.attributes) d.setAttribute(a.name, a.value);\n          d.classList.add('is-heading-removed');\n          h.replaceWith(d);\n        }\n      });\n  }\n  deheadEmptyStamped();\n  const container = document.querySelector('#stamped-main-widget') || document.body;\n  new MutationObserver(() => deheadEmptyStamped(container))\n    .observe(container, {childList:true, subtree:true});\n})();\n</script>\n<style>\n#stamped-reviews-widget[data-widget-type=full-page] .stamped-pagination .stamped-pagination-page.is-active a{\ncolor:var(--craftmix-orange) !important;\n}\n</style>",
+        "full_width": false,
+        "show_section_divider": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "full_width_mobile": false,
+        "show_section_divider_mobile": false,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
+    },
+    "17441149965a0b3575": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_star_rating_badge_8ra4Gm": {
+          "type": "shopify://apps/stamped-reviews/blocks/star-rating-badge/a103faaf-2125-4b0e-89fa-de5149736723",
+          "disabled": true,
+          "settings": {
+            "use_metafields": false,
+            "sku_tagtype": "sku",
+            "is_featured_product": false,
+            "featured_product_handle": ""
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_star_rating_badge_8ra4Gm"
+      ],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "17435417519e5d1ab5": {
+      "type": "apps",
+      "blocks": {
+        "stamped_reviews_full_page_Hf633G": {
+          "type": "shopify://apps/stamped-reviews/blocks/full-page/a103faaf-2125-4b0e-89fa-de5149736723",
+          "settings": {
+            "product_image": false,
+            "take": 3,
+            "label_substitute": "",
+            "color_star": "#00ade0",
+            "color_verified": "",
+            "color_text": "#002657",
+            "color_link": "#002657",
+            "review_ids": "",
+            "product_ids": "{{ product.metafields.custom.product_id.value }}",
+            "category": "",
+            "product_brand": "",
+            "tags": "",
+            "min_rating": "none",
+            "fill_empty": true,
+            "random": false,
+            "with_photos": false
+          }
+        }
+      },
+      "block_order": [
+        "stamped_reviews_full_page_Hf633G"
+      ],
+      "custom_css": [],
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "why_craftmix_card_x9pJjk": {
+      "type": "why-craftmix-card",
+      "settings": {
+        "background_color": "#bfefff",
+        "button_link": "shopify://pages/about-us"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "pdp_nutrition_facts_new_9nAJcX",
+    "hydration_nutrition_facts_FwBp9U",
+    "pdp_make_craft_drinks_fLDEPe",
+    "v2_pdp_faq_section_yNjAaJ",
+    "pdp_comparison_graph_pcRkY9",
+    "hydration_comparison_graph_GenQBm",
+    "pdp_flavor_carousel_RNmhy9",
+    "marquee_divider_RNMnJe",
+    "product-recommendations",
+    "pdp_video_carousel_3JFfV3",
+    "pdp_quote_section_i9D6EL",
+    "pdp_nutrition_section_9DRRXH",
+    "1744458253b1e6f7fb",
+    "custom_pdp_review_main_mBXy6z",
+    "custom_liquid_AqKaPg",
+    "17441149965a0b3575",
+    "17435417519e5d1ab5",
+    "why_craftmix_card_x9pJjk"
+  ]
+}

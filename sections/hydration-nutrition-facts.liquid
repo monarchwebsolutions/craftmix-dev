@@ -1,0 +1,914 @@
+<div class="custom-nutrition-section">
+<img src="{{ 'tropicalleaf.svg' | asset_url }}" class="background-fruit-nutrition-lower bg-tropical-leaf" width="268" height="289" alt="Tropical Leaf Illustration" loading="lazy">
+<img src="{{ 'mint-light.svg' | asset_url }}"  class="background-fruit-nutrition-lower bg-mint-leaf" width="294" height="350" alt="Mint Leaf Illustration" loading="lazy">
+<div class="custom-nutrition-section-container">
+   {% assign is_variety_pack = false %}
+   {% if product.metafields.custom.variety_pack_products.value != blank %}
+   {% assign is_variety_pack = true %}
+   {% assign variety_pack_products = product.metafields.custom.variety_pack_products.value %}
+   {% endif %}
+   <div>
+      {% if is_variety_pack %}
+      <div class="nutrition-card-selectors-container nutrition-card-selectors-desktop">
+      {% for product in variety_pack_products %}
+        <button class="nutrition-card-selector {{ product.title | downcase | replace: ' ', '-' | replace: '_', '-' }}-nutrition-card-selector {% if forloop.index == 1 %}selected{% endif %}">{{product.title }}</button>
+      {% endfor %}
+      </div>
+      {% for product in variety_pack_products %}
+      <div class="nutrition-facts-container {{ product.title | downcase | replace: ' ', '-' | replace: '_', '-' }}-nutrition-facts-container {% if forloop.index == 1 %}active{% endif %}">
+        {% assign nutrition_card_bg = product.metafields.custom.color_3 | default: '#ffffff' %}
+        {% assign nutrition_card_text = product.metafields.custom.color_1 | default: '#000000' %}
+        {% assign nutrition_card_btn = product.metafields.custom.color_1 | default: '#000000' %}
+        {% if product.metafields.custom.illustration_b %}
+        {% assign flavor_icon = product.metafields.custom.illustration_b | file_url %}
+        {% else %}
+        {% assign flavor_icon = 'https://cdn.shopify.com/s/files/1/2340/1623/files/lime2.svg?v=1738881712' %}
+        {% endif %}
+        <div class="top-section">
+          <img src="{{ flavor_icon }}" class="bg-nutrition-fruit flavor-bg" alt="Flavor illustration" width="114" height="118" loading="lazy">
+          <div class="whats-in-craftmix">
+              <h4 class="whats-in-craftmix-subheading">What's in CraftMix</h4>
+              <h3 class="whats-in-craftmix-heading">Quality Ingredients, Amazing Taste</h3>
+              <p class="whats-in-craftmix-paragraph whats-in-craftmix-paragraph-variety">Craftmix never uses artificial flavors, sweeteners, or preservatives and each flavor is made from real-fruit powders.</p>
+              <div class="flavor-bar flavor-bar-desktop" data-flavor="{{ product.metafields.custom.flavor_measure.value }}">
+                <div class="flavor-range">
+                    <div class="flavor-range-fill"></div>
+                    <img src="{{ flavor_icon }}" width="40" height="32" alt="Flavor Icon" class="flavor-icon" loading="lazy">
+                </div>
+                <div class="flavor-labels">
+                    <span class="sweet-label">{{ product.metafields.custom.sweet_alt.value | default: 'Sweet' }}</span>
+                    <span class="flavor-label">Flavor</span>
+                    <span class="sour-label">{{ product.metafields.custom.flavor_type.value | default: 'Sour' }}</span>
+                </div>
+              </div>
+          </div>
+          <div class="nutrition-card-selectors-container nutrition-card-selectors-mobile">
+          {% for product in variety_pack_products %}
+            <button class="nutrition-card-selector {{ product.title | downcase | replace: ' ', '-' | replace: '_', '-' }}-nutrition-card-selector {% if forloop.index == 1 %}selected{% endif %}">{{product.title }}</button>
+          {% endfor %}
+          </div>
+          <div class="nutrition-fact-card-container">
+              <div class="nutrition-fact-card card-single" style=" border: 1.5px solid {{ nutrition_card_text }};  color: {{ nutrition_card_text }}; background-color: {{ nutrition_card_bg }};">
+                <div class="nutrition-fact-card-header">
+                    <div class="nutrition-fact-card-head">
+                      <h3 class="nutrition-product-title" style="color: {{ nutrition_card_text }};">{{ product.title | remove_first: '2025 - ' }}</h3>
+                      <div class="calories-box">
+                          <h4 class="cal-num" style="color: {{ nutrition_card_text }};">{{ product.metafields.custom.calorie_total.value | default: 25 }}</h4>
+                          <p class="cal-text" style="color: {{ nutrition_card_text }};">Calories</p>
+                      </div>
+                    </div>
+                </div>
+                <div class="nutrition-fact-card-body">
+                    <table class="nutrition-table" style=" color: {{ nutrition_card_text }};">
+                      <tr>
+                          <th><span class="visually-hidden">Blank header</span></th>
+                          <th class="table-th">Per 7g Packet</th>
+                          <th class="table-th">DV%</th>
+                      </tr>
+                      <tr>
+                          <td>Total Fat</td>
+                          <td>{{ product.metafields.custom.total_fat_mass.value | default: 0 }}g</td>
+                          <td>{{ product.metafields.custom.total_fat_dv.value | default: 0 }}%</td>
+                      </tr>
+                      <tr>
+                          <td>Sodium</td>
+                          <td>{{ product.metafields.custom.sodium_mass.value | default: 22 }}mg</td>
+                          <td>{{ product.metafields.custom.table_sodium_dv.value | default: 1 }}%</td>
+                      </tr>
+                      <tr>
+                          <td>Carbohydrate</td>
+                          <td>{{ product.metafields.custom.carbs_mass.value | default: 6 }}g</td>
+                          <td>{{ product.metafields.custom.carbs_dv.value | default: 2 }}%</td>
+                      </tr>
+                      <tr>
+                          <td>Total Sugars <br> <span class="sugar-text-sm">Includes {{ product.metafields.custom.sugar_mass.value | default: 5 }}g <br> Added Sugars</span></td>
+                          <td></td>
+                          <td>{{ product.metafields.custom.sugar_dv.value | default: 10 }}%</td>
+                      </tr>
+                      <tr>
+                          <td>Protein</td>
+                          <td>{{ product.metafields.custom.protein_mass.value | default: 0 }}mg</td>
+                          <td>{{ product.metafields.custom.protein_dv.value | default: 0 }}%</td>
+                      </tr>
+                      <tr>
+                          <td>Potassium</td>
+                          <td>{{ product.metafields.custom.potassium_mass.value | default: 11 }}mg</td>
+                          <td>{{ product.metafields.custom.potassium_dv.value | default: 0 }}%</td>
+                      </tr>
+                      <tr class="ingredients-row">
+                          <td colspan="3" style="text-align: left; border-bottom: none; padding: 20px">
+                            <strong>Ingredients:</strong> {{ product.metafields.custom.ingredients }}
+                          </td>
+                      </tr>
+                    </table>
+                </div>
+              </div>
+              <style>
+                .card-single .nutrition-table th,
+                .card-single .nutrition-table td,
+                .card-single .nutrition-table tr {
+                border-bottom: 1px solid {{ nutrition_card_text }};
+                }
+              </style>
+          </div>
+          <div class="flavor-bar flavor-bar-mobile" data-flavor="{{ product.metafields.custom.flavor_measure.value }}">
+              <div class="flavor-range">
+                <div class="flavor-range-fill"></div>
+                <img src="{{ flavor_icon }}" width="40" height="32" alt="Flavor Icon" class="flavor-icon" loading="lazy">
+              </div>
+              <div class="flavor-labels">
+                <span class="sweet-label">{{ product.metafields.custom.sweet_alt.value | default: 'Sweet' }}</span>
+                <span class="flavor-label">Flavor</span>
+                <span class="sour-label">{{ product.metafields.custom.flavor_type.value | default: 'Sour' }}</span>
+              </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <!-- This is a SINGLE PRODUCT -->
+      {% assign nutrition_card_bg = product.metafields.custom.color_3 | default: '#ffffff' %}
+      {% assign nutrition_card_text = product.metafields.custom.color_1 | default: '#000000' %}
+      {% assign nutrition_card_btn = product.metafields.custom.color_1 | default: '#000000' %}
+      {% if product.metafields.custom.illustration_b %}
+      {% assign flavor_icon = product.metafields.custom.illustration_b | file_url %}
+      {% else %}
+      {% assign flavor_icon = 'https://cdn.shopify.com/s/files/1/2340/1623/files/lime2.svg?v=1738881712' %}
+      {% endif %}
+      <div class="top-section">
+         <img src="{{ flavor_icon }}" class="bg-nutrition-fruit flavor-bg" alt="Flavor illustration" width="114" height="118" loading="lazy">
+         <div class="whats-in-craftmix">
+            <h4 class="whats-in-craftmix-subheading">What's in CraftMix</h4>
+            <h3 class="whats-in-craftmix-heading">Quality Ingredients, Amazing Taste</h3>
+            <p class="whats-in-craftmix-paragraph">Craftmix never uses artificial flavors, sweeteners, or preservatives and each flavor is made from real-fruit powders.</p>
+            <div class="flavor-bar" data-flavor="{{ product.metafields.custom.flavor_measure.value }}">
+               <div class="flavor-range">
+                  <div class="flavor-range-fill"></div>
+                  <img src="{{ flavor_icon }}" width="40" height="32" alt="Flavor Icon" class="flavor-icon" loading="lazy">
+               </div>
+               <div class="flavor-labels">
+                  <span class="sweet-label">{{ product.metafields.custom.sweet_alt.value | default: 'Sweet' }}</span>
+                  <span class="flavor-label">Flavor</span>
+                  <span class="sour-label">{{ product.metafields.custom.flavor_type.value | default: 'Sour' }}</span>
+               </div>
+            </div>
+         </div>
+         <div class="nutrition-fact-card-container">
+            <div class="nutrition-fact-card card-single" style=" border: 1.5px solid {{ nutrition_card_text }};  color: {{ nutrition_card_text }}; background-color: {{ nutrition_card_bg }};">
+               <div class="nutrition-fact-card-header">
+                  <div class="nutrition-fact-card-head">
+                     <h3 class="nutrition-product-title" style="color: {{ nutrition_card_text }};">{{ product.title | remove_first: '2025 - ' }}</h3>
+                     <div class="calories-box">
+                        <h4 class="cal-num" style="color: {{ nutrition_card_text }};">{{ product.metafields.custom.calorie_total.value | default: 25 }}</h4>
+                        <p class="cal-text" style="color: {{ nutrition_card_text }};">Calories</p>
+                     </div>
+                  </div>
+               </div>
+               <div class="nutrition-fact-card-body">
+                  <table class="nutrition-table" style=" color: {{ nutrition_card_text }};">
+                     <tr>
+                        <th><span class="visually-hidden">Blank header</span></th>
+                        <th class="table-th">Per 7g Packet</th>
+                        <th class="table-th">DV%</th>
+                     </tr>
+                     <tr>
+                        <td>Total Fat</td>
+                        <td>{{ product.metafields.custom.total_fat_mass.value | default: 0 }}g</td>
+                        <td>{{ product.metafields.custom.total_fat_dv.value | default: 0 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Sodium</td>
+                        <td>{{ product.metafields.custom.sodium_mass.value | default: 22 }}mg</td>
+                        <td>{{ product.metafields.custom.table_sodium_dv.value | default: 1 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Carbohydrate</td>
+                        <td>{{ product.metafields.custom.carbs_mass.value | default: 6 }}g</td>
+                        <td>{{ product.metafields.custom.carbs_dv.value | default: 2 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Total Sugars <br> <span class="sugar-text-sm">Includes {{ product.metafields.custom.sugar_mass.value | default: 5 }}g <br> Added Sugars</span></td>
+                        <td>5g</td>
+                        <td>{{ product.metafields.custom.sugar_dv.value | default: 10 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Protein</td>
+                        <td>{{ product.metafields.custom.protein_mass.value | default: 0 }}mg</td>
+                        <td>{{ product.metafields.custom.protein_dv.value | default: 0 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Potassium</td>
+                        <td>{{ product.metafields.custom.potassium_mass.value | default: 11 }}mg</td>
+                        <td>{{ product.metafields.custom.potassium_dv.value | default: 0 }}%</td>
+                     </tr>
+                     <tr>
+                        <td>Chloride</td>
+                        <td>345mg</td>
+                        <td>15%</td>
+                     </tr>
+                     <tr>
+                        <td>Magnesium</td>
+                        <td>60mg</td>
+                        <td>14%</td>
+                     </tr>
+                     <tr>
+                        <td>Calcium</td>
+                        <td>60mg</td>
+                        <td>5%</td>
+                     </tr>
+                     <tr class="ingredients-row">
+                        <td colspan="3" style="text-align: left; border-bottom: none; padding: 20px">
+                           <strong>Ingredients:</strong> {{ product.metafields.custom.ingredients }}
+                        </td>
+                     </tr>
+                  </table>
+               </div>
+            </div>
+            <style>
+               .card-single .nutrition-table th,
+               .card-single .nutrition-table td,
+               .card-single .nutrition-table tr {
+               border-bottom: 1px solid {{ nutrition_card_text }};
+               }
+            </style>
+         </div>
+      </div>
+      {% endif %}
+   </div>
+</div>
+<div class="section-wave-container">
+   <div
+      class="lazy-lottie-container section-wave"
+      data-src="{{ product.metafields.custom.secondary_product_wave | asset_url }}"
+      data-background="transparent"
+      data-speed="1"
+      data-autoplay="true"
+      data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+   </div>
+</div>
+
+{% style %}
+.nutrition-card-selectors-container{
+  margin-bottom: 44px;
+}
+.nutrition-card-selector{
+  border: 1px solid var(--craftmix-dark-blue);
+  padding: 8px 10px;
+  border-radius: 100px;
+  font-family: Goldplay;
+  font-weight: 600;
+  font-size:18px;
+  white-space:nowrap;
+}
+.nutrition-card-selectors-desktop{
+    display:flex;
+    gap: 30px;
+    justify-content: center;
+}
+.nutrition-card-selectors-mobile{
+  display:none;
+  gap: 16px;
+  justify-content: left;
+  overflow-x:scroll;
+}
+.nutrition-card-selectors-mobile::-webkit-scrollbar{
+  display:none;
+}
+.nutrition-card-selector.selected{
+  background-color:var(--craftmix-dark-blue);
+  color:white;
+}
+.nutrition-facts-container{
+  display:none;
+  background:unset;
+}
+.nutrition-facts-container.active{
+  display:block;
+  border:none;
+}
+.ingredients-row td {
+  font-weight: 500 !important;
+}
+
+.custom-nutrition-section {
+  padding-top: 60px;
+  background-color: var(--craftmix-sky-blue);
+  position: relative;
+}
+
+.custom-nutrition-section-container {
+  margin: 0 auto;
+  padding: 0 45px;
+  max-width: 1400px;
+  position: relative;
+}
+
+.top-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Variety pack heading */
+.variety-pack-heading {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.variety-pack-subheading {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.variety-pack-title {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Hornbill";
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: -1.68px;
+  line-height: 54px;
+  margin-bottom: 40px;
+}
+
+.variety-pack-description {
+  opacity: 0.9;
+  color: #002657;
+  font-family: "Goldplay";
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  line-height: 1.5rem;
+}
+
+/* Variety pack grid */
+.variety-pack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1156px) {
+  .variety-pack-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.variety-pack-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+/* Single product copy column */
+.whats-in-craftmix {
+  width: 451px;
+  margin-left: 20px;
+  margin-right: 12px;
+}
+
+.whats-in-craftmix-subheading {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.43px;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 39px;
+}
+
+.whats-in-craftmix-heading {
+  color: rgba(0, 38, 87, 1);
+  font-family: "Hornbill";
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -1.05px;
+  line-height: 46px;
+  margin-bottom: 39px;
+}
+
+.whats-in-craftmix-paragraph {
+  opacity: 0.9;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: -0.11px;
+  line-height: 24px;
+  margin-bottom: 43px;
+}
+
+/* Flavor bar */
+.flavor-bar {
+  width:520px;
+  max-width: 100%;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flavor-bar-desktop{
+  display:flex;
+}
+.flavor-bar-mobile{
+  display:none;
+  margin:60px auto 0;
+}
+.variety-pack-flavor-bar {
+  width: 100%;
+  margin: 25px auto 0;
+}
+
+.flavor-range {
+  width: 100%;
+  height: 12px;
+  background-color: #ccc;
+  border-radius: 6px;
+  overflow: visible;
+  position: relative;
+}
+
+.flavor-range-fill {
+  height: 100%;
+  background-color: #002657;
+  border-radius: 6px;
+  transition: width 0.3s ease;
+}
+
+.flavor-icon {
+  position: absolute;
+  top: 50%;
+  right: -22px;
+  transform: translateY(-50%) translateX(-50%) rotate(0deg);
+  width: 40px;
+  transition: right 0.3s ease;
+}
+
+.flavor-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-family: "Goldplay";
+  font-size: 14px;
+  color: rgba(0, 38, 87, 0.7);
+  padding: 0 15px;
+}
+
+.sweet-label,
+.sour-label {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -0.16px;
+  text-align: center;
+  line-height: 16px;
+}
+
+.flavor-label {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: center;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+/* Nutrition card */
+.nutrition-fact-card-container {
+  width: 100%;
+  max-width: 521px;
+  min-height: 356px;
+  margin: 0 auto;
+}
+
+.nutrition-fact-card {
+  width: 100%;
+  max-width: 521px;
+  min-height: 356px;
+  margin: 0 auto;
+  border-radius: 30px;
+  opacity: 1;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+.nutrition-fact-card-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  padding-left: 33px;
+  padding-right: 27px;
+  margin-bottom: 11px;
+}
+
+.nutrition-product-title {
+  font-family: "Hornbill", sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  letter-spacing: -1.32px;
+  line-height: 54px;
+  max-width: 20rem;
+}
+
+.cal-num {
+  font-family: "Goldplay", sans-serif;
+  font-size: 70px;
+  font-weight: 700;
+  letter-spacing: 1.67px;
+  line-height: 68px;
+  text-transform: uppercase;
+}
+
+.cal-text {
+  font-family: "Hornbill", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.68px;
+  line-height: 30px;
+}
+
+.nutrition-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.nutrition-table th,
+.nutrition-table td {
+  padding: 10px 0;
+  font-family: "Goldplay", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  line-height: 20px;
+  width: 33.33%;
+  text-align: center;
+}
+
+.nutrition-table th {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.11px;
+  line-height: 22px;
+}
+
+.nutrition-table tr:last-child {
+  border-bottom: none;
+}
+
+.nutrition-table tr:not(.ingredients-row) td:first-child {
+  text-align: left;
+  font-weight: 600;
+  padding-left: 20px;
+}
+
+span.sugar-text-sm {
+  font-size: 15px;
+}
+
+/* Fruits used in this section */
+.bg-nutrition-fruit,
+.bg-nutrition-fruit-top {
+  position: absolute;
+}
+
+.bg-nutrition-fruit.flavor-bg {
+  bottom:-220px;
+  left: 100px;
+  /* transform: rotate(130deg); */
+  z-index: 1;
+  width: 125px;
+  height: auto;
+}
+
+.bg-nutrition-fruit-top.tropical-leaf-bg {
+  top: 245px;
+  right: -100px;
+  width: auto !important;
+  height: 289px !important;
+  transform: rotate(70deg);
+}
+
+.background-fruit-nutrition-lower {
+  position: absolute;
+}
+
+.background-fruit-nutrition-lower.bg-tropical-leaf {
+    bottom: -175px;
+    left: -136px;
+    width: 240px;
+    height: auto;
+    transform: rotate(65deg);
+    z-index: 2;
+}
+
+.background-fruit-nutrition-lower.bg-mint-leaf {
+  bottom: -90px;
+  right: -55px;
+  width: 211px;
+  height: auto;
+  transform: rotate(0deg);
+  z-index: 2;
+}
+
+/* Media queries actually used */
+@media screen and (max-width: 1050px) {
+  .custom-nutrition-section-container {
+    padding: 0 20px;
+  }
+  .bg-nutrition-fruit-top.tropical-leaf-bg {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .whats-in-craftmix {
+    width: 100%;
+    max-width: 388px;
+    align-self: center;
+  }
+
+  .nutrition-fact-card-container,
+  .nutrition-fact-card {
+    width: 100%;
+  }
+
+  .variety-pack-item .nutrition-fact-card-container {
+    padding: 0 16px;
+  }
+
+  .variety-pack-item .nutrition-fact-card-container,
+  .variety-pack-item .nutrition-fact-card-container .nutrition-fact-card {
+    width: 100%;
+    max-width: 521px !important;
+  }
+}
+
+@media screen and (max-width: 875px) {
+  .top-section {
+    flex-direction: column;
+    align-items:unset;
+  }
+  .whats-in-craftmix{
+    margin-bottom:32px;
+    max-width:521px;
+  }
+  .whats-in-craftmix-heading {
+    font-size: 30px;
+    letter-spacing: -0.79px;
+    line-height: 35px;
+  }
+
+  .whats-in-craftmix-paragraph {
+    margin-bottom: 29px;
+  }
+  .whats-in-craftmix-paragraph-variety{
+    margin-bottom:0;
+  }
+  .variety-pack-subheading {
+    font-size: 18px;
+    line-height: 17px;
+  }
+
+  .variety-pack-title {
+    font-size: 46px;
+    letter-spacing: -1.21px;
+    line-height: 46px;
+    margin-bottom: 60px;
+  }
+  .custom-nutrition-section-container{
+    margin-bottom:150px;
+  }
+  .nutrition-card-selectors-desktop{
+    display:none;
+  }
+  .nutrition-card-selectors-mobile{
+    display:flex;
+    margin-right:-20px;
+  }
+  .flavor-bar-desktop{
+    display:none;
+  }
+  .flavor-bar-mobile{
+    display:flex;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .custom-nutrition-section-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .custom-nutrition-section {
+    padding-top: 0;
+  }
+
+  .whats-in-craftmix-heading {
+    max-width: 75%;
+  }
+
+  .whats-in-craftmix-subheading,
+  .whats-in-craftmix-heading,
+  .whats-in-craftmix-paragraph {
+    margin-bottom: 24px;
+  }
+  .whats-in-craftmix-paragraph-variety{
+    margin-bottom:0;
+  }
+  .variety-pack-item {
+    padding: 16px 0;
+  }
+}
+
+@media screen and (max-width: 529px) {
+  .nutrition-fact-card-head {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .nutrition-product-title {
+    font-size: 40px;
+    line-height: 40px;
+    max-width: 95%;
+  }
+
+  .cal-num {
+    font-size: 65px;
+    line-height: 68px;
+  }
+
+  .cal-text {
+    font-size: 22px;
+    line-height: 30px;
+  }
+
+  .expand-btn {
+    font-size: 18px;
+    letter-spacing: -0.11px;
+  }
+}
+
+@media (max-width: 500px) {
+  .variety-pack-item .nutrition-fact-card-container {
+    padding: 0;
+  }
+
+  .variety-pack-item {
+    padding: 16px;
+  }
+
+  .sweet-label,
+  .sour-label {
+    font-size: 22px;
+  }
+
+  .flavor-labels {
+    padding: 0;
+  }
+}
+
+/* Fruits media queries (only for used fruit classes) */
+@media (max-width: 875px) {
+  .bg-nutrition-fruit.flavor-bg {
+    width: 79px !important;
+    height: auto !important;
+    bottom:-150px;
+    left:30%;
+  }
+
+  .bg-nutrition-fruit-top.tropical-leaf-bg {
+    display: none;
+  }
+
+  .background-fruit-nutrition-lower.bg-tropical-leaf {
+    bottom: 50px;
+    left: -60px;
+    width: 139px !important;
+    height: auto !important;
+    transform: rotate(75deg);
+    z-index: 2;
+  }
+
+  .background-fruit-nutrition-lower.bg-mint-leaf {
+    bottom: 85px;
+    right: -45px;
+    transform: rotate(0deg);
+    width:160px;
+  }
+}
+
+@media (max-width: 600px) {
+  .bg-nutrition-fruit.flavor-bg {
+
+  }
+
+  .background-fruit-nutrition-lower.bg-tropical-leaf {
+    
+  }
+
+  .background-fruit-nutrition-lower.bg-mint-leaf {
+    
+  }
+}
+{% endstyle %}
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const selectors = document.querySelectorAll('.nutrition-card-selector');
+    const containers = document.querySelectorAll('.nutrition-facts-container');
+
+    selectors.forEach(button => {
+      button.addEventListener('click', () => {
+        // remove selected from all buttons
+        selectors.forEach(btn => btn.classList.remove('selected'));
+
+        // remove active from all containers
+        containers.forEach(container => container.classList.remove('active'));
+
+        // add selected to clicked button
+        button.classList.add('selected');
+
+        // find the shared product slug
+        const slugClass = Array.from(button.classList)
+          .find(cls => cls.endsWith('-nutrition-card-selector'));
+
+        if (!slugClass) return;
+
+        const slug = slugClass.replace('-nutrition-card-selector', '');
+
+        // activate the matching container
+        const target = document.querySelector(
+          `.${slug}-nutrition-facts-container`
+        );
+
+        if (target) {
+          target.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+{% javascript %}
+// // Flavor Bar
+document.addEventListener('DOMContentLoaded', function () {
+  const flavorBars = document.querySelectorAll('.flavor-bar');
+
+  flavorBars.forEach(flavorBar => {
+    let sweetnessPercentage = parseInt(flavorBar.dataset.flavor, 10) || 0;
+
+    // Clamp to 0–100
+    sweetnessPercentage = Math.max(0, Math.min(100, sweetnessPercentage));
+
+    setFlavorRange(flavorBar, sweetnessPercentage);
+  });
+});
+
+function setFlavorRange(flavorBar, percentage) {
+  const fillElement = flavorBar.querySelector('.flavor-range-fill');
+  const iconElement = flavorBar.querySelector('.flavor-icon');
+  
+  if (fillElement && iconElement) {
+    fillElement.style.width = `${percentage}%`;
+    iconElement.style.left = `${percentage}%`;
+  }
+}
+
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Hydration Nutrition",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hydration Nutrition"
+    }
+  ]
+}
+{% endschema %}

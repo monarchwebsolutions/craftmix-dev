@@ -264,13 +264,21 @@
                      {% endcomment %}
                         <div class="pdp-info-text-and-badges">
                           <div class="product-badge-container">
-                            <img height="auto" width="420" src="/cdn/shop/files/hero-badges-small-min_1024x.png" class="homepage-hero-badges" alt="Craftmix benefits: convenient, natural flavors, low sugar, affordable.">
+                            <img height="auto" width="420" src="/cdn/shop/files/hydration-badges.png" class="homepage-hero-badges" alt="Craftmix benefits: convenient, natural flavors, low sugar, affordable.">
                           </div>
                           <h2 class="product-description-heading">Product Description</h2>
                           {% if product.metafields.custom.product_description_bullets.value != blank %}
                             <ul class="product-description-bullets">
                               {% for bullet in product.metafields.custom.product_description_bullets.value %}
-                                <li>{{ bullet }}</li>
+                                <li>
+                                  {% if bold_bullets_before_colon and bullet contains ':' %}
+                                    {% assign bullet_lead = bullet | split: ':' | first %}
+                                    {% assign bullet_rest = bullet | remove_first: bullet_lead | remove_first: ':' %}
+                                    <strong>{{ bullet_lead }}:</strong>{{ bullet_rest }}
+                                  {% else %}
+                                    {{ bullet }}
+                                  {% endif %}
+                                </li>
                               {% endfor %}
                             </ul>
                           {% else %}
@@ -454,13 +462,8 @@
                   >
                   </div>
                   <div class="product-brief">
-                    <p class="make-a-delicious">Make a delicious, flavorful {% if product.metafields.custom.variety_pack_products.value != blank %}cocktail{% else %}{{ product.title }}{% endif %} in 30 seconds,</p>
-                    {% if product.metafields.custom.just_add != blank %}
-                      <p class="product-metafield-just_add-text">
-                        {{ product.metafields.custom.just_add }} or enjoy as a mocktail.
-                      </p>
-                    {% endif %}
-                    <p class="each-packet">Each packet makes 1 drink.</p>
+                    <p class="product-brief-line">We spent a year formulating the best tasting hydration mix on the market.</p>
+                    <p class="product-brief-line">Better hydration. Bolder flavor. Nearly 3x the electrolytes of leading sports drinks. Just add water and ice.</p>
                     {% if product.title == "5PM Happy Hour Kit" %}
                       <div class="variety-includes-container">
                         <div class="includes-header">Includes:</div>
@@ -494,7 +497,7 @@
                       <div class="change-flavor-body">
                         <div class="scroll-area">
                         <ul class="change-flavor-list">
-                          {%- assign all_products = collections['non-hydration'].products -%}
+                          {%- assign all_products = collections['hydration-packs'].products -%}
                         
                           {%- for product_card in all_products -%}
                             {%- if product.id == product_card.id -%}
@@ -891,11 +894,8 @@
                                 %}
                               </fieldset>
                               <div class="variant-discounts subscription-discounts">
-                                <div class="discount-1 sub-discount-1" style="{% unless section.settings.pack_12_subscribe_discount and section.settings.pack_12_subscribe_discount != 0 %}visibility: hidden;{% endunless %}">
-                                  Save {{ section.settings.pack_12_subscribe_discount }}%
-                                </div>
-                                <div class="discount-2 sub-discount-2" style="{% unless section.settings.pack_24_subscribe_discount and section.settings.pack_24_subscribe_discount != 0 %}visibility: hidden;{% endunless %}">
-                                  Save {{ section.settings.pack_24_subscribe_discount }}%
+                                <div class="discount-1 sub-discount-1b" style="{% unless section.settings.pack_18_subscribe_discount and section.settings.pack_18_subscribe_discount != 0 %}visibility: hidden;{% endunless %}">
+                                  Save {{ section.settings.pack_18_subscribe_discount }}%
                                 </div>
                                 <div class="discount-3 sub-discount-3" style="{% unless section.settings.pack_36_subscribe_discount and section.settings.pack_36_subscribe_discount != 0 %}visibility: hidden;{% endunless %}">
                                   Save {{ section.settings.pack_36_subscribe_discount }}%
@@ -903,11 +903,8 @@
                               </div>
                               
                               <div class="variant-discounts regular-discounts" style="display:none">
-                                <div class="discount-1 ot-discount-1" style="{% unless section.settings.pack_12_regular_discount and section.settings.pack_12_regular_discount != 0 %}visibility: hidden;{% endunless %}">
-                                  Save {{ section.settings.pack_12_regular_discount }}%
-                                </div>
-                                <div class="discount-2 ot-discount-2" style="{% unless section.settings.pack_24_regular_discount and section.settings.pack_24_regular_discount != 0 %}visibility: hidden;{% endunless %}">
-                                  Save {{ section.settings.pack_24_regular_discount }}%
+                                <div class="discount-1 ot-discount-1b" style="{% unless section.settings.pack_18_regular_discount and section.settings.pack_18_regular_discount != 0 %}visibility: hidden;{% endunless %}">
+                                  Save {{ section.settings.pack_18_regular_discount }}%
                                 </div>
                                 <div class="discount-3 ot-discount-3" style="{% unless section.settings.pack_36_regular_discount and section.settings.pack_36_regular_discount != 0 %}visibility: hidden;{% endunless %}">
                                   Save {{ section.settings.pack_36_regular_discount }}%
