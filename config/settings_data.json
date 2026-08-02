@@ -201,7 +201,7 @@
         "settings": {
           "widget_position": "left",
           "widget_language": "us-en",
-          "button_size": "large",
+          "button_size": "small",
           "color": "#002657",
           "use_default_widget_color": false,
           "button_color": "#002657",
