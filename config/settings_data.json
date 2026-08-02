@@ -939,8 +939,6 @@
     }
   },
   "platform_customizations": {
-    "custom_css": [
-      "#tr-button-mobile {bottom: 100px !important;}"
-    ]
+    "custom_css": []
   }
 }
