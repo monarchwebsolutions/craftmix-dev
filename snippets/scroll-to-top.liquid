@@ -7,14 +7,14 @@
 <div class="scroll-to-top">
   {% style %}
     .scroll_top {
-      bottom: {{ settings.position_scroll_mobile | times: 3 | plus: 10 }}px;
+      bottom: 100px;
     }
     body:has(.sticky-atc__container--visible) .scroll_top {
         bottom: 140px !important;
       }
     @media(min-width: 768px) {
       .scroll_top {
-        bottom: {{ settings.position_scroll | times: 3 | plus: 10 }}px;
+        bottom: 100px;
       }
     }
   {% endstyle %}
