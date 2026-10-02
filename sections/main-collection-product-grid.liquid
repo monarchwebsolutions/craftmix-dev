@@ -225,27 +225,7 @@
                       assign product_card_id = paginate.current_page | append: forloop.index | plus: 0
                     %}
                     <div class="grid-item">
-                      {% render 'card-product',
-                        index_param: index_param,      
-                        card_product: product,
-                        media_aspect_ratio: section.settings.image_ratio,
-                        show_vendor: section.settings.show_vendor,
-                        show_rating: section.settings.show_rating,
-                        loading: loading,
-                        show_quick_add: section.settings.enable_quick_add,
-                        section_id: section.id,
-                        block_id: product_card_id,
-                        collection: collection,
-                        columns_desktop: section.settings.products_per_row_on_desktop,
-                        column_mobile: section.settings.products_per_row_on_mobile | plus: 0,
-                        disable_quickview: disable_quickview,
-                        collection_page: true,
-                        show_description: section.settings.show_description,
-                        list_layout: true,
-                        product_card_id: product_card_id,
-                        animation_loading: true,
-                        show_price_range: true
-                      %}
+                      {% render 'card-product', index_param: index_param, card_product: product, media_aspect_ratio: section.settings.image_ratio, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, loading: loading, show_quick_add: section.settings.enable_quick_add, section_id: section.id, block_id: product_card_id, collection: collection, columns_desktop: section.settings.products_per_row_on_desktop, column_mobile: section.settings.products_per_row_on_mobile, plus: 0, disable_quickview: disable_quickview, collection_page: true, show_description: section.settings.show_description, list_layout: true, product_card_id: product_card_id, animation_loading: true, show_price_range: true %}
                     </div>
                     {% endunless %}
                   {%- endfor -%}
@@ -968,4 +948,32 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'card-product',\n                        index_param: index_param,
+    \     \n                        card_product: product,\n                        media_aspect_ratio:
+    section.settings.image_ratio,\n                        show_vendor: section.settings.show_vendor,\n
+    \                       show_rating: section.settings.show_rating,\n                        loading:
+    loading,\n                        show_quick_add: section.settings.enable_quick_add,\n
+    \                       section_id: section.id,\n                        block_id:
+    product_card_id,\n                        collection: collection,\n                        columns_desktop:
+    section.settings.products_per_row_on_desktop,\n                        column_mobile:
+    section.settings.products_per_row_on_mobile | plus: 0,\n                        disable_quickview:
+    disable_quickview,\n                        collection_page: true,\n                        show_description:
+    section.settings.show_description,\n                        list_layout: true,\n
+    \                       product_card_id: product_card_id,\n                        animation_loading:
+    true,\n                        show_price_range: true\n                      %}"
+  to: "{% render 'card-product', index_param: index_param, card_product: product,
+    media_aspect_ratio: section.settings.image_ratio, show_vendor: section.settings.show_vendor,
+    show_rating: section.settings.show_rating, loading: loading, show_quick_add: section.settings.enable_quick_add,
+    section_id: section.id, block_id: product_card_id, collection: collection, columns_desktop:
+    section.settings.products_per_row_on_desktop, column_mobile: section.settings.products_per_row_on_mobile,
+    plus: 0, disable_quickview: disable_quickview, collection_page: true, show_description:
+    section.settings.show_description, list_layout: true, product_card_id: product_card_id,
+    animation_loading: true, show_price_range: true %}"
+  position: 13710..14414
+{%- endcomment -%}

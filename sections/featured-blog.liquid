@@ -222,35 +222,7 @@
         <div class="splide__list{% if enable_desktop_slider %} md:grid-cols-none md:flex md:w-full md:gap-0{% else %} md:grid lg:grid-cols-{{ section.settings.columns_desktop }} md:grid-cols-3 gap-{{ section.id }}{% endif %}{% if swiper_on_mobile %} flex w-full{% else %} grid grid-cols-1 gap-mobile-{{ section.id }}{% endif %}">
           {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
             {%- for article in section.settings.blog.articles limit: section.settings.post_limit -%}
-              {%- render 'article-card',
-                class_slide: class_slide,
-                blog: section.settings.blog,
-                article: article,
-                image_desktop_top: true,
-                columns_desktop: section.settings.columns_desktop,
-                columns_mobile: section.settings.columns_mobile | plus: 0,
-                show_show_more: section.settings.show_show_more,
-                limit: section.settings.post_limit,
-                class_margin: class_margin, 
-                show_image: section.settings.show_image,
-                item_secondary_background: section.settings.item_secondary_background,
-                image_ratio: section.settings.image_ratio,
-                show_name: section.settings.show_name,
-                show_author: section.settings.show_author,
-                show_comment_counts: section.settings.show_comment_counts,
-                show_date: section.settings.show_date,
-                show_excerpt: section.settings.show_excerpt,
-                show_tag: section.settings.show_tag,
-                enable_desktop_slider: enable_desktop_slider,
-                swiper_on_mobile: swiper_on_mobile,
-                content_alignment: section.settings.content_alignment,
-                disable_divider: disable_divider,
-                show_read_more: section.settings.show_read_more,
-                button_read_more_label: section.settings.button_read_more_label
-                index: forloop.index,
-                show_show_more_mobile: show_show_more_mobile,
-                show_show_more_desktop: show_show_more_desktop
-              -%}
+              {%- render 'article-card', class_slide: class_slide, blog: section.settings.blog, article: article, image_desktop_top: true, columns_desktop: section.settings.columns_desktop, columns_mobile: section.settings.columns_mobile, plus: 0, show_show_more: section.settings.show_show_more, limit: section.settings.post_limit, class_margin: class_margin, show_image: section.settings.show_image, item_secondary_background: section.settings.item_secondary_background, image_ratio: section.settings.image_ratio, show_name: section.settings.show_name, show_author: section.settings.show_author, show_comment_counts: section.settings.show_comment_counts, show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt, show_tag: section.settings.show_tag, enable_desktop_slider: enable_desktop_slider, swiper_on_mobile: swiper_on_mobile, content_alignment: section.settings.content_alignment, disable_divider: disable_divider, show_read_more: section.settings.show_read_more, button_read_more_label: section.settings.button_read_more_label, index: forloop.index, show_show_more_mobile: show_show_more_mobile, show_show_more_desktop: show_show_more_desktop -%}
             {%- endfor -%}
           {%- else %}
             {%- for i in (1..section.settings.post_limit) -%}
@@ -766,4 +738,43 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'article-card',\n                class_slide: class_slide,\n                blog:
+    section.settings.blog,\n                article: article,\n                image_desktop_top:
+    true,\n                columns_desktop: section.settings.columns_desktop,\n                columns_mobile:
+    section.settings.columns_mobile | plus: 0,\n                show_show_more: section.settings.show_show_more,\n
+    \               limit: section.settings.post_limit,\n                class_margin:
+    class_margin, \n                show_image: section.settings.show_image,\n                item_secondary_background:
+    section.settings.item_secondary_background,\n                image_ratio: section.settings.image_ratio,\n
+    \               show_name: section.settings.show_name,\n                show_author:
+    section.settings.show_author,\n                show_comment_counts: section.settings.show_comment_counts,\n
+    \               show_date: section.settings.show_date,\n                show_excerpt:
+    section.settings.show_excerpt,\n                show_tag: section.settings.show_tag,\n
+    \               enable_desktop_slider: enable_desktop_slider,\n                swiper_on_mobile:
+    swiper_on_mobile,\n                content_alignment: section.settings.content_alignment,\n
+    \               disable_divider: disable_divider,\n                show_read_more:
+    section.settings.show_read_more,\n                button_read_more_label: section.settings.button_read_more_label\n
+    \               index: forloop.index,\n                show_show_more_mobile:
+    show_show_more_mobile,\n                show_show_more_desktop: show_show_more_desktop\n
+    \             -%}"
+  to: "{%- render 'article-card', class_slide: class_slide, blog: section.settings.blog,
+    article: article, image_desktop_top: true, columns_desktop: section.settings.columns_desktop,
+    columns_mobile: section.settings.columns_mobile, plus: 0, show_show_more: section.settings.show_show_more,
+    limit: section.settings.post_limit, class_margin: class_margin, show_image: section.settings.show_image,
+    item_secondary_background: section.settings.item_secondary_background, image_ratio:
+    section.settings.image_ratio, show_name: section.settings.show_name, show_author:
+    section.settings.show_author, show_comment_counts: section.settings.show_comment_counts,
+    show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt,
+    show_tag: section.settings.show_tag, enable_desktop_slider: enable_desktop_slider,
+    swiper_on_mobile: swiper_on_mobile, content_alignment: section.settings.content_alignment,
+    disable_divider: disable_divider, show_read_more: section.settings.show_read_more,
+    button_read_more_label: section.settings.button_read_more_label, index: forloop.index,
+    show_show_more_mobile: show_show_more_mobile, show_show_more_desktop: show_show_more_desktop
+    -%}"
+  position: 9863..11030
+{%- endcomment -%}

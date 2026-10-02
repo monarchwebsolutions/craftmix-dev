@@ -43,7 +43,7 @@
               </div>
           {%- else -%}
             <div class='bg-[#c9c9c9] flex{% unless image_ratio == "natural" %} absolute{% endunless %} top-0 left-0 w-full h-full items-center'>
-              {% render 'icon-placeholder', icon: 'icon-product' | class: 'w-full h-full' %}
+              {% render 'icon-placeholder', icon: 'icon-product', class: 'w-full h-full' %}
             </div>
           {%- endif -%}
         </div>
@@ -110,4 +110,15 @@
       </div>
     </div>
   </div>
-</div>
+</div>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-placeholder', icon: 'icon-product' | class: 'w-full h-full'
+    %}"
+  to: "{% render 'icon-placeholder', icon: 'icon-product', class: 'w-full h-full'
+    %}"
+  position: 2652..2729
+{%- endcomment -%}

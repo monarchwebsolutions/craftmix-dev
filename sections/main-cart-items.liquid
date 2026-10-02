@@ -449,7 +449,7 @@
                             height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}">
                         {%- else -%}
                           <div class='bg-[#c9c9c9] flex{% unless settings.product_image_ratio == "natural" %} absolute{% endunless %} top-0 left-0 w-full h-full items-center'>
-                            {% render 'icon-placeholder', icon: 'icon-product' | class: 'w-full h-full' %}
+                            {% render 'icon-placeholder', icon: 'icon-product', class: 'w-full h-full' %}
                           </div>
                         {%- endif -%}
                       </a>
@@ -1160,4 +1160,15 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-placeholder', icon: 'icon-product' | class: 'w-full h-full'
+    %}"
+  to: "{% render 'icon-placeholder', icon: 'icon-product', class: 'w-full h-full'
+    %}"
+  position: 24241..24318
+{%- endcomment -%}

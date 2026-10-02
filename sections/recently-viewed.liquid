@@ -177,21 +177,7 @@
               assign index_param = section.index | append: forloop.index | plus: 0 
             %}
             <div class="splide__slide x-splide-slide w-full{% if section.settings.enable_carousel_desktop %} preload-slide--{{ section.id }}{% endif %}">
-              {% render 'card-product',
-                card_product: item,
-                show_vendor: section.settings.show_vendor,
-                show_rating: section.settings.show_rating,
-                lazy_load: true,
-                columns_desktop: section.settings.columns_desktop,
-                column_mobile: section.settings.columns_mobile | plus: 0,
-                block_id: forloop.index,
-                section_id: section.id,
-                product_card_id: forloop.index,
-                disable_quickview: disable_quickview,
-                index_param: index_param,
-                animation_loading: true,
-                show_price_range: true
-              %}
+              {% render 'card-product', card_product: item, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, lazy_load: true, columns_desktop: section.settings.columns_desktop, column_mobile: section.settings.columns_mobile, plus: 0, block_id: forloop.index, section_id: section.id, product_card_id: forloop.index, disable_quickview: disable_quickview, index_param: index_param, animation_loading: true, show_price_range: true %}
             </div>
           {%- endfor -%}
         </div>
@@ -516,4 +502,32 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'card-product',
+                    card_product: item,
+                    show_vendor: section.settings.show_vendor,
+                    show_rating: section.settings.show_rating,
+                    lazy_load: true,
+                    columns_desktop: section.settings.columns_desktop,
+                    column_mobile: section.settings.columns_mobile | plus: 0,
+                    block_id: forloop.index,
+                    section_id: section.id,
+                    product_card_id: forloop.index,
+                    disable_quickview: disable_quickview,
+                    index_param: index_param,
+                    animation_loading: true,
+                    show_price_range: true
+                  %}
+  to: "{% render 'card-product', card_product: item, show_vendor: section.settings.show_vendor,
+    show_rating: section.settings.show_rating, lazy_load: true, columns_desktop: section.settings.columns_desktop,
+    column_mobile: section.settings.columns_mobile, plus: 0, block_id: forloop.index,
+    section_id: section.id, product_card_id: forloop.index, disable_quickview: disable_quickview,
+    index_param: index_param, animation_loading: true, show_price_range: true %}"
+  position: 8931..9383
+{%- endcomment -%}
