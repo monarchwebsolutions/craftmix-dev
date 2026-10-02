@@ -566,7 +566,7 @@
                           <div x-slide-index="{{ forloop.index | minus: 1 }}" class="grid-item{% if swiper_on_mobile or enable_desktop_slider and section.settings.slider_style != "vertical" %} splide__slide x-splide-slide{% endif %} relative">
                             <div>
                               <div class="relative{% if settings.edges_type == 'rounded_corners' %} rounded-[10px] overflow-hidden{% endif %}{% unless media_aspect_ratio == "natural" %} pb-[{{ ratio }}%]{% endunless %}"> 
-                                {% render 'icon-placeholder', icon: 'icon-product' | class: 'bg-[#c9c9c9] absolute top-0 left-0 w-full h-full' %}
+                                {% render 'icon-placeholder', icon: 'icon-product', class: 'bg-[#c9c9c9] absolute top-0 left-0 w-full h-full' %}
                               </div>
                               <div class="pt-4 pb-4 text-{{ settings.info_alignment_card_product }}">
                                 <p class="leading-tight mb-2">
@@ -619,4 +619,15 @@
     </div>
   </div>
 </div>
-<script src="{{ 'preview-color-swatches.js' | asset_url }}" defer></script>
+<script src="{{ 'preview-color-swatches.js' | asset_url }}" defer></script>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-placeholder', icon: 'icon-product' | class: 'bg-[#c9c9c9]
+    absolute top-0 left-0 w-full h-full' %}"
+  to: "{% render 'icon-placeholder', icon: 'icon-product', class: 'bg-[#c9c9c9] absolute
+    top-0 left-0 w-full h-full' %}"
+  position: 36503..36615
+{%- endcomment -%}

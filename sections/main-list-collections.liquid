@@ -70,24 +70,7 @@
                 endif
               -%}
               <li class="collection-list-item flex flex-col group overflow-hidden relative col-span-{{ columns_mobile }} md:col-span-{{ columns_desktop }} row-span-{{ block.settings.number_of_row }}" {{ block.shopify_attributes }}>
-                {% render 'card-collection', 
-                  card_collection: block.settings.collection, 
-                  block_type: 'featured_collection', 
-                  image_ratio: section.settings.image_ratio,
-                  ratio: ratio,
-                  extend_height: true,
-                  collage: image_ratio,
-                  block: block,
-                  image: block.settings.image,
-                  title_size: section.settings.title_size,
-                  content_alignment: section.settings.content_alignment,
-                  content_position: section.settings.content_position,
-                  columns_desktop: columns_desktop,
-                  columns_mobile: section.settings.columns_mobile | plus: 0,
-                  image_overlay_opacity: section.settings.image_overlay_opacity,
-                  text_overlay: section.settings.show_text_overlay,
-                  collection_metafield: section.settings.collection_metafield
-                %}
+                {% render 'card-collection', card_collection: block.settings.collection, block_type: 'featured_collection', image_ratio: section.settings.image_ratio, ratio: ratio, extend_height: true, collage: image_ratio, block: block, image: block.settings.image, title_size: section.settings.title_size, content_alignment: section.settings.content_alignment, content_position: section.settings.content_position, columns_desktop: columns_desktop, columns_mobile: section.settings.columns_mobile, plus: 0, image_overlay_opacity: section.settings.image_overlay_opacity, text_overlay: section.settings.show_text_overlay, collection_metafield: section.settings.collection_metafield %}
               </li>
           {%- endcase -%}
         {%- endfor -%}
@@ -109,21 +92,7 @@
     <ul class="collection-list grid lg:grid-cols-{{ section.settings.columns_desktop }} grid-cols-{{ section.settings.columns_mobile }} spacing--{{ section.id }}" role="list">
       {%- for collection in collections -%}
         <li class="collection-list-item overflow-hidden">
-          {% render 'card-collection', 
-            card_collection: collection, 
-            block_type: 'featured_collection', 
-            image_ratio: section.settings.image_ratio, 
-            ratio: ratio,
-            title_size: section.settings.title_size,
-            content_alignment: section.settings.content_alignment,
-            content_position: section.settings.content_position,
-            text_overlay: section.settings.show_text_overlay,
-            image_overlay_opacity: section.settings.image_overlay_opacity,
-            text_overlay: section.settings.show_text_overlay,
-            columns_desktop: columns_desktop, 
-            columns_mobile: section.settings.columns_mobile | plus: 0 ,
-            collection_metafield: section.settings.collection_metafield
-          %}
+          {% render 'card-collection', card_collection: collection, block_type: 'featured_collection', image_ratio: section.settings.image_ratio, ratio: ratio, title_size: section.settings.title_size, content_alignment: section.settings.content_alignment, content_position: section.settings.content_position, text_overlay: section.settings.show_text_overlay, image_overlay_opacity: section.settings.image_overlay_opacity, columns_desktop: columns_desktop, columns_mobile: section.settings.columns_mobile, plus: 0, collection_metafield: section.settings.collection_metafield %}
         </li>
       {%- endfor -%}
     </ul>
@@ -495,3 +464,46 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'card-collection', \n                  card_collection: block.settings.collection,
+    \n                  block_type: 'featured_collection', \n                  image_ratio:
+    section.settings.image_ratio,\n                  ratio: ratio,\n                  extend_height:
+    true,\n                  collage: image_ratio,\n                  block: block,\n
+    \                 image: block.settings.image,\n                  title_size:
+    section.settings.title_size,\n                  content_alignment: section.settings.content_alignment,\n
+    \                 content_position: section.settings.content_position,\n                  columns_desktop:
+    columns_desktop,\n                  columns_mobile: section.settings.columns_mobile
+    | plus: 0,\n                  image_overlay_opacity: section.settings.image_overlay_opacity,\n
+    \                 text_overlay: section.settings.show_text_overlay,\n                  collection_metafield:
+    section.settings.collection_metafield\n                %}"
+  to: "{% render 'card-collection', card_collection: block.settings.collection, block_type:
+    'featured_collection', image_ratio: section.settings.image_ratio, ratio: ratio,
+    extend_height: true, collage: image_ratio, block: block, image: block.settings.image,
+    title_size: section.settings.title_size, content_alignment: section.settings.content_alignment,
+    content_position: section.settings.content_position, columns_desktop: columns_desktop,
+    columns_mobile: section.settings.columns_mobile, plus: 0, image_overlay_opacity:
+    section.settings.image_overlay_opacity, text_overlay: section.settings.show_text_overlay,
+    collection_metafield: section.settings.collection_metafield %}"
+  position: 3753..4420
+- from: "{% render 'card-collection', \n            card_collection: collection, \n
+    \           block_type: 'featured_collection', \n            image_ratio: section.settings.image_ratio,
+    \n            ratio: ratio,\n            title_size: section.settings.title_size,\n
+    \           content_alignment: section.settings.content_alignment,\n            content_position:
+    section.settings.content_position,\n            text_overlay: section.settings.show_text_overlay,\n
+    \           image_overlay_opacity: section.settings.image_overlay_opacity,\n            text_overlay:
+    section.settings.show_text_overlay,\n            columns_desktop: columns_desktop,
+    \n            columns_mobile: section.settings.columns_mobile | plus: 0 ,\n            collection_metafield:
+    section.settings.collection_metafield\n          %}"
+  to: "{% render 'card-collection', card_collection: collection, block_type: 'featured_collection',
+    image_ratio: section.settings.image_ratio, ratio: ratio, title_size: section.settings.title_size,
+    content_alignment: section.settings.content_alignment, content_position: section.settings.content_position,
+    text_overlay: section.settings.show_text_overlay, image_overlay_opacity: section.settings.image_overlay_opacity,
+    columns_desktop: columns_desktop, columns_mobile: section.settings.columns_mobile,
+    plus: 0, collection_metafield: section.settings.collection_metafield %}"
+  position: 5323..5889
+{% endcomment %}

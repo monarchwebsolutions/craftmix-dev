@@ -81,7 +81,7 @@
         "end_hour": {{ block.settings.end_hour | default: 0 }},
         "end_minute": {{ block.settings.end_minute | default: 0 }}
       }
-    }' x-badges-icon='{% if block.settings.icon != 'none' %}{% unless block.settings.custom_icon == blank and block.settings.another_icon == blank and block.settings.icon == 'another_icon' %}{% if block.settings.custom_icon == blank %}{% if block.settings.another_icon != blank and block.settings.icon == 'another_icon' %}{% render 'icon-new-alls', icon: block.settings.another_icon %}{% else %}{% render 'icon-labels-bags', icon: block.settings.icon | default: "none" %}{% endif %}{% else %}{{ block.settings.custom_icon }}{% endif %}{% endunless %}{% endif %}'></div>
+    }' x-badges-icon='{% if block.settings.icon != 'none' %}{% unless block.settings.custom_icon == blank and block.settings.another_icon == blank and block.settings.icon == 'another_icon' %}{% if block.settings.custom_icon == blank %}{% if block.settings.another_icon != blank and block.settings.icon == 'another_icon' %}{% render 'icon-new-alls', icon: block.settings.another_icon %}{% else %}{% render 'icon-labels-bags', icon: block.settings.icon, default: "none" %}{% endif %}{% else %}{{ block.settings.custom_icon }}{% endif %}{% endunless %}{% endif %}'></div>
   {%- endfor -%}
   <script src="{{ 'labels-and-badges.js' | asset_url }}" defer></script>
   {%- if request.design_mode -%}
@@ -4068,3 +4068,15 @@
   }
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: '{% render ''icon-labels-bags'', icon: block.settings.icon | default: "none"
+    %}'
+  to: '{% render ''icon-labels-bags'', icon: block.settings.icon, default: "none"
+    %}'
+  position: 4804..4879
+{% endcomment %}

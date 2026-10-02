@@ -396,26 +396,7 @@
                   {% endif %}
                 {%- when 'customize_picker' -%}
                   <div class="mb-5 {{ block.settings.width_block }}{% if show_content_center %} text-center{% endif %}" {{ block.shopify_attributes }}>
-                    {% render 'customize-picker',
-                      block_id: block.id,
-                      option_name: block.settings.option_name,
-                      required: block.settings.required,
-                      picker_type: block.settings.picker_type,
-                      option_label: block.settings.option_name,
-                      product_form_id: product_form_id,
-                      option_list: block.settings.option_list,
-                      max_text_length: block.settings.max_text_length | plus: 0,
-                      option_text_note: block.settings.option_text_note,
-                      option_select_note: block.settings.option_select_note,
-                      minimum_select_value: block.settings.minimum_select_value,
-                      maximum_select_value: block.settings.maximum_select_value,
-                      option_file_note: block.settings.option_file_note,
-                      swatch_value: block.settings.swatch_value,
-                      swatch_style: block.settings.swatch_style,
-                      min_date: block.settings.min_date,
-                      max_date: block.settings.max_date,
-                      show_content_center: show_content_center
-                    %}
+                    {% render 'customize-picker', block_id: block.id, option_name: block.settings.option_name, required: block.settings.required, picker_type: block.settings.picker_type, option_label: block.settings.option_name, product_form_id: product_form_id, option_list: block.settings.option_list, max_text_length: block.settings.max_text_length, plus: 0, option_text_note: block.settings.option_text_note, option_select_note: block.settings.option_select_note, minimum_select_value: block.settings.minimum_select_value, maximum_select_value: block.settings.maximum_select_value, option_file_note: block.settings.option_file_note, swatch_value: block.settings.swatch_value, swatch_style: block.settings.swatch_style, min_date: block.settings.min_date, max_date: block.settings.max_date, show_content_center: show_content_center %}
                   </div>
                 {%- when 'product_name' -%}
                   {% liquid
@@ -1401,7 +1382,7 @@
                       {{ block.shopify_attributes }}
                     >
                       <div class="button p-break-words button--{{ block.id }}{% if block.settings.show_button_style == 'secondary' %} button-outline{% elsif block.settings.show_button_style == 'text-link' %} button-text-link {% else %} button-solid{% endif %} empty:hidden leading-normal text-center lg:mt-0 lg:mb-0 lg:ml-0 lg:mr-0 h-full pl-7 pr-7 lg:pl-9 lg:pr-9 pt-2.5 pb-2.5 md:pt-3 md:pb-3">
-                        {% render 'button-label', button_label: button_label | t, show_button_style: block.settings.show_button_style %}
+                        {% render 'button-label', button_label: button_label, show_button_style: block.settings.show_button_style %}
                       </div>
                     </a>
                   </div>
@@ -2699,3 +2680,46 @@
   });
 
 </script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'customize-picker',
+                          block_id: block.id,
+                          option_name: block.settings.option_name,
+                          required: block.settings.required,
+                          picker_type: block.settings.picker_type,
+                          option_label: block.settings.option_name,
+                          product_form_id: product_form_id,
+                          option_list: block.settings.option_list,
+                          max_text_length: block.settings.max_text_length | plus: 0,
+                          option_text_note: block.settings.option_text_note,
+                          option_select_note: block.settings.option_select_note,
+                          minimum_select_value: block.settings.minimum_select_value,
+                          maximum_select_value: block.settings.maximum_select_value,
+                          option_file_note: block.settings.option_file_note,
+                          swatch_value: block.settings.swatch_value,
+                          swatch_style: block.settings.swatch_style,
+                          min_date: block.settings.min_date,
+                          max_date: block.settings.max_date,
+                          show_content_center: show_content_center
+                        %}
+  to: "{% render 'customize-picker', block_id: block.id, option_name: block.settings.option_name,
+    required: block.settings.required, picker_type: block.settings.picker_type, option_label:
+    block.settings.option_name, product_form_id: product_form_id, option_list: block.settings.option_list,
+    max_text_length: block.settings.max_text_length, plus: 0, option_text_note: block.settings.option_text_note,
+    option_select_note: block.settings.option_select_note, minimum_select_value: block.settings.minimum_select_value,
+    maximum_select_value: block.settings.maximum_select_value, option_file_note: block.settings.option_file_note,
+    swatch_value: block.settings.swatch_value, swatch_style: block.settings.swatch_style,
+    min_date: block.settings.min_date, max_date: block.settings.max_date, show_content_center:
+    show_content_center %}"
+  position: 23966..24782
+- from: "{% render 'button-label', button_label: button_label | t, show_button_style:
+    block.settings.show_button_style %}"
+  to: "{% render 'button-label', button_label: button_label, show_button_style: block.settings.show_button_style
+    %}"
+  position: 99477..99585
+{% endcomment %}

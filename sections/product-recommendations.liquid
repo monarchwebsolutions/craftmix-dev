@@ -1,17 +1,6 @@
 <div x-data="{ loading: false}" x-intersect.once.margin.200px="loading = true;$store.xProductRecommendations.load($el, '{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=30')" class="product-recommendations">
   <div x-show="loading" class="pb-[{{ section.settings.padding_bottom_mobile }}px] pt-[{{ section.settings.padding_top_mobile }}px] md:pb-[{{ section.settings.padding_bottom }}px] md:pt-[{{ section.settings.padding_top }}px]{% if section.settings.full_width %} full-width{% else %} page-width{% endif %}" x-cloak>
-    {% render 'skeleton-product-recommendations'
-      section_id: section.id,
-      columns_desktop: section.settings.columns_desktop | plus: 0,
-      columns_mobile: section.settings.columns_mobile | plus: 0,
-      swiper_on_mobile: section.settings.enable_swiper_mobile,
-      enable_desktop_slider: section.settings.enable_carousel_desktop,
-      spacing: section.settings.spacing,
-      spacing_mobile: section.settings.spacing_mobile,
-      product_show: section.settings.products_to_show,
-      heading_alignment: section.settings.heading_alignment,
-      show_content_above: true
-    %}
+    {% render 'skeleton-product-recommendations', section_id: section.id, columns_desktop: section.settings.columns_desktop, plus: 0, columns_mobile: section.settings.columns_mobile, swiper_on_mobile: section.settings.enable_swiper_mobile, enable_desktop_slider: section.settings.enable_carousel_desktop, spacing: section.settings.spacing, spacing_mobile: section.settings.spacing_mobile, product_show: section.settings.products_to_show, heading_alignment: section.settings.heading_alignment, show_content_above: true %}
   </div>
   {% if recommendations.performed and recommendations.products_count > 0 %}
     {% liquid 
@@ -498,3 +487,31 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'skeleton-product-recommendations'
+          section_id: section.id,
+          columns_desktop: section.settings.columns_desktop | plus: 0,
+          columns_mobile: section.settings.columns_mobile | plus: 0,
+          swiper_on_mobile: section.settings.enable_swiper_mobile,
+          enable_desktop_slider: section.settings.enable_carousel_desktop,
+          spacing: section.settings.spacing,
+          spacing_mobile: section.settings.spacing_mobile,
+          product_show: section.settings.products_to_show,
+          heading_alignment: section.settings.heading_alignment,
+          show_content_above: true
+        %}
+  to: "{% render 'skeleton-product-recommendations', section_id: section.id, columns_desktop:
+    section.settings.columns_desktop, plus: 0, columns_mobile: section.settings.columns_mobile,
+    swiper_on_mobile: section.settings.enable_swiper_mobile, enable_desktop_slider:
+    section.settings.enable_carousel_desktop, spacing: section.settings.spacing, spacing_mobile:
+    section.settings.spacing_mobile, product_show: section.settings.products_to_show,
+    heading_alignment: section.settings.heading_alignment, show_content_above: true
+    %}"
+  position: 580..1096
+{% endcomment %}

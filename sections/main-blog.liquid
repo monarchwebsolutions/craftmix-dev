@@ -163,27 +163,7 @@
             <div class="grid-cols-1 grid md:grid-cols-{{ col_first_row }} gap-{{ section.id }}">
               {%- for article in blog.articles -%}
                 <div class="grid-item article--{{ section.id }}-{{ forloop.index }}{% if section.settings.image_ratio == 'auto' %} break-inside-avoid-column{% endif %}">
-                  {%- render 'article-card',
-                    article: article,
-                    disable_divider: true,
-                    blog_page: true,
-                    image_desktop_top: true,
-                    columns_desktop: col_first_row,
-                    columns_mobile: section.settings.columns_mobile | plus: 0,
-                    class_margin: class_margin,
-                    show_image: section.settings.show_image, 
-                    item_secondary_background: section.settings.item_secondary_background, 
-                    image_ratio: section.settings.image_ratio, 
-                    show_name: section.settings.show_name, 
-                    show_author: section.settings.show_author, 
-                    show_comment_counts: section.settings.show_comment_counts, 
-                    show_date: section.settings.show_date, 
-                    show_excerpt: section.settings.show_excerpt, 
-                    show_tag: section.settings.show_tag,
-                    content_alignment: section.settings.content_alignment,
-                    show_read_more: section.settings.show_read_more,
-                    button_read_more_label: section.settings.button_read_more_label
-                  -%}
+                  {%- render 'article-card', article: article, disable_divider: true, blog_page: true, image_desktop_top: true, columns_desktop: col_first_row, columns_mobile: section.settings.columns_mobile, plus: 0, class_margin: class_margin, show_image: section.settings.show_image, item_secondary_background: section.settings.item_secondary_background, image_ratio: section.settings.image_ratio, show_name: section.settings.show_name, show_author: section.settings.show_author, show_comment_counts: section.settings.show_comment_counts, show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt, show_tag: section.settings.show_tag, content_alignment: section.settings.content_alignment, show_read_more: section.settings.show_read_more, button_read_more_label: section.settings.button_read_more_label -%}
                 </div>
                 {% liquid
                   if forloop.index >= col_first_row
@@ -196,27 +176,7 @@
               {%- for article in blog.articles -%}
                 {% if forloop.index > col_first_row %}
                   <div class="grid-item article--{{ section.id }}-{{ forloop.index }}{% if section.settings.image_ratio == 'auto' %} break-inside-avoid-column{% endif %}">
-                    {%- render 'article-card',
-                      article: article,
-                      disable_divider: true,
-                      blog_page: true,
-                      image_desktop_top: true,
-                      columns_desktop: section.settings.columns_desktop,
-                      columns_mobile: section.settings.columns_mobile | plus: 0,
-                      class_margin: class_margin,
-                      show_image: section.settings.show_image, 
-                      item_secondary_background: section.settings.item_secondary_background, 
-                      image_ratio: section.settings.image_ratio, 
-                      show_name: section.settings.show_name, 
-                      show_author: section.settings.show_author, 
-                      show_comment_counts: section.settings.show_comment_counts, 
-                      show_date: section.settings.show_date, 
-                      show_excerpt: section.settings.show_excerpt, 
-                      show_tag: section.settings.show_tag,
-                      content_alignment: section.settings.content_alignment,
-                      show_read_more: section.settings.show_read_more,
-                      button_read_more_label: section.settings.button_read_more_label
-                    -%}
+                    {%- render 'article-card', article: article, disable_divider: true, blog_page: true, image_desktop_top: true, columns_desktop: section.settings.columns_desktop, columns_mobile: section.settings.columns_mobile, plus: 0, class_margin: class_margin, show_image: section.settings.show_image, item_secondary_background: section.settings.item_secondary_background, image_ratio: section.settings.image_ratio, show_name: section.settings.show_name, show_author: section.settings.show_author, show_comment_counts: section.settings.show_comment_counts, show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt, show_tag: section.settings.show_tag, content_alignment: section.settings.content_alignment, show_read_more: section.settings.show_read_more, button_read_more_label: section.settings.button_read_more_label -%}
                   </div>
                 {% endif %}
               {%- endfor -%}
@@ -803,3 +763,60 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'article-card',\n                    article: article,\n                    disable_divider:
+    true,\n                    blog_page: true,\n                    image_desktop_top:
+    true,\n                    columns_desktop: col_first_row,\n                    columns_mobile:
+    section.settings.columns_mobile | plus: 0,\n                    class_margin:
+    class_margin,\n                    show_image: section.settings.show_image, \n
+    \                   item_secondary_background: section.settings.item_secondary_background,
+    \n                    image_ratio: section.settings.image_ratio, \n                    show_name:
+    section.settings.show_name, \n                    show_author: section.settings.show_author,
+    \n                    show_comment_counts: section.settings.show_comment_counts,
+    \n                    show_date: section.settings.show_date, \n                    show_excerpt:
+    section.settings.show_excerpt, \n                    show_tag: section.settings.show_tag,\n
+    \                   content_alignment: section.settings.content_alignment,\n                    show_read_more:
+    section.settings.show_read_more,\n                    button_read_more_label:
+    section.settings.button_read_more_label\n                  -%}"
+  to: "{%- render 'article-card', article: article, disable_divider: true, blog_page:
+    true, image_desktop_top: true, columns_desktop: col_first_row, columns_mobile:
+    section.settings.columns_mobile, plus: 0, class_margin: class_margin, show_image:
+    section.settings.show_image, item_secondary_background: section.settings.item_secondary_background,
+    image_ratio: section.settings.image_ratio, show_name: section.settings.show_name,
+    show_author: section.settings.show_author, show_comment_counts: section.settings.show_comment_counts,
+    show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt,
+    show_tag: section.settings.show_tag, content_alignment: section.settings.content_alignment,
+    show_read_more: section.settings.show_read_more, button_read_more_label: section.settings.button_read_more_label
+    -%}"
+  position: 9515..10331
+- from: "{%- render 'article-card',\n                      article: article,\n                      disable_divider:
+    true,\n                      blog_page: true,\n                      image_desktop_top:
+    true,\n                      columns_desktop: section.settings.columns_desktop,\n
+    \                     columns_mobile: section.settings.columns_mobile | plus:
+    0,\n                      class_margin: class_margin,\n                      show_image:
+    section.settings.show_image, \n                      item_secondary_background:
+    section.settings.item_secondary_background, \n                      image_ratio:
+    section.settings.image_ratio, \n                      show_name: section.settings.show_name,
+    \n                      show_author: section.settings.show_author, \n                      show_comment_counts:
+    section.settings.show_comment_counts, \n                      show_date: section.settings.show_date,
+    \n                      show_excerpt: section.settings.show_excerpt, \n                      show_tag:
+    section.settings.show_tag,\n                      content_alignment: section.settings.content_alignment,\n
+    \                     show_read_more: section.settings.show_read_more,\n                      button_read_more_label:
+    section.settings.button_read_more_label\n                    -%}"
+  to: "{%- render 'article-card', article: article, disable_divider: true, blog_page:
+    true, image_desktop_top: true, columns_desktop: section.settings.columns_desktop,
+    columns_mobile: section.settings.columns_mobile, plus: 0, class_margin: class_margin,
+    show_image: section.settings.show_image, item_secondary_background: section.settings.item_secondary_background,
+    image_ratio: section.settings.image_ratio, show_name: section.settings.show_name,
+    show_author: section.settings.show_author, show_comment_counts: section.settings.show_comment_counts,
+    show_date: section.settings.show_date, show_excerpt: section.settings.show_excerpt,
+    show_tag: section.settings.show_tag, content_alignment: section.settings.content_alignment,
+    show_read_more: section.settings.show_read_more, button_read_more_label: section.settings.button_read_more_label
+    -%}"
+  position: 10979..11814
+{% endcomment %}

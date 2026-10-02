@@ -144,41 +144,11 @@
                           assign index_param = section.index | append: forloop.index | plus: 0 
                           assign product_card_id = paginate.current_page | append: forloop.index | plus: 0
                         %}
-                        {% render 'card-product',
-                          card_product: item,
-                          show_vendor: section.settings.show_vendor,
-                          show_rating: section.settings.show_rating,
-                          loading: loading,
-                          columns_desktop: section.settings.columns_desktop_grid,
-                          column_mobile: section.settings.columns_mobile_grid | plus: 0,
-                          block_id: product_card_id,
-                          disable_quickview: disable_quickview,
-                          list_layout: true,
-                          section_id: section.id,
-                          product_card_id: product_card_id,
-                          index_param: index_param,
-                          show_description: section.settings.show_description,
-                          animation_loading: true,
-                          show_price_range: true
-                        %}
+                        {% render 'card-product', card_product: item, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, loading: loading, columns_desktop: section.settings.columns_desktop_grid, column_mobile: section.settings.columns_mobile_grid, plus: 0, block_id: product_card_id, disable_quickview: disable_quickview, list_layout: true, section_id: section.id, product_card_id: product_card_id, index_param: index_param, show_description: section.settings.show_description, animation_loading: true, show_price_range: true %}
                         <script src="{{ 'preview-color-swatches.js' | asset_url }}" defer></script>
                       {%- when 'article' -%}
                         <div class="h-full w-full">
-                          {% render 'article-card',
-                            article: item,
-                            disable_divider: true,
-                            image_desktop_top: true,
-                            has_image: true,
-                            show_badge: true,
-                            loading: loading,
-                            image_ratio: section.settings.image_ratio, 
-                            show_name: section.settings.show_name, 
-                            show_author: section.settings.show_author, 
-                            show_date: section.settings.show_date, 
-                            columns_desktop: section.settings.columns_desktop_grid,
-                            columns_mobile: section.settings.columns_mobile_grid | plus: 0,
-                            list_layout: true
-                          %}
+                          {% render 'article-card', article: item, disable_divider: true, image_desktop_top: true, has_image: true, show_badge: true, loading: loading, image_ratio: section.settings.image_ratio, show_name: section.settings.show_name, show_author: section.settings.show_author, show_date: section.settings.show_date, columns_desktop: section.settings.columns_desktop_grid, columns_mobile: section.settings.columns_mobile_grid, plus: 0, list_layout: true %}
                         </div>
                       {%- when 'page' -%}
                         <div class="h-full w-full">
@@ -504,3 +474,52 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {% render 'card-product',
+                              card_product: item,
+                              show_vendor: section.settings.show_vendor,
+                              show_rating: section.settings.show_rating,
+                              loading: loading,
+                              columns_desktop: section.settings.columns_desktop_grid,
+                              column_mobile: section.settings.columns_mobile_grid | plus: 0,
+                              block_id: product_card_id,
+                              disable_quickview: disable_quickview,
+                              list_layout: true,
+                              section_id: section.id,
+                              product_card_id: product_card_id,
+                              index_param: index_param,
+                              show_description: section.settings.show_description,
+                              animation_loading: true,
+                              show_price_range: true
+                            %}
+  to: "{% render 'card-product', card_product: item, show_vendor: section.settings.show_vendor,
+    show_rating: section.settings.show_rating, loading: loading, columns_desktop:
+    section.settings.columns_desktop_grid, column_mobile: section.settings.columns_mobile_grid,
+    plus: 0, block_id: product_card_id, disable_quickview: disable_quickview, list_layout:
+    true, section_id: section.id, product_card_id: product_card_id, index_param: index_param,
+    show_description: section.settings.show_description, animation_loading: true,
+    show_price_range: true %}"
+  position: 9372..9911
+- from: "{% render 'article-card',\n                            article: item,\n                            disable_divider:
+    true,\n                            image_desktop_top: true,\n                            has_image:
+    true,\n                            show_badge: true,\n                            loading:
+    loading,\n                            image_ratio: section.settings.image_ratio,
+    \n                            show_name: section.settings.show_name, \n                            show_author:
+    section.settings.show_author, \n                            show_date: section.settings.show_date,
+    \n                            columns_desktop: section.settings.columns_desktop_grid,\n
+    \                           columns_mobile: section.settings.columns_mobile_grid
+    | plus: 0,\n                            list_layout: true\n                          %}"
+  to: "{% render 'article-card', article: item, disable_divider: true, image_desktop_top:
+    true, has_image: true, show_badge: true, loading: loading, image_ratio: section.settings.image_ratio,
+    show_name: section.settings.show_name, show_author: section.settings.show_author,
+    show_date: section.settings.show_date, columns_desktop: section.settings.columns_desktop_grid,
+    columns_mobile: section.settings.columns_mobile_grid, plus: 0, list_layout: true
+    %}"
+  position: 10135..10580
+{% endcomment %}

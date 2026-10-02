@@ -267,7 +267,7 @@
                     >
                     {% comment %}theme-check-enable ImgLazyLoading{% endcomment %}
                   {%- else -%}
-                    {% render 'icon-placeholder', icon: 'icon-product' | class: 'bg-[#c9c9c9] w-full h-full' %}
+                    {% render 'icon-placeholder', icon: 'icon-product', class: 'bg-[#c9c9c9] w-full h-full' %}
                   {%- endif -%}
                 </div>
               {% when 'collection' %}
@@ -1063,4 +1063,15 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icon-placeholder', icon: 'icon-product' | class: 'bg-[#c9c9c9]
+    w-full h-full' %}"
+  to: "{% render 'icon-placeholder', icon: 'icon-product', class: 'bg-[#c9c9c9] w-full
+    h-full' %}"
+  position: 15097..15187
+{%- endcomment -%}
