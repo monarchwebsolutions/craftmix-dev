@@ -13,9 +13,9 @@
           <h2 class="main-review-header-title">Product Reviews</h2>
           <div class="main-review-header-stars">
             <img src="{{ 'stars-dark.png' | asset_url   }}"  width="105" height="18" alt="Review Stars" loading="lazy">
-             <p class="main-review-average">0.0</p>
+             <p class="main-review-average" style="display: none;"></p>
           </div>
-          <p class="main-reviews-header-number">0 reviews</p>
+          <p class="main-reviews-header-number"></p>
           <div class="main-review-header-gallery">
             <img class="main-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-1.png?v=1739298888" width="116" height="116" alt="Gallery image of cocktails and mocktails" loading="lazy">
             <img class="main-review-gallery-image" src="https://cdn.shopify.com/s/files/1/2340/1623/files/test-gallery-img-2.png?v=1739298889" width="116" height="116" alt="Gallery image of cocktails and mocktails" loading="lazy">
@@ -264,35 +264,39 @@ img {
       if (!section) return;
 
       const productId = section.dataset.productId;
-      const badgeEl = document.querySelector(`.stamped-product-reviews-badge[data-id="${productId}"] .stamped-badge`);
-      if (!badgeEl) {
-        console.warn('[Stamped Debug] No badge found on product page');
-        return;
-      }
+      const badgeEl = section.parentElement.querySelector(`.stamped-product-reviews-badge[data-id="${productId}"] .stamped-badge`);
+      const captionEl = badgeEl?.querySelector('.stamped-badge-caption[data-reviews]');
 
-      const avg = badgeEl.getAttribute('data-rating') || '0.0';
-      const label = badgeEl.getAttribute('aria-label') || '';
-      const match = label.match(/(\d+)\s+review/);
-      const count = match ? match[1] : '0';
+      // Accessibility labels are presentation text, not a stable source of counts.
+      const rawCount = captionEl?.getAttribute('data-reviews');
+      if (!rawCount || !/^\d+$/.test(rawCount)) return;
+      const count = Number(rawCount);
+      const avg = badgeEl.getAttribute('data-rating') || captionEl.getAttribute('data-rating');
 
       const avgEl = section.querySelector('.main-review-average');
       const countEl = section.querySelector('.main-reviews-header-number');
 
-      if (avgEl) avgEl.textContent = avg;
-      if (countEl) countEl.textContent = `${count} review${count !== '1' ? 's' : ''}`;
+      if (avgEl) {
+        avgEl.textContent = avg || '';
+        avgEl.style.display = count > 0 && avg ? '' : 'none';
+      }
+      if (countEl) countEl.textContent = `${count} review${count !== 1 ? 's' : ''}`;
     }
 
-    const badgeEl = document.querySelector('.stamped-product-reviews-badge');
-    const observer = new MutationObserver(() => {
-      updateMainReviewInfo();
-    });
+    const section = document.querySelector('.main-review-info');
+    const badgeEl = section?.parentElement.querySelector('.stamped-product-reviews-badge');
+    const observer = new MutationObserver(updateMainReviewInfo);
 
     if (badgeEl) {
-      observer.observe(badgeEl, { childList: true, subtree: true });
+      observer.observe(badgeEl, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['data-reviews', 'data-rating']
+      });
     }
 
-    // Fallback if mutation doesn't fire
-    setTimeout(updateMainReviewInfo, 1500);
+    updateMainReviewInfo();
   });
 </script>
 {% schema %}

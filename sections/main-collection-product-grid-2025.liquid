@@ -78,9 +78,9 @@
                   <div class="product-card-stars-container" data-product-id="{{ product.id }}">
                     <div class="product-card-stars">
                       <img src="{{ 'stars-dark.svg' | asset_url }}" alt="Rating stars" width="105" height="18">
-                      <p class="product-review-rating-number">5.0</p>
+                      <p class="product-review-rating-number" style="display: none;"></p>
                     </div>
-                    <p class="product-card-reviews">0 reviews</p>
+                    <p class="product-card-reviews"></p>
                     <h2 class="product-card-title">{{ product.title | replace_first: "2025 - ", "" }}</h2>
                   </div>
 
@@ -179,28 +179,23 @@
   document.addEventListener('DOMContentLoaded', function () {
     function updateCustomStampedInfo() {
       const containers = document.querySelectorAll('.product-card-stars-container');
-      // console.log('[Stamped Debug] Found', containers.length, 'containers');
-
       containers.forEach(container => {
         const productId = container.dataset.productId;
-        // console.log('[Stamped Debug] Checking product ID:', productId);
+        const badgeEl = container.parentElement.querySelector(`.stamped-product-reviews-badge[data-id="${productId}"] .stamped-badge`);
+        const captionEl = badgeEl?.querySelector('.stamped-badge-caption[data-reviews]');
 
-        const badgeEl = document.querySelector(`.stamped-product-reviews-badge[data-id="${productId}"] .stamped-badge`);
-        if (!badgeEl) {
-          // console.warn(`[Stamped Debug] No badge found for product ID ${productId}`);
-          return;
-        }
-
-        const avg = badgeEl.getAttribute('data-rating') || '0.0';
-        const label = badgeEl.getAttribute('aria-label') || '';
-        const match = label.match(/(\d+)\s+review/);
-        const count = match ? match[1] : '0';
+        // Stamped can move/remove aria-label during accessibility updates.
+        // Read its numeric data instead; missing data is not a zero-review result.
+        const rawCount = captionEl?.getAttribute('data-reviews');
+        if (!rawCount || !/^\d+$/.test(rawCount)) return;
+        const count = Number(rawCount);
+        const avg = badgeEl.getAttribute('data-rating') || captionEl.getAttribute('data-rating');
 
         const ratingEl = container.querySelector('.product-review-rating-number');
         const countEl = container.querySelector('.product-card-reviews');
 
         if (ratingEl) {
-          if (count === '0') {
+          if (count === 0 || !avg) {
             ratingEl.style.display = 'none';
           } else {
             ratingEl.textContent = avg;
@@ -209,30 +204,29 @@
         }
                 
         if (countEl) {
-          if (count === '0') {
+          if (count === 0) {
             countEl.textContent = 'No reviews yet!';
           } else {
-            countEl.textContent = `${count} review${count !== '1' ? 's' : ''}`;
+            countEl.textContent = `${count} review${count !== 1 ? 's' : ''}`;
           }
         }
       });
     }
 
-    const observer = new MutationObserver(() => {
-      // console.log('[Stamped Debug] Badge DOM changed — updating UI');
-      updateCustomStampedInfo();
-    });
+    const observer = new MutationObserver(updateCustomStampedInfo);
 
-    const badgeContainers = document.querySelectorAll('.stamped-product-reviews-badge');
+    const badgeContainers = document.querySelectorAll('.product-card-info .stamped-product-reviews-badge');
     badgeContainers.forEach(container => {
-      observer.observe(container, { childList: true, subtree: true });
+      observer.observe(container, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['data-reviews', 'data-rating']
+      });
     });
 
-    // Fallback: manually trigger update after delay
-    setTimeout(() => {
-      // console.log('[Stamped Debug] Manual fallback update');
-      updateCustomStampedInfo();
-    }, 1500);
+    // Also handle badges that finished loading before the observer was attached.
+    updateCustomStampedInfo();
   });
 </script>
 
