@@ -4,7 +4,7 @@
     preload="none"
     src="{{ video_url }}"
     loading="lazy" 
-    {% if thumbnail %}data-poster="{{ thumbnail | image_url }}"{% endif %}
+    {% if thumbnail %}poster="{{ thumbnail | image_url: width: 800 }}"{% endif %}
     playsinline loop>
     {% if block.settings.captions_title != blank %}
       <track
