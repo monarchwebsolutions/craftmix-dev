@@ -34,7 +34,7 @@
       }
     },
     "espresso_martini_hero_wN4adg": {
-      "type": "prank-lander-hero",
+      "type": "halloween-2026-hero",
       "blocks": {
         "image_slide_HQiwzp": {
           "type": "image_slide",
@@ -50,10 +50,10 @@
             "badge_left_desktop": 13,
             "badge_top_mobile": 81,
             "badge_left_mobile": 8,
-            "badge_border_thickness": 6,
-            "badge_font_size": 48,
-            "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 38,
+            "badge_border_thickness": 4,
+            "badge_font_size": 28,
+            "badge_secondary_font_size": 14,
+            "badge_font_size_mobile": 24,
             "badge_rotation": 8,
             "badge_padding_horizontal": 4,
             "badge_padding_vertical": 0
@@ -73,10 +73,10 @@
             "badge_left_desktop": 20,
             "badge_top_mobile": 81,
             "badge_left_mobile": 10,
-            "badge_border_thickness": 6,
-            "badge_font_size": 48,
-            "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 38,
+            "badge_border_thickness": 4,
+            "badge_font_size": 28,
+            "badge_secondary_font_size": 14,
+            "badge_font_size_mobile": 24,
             "badge_rotation": 0,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
@@ -97,9 +97,9 @@
             "badge_top_mobile": 82,
             "badge_left_mobile": 8,
             "badge_border_thickness": 4,
-            "badge_font_size": 48,
-            "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 38,
+            "badge_font_size": 28,
+            "badge_secondary_font_size": 14,
+            "badge_font_size_mobile": 24,
             "badge_rotation": -8,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
@@ -120,9 +120,9 @@
             "badge_top_mobile": 79,
             "badge_left_mobile": 16,
             "badge_border_thickness": 4,
-            "badge_font_size": 48,
-            "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 38,
+            "badge_font_size": 28,
+            "badge_secondary_font_size": 14,
+            "badge_font_size_mobile": 24,
             "badge_rotation": 10,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
@@ -143,38 +143,12 @@
             "badge_top_mobile": 22,
             "badge_left_mobile": 4,
             "badge_border_thickness": 4,
-            "badge_font_size": 48,
-            "badge_secondary_font_size": 24,
-            "badge_font_size_mobile": 38,
+            "badge_font_size": 28,
+            "badge_secondary_font_size": 14,
+            "badge_font_size_mobile": 24,
             "badge_rotation": -10,
             "badge_padding_horizontal": 8,
             "badge_padding_vertical": 4
-          }
-        },
-        "bullet_zBz6Yf": {
-          "type": "bullet",
-          "settings": {
-            "text": "We've been pranking our CEO for years. He never sees it coming. Neither did you."
-          }
-        },
-        "bullet_zDRPzN": {
-          "type": "bullet",
-          "disabled": true,
-          "settings": {
-            "text": "Consider yourself an official member of the prank club."
-          }
-        },
-        "bullet_9NtqFB": {
-          "type": "bullet",
-          "disabled": true,
-          "settings": {
-            "text": "As an official apology, here's $5 off your next order!"
-          }
-        },
-        "bullet_4RpceD": {
-          "type": "bullet",
-          "settings": {
-            "text": "As an official apology, use code  <span style=\"color:#dd571c\">GOTCHA</span> at checkout for $5 Off your next order."
           }
         }
       },
@@ -183,42 +157,41 @@
         "image_slide_LUXTwL",
         "image_slide_FWiExG",
         "image_slide_Na4Rz4",
-        "image_slide_JWqPpE",
-        "bullet_zBz6Yf",
-        "bullet_zDRPzN",
-        "bullet_9NtqFB",
-        "bullet_4RpceD"
+        "image_slide_JWqPpE"
       ],
-      "custom_css": [
-        ".custom-primary-cta {padding: 12px !important;}",
-        ".espresso-hero__rating {display: none;}",
-        ".custom-primary-cta {font-size: 18px !important;}",
-        "@media screen and (max-width: 768px) {.custom-primary-cta {font-size: 16px !important; }}",
-        "@media screen and (max-width: 360px) {.custom-primary-cta {font-size: 14px !important; }}"
-      ],
-      "name": "Prank lander hero",
+      "name": "Halloween 2026 hero",
       "settings": {
-        "eyebrow": "Hate to break it to you…",
-        "title": "You’ve Been Pranked!",
+        "eyebrow": "",
+        "title": "Craftmix Halloween is Live!",
+        "description": "<p>For four days only, get 40% off sitewide. Reveal your code below.</p>",
+        "discount_code": "SPOOKY40",
+        "code_label": "USE CODE",
+        "reveal_label": "CLICK TO REVEAL",
+        "revealed_label": "Use this code at checkout.",
+        "copy_label": "Copy code",
+        "copied_label": "Code copied!",
+        "copy_failure_text": "Select and copy the code above to use it at checkout.",
+        "show_bats": true,
+        "overlay_line_one": "No tricks.",
+        "overlay_line_two": "Just",
+        "overlay_line_three": "40% OFF.",
         "background": "linear-gradient(180deg, rgba(254, 233, 232, 1), rgba(249, 188, 185, 1) 100%)",
-        "show_rating": true,
+        "show_rating": false,
         "rating_stars": 5,
         "rating_label": "7,000+ REVIEWS",
         "image_crop": "9:16",
-        "image_max_width": 420,
-        "image_max_width_mobile": 420,
+        "image_max_width": 280,
+        "image_max_width_mobile": 240,
         "main_image": "shopify://shop_images/Craftmix_Mango_Margarita_next_to_fresh_mango_lime_and_a_margarita_glass._1.png",
         "decor_left": "shopify://shop_images/Craftmix_pineapple_flavor_icon_cbd90e7b-b816-4aab-a8e4-037177538791.png",
         "decor_left_bottom": "19%",
-        "decor_left_img_width": "160",
+        "decor_left_img_width": "100",
         "decor_right": "shopify://shop_images/strawberry_svg.png",
-        "decor_max_width": 200,
-        "decor_max_height": 260,
-        "cta_label": "Save $5 Before We Prank You Again!",
-        "make_anchor_link": false,
-        "cta_anchor_id": "buy-box",
-        "cta_link": "",
-        "cta_background_color": "#60d3f8"
+        "decor_max_width": 100,
+        "decor_max_height": 100,
+        "cta_label": "Shop 40% Off Sitewide",
+        "cta_link": "shopify://collections/all",
+        "cta_background_color": "#ffffff"
       }
     },
     "marquee_divider_eeXVF7": {
