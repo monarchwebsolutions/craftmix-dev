@@ -1,0 +1,1183 @@
+{% liquid
+  assign s = section.settings
+  assign hero_image_crop = s.image_crop | default: 'original'
+  assign bullet_blocks = section.blocks | where: 'type', 'bullet'
+  assign image_slide_blocks = section.blocks | where: 'type', 'image_slide'
+  assign discount_code = s.discount_code | strip
+  assign shop_url = s.cta_link | default: routes.all_products_collection_url
+  assign hero_cta_href = shop_url
+  if discount_code != blank
+    assign discount_path = discount_code | url_encode
+    assign redirect_path = shop_url | url_encode
+    assign hero_cta_href = routes.root_url | append: 'discount/' | append: discount_path | append: '?redirect=' | append: redirect_path
+  endif
+  assign hero_image_count = 0
+  for block in image_slide_blocks
+    if block.settings.image != blank
+      assign hero_image_count = hero_image_count | plus: 1
+    endif
+  endfor
+%}
+
+<style>
+  #halloween-hero-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    padding: 51px 137px 26px 193px;
+    background: {{ s.background | default: 'linear-gradient(180deg, #FFF5EB 0%, #EDC6A4 100%)' }};
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__grid {
+    display: grid;
+    gap: clamp(1.75rem, 3vw, 3.25rem);
+    align-items: center;
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+
+  @media (min-width: 900px) {
+    #halloween-hero-{{ section.id }} .espresso-hero__grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__content {
+    position: relative;
+    z-index: 2;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__eyebrow {
+    font-family: 'Goldplay';
+    font-weight: 600;
+    margin-bottom: 21.62px;
+    font-size: 18px;
+    line-height: 17px;
+    letter-spacing: 0.43px;
+    text-transform: uppercase;
+    color: var(--badge-color, #002657);
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__title {
+    font-weight: 700;
+    font-size: 54px;
+    margin-bottom: 22.5px;
+    line-height: 54px;
+    letter-spacing: -1.68px;
+    color: var(--badge-color, #002657);
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 21.84px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__stars {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__star {
+    color: #ff7300;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__rating-label {
+    font-family: 'Goldplay';
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--badge-color, #002657);
+    line-height: 19.25px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__bullet {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Hornbill';
+    font-weight: 700;
+    margin-bottom: 17px;
+    font-size: 30px;
+    line-height: 44px;
+    letter-spacing: -0.79px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__bullet-icon {
+    width: 40px;
+    height: 45px;
+    object-fit: contain;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__cta.custom-cta-container {
+    margin-top: 48px;
+  }
+
+  #halloween-hero-{{ section.id }} .custom-primary-cta {
+    background-color: {{ s.cta_background_color | default: '#6E493F' }};
+    font-family: 'Goldplay' !important;
+    font-weight: 600 !important;
+    border: 2px solid #002657 !important;
+    border-radius: 6.25rem !important;
+    box-shadow: 2px 6px 0 0 #002657;
+    max-width: 362px;
+    max-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: box-shadow .25s ease !important;
+    border-color: var(--craftmix-dark-blue) !important;
+    padding: 16px 32px;
+    font-size: 1.25rem !important;
+    transform: translateZ(0);
+  }
+
+  #halloween-hero-{{ section.id }} .custom-primary-cta:hover {
+    box-shadow: none;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__card {
+    width: min({{ s.image_max_width | default: 560 }}px, 100%);
+    border-radius: 26.43px;
+    border-top: 0.88px solid var(--color-azure-17, #002657);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 26.43px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media {
+    width: 100%;
+    border-radius: 26.43px;
+    overflow: hidden;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media--square {
+    aspect-ratio: 1 / 1;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media--4-5 {
+    aspect-ratio: 4 / 5;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media--2-3 {
+    aspect-ratio: 2 / 3;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media--9-16 {
+    aspect-ratio: 9 / 16;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__media--cropped img {
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__slider {
+    position: relative;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__viewport {
+    overflow: hidden;
+    border-radius: 26.43px;
+    touch-action: pan-y;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__track {
+    display: flex;
+    width: 100%;
+    transition: transform .45s ease;
+    will-change: transform;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    line-height: 0;
+    position: relative;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__badge {
+    position: absolute;
+    top: var(--badge-top-desktop, 8%);
+    left: var(--badge-left-desktop, 8%);
+    z-index: 2;
+    padding: var(--badge-padding-y, 4px) var(--badge-padding-x, 8px);
+    border: var(--badge-border-width, 4px) solid currentColor;
+    border-radius: 0;
+    color: #002657;
+    font-family: 'Goldplay';
+    font-size: var(--badge-font-size, 24px);
+    font-weight: 700;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: var(--badge-text-align, left);
+    transform: rotate(var(--badge-rotation, 0deg));
+    transform-origin: center center;
+    line-height:0.8;
+    padding-top:2px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__badge-secondary {
+    display: block;
+    font-size: var(--badge-secondary-font-size, 16px);
+    line-height: 1;
+    padding-bottom:2px;
+  }
+
+  {% for block in image_slide_blocks %}
+    {% assign badge_bg_alpha = block.settings.badge_bg_opacity | default: 0 | times: 0.01 %}
+    {% if block.settings.badge_color != blank or block.settings.badge_bg_color != blank %}
+      #halloween-hero-{{ section.id }} [data-slide-block-id="{{ block.id }}"] .espresso-hero__badge {
+        {% if block.settings.badge_color != blank %}
+          color: {{ block.settings.badge_color }} !important;
+          border-color: {{ block.settings.badge_color }} !important;
+        {% endif %}
+        {% if block.settings.badge_bg_color != blank %}
+          background-color: {{ block.settings.badge_bg_color | color_modify: 'alpha', badge_bg_alpha }} !important;
+        {% endif %}
+      }
+    {% endif %}
+  {% endfor %}
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    border: 2px solid var(--craftmix-dark-blue, #002657);
+    border-radius: 999px;
+    background: var(--craftmix-light-blue, #60d3f8);
+    box-shadow: 2px 6px 0 0 var(--craftmix-dark-blue, #002657);
+    color: var(--craftmix-dark-blue, #002657);
+    transform: translateY(-50%);
+    transition: box-shadow .25s ease, opacity .25s ease;
+    cursor: pointer;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow:hover {
+    box-shadow: none;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow:focus-visible {
+    outline: 2px solid var(--craftmix-dark-blue, #002657);
+    outline-offset: 3px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow--prev {
+    left: 1rem;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow--next {
+    right: 1rem;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    stroke: currentColor;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor {
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor--left {
+    left: 0;
+    bottom: {{ s.decor_left_bottom | default: '25%' }};
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor.espresso-hero__decor--left img {
+    max-width: {{ s.decor_max_width | default: 188 }}px;
+    max-height: {{ s.decor_max_height | default: 170 }}px;
+    {% if s.decor_left_img_width != blank %}
+      {% assign left_img_w = s.decor_left_img_width | strip %}
+      {% if left_img_w contains 'px' or left_img_w contains '%' %}
+        width: {{ left_img_w }};
+      {% else %}
+        width: {{ left_img_w }}px;
+      {% endif %}
+    {% else %}
+      width: 100%;
+    {% endif %}
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor--right {
+    right: 0;
+    top: 25%;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: 188px;
+    max-height: 170px;
+  }
+
+  @media (max-width: 1300px) {
+    #halloween-hero-{{ section.id }} {
+      padding: 51px 100px 26px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--left {
+      left: -33px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__bullet {
+      font-size: 22px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__title {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--left {
+      top: 50%;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__grid {
+      gap: 30px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__arrow {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--right {
+      top: 80%;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__cta.custom-cta-container {
+      margin-top: 24px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    #halloween-hero-{{ section.id }} {
+      padding: 34px 23.5px 47px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__eyebrow {
+      margin-bottom: 6px;
+      font-size: 16px;
+      text-align: center;
+      line-height: 17px;
+      letter-spacing: 0.43px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__title {
+      margin-bottom: 12px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__rating-label {
+      font-size: 12px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__rating {
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__bullet {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__content {
+      max-width: 320px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__grid {
+      gap: 77px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__card {
+      width: min({{ s.image_max_width_mobile | default: s.image_max_width | default: 560 }}px, 100%);
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__arrow {
+      width: 2.75rem;
+      height: 2.75rem;
+      box-shadow: 2px 4px 0 0 var(--craftmix-dark-blue, #002657);
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__arrow--prev {
+      left: 0.75rem;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__arrow--next {
+      right: 0.75rem;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__badge {
+      top: var(--badge-top-mobile, var(--badge-top-desktop, 8%));
+      left: var(--badge-left-mobile, var(--badge-left-desktop, 8%));
+      font-size: var(--badge-font-size-mobile, var(--badge-font-size, 24px));
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--right {
+      z-index: 3;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--left {
+      top: 48%;
+      left: -20px;
+    }
+  }
+  #halloween-hero-{{ section.id }} {
+    padding: 54px 40px 64px;
+    color: #002657;
+    isolation: isolate;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__grid {
+    max-width: 1120px;
+    margin: 0 auto;
+    gap: 56px;
+    grid-template-columns: minmax(0, 440px) minmax(0, 1fr);
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__content {
+    width: 100%;
+    max-width: 440px;
+    margin: 0;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__title {
+    font-family: 'Hornbill';
+    font-size: clamp(28px, 2.15vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.6px;
+    margin: 0 0 24px;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__description {
+    max-width: 410px;
+    font-family: 'Goldplay';
+    font-size: 20px;
+    line-height: 1.35;
+    margin-bottom: 24px;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__description p {
+    margin: 0;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__offer {
+    border: 1.5px solid #002657;
+    border-radius: 30px;
+    background: #fff;
+    font-family: 'Goldplay';
+    overflow: hidden;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__reveal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 5px;
+    cursor: pointer;
+    list-style: none;
+    color: #002657;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__reveal::-webkit-details-marker {
+    display: none;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__code-label {
+    padding-left: 18px;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__reveal-action {
+    background: #ff7300;
+    border: 1px dashed #002657;
+    border-radius: 999px;
+    padding: 14px 18px;
+    font-size: 17px;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #002657;
+    text-align: center;
+    flex: 1;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__after-reveal,
+  #halloween-hero-{{ section.id }} .halloween-hero__offer[open] .halloween-hero__before-reveal {
+    display: none;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__offer[open] .halloween-hero__after-reveal {
+    display: inline;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__revealed {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px 12px;
+    border-top: 1px solid #002657;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__code {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    user-select: all;
+    overflow-wrap: anywhere;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__instructions {
+    font-size: 15px;
+    line-height: 1.3;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__copy {
+    border: 1px solid #002657;
+    border-radius: 999px;
+    padding: 8px 14px;
+    background: #fee9e8;
+    color: #002657;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__copy[hidden] {
+    display: none;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__copy-status {
+    margin: 0;
+    padding: 0 22px 14px;
+    font-size: 14px;
+    line-height: 1.3;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__reveal:focus-visible,
+  #halloween-hero-{{ section.id }} .halloween-hero__copy:focus-visible {
+    outline: 3px solid #002657;
+    outline-offset: -4px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__cta.custom-cta-container {
+    margin-top: 24px;
+  }
+
+  #halloween-hero-{{ section.id }} .custom-primary-cta {
+    width: 100%;
+    max-width: none;
+    min-height: 58px;
+    padding: 16px 20px;
+    background: {{ s.cta_background_color | default: '#ffffff' }};
+    color: #002657 !important;
+    text-align: center;
+    font-size: 17px !important;
+    text-transform: uppercase;
+    line-height: 1.25;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__visual {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__headline {
+    position: absolute;
+    top: 14%;
+    left: -20px;
+    width: calc(100% + 20px);
+    z-index: 4;
+    pointer-events: none;
+    text-align: center;
+    font-family: 'Hornbill';
+    font-weight: 700;
+    color: #002657;
+    font-size: clamp(56px, 6.1vw, 88px);
+    letter-spacing: -2px;
+    line-height: 1;
+    filter: drop-shadow(0 4px 1px rgba(0, 38, 87, 0.18));
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__headline span {
+    display: block;
+    -webkit-text-stroke: 12px #fff;
+    paint-order: stroke fill;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__headline .halloween-hero__headline-small {
+    font-size: 0.53em;
+    color: #76256c;
+    transform: rotate(-9deg);
+    margin: 0 0 4px;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__arrow {
+    top: 69%;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__bats {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #halloween-hero-{{ section.id }} .espresso-hero__decor img {
+    max-width: {{ s.decor_max_width }}px;
+    max-height: {{ s.decor_max_height }}px;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__bat {
+    position: absolute;
+    width: clamp(90px, 12vw, 180px);
+    height: auto;
+    opacity: 0.35;
+  }
+
+  #halloween-hero-{{ section.id }} .halloween-hero__bat--1 { top: 8%; left: 2%; transform: rotate(-12deg); }
+  #halloween-hero-{{ section.id }} .halloween-hero__bat--2 { bottom: 12%; left: 9%; transform: rotate(15deg); }
+  #halloween-hero-{{ section.id }} .halloween-hero__bat--3 { top: 7%; right: 3%; transform: rotate(-8deg); }
+  #halloween-hero-{{ section.id }} .halloween-hero__bat--4 { bottom: 9%; right: 4%; transform: rotate(-18deg); }
+
+  @media (max-width: 899px) {
+    #halloween-hero-{{ section.id }} {
+      padding: 36px 24px 48px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 36px;
+      max-width: 520px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__content {
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__visual {
+      justify-content: center;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__headline {
+      width: 100%;
+      left: 0;
+      font-size: clamp(42px, 11.5vw, 70px);
+      letter-spacing: -1px;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__headline span {
+      -webkit-text-stroke-width: 8px;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__bat--2 { bottom: 30%; left: -2%; }
+    #halloween-hero-{{ section.id }} .halloween-hero__bat--4 { bottom: 2%; right: -2%; }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__title {
+      font-size: clamp(28px, 6vw, 36px);
+      margin-bottom: 18px;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__description {
+      font-size: 18px;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor--right {
+      z-index: 1;
+    }
+
+    #halloween-hero-{{ section.id }} .espresso-hero__decor img,
+    #halloween-hero-{{ section.id }} .espresso-hero__decor.espresso-hero__decor--left img {
+      max-width: 72px;
+      max-height: 100px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    #halloween-hero-{{ section.id }} .halloween-hero__code-label {
+      padding-left: 8px;
+      font-size: 15px;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__reveal-action {
+      font-size: 14px;
+      padding: 14px 10px;
+    }
+
+    #halloween-hero-{{ section.id }} .halloween-hero__revealed {
+      padding: 16px 12px 12px;
+      gap: 8px;
+    }
+  }
+</style>
+
+<script src="{{ 'halloween-2026-hero.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign star_count = s.rating_stars | default: 5
+%}
+
+<section id="halloween-hero-{{ section.id }}" class="espresso-hero section" data-halloween-hero>
+  {% if s.show_bats %}
+    <div class="halloween-hero__bats" aria-hidden="true">
+      {% for i in (1..4) %}
+        <img class="halloween-hero__bat halloween-hero__bat--{{ i }}" src="{{ 'halloween-bat.svg' | asset_url }}" width="180" height="90" alt="">
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if s.decor_left != blank %}
+    <div class="espresso-hero__decor espresso-hero__decor--left">
+      {{ s.decor_left | image_url: width: 240 | image_tag: loading: 'lazy', alt: s.decor_left.alt }}
+    </div>
+  {% endif %}
+
+  {% if s.decor_right != blank %}
+    <div class="espresso-hero__decor espresso-hero__decor--right">
+      {{ s.decor_right | image_url: width: 260 | image_tag: loading: 'lazy', alt: s.decor_right.alt }}
+    </div>
+  {% endif %}
+
+  <div class="page-width espresso-hero__grid">
+    <div class="espresso-hero__content">
+      {% if s.eyebrow != blank %}
+        <p class="espresso-hero__eyebrow">{{ s.eyebrow }}</p>
+      {% endif %}
+
+      {% if s.title != blank %}
+        <h1 class="espresso-hero__title">{{ s.title | escape }}</h1>
+      {% endif %}
+
+      {% if s.description != blank %}
+        <div class="halloween-hero__description">{{ s.description }}</div>
+      {% endif %}
+
+      {% if discount_code != blank %}
+        <details class="halloween-hero__offer">
+          <summary class="halloween-hero__reveal">
+            <span class="halloween-hero__code-label">{{ s.code_label | escape }}</span>
+            <span class="halloween-hero__reveal-action">
+              <span class="halloween-hero__before-reveal">{{ s.reveal_label | escape }}</span>
+              <span class="halloween-hero__after-reveal halloween-hero__code" data-halloween-code>{{ discount_code | escape }}</span>
+            </span>
+          </summary>
+          <div class="halloween-hero__revealed">
+            <span class="halloween-hero__instructions">{{ s.revealed_label | escape }}</span>
+            <button type="button" class="halloween-hero__copy" data-halloween-copy data-copied-label="{{ s.copied_label | escape }}" hidden>{{ s.copy_label | escape }}</button>
+          </div>
+          <p class="halloween-hero__copy-status" data-halloween-copy-status data-copy-failure="{{ s.copy_failure_text | escape }}" role="status" aria-live="polite"></p>
+        </details>
+      {% endif %}
+
+      {% if s.show_rating %}
+        <div class="espresso-hero__rating">
+          <div class="espresso-hero__stars" aria-hidden="true">
+            {% for i in (1..star_count) %}
+              <span class="espresso-hero__star" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="25" viewBox="0 0 26 25" fill="none">
+                  <path d="M23.5587 7.33403L19.1144 6.83359C18.2228 6.73694 17.4491 6.18784 17.0791 5.38848L15.1934 1.41304C14.914 0.845632 14.4255 0.402682 13.8261 0.172562C13.2268 -0.0575207 12.5606 -0.0575207 11.9613 0.172562C11.3618 0.402645 10.8734 0.845586 10.594 1.41304L8.73125 5.39963C8.36106 6.19899 7.58757 6.74826 6.696 6.84493L2.2517 7.34537C1.60246 7.4206 1.0075 7.7369 0.589626 8.22855C0.171528 8.72038 -0.037526 9.35024 0.00554576 9.98831C0.0484034 10.6266 0.339987 11.2242 0.82022 11.6582L4.12027 14.6159C4.76217 15.2187 5.03675 16.1051 4.84472 16.955L3.95349 21.2453C3.82473 21.8748 3.94881 22.5284 4.29991 23.0707C4.65081 23.6131 5.20197 24.0022 5.83885 24.1576C6.47553 24.313 7.14892 24.2226 7.71935 23.905L11.6173 21.7514C12.3983 21.3183 13.3545 21.3183 14.1356 21.7514L18.068 23.905C18.6401 24.2226 19.3154 24.3119 19.9532 24.1545C20.591 23.9969 21.142 23.6048 21.4912 23.0596C21.8407 22.5145 21.9612 21.8584 21.8281 21.2284L20.9427 16.955C20.7636 16.0962 21.0582 15.2083 21.7188 14.616L25.0189 11.6582C25.5051 11.2226 25.8001 10.6198 25.8422 9.97625C25.8841 9.3327 25.6698 8.6981 25.2442 8.20572C24.8185 7.71314 24.2145 7.40085 23.5587 7.33403Z" fill="#FF5F00"/>
+                </svg>
+              </span>
+            {% endfor %}
+          </div>
+          {% if s.rating_label != blank %}
+            <span class="espresso-hero__rating-label">{{ s.rating_label }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% if bullet_blocks.size > 0 %}
+        <ul class="espresso-hero__bullets" role="list">
+          {% for block in bullet_blocks %}
+            <li class="espresso-hero__bullet" {{ block.shopify_attributes }}>
+              {% if block.settings.icon != blank %}
+                {{
+                  block.settings.icon
+                  | image_url: width: 40
+                  | image_tag: class: 'espresso-hero__bullet-icon', loading: 'lazy', alt: block.settings.icon.alt
+                }}
+              {% endif %}
+              <span class="espresso-hero__bullet-text">{{ block.settings.text }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if s.cta_label != blank %}
+        <div class="espresso-hero__cta hero-cta-container custom-cta-container">
+          <a class="button custom-primary-cta" href="{{ hero_cta_href | escape }}">{{ s.cta_label | escape }}</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="espresso-hero__visual">
+      {% if s.overlay_line_one != blank or s.overlay_line_three != blank %}
+        <div class="halloween-hero__headline">
+          <span>{{ s.overlay_line_one | escape }}</span>
+          {% if s.overlay_line_two != blank %}<span class="halloween-hero__headline-small">{{ s.overlay_line_two | escape }}</span>{% endif %}
+          <span>{{ s.overlay_line_three | escape }}</span>
+        </div>
+      {% endif %}
+      <div class="espresso-hero__card">
+        {% if hero_image_count > 1 %}
+          <div
+            class="espresso-hero__slider"
+            data-prank-hero-carousel
+            role="group"
+            aria-roledescription="carousel"
+            aria-label="{{ s.title | default: 'Halloween hero images' | escape }}"
+          >
+            <div class="espresso-hero__viewport">
+              <div class="espresso-hero__track" data-prank-hero-track>
+                {% for block in image_slide_blocks %}
+                  {% if block.settings.image != blank %}
+                    <div
+                      class="espresso-hero__slide"
+                      data-slide-block-id="{{ block.id }}"
+                      aria-hidden="true"
+                      {{ block.shopify_attributes }}
+                    >
+                      {% if block.settings.badge_text != blank or block.settings.badge_text_secondary != blank %}
+                        <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-font-size-mobile: {{ block.settings.badge_font_size_mobile | default: block.settings.badge_font_size | default: 24 }}px; --badge-secondary-font-size: {{ block.settings.badge_secondary_font_size | default: 16 }}px; --badge-rotation: {{ block.settings.badge_rotation | default: 0 }}deg; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">
+                          {% if block.settings.badge_text != blank %}{{ block.settings.badge_text | newline_to_br }}{% endif %}
+                          {% if block.settings.badge_text_secondary != blank %}<span class="espresso-hero__badge-secondary">{{ block.settings.badge_text_secondary | newline_to_br }}</span>{% endif %}
+                        </div>
+                      {% endif %}
+                      <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+                        {{
+                          block.settings.image
+                          | image_url: width: 1100
+                          | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                        }}
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+            <button
+              type="button"
+              class="espresso-hero__arrow espresso-hero__arrow--prev"
+              data-prank-hero-prev
+              aria-label="Previous slide"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M14.5 5.5L8 12l6.5 6.5"></path>
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="espresso-hero__arrow espresso-hero__arrow--next"
+              data-prank-hero-next
+              aria-label="Next slide"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9.5 5.5L16 12l-6.5 6.5"></path>
+              </svg>
+            </button>
+          </div>
+        {% elsif hero_image_count == 1 %}
+          {% for block in image_slide_blocks %}
+            {% if block.settings.image != blank %}
+              <div
+                class="espresso-hero__slide"
+                data-slide-block-id="{{ block.id }}"
+                {{ block.shopify_attributes }}
+              >
+                {% if block.settings.badge_text != blank or block.settings.badge_text_secondary != blank %}
+                  <div class="espresso-hero__badge" style="--badge-border-width: {{ block.settings.badge_border_thickness | default: 4 }}px; --badge-padding-x: {{ block.settings.badge_padding_horizontal | default: 8 }}px; --badge-padding-y: {{ block.settings.badge_padding_vertical | default: 4 }}px; --badge-font-size: {{ block.settings.badge_font_size | default: 24 }}px; --badge-font-size-mobile: {{ block.settings.badge_font_size_mobile | default: block.settings.badge_font_size | default: 24 }}px; --badge-secondary-font-size: {{ block.settings.badge_secondary_font_size | default: 16 }}px; --badge-rotation: {{ block.settings.badge_rotation | default: 0 }}deg; --badge-text-align: {% if block.settings.badge_text_center %}center{% else %}left{% endif %}; --badge-top-desktop: {{ block.settings.badge_top_desktop | default: 8 }}%; --badge-left-desktop: {{ block.settings.badge_left_desktop | default: 8 }}%; --badge-top-mobile: {{ block.settings.badge_top_mobile | default: 8 }}%; --badge-left-mobile: {{ block.settings.badge_left_mobile | default: 8 }}%;">
+                    {% if block.settings.badge_text != blank %}{{ block.settings.badge_text | newline_to_br }}{% endif %}
+                    {% if block.settings.badge_text_secondary != blank %}<span class="espresso-hero__badge-secondary">{{ block.settings.badge_text_secondary | newline_to_br }}</span>{% endif %}
+                  </div>
+                {% endif %}
+                <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+                  {{
+                    block.settings.image
+                    | image_url: width: 1100
+                    | image_tag: loading: 'lazy', alt: block.settings.image.alt
+                  }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% elsif s.main_image != blank %}
+          <div class="espresso-hero__media{% if hero_image_crop != 'original' %} espresso-hero__media--cropped espresso-hero__media--{{ hero_image_crop | replace: ':', '-' | replace: '/', '-' }}{% endif %}">
+            {{ s.main_image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: s.main_image.alt }}
+          </div>
+        {% else %}
+          {{ 'image' | placeholder_svg_tag }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% javascript %}
+  (() => {
+    const initPrankHeroCarousels = (scope = document) => {
+      const carousels = scope.querySelectorAll
+        ? scope.querySelectorAll('[data-prank-hero-carousel]')
+        : [];
+
+      carousels.forEach((carousel) => {
+        if (carousel.dataset.carouselInitialized === 'true') return;
+
+        const track = carousel.querySelector('[data-prank-hero-track]');
+        const slides = Array.from(carousel.querySelectorAll('.espresso-hero__slide'));
+        const viewport = carousel.querySelector('.espresso-hero__viewport');
+        const prevButton = carousel.querySelector('[data-prank-hero-prev]');
+        const nextButton = carousel.querySelector('[data-prank-hero-next]');
+
+        if (!track || !viewport || !prevButton || !nextButton || slides.length < 2) return;
+
+        let currentIndex = 0;
+        let startX = 0;
+        let currentX = 0;
+        let isTouching = false;
+
+        const goToSlide = (index) => {
+          if (index < 0) {
+            currentIndex = slides.length - 1;
+          } else if (index >= slides.length) {
+            currentIndex = 0;
+          } else {
+            currentIndex = index;
+          }
+
+          track.style.transform = `translate3d(-${currentIndex * 100}%, 0, 0)`;
+          slides.forEach((slide, slideIndex) => {
+            slide.setAttribute('aria-hidden', slideIndex == currentIndex ? 'false' : 'true');
+          });
+        };
+
+        prevButton.addEventListener('click', () => goToSlide(currentIndex - 1));
+        nextButton.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+        const onTouchStart = (event) => {
+          if (!event.touches || !event.touches.length) return;
+          startX = event.touches[0].clientX;
+          currentX = startX;
+          isTouching = true;
+        };
+
+        const onTouchMove = (event) => {
+          if (!isTouching || !event.touches || !event.touches.length) return;
+          currentX = event.touches[0].clientX;
+        };
+
+        const onTouchEnd = () => {
+          if (!isTouching) return;
+
+          const deltaX = currentX - startX;
+          const swipeThreshold = 40;
+
+          if (deltaX > swipeThreshold) {
+            goToSlide(currentIndex - 1);
+          } else if (deltaX < -swipeThreshold) {
+            goToSlide(currentIndex + 1);
+          }
+
+          isTouching = false;
+          startX = 0;
+          currentX = 0;
+        };
+
+        viewport.addEventListener('touchstart', onTouchStart, { passive: true });
+        viewport.addEventListener('touchmove', onTouchMove, { passive: true });
+        viewport.addEventListener('touchend', onTouchEnd);
+        viewport.addEventListener('touchcancel', onTouchEnd);
+
+        carousel.goToPrankHeroSlide = (index) => {
+          goToSlide(index);
+        };
+
+        goToSlide(0);
+        carousel.dataset.carouselInitialized = 'true';
+      });
+    };
+
+    document.addEventListener('DOMContentLoaded', () => initPrankHeroCarousels(document));
+    document.addEventListener('shopify:section:load', (event) => initPrankHeroCarousels(event.target));
+    document.addEventListener('shopify:section:reorder', () => initPrankHeroCarousels(document));
+    document.addEventListener('shopify:block:select', (event) => {
+      const slide = event.target.closest('[data-slide-block-id]');
+      const carousel = event.target.closest('[data-prank-hero-carousel]');
+
+      if (!slide || !carousel || typeof carousel.goToPrankHeroSlide !== 'function') return;
+
+      const slides = Array.from(carousel.querySelectorAll('[data-slide-block-id]'));
+      const index = slides.indexOf(slide);
+
+      if (index >= 0) {
+        carousel.goToPrankHeroSlide(index);
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Halloween 2026 hero",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Halloween offer" },
+    { "type": "richtext", "id": "description", "label": "Offer description", "default": "<p>For four days only, get 40% off sitewide.</p>" },
+    { "type": "text", "id": "discount_code", "label": "Discount code", "default": "SPOOKY40", "info": "Create and activate this code in Shopify Discounts before launch." },
+    { "type": "text", "id": "code_label", "label": "Code label", "default": "USE CODE" },
+    { "type": "text", "id": "reveal_label", "label": "Reveal button text", "default": "CLICK TO REVEAL" },
+    { "type": "text", "id": "revealed_label", "label": "Revealed help text", "default": "Use this code at checkout." },
+    { "type": "text", "id": "copy_label", "label": "Copy button text", "default": "Copy code" },
+    { "type": "text", "id": "copied_label", "label": "Copied confirmation", "default": "Code copied!" },
+    { "type": "text", "id": "copy_failure_text", "label": "Manual copy instructions", "default": "Select and copy the code above to use it at checkout." },
+    { "type": "checkbox", "id": "show_bats", "label": "Show background bats", "default": true },
+    { "type": "text", "id": "overlay_line_one", "label": "Image headline first line", "default": "No tricks." },
+    { "type": "text", "id": "overlay_line_two", "label": "Image headline middle line", "default": "Just" },
+    { "type": "text", "id": "overlay_line_three", "label": "Image headline last line", "default": "40% OFF." },
+    { "type": "header", "content": "Hero content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Craftmix Halloween is Live!" },
+    { "type": "color_background", "id": "background", "label": "Background gradient", "default": "linear-gradient(180deg, #FEE9E8 0%, #F9BCB9 100%)" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating row", "default": false },
+    { "type": "range", "id": "rating_stars", "min": 0, "max": 5, "step": 1, "default": 5, "label": "Star count" },
+    { "type": "text", "id": "rating_label", "label": "Rating text", "default": "600+ Reviews" },
+    {
+      "type": "select",
+      "id": "image_crop",
+      "label": "Image crop",
+      "default": "original",
+      "options": [
+        { "value": "original", "label": "Original" },
+        { "value": "square", "label": "Square" },
+        { "value": "4:5", "label": "4:5" },
+        { "value": "2:3", "label": "2:3" },
+        { "value": "9:16", "label": "9:16" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "min": 240,
+      "max": 900,
+      "step": 10,
+      "unit": "px",
+      "label": "Image max width",
+      "default": 280
+    },
+    {
+      "type": "range",
+      "id": "image_max_width_mobile",
+      "min": 200,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Image max width on mobile",
+      "default": 240
+    },
+    { "type": "image_picker", "id": "main_image", "label": "Main image fallback", "info": "Used when no image slide blocks are added." },
+    { "type": "image_picker", "id": "decor_left", "label": "Left decorative image" },
+    { "type": "text", "id": "decor_left_bottom", "label": "Left decor bottom position", "default": "25%", "info": "e.g. 25% or 20px" },
+    { "type": "text", "id": "decor_left_img_width", "label": "Left decor image width", "info": "Leave blank for 100%. Enter number for px (e.g. 240).", "placeholder": "e.g. 240" },
+    { "type": "image_picker", "id": "decor_right", "label": "Right decorative image" },
+    { "type": "range", "id": "decor_max_width", "min": 100, "max": 300, "step": 2, "default": 188, "unit": "px", "label": "Decor image max width" },
+    { "type": "range", "id": "decor_max_height", "min": 100, "max": 300, "step": 2, "default": 170, "unit": "px", "label": "Decor image max height" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Shop 40% Off Sitewide" },
+    { "type": "url", "id": "cta_link", "label": "Shop destination", "info": "Defaults to all products. The discount code is included in the shop link." },
+    { "type": "color", "id": "cta_background_color", "label": "Button background color", "default": "#ffffff" }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "textarea", "id": "text", "label": "Text / HTML", "default": "Just add vodka, water, and ice", "info": "HTML is allowed." }
+      ]
+    },
+    {
+      "type": "image_slide",
+      "name": "Image slide",
+      "limit": 10,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "textarea", "id": "badge_text", "label": "Badge text" },
+        { "type": "textarea", "id": "badge_text_secondary", "label": "Badge text second line" },
+        { "type": "color", "id": "badge_color", "label": "Badge text and border color", "default": "#002657" },
+        { "type": "color", "id": "badge_bg_color", "label": "Badge background color", "default": "#ffffff" },
+        { "type": "range", "id": "badge_bg_opacity", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge background opacity", "default": 0 },
+        { "type": "checkbox", "id": "badge_text_center", "label": "Center badge text", "default": false },
+        { "type": "range", "id": "badge_top_desktop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge top position on desktop", "default": 8 },
+        { "type": "range", "id": "badge_left_desktop", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge left position on desktop", "default": 8 },
+        { "type": "range", "id": "badge_top_mobile", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge top position on mobile", "default": 8 },
+        { "type": "range", "id": "badge_left_mobile", "min": 0, "max": 100, "step": 1, "unit": "%", "label": "Badge left position on mobile", "default": 8 },
+        { "type": "range", "id": "badge_border_thickness", "min": 1, "max": 16, "step": 1, "unit": "px", "label": "Badge border thickness", "default": 4 },
+        { "type": "range", "id": "badge_font_size", "min": 8, "max": 72, "step": 1, "unit": "px", "label": "Badge font size", "default": 24 },
+        { "type": "range", "id": "badge_secondary_font_size", "min": 8, "max": 72, "step": 1, "unit": "px", "label": "Badge second line font size", "default": 16 },
+        { "type": "range", "id": "badge_font_size_mobile", "min": 8, "max": 72, "step": 1, "unit": "px", "label": "Badge font size on mobile", "default": 24 },
+        { "type": "range", "id": "badge_rotation", "min": -45, "max": 45, "step": 1, "unit": "deg", "label": "Badge rotation", "default": 0 },
+        { "type": "range", "id": "badge_padding_horizontal", "min": 0, "max": 48, "step": 1, "unit": "px", "label": "Badge horizontal padding", "default": 8 },
+        { "type": "range", "id": "badge_padding_vertical", "min": 0, "max": 32, "step": 1, "unit": "px", "label": "Badge vertical padding", "default": 4 }
+      ]
+    }
+  ],
+  "max_blocks": 14,
+  "presets": [
+    {
+      "name": "Halloween 2026 hero",
+      "blocks": [
+        { "type": "image_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}
