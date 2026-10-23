@@ -316,6 +316,7 @@
         <link fetchpriority="high" rel="stylesheet" href="{{ 'homepage.css' | asset_url }}">
         {{- 'flickity.css' | asset_url | stylesheet_tag -}}
       {% endif %}
+      {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
       {% unless template contains 'lander' or template contains 'landing' %}
         {% case settings.selected_preset %}
           {% when 'breath' %}
@@ -329,6 +330,7 @@
           {% else %}
             {% sections 'footer-group' %}
         {% endcase %}
+      {% endunless %}
       {% endunless %}
 
       {% render 'popups' %}
