@@ -55,7 +55,9 @@
         "faq_Wfawkb",
         "faq_6LKdfV"
       ],
-      "settings": {}
+      "settings": {
+        "hero_image": "shopify://shop_images/V1_-_Variety_6_Pack.png"
+      }
     },
     "info": {
       "type": "custom-cocktail-info",
