@@ -1,5 +1,5 @@
 {{- 'flickity.css' | asset_url | stylesheet_tag -}}
-{{- 'flickity.pkgd.min.js' | asset_url | script_tag -}}
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
 {{ 'custom-carousel-card-video.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'custom-carousel-card-video.js' | asset_url }}" defer></script>
 <script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
@@ -75,7 +75,7 @@
   {% if section.settings.single_packet_image != blank %}
     <img 
       class="image-center-main" 
-      src="{{ section.settings.single_packet_image | image_url: original }}"
+      src="{{ section.settings.single_packet_image | image_url: width: section.settings.single_packet_image.width }}"
       alt="Enlarged Sinlge Packet Image" 
       loading="lazy"
       width="567"
