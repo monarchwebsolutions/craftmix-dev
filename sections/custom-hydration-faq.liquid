@@ -27,7 +27,7 @@
                     </div>
                   </div>
                   <div class="answer">
-                    <p>{{ faq.answer }}</p>
+                    <div class="answer-inner"><p>{{ faq.answer }}</p></div>
                   </div>
                 </div>
               {% endfor %}
@@ -183,15 +183,20 @@
   cursor: pointer;
 }
 #shopify-section-{{ section.id }} .faq .answer {
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  transition: grid-template-rows 0.3s ease-out, padding 0.3s ease-out;
   padding-right: 80px;
   padding-bottom: 0;
 }
+#shopify-section-{{ section.id }} .answer-inner {
+  min-height: 0;
+  overflow: hidden;
+}
 #shopify-section-{{ section.id }} .faq.faq-active .answer {
-  max-height: 1000px;
-  transition: max-height 0.5s ease-in, padding 0.5s ease-in;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.5s ease-in, padding 0.5s ease-in;
   padding-bottom: 26px;
 }
 #shopify-section-{{ section.id }} .faq .question-icon {
@@ -239,12 +244,7 @@
   height: 100%;
   object-fit: cover;
 }
-#shopify-section-{{ section.id }} * ********* */
 
-
-.custom-product-faq-section {
-  position: relative;
-}
 #shopify-section-{{ section.id }} .faq-fruit.bg-pink-umbrella {
   position: absolute !important;
   z-index: 2;
@@ -372,7 +372,6 @@
  if (section.dataset.hydrationInitialized) return;
  section.dataset.hydrationInitialized = 'true';
  const faqs = section.querySelectorAll('.faq');
- function sizeAnswers() { faqs.forEach(faq => { const answer = faq.querySelector('.answer'); if(answer) answer.style.maxHeight = faq.classList.contains('faq-active') ? answer.scrollHeight + 'px' : ''; }); }
  faqs.forEach(faq => {
   const question = faq.querySelector('.question');
   question.setAttribute('role','button');
@@ -380,11 +379,9 @@
   question.addEventListener('click', () => {
    const open = !faq.classList.contains('faq-active');
    faqs.forEach(item => { const active = item === faq && open; item.classList.toggle('faq-active',active); item.querySelector('.question').setAttribute('aria-expanded',String(active)); });
-   sizeAnswers();
   });
   question.addEventListener('keydown', event => { if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); question.click(); } });
  });
- sizeAnswers();
  }); }
  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => init(document), {once:true}); else init(document);
  document.addEventListener('shopify:section:load', event => init(event.target));

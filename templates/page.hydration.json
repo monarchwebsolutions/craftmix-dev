@@ -38,6 +38,10 @@
         "background_color": "#ffffff",
         "product": "hydration-variety"
       }
+    },
+    "footer": {
+      "type": "custom-hydration-footer",
+      "settings": {}
     }
   },
   "order": [
@@ -45,6 +49,7 @@
     "nutrition",
     "faq",
     "comparison",
-    "ugc"
+    "ugc",
+    "footer"
   ]
 }
