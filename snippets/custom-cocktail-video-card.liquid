@@ -46,6 +46,12 @@
           {{ linked_product.variants.first.title }} - <span class="igPrice" data-product-id="{{ linked_product.id }}">{{ linked_product.price | money }}</span>
         </p>
       </div>
+      <div class="carousel-product-info-cta">
+        <form method="post" action="/cart/add">
+          <input type="hidden" name="id" value="{{ linked_product.variants.first.id }}">
+          <button type="submit" class="carousel-product-info-cta-btn">Add</button>
+        </form>
+      </div>
     </div>
   {% endif %}
 </div>
