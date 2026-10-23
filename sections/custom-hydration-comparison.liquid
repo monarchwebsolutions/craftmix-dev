@@ -1,12 +1,4 @@
-{% liquid
-  if template.name == 'product'
-    assign comparison_wave_asset = 'wave-divider-right-to-left-2400px-sky-blue.json'
-  elsif template.name == 'page' and template.suffix == 'espresso-martini'
-    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-beige.json'
-  else
-    assign comparison_wave_asset = 'wave-divider-left-to-right-2400px-lavender.json'
-  endif
-%}
+{% assign comparison_wave_asset = 'wave-divider-right-to-left-2400px-sky-blue.json' %}
 
 <div class="hydration-comparison">
   <img

@@ -196,6 +196,7 @@
 
   
 {%- endstyle -%}
+{% unless template.name == 'page' and template.suffix == 'hydration' %}
 {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
 {% unless template contains 'lander' or template contains 'landing' %}
   {%- if show -%}
@@ -356,6 +357,7 @@
       })();
     </script>
   {%- endif -%}
+{% endunless %}
 {% endunless %}
 {% endunless %}
 

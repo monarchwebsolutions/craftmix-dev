@@ -422,6 +422,7 @@ document.addEventListener('keydown', (e) => {
           {% comment %}
            Hide for landing page                 
           {% endcomment %}                  
+          {% unless template.name == 'page' and template.suffix == 'hydration' %}
           {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
           {% unless template contains 'lander' or template contains 'landing' %}
           <button
@@ -432,6 +433,7 @@ document.addEventListener('keydown', (e) => {
           >
             {% render 'icon-alls', icon: 'icon-hamburger' %}
           </button>
+          {% endunless %}
           {% endunless %}
           {% endunless %}                  
         </div>
@@ -505,9 +507,11 @@ document.addEventListener('keydown', (e) => {
            {% comment %}
            For landing page                 
           {% endcomment %}                  
+          {% unless template.name == 'page' and template.suffix == 'hydration' %}
           {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
           {% unless template contains 'lander' or template contains 'landing' %}
             <a class="header-subscribe-link" href="/pages/subscriptions">Craftmix Club (Subscribe & Save)</a>
+          {% endunless %}
           {% endunless %}
           {% endunless %}
           {%- unless settings.hide_cart -%}
@@ -577,9 +581,11 @@ document.addEventListener('keydown', (e) => {
       {% comment %}
       For landing page                 
       {% endcomment %}                  
+      {% unless template.name == 'page' and template.suffix == 'hydration' %}
       {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
       {% unless template contains 'lander' or template contains 'landing' %}
           {%- render 'header-megamenu-block', logo_above: logo_above, logo_center: logo_center, select_motion: section.settings.select_motion, transparent: transparent -%}
+      {% endunless %}
       {% endunless %}
       {% endunless %}
        {% comment %}

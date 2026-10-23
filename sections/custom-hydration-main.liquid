@@ -74,6 +74,18 @@
     </div>
   </div>
 </section>
+    <div class="section-wave-container">
+      <div
+        class="lazy-lottie-container section-wave"
+        data-src="{{ 'wave-divider-left-to-right-2400px-light-blue.json' | asset_url }}"
+        data-background="transparent"
+        data-speed="1"
+        data-autoplay="true"
+        data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
 {% style %}
   #shopify-section-{{ section.id }} {
     --hydration-light: {{ hydration_product.metafields.custom.color_3 | default: '#ffffff' }};
