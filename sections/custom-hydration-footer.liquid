@@ -1,0 +1,33 @@
+<footer class="hydration-landing-footer">
+  <div class="hydration-landing-copyright"><span>&copy;</span>Craftmix Inc. All Rights Reserved</div>
+  <div class="hydration-landing-footer-logo">
+    <img src="https://cdn.shopify.com/s/files/1/2340/1623/files/lp-craftmix-footer__logo.png?v=1744326199" width="864" height="161" alt="Purple Craftmix Logo" loading="lazy">
+  </div>
+</footer>
+{% style %}
+  #shopify-section-{{ section.id }} .hydration-landing-footer {
+    background-color: #c9eefd;
+    padding: 0 0 48px;
+    overflow: hidden;
+  }
+  #shopify-section-{{ section.id }} .hydration-landing-copyright {
+    margin: 0 auto;
+    text-align: center;
+  }
+  #shopify-section-{{ section.id }} .hydration-landing-footer-logo {
+    max-width: 896px;
+    margin: 75px auto;
+    padding: 0 16px;
+  }
+  #shopify-section-{{ section.id }} .hydration-landing-footer-logo img {
+    width: 100%;
+    height: auto;
+  }
+{% endstyle %}
+{% schema %}
+{
+  "name": "Hydration Landing Footer",
+  "settings": [],
+  "presets": [{ "name": "Hydration Landing Footer" }]
+}
+{% endschema %}

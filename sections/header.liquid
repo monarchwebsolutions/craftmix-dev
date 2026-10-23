@@ -422,6 +422,8 @@ document.addEventListener('keydown', (e) => {
           {% comment %}
            Hide for landing page                 
           {% endcomment %}                  
+          {% unless template.name == 'page' and template.suffix == 'hydration' %}
+          {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
           {% unless template contains 'lander' or template contains 'landing' %}
           <button
             id="mobile-navigation"
@@ -431,6 +433,8 @@ document.addEventListener('keydown', (e) => {
           >
             {% render 'icon-alls', icon: 'icon-hamburger' %}
           </button>
+          {% endunless %}
+          {% endunless %}
           {% endunless %}                  
         </div>
         
@@ -503,8 +507,12 @@ document.addEventListener('keydown', (e) => {
            {% comment %}
            For landing page                 
           {% endcomment %}                  
+          {% unless template.name == 'page' and template.suffix == 'hydration' %}
+          {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
           {% unless template contains 'lander' or template contains 'landing' %}
             <a class="header-subscribe-link" href="/pages/subscriptions">Craftmix Club (Subscribe & Save)</a>
+          {% endunless %}
+          {% endunless %}
           {% endunless %}
           {%- unless settings.hide_cart -%}
             <div class="header-icon-cart cursor-pointer relative flex items-center lg:mr-1 rtl:lg:ml-1 rtl:lg:mr-0">
@@ -573,8 +581,12 @@ document.addEventListener('keydown', (e) => {
       {% comment %}
       For landing page                 
       {% endcomment %}                  
+      {% unless template.name == 'page' and template.suffix == 'hydration' %}
+      {% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
       {% unless template contains 'lander' or template contains 'landing' %}
           {%- render 'header-megamenu-block', logo_above: logo_above, logo_center: logo_center, select_motion: section.settings.select_motion, transparent: transparent -%}
+      {% endunless %}
+      {% endunless %}
       {% endunless %}
        {% comment %}
         {%- render 'header-megamenu-block', logo_above: logo_above, logo_center: logo_center, select_motion: section.settings.select_motion, transparent: transparent -%}
