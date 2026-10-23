@@ -10,15 +10,8 @@
 {
   "sections": {
     "heading-product": {
-      "type": "2025-landing-page_heading-product",
+      "type": "custom-cocktail-main",
       "blocks": {
-        "faq_afK9dU": {
-          "type": "faq",
-          "settings": {
-            "question": "What’s included in the Party Pack?",
-            "answer": "Try almost ALL the Craftmix flavors with 10 of our favorites."
-          }
-        },
         "faq_JVQYWW": {
           "type": "faq",
           "settings": {
@@ -56,7 +49,6 @@
         }
       },
       "block_order": [
-        "faq_afK9dU",
         "faq_JVQYWW",
         "faq_NQ6V7Y",
         "faq_8CearL",
@@ -66,7 +58,7 @@
       "settings": {}
     },
     "info": {
-      "type": "2025-landing-page_info",
+      "type": "custom-cocktail-info",
       "blocks": {
         "carousel_card_9a8P3n": {
           "type": "carousel_card",
@@ -148,7 +140,7 @@
       }
     },
     "reviews": {
-      "type": "2025-landing-page_reviews",
+      "type": "custom-cocktail-reviews",
       "blocks": {
         "flavor_card_ACKD9n": {
           "type": "flavor_card",
@@ -226,7 +218,7 @@
       "settings": {}
     },
     "nutrition": {
-      "type": "2025-landing-page_nutrition",
+      "type": "custom-cocktail-nutrition",
       "settings": {}
     }
   },

@@ -196,6 +196,7 @@
 
   
 {%- endstyle -%}
+{% unless template.name == 'page' and template.suffix == 'cocktail-mocktail' %}
 {% unless template contains 'lander' or template contains 'landing' %}
   {%- if show -%}
     <!-- Swiper CSS CDN -->
@@ -355,6 +356,7 @@
       })();
     </script>
   {%- endif -%}
+{% endunless %}
 {% endunless %}
 
 {% schema %}
