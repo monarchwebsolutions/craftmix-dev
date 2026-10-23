@@ -197,6 +197,10 @@
 
 {% style %}
 
+#shopify-section-{{ section.id }} {
+    isolation: isolate;
+  }
+
 #shopify-section-{{ section.id }} .hydration-comparison {
     position: relative;
     background: {{ section.settings.background_color }};
@@ -404,6 +408,7 @@
 #shopify-section-{{ section.id }} .hydration-comparison__wave-wrap {
     background-color: {{ section.settings.background_color }};
     bottom: 0;
+    z-index: 0;
   }
 #shopify-section-{{ section.id }} .hydration-comparison__wave-wrap .section-wave {
     z-index: 2;
