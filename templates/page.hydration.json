@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "custom-hydration-main",
+      "settings": {
+        "product": "hydration-variety"
+      }
+    },
+    "nutrition": {
+      "type": "custom-hydration-nutrition",
+      "settings": {
+        "background_color": "#ffffff",
+        "product": "hydration-variety"
+      }
+    },
+    "faq": {
+      "type": "custom-hydration-faq",
+      "settings": {
+        "heading": "Got Questions",
+        "product": "hydration-variety"
+      }
+    },
+    "comparison": {
+      "type": "custom-hydration-comparison",
+      "settings": {
+        "background_color": "#EAD1FA",
+        "cta_text": "Shop Now",
+        "make_anchor_link": false,
+        "cta_anchor_id": "hydration-introductory-offer",
+        "cta_url": "",
+        "cta_bg_color": "#60D3F8",
+        "cta_text_color": "#002657"
+      }
+    },
+    "ugc": {
+      "type": "custom-hydration-ugc",
+      "settings": {
+        "background_color": "#ffffff",
+        "product": "hydration-variety"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "nutrition",
+    "faq",
+    "comparison",
+    "ugc"
+  ]
+}

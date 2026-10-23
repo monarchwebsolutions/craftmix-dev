@@ -1,0 +1,299 @@
+{% assign product = section.settings.product | default: all_products['hydration-variety'] %}
+{{- 'flickity.css' | asset_url | stylesheet_tag -}}
+<script src="{{ 'flickity.pkgd.min.js' | asset_url }}" defer></script>
+<script src="{{ 'custom-carousel.js' | asset_url }}" defer='defer'></script>
+<script src="{{ 'custom-carousel-card-video.js' | asset_url }}" defer='defer'></script>
+
+<div>
+  {% assign cards = product.metafields.custom.pdp_video_carousel_cards.value %}
+
+  <div style="background-color: {{ product.metafields.custom.color_2 }} !important;" class="custom-sub-carousel-section">
+    <div class="custom-sub-carousel-header">
+      <h5 class="custom-sub-carousel-subheader">Customer Favorites</h5>
+      <h3 class="custom-sub-carousel-heading">What Our Fans Say</h3>
+    </div>
+    <div class="custom-video-review-carousel-nav">
+      <button class="flickity-button flickity-prev-next-button custom-carousel-prev previous disabled" type="button" aria-label="Previous" disabled=""><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button>
+      <button class="flickity-button flickity-prev-next-button custom-carousel-next next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button>
+    </div>
+    <div class="custom-sub--carousel-container">
+      <div class="custom-carousel">
+          {% for card in cards %}
+            <div class="carousel-cell">
+             {% render 'custom-hydration-video-card', card: card, first: forloop.first %}
+             {% if card.captions_title == blank %}
+                <div class="no-dialogue {% if forloop.first %} no-dialogue--first{% endif %}">This video contains no dialogue</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="section-wave-container video-carousel-section-wave-container">
+      <div
+        class="lazy-lottie-container section-wave pdp-video-carousel-wave"
+        data-src="{{ 'beige-divider-left-to-right.json' | asset_url }}"
+        data-background="transparent"
+        data-speed="1"
+        data-autoplay="true"
+        data-loop="true"
+      >
+      <!-- lottie-player will be injected here -->
+    </div>
+  </div>
+</div>
+
+
+{% style %}
+
+#shopify-section-{{ section.id }} .video-carousel-section-wave-container {
+  top:0;
+}
+#shopify-section-{{ section.id }} .pdp-video-carousel-wave {
+  background-color:{{ product.metafields.custom.color_2 }};
+}
+#shopify-section-{{ section.id }} .custom-sub-carousel-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+#shopify-section-{{ section.id }} .custom-sub-carousel-header {
+  padding-top:1rem;
+}
+#shopify-section-{{ section.id }} .custom-sub-carousel-subheader {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 18px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: 0.43px;
+  text-align: center;
+  line-height: 17px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+#shopify-section-{{ section.id }} .custom-sub-carousel-heading {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Hornbill';
+  font-size: 64px;
+  font-weight: 700;
+  font-style: Bold;
+  letter-spacing: -1.68px;
+  text-align: center;
+  line-height: 54px;
+  margin-bottom: 100px;
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-nav {
+  top:-85px;
+}
+#shopify-section-{{ section.id }} .custom-sub-carousel-container {
+  margin-bottom: 60px;
+  position: relative;
+  padding-top: 86px;
+}
+#shopify-section-{{ section.id }} .carousel-cell {
+  margin-right: 25px;
+}
+#shopify-section-{{ section.id }} .custom-review-carousel-card {
+   height: 558px;
+   width: 332px;
+   border-radius: 30px;
+   border: 1.5px solid rgba(0, 38, 87, 1);
+   overflow: hidden;
+   position: relative;
+   background-color: #f0f0f0;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-card {
+  margin-left: 25px;
+}
+#shopify-section-{{ section.id }} .custom-review-carousel-card.first-card {
+  margin-left: 25px;
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+#shopify-section-{{ section.id }} .play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 68px;
+  height: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+#shopify-section-{{ section.id }} .play-btn img {
+  width: 68px;
+  height: 68px;
+}
+#shopify-section-{{ section.id }} .volume-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: 2px solid rgba(0, 38, 87, 1);
+}
+#shopify-section-{{ section.id }} .volume-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+#shopify-section-{{ section.id }} .volume-btn img {
+  width: 20px;
+  height: 20px;
+}
+#shopify-section-{{ section.id }} .carousel-product-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 12px 15px 10px 15px ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 20px;
+}
+#shopify-section-{{ section.id }} .carousel-product-info-text {
+  flex-grow: 1;
+}
+#shopify-section-{{ section.id }} .stars img {
+  width: 55px;
+  height: auto;
+}
+#shopify-section-{{ section.id }} .carousel-product-title {
+  margin: 5px 0 0 0;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 15px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 16px;
+}
+#shopify-section-{{ section.id }} .product-variant {
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: "Goldplay";
+  font-size: 15px;
+  font-weight: 500;
+  font-style: Medium;
+  letter-spacing: -0.09px;
+  text-align: left;
+  line-height: 19px;
+}
+#shopify-section-{{ section.id }} .carousel-product-info-cta-btn {
+  background-color: rgba(96, 211, 248, 1);
+  color: rgba(0, 38, 87, 1);
+  padding: 10px 28px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-family: "Goldplay";
+  font-weight: 600;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  border-radius: 23px;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-cta {
+  text-align: center;
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-cta-btn {
+  display: inline-block;
+  border: 1.5px solid rgba(0, 38, 87, 1);
+  box-shadow: 2px 2px 0px rgba(0, 38, 87, 1);
+  border-radius: 30px;
+  opacity: 1;
+  background-color: rgba(96, 211, 248, 1);
+  opacity: 1;
+  color: rgba(0, 38, 87, 1);
+  font-family: 'Goldplay';
+  font-size: 20px;
+  font-weight: 600;
+  font-style: SemiBold;
+  letter-spacing: -0.13px;
+  text-align: center;
+  line-height: 20px;
+  padding: 20px;
+}
+#shopify-section-{{ section.id }} .faq-cta {
+  padding: 1.25rem 0.5rem !important;
+  width:100%;
+}
+#shopify-section-{{ section.id }} .custom-subscription-faq-section {
+  padding-bottom:0 !important;
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-video {
+  cursor: pointer;
+}
+#shopify-section-{{ section.id }} .custom-video-review-carousel-card .custom-video-review-carousel-video {
+  pointer-events: auto;
+}
+
+
+
+@media (max-width: 768px) {
+#shopify-section-{{ section.id }} .custom-sub-carousel-heading {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -1.05px;
+    text-align: center;
+    line-height: 40px;
+    margin-bottom: 3.5rem;
+  }
+#shopify-section-{{ section.id }} .custom-video-review-carousel-nav {
+    top:280px;
+  }
+}
+@media (max-width: 529px) {
+#shopify-section-{{ section.id }} .custom-review-carousel-card.first-card {
+  margin-left: 0px;
+}
+}
+
+
+{% endstyle %}
+
+
+{% schema %}
+{
+  "name": "Hydration Landing Videos",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Hydration product",
+      "info": "Uses hydration-variety when empty."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hydration Landing Videos"
+    }
+  ]
+}
+{% endschema %}
