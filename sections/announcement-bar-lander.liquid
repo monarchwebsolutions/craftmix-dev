@@ -208,8 +208,12 @@
   if template.name == 'page' and template.suffix == 'hydration'
     assign is_hydration_landing = true
   endif
+  assign is_cocktail_mocktail_landing = false
+  if template.name == 'page' and template.suffix == 'cocktail-mocktail'
+    assign is_cocktail_mocktail_landing = true
+  endif
 %}
-{% if template contains 'lander' or template contains 'landing' or is_hydration_landing %}
+{% if template contains 'lander' or template contains 'landing' or is_hydration_landing or is_cocktail_mocktail_landing %}
     {%- if show -%}
     <!-- Swiper CSS CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
