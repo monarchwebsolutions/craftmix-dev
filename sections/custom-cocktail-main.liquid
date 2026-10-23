@@ -1000,7 +1000,8 @@ input[type="radio"]:checked::after {
  function init(root) { root.querySelectorAll('[data-cocktail-gallery]').forEach(section => {
   if (instances.has(section)) return;
   const controller = new AbortController();
-  const embla = EmblaCarousel(section.querySelector('.lp_image_carousel_embla__viewport'), {dragFree:true,loop:true});
+  const instance = {controller, embla: null, retry: null};
+  instances.set(section, instance);
   const image = section.querySelector('.img-wrapper-lg img');
   if (image) {
    const images = [image,...section.querySelectorAll('.img-wrapper-sm img')].map(img=>({src:img.src,alt:img.alt}));
@@ -1010,11 +1011,21 @@ input[type="radio"]:checked::after {
    section.querySelector('.lp-main-next-btn')?.addEventListener('click',()=>rotate(1),{signal:controller.signal});
    section.querySelector('.lp-main-prev-btn')?.addEventListener('click',()=>rotate(-1),{signal:controller.signal});
   }
-  instances.set(section,{controller,embla});
+  const viewport = section.querySelector('.lp_image_carousel_embla__viewport');
+  let attempts = 0;
+  const initMobile = () => {
+   if (controller.signal.aborted || instance.embla || !viewport) return;
+   if (typeof window.EmblaCarousel === 'function') {
+    instance.embla = window.EmblaCarousel(viewport, {dragFree:true,loop:true});
+   } else if (attempts++ < 20) {
+    instance.retry = setTimeout(initMobile, 250);
+   }
+  };
+  initMobile();
  }); }
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>init(document),{once:true}); else init(document);
+ if(document.readyState !== 'complete') document.addEventListener('DOMContentLoaded',()=>init(document),{once:true}); else init(document);
  document.addEventListener('shopify:section:load',event=>init(event.target));
- document.addEventListener('shopify:section:unload',event=>event.target.querySelectorAll('[data-cocktail-gallery]').forEach(section=>{const instance=instances.get(section);if(instance){instance.controller.abort();instance.embla.destroy();instances.delete(section);}}));
+ document.addEventListener('shopify:section:unload',event=>event.target.querySelectorAll('[data-cocktail-gallery]').forEach(section=>{const instance=instances.get(section);if(instance){instance.controller.abort();clearTimeout(instance.retry);instance.embla?.destroy();instances.delete(section);}}));
 })();
 
   document.addEventListener('DOMContentLoaded', () => {
