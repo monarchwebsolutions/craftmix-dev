@@ -58,7 +58,7 @@
           </ul>
         </div>
       </div>
-      <button type="button" class="hydration-offer-cta" disabled>Available soon</button>
+      <button type="button" class="hydration-offer-cta" disabled>AVAILABLE SOON</button>
       {% if hydration_product.metafields.custom.product_description_bullets.value != blank %}
         <ul class="product-description-bullets" role="list">
           {% for bullet in hydration_product.metafields.custom.product_description_bullets.value %}
@@ -106,9 +106,9 @@
   #shopify-section-{{ section.id }} .pdp-secondary-images-container { position: relative; display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 2%; z-index: 1; }
   #shopify-section-{{ section.id }} .secondary-img-container { padding: 0; cursor: pointer; width: 32%; aspect-ratio: 1; border-radius: 20px; border: 2px solid #002657; background: linear-gradient(184deg, var(--hydration-light), var(--hydration-medium)); overflow: hidden; }
   #shopify-section-{{ section.id }} .secondary-img-container[aria-pressed="true"] { outline: 2px solid var(--hydration-dark); outline-offset: 2px; }
-  #shopify-section-{{ section.id }} .product-title { font-family: Hornbill; font-size: 58px; font-weight: 900; letter-spacing: normal; text-align: left; line-height: 1.2; overflow-wrap: break-word; margin: 10px 0 0; }
+  #shopify-section-{{ section.id }} .product-title { color: #002657; font-family: Hornbill; font-size: 58px; font-weight: 900; letter-spacing: normal; text-align: left; line-height: 1.2; overflow-wrap: break-word; margin: 10px 0 0; }
   #shopify-section-{{ section.id }} .product-brief { font-family: Goldplay; font-size: 18px; font-weight: 500; letter-spacing: -0.11px; line-height: 1.6; margin: 20px 0; }
-  #shopify-section-{{ section.id }} .product-description-bullets { margin: 24px 0 20px; }
+  #shopify-section-{{ section.id }} .product-description-bullets { list-style: disc; padding-left: 2rem; margin: 24px 0 20px; }
   #shopify-section-{{ section.id }} .hydration-offer { border: 2px solid #002657; border-radius: 18px; overflow: hidden; font-family: Goldplay; color: #002657; background: #FFFFFF; }
   #shopify-section-{{ section.id }} .hydration-offer-banner { background: #7FD0F4; border-bottom: 2px solid #002657; text-align: center; padding: 4px 10px; font-size: 24px; font-weight: 600; line-height: 1.2; }
   #shopify-section-{{ section.id }} .hydration-offer-body { background: #FFFFFF; padding: 16px 20px; }
@@ -142,11 +142,10 @@
   #shopify-section-{{ section.id }} .hydration-pack-details { color: #FE6B00; text-transform: uppercase; font: 600 20px/1.4 Goldplay; }
   #shopify-section-{{ section.id }} .hydration-offer-row > div { min-width: 0; overflow-wrap: break-word; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits,
-  #shopify-section-{{ section.id }} .product-description-bullets { list-style: none; padding-left: 0; color: #002657; font: 600 20px/1.4 Goldplay; }
-  #shopify-section-{{ section.id }} .hydration-offer-benefits li,
-  #shopify-section-{{ section.id }} .product-description-bullets li { display: flex; align-items: baseline; gap: 5px; overflow-wrap: anywhere; }
-  #shopify-section-{{ section.id }} .hydration-offer-benefits li::before,
-  #shopify-section-{{ section.id }} .product-description-bullets li::before { content: ""; flex: 0 0 17px; height: 10px; background: url('https://cdn.shopify.com/s/files/1/2340/1623/files/lp-tick.svg?v=1744287348') center / contain no-repeat; }
+  #shopify-section-{{ section.id }} .product-description-bullets { color: #002657; font: 600 20px/1.4 Goldplay; }
+  #shopify-section-{{ section.id }} .hydration-offer-benefits { list-style: none; padding-left: 0; }
+  #shopify-section-{{ section.id }} .hydration-offer-benefits li { display: flex; align-items: baseline; gap: 5px; overflow-wrap: anywhere; }
+  #shopify-section-{{ section.id }} .hydration-offer-benefits li::before { content: ""; flex: 0 0 17px; height: 10px; background: url('https://cdn.shopify.com/s/files/1/2340/1623/files/lp-tick.svg?v=1744287348') center / contain no-repeat; }
   @media (max-width: 529px) {
     #shopify-section-{{ section.id }} .hydration-reviews { font-size: 16px; }
     #shopify-section-{{ section.id }} .hydration-review-stars { height: 16px; width: auto; }
@@ -157,8 +156,7 @@
     #shopify-section-{{ section.id }} .product-description-bullets { font-size: 14px; }
     #shopify-section-{{ section.id }} .hydration-offer-banner { font-size: 16px; }
     #shopify-section-{{ section.id }} .hydration-offer-price { font-size: 18px; gap: 9px; }
-    #shopify-section-{{ section.id }} .hydration-offer-benefits li::before,
-    #shopify-section-{{ section.id }} .product-description-bullets li::before { flex-basis: 12px; height: 7px; }
+    #shopify-section-{{ section.id }} .hydration-offer-benefits li::before { flex-basis: 12px; height: 7px; }
   }
 {% endstyle %}
 {% javascript %}
