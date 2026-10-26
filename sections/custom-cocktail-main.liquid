@@ -88,12 +88,13 @@ section.landing-page-main {
 .lp_image_carousel_embla__slide:last-of-type {
   margin-right: 12px;
 }
-.small-img-container {
+[data-cocktail-gallery] .small-img-container {
   border: 1px solid #002657;
   border-radius: 20px;
   overflow: hidden;
   width: 250px;
-  height: 260px;
+  height: auto;
+  aspect-ratio: 1 / 1;
 }
   
 .lp-carousel-image {
@@ -161,7 +162,7 @@ section.landing-page-main {
   max-width: 379px;
   max-height: 401px;
   width: calc(50% - 8.9195px);
-  aspect-ratio: 379 / 401;
+  aspect-ratio: 1 / 1;
 }
 
 [data-cocktail-gallery] .img-wrapper-lg img,
