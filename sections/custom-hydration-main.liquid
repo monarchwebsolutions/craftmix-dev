@@ -31,10 +31,12 @@
       </div>
     </div>
     <div class="product-content-container">
-      <div class="hydration-reviews">
-        <img class="hydration-review-stars" src="https://cdn.shopify.com/s/files/1/2340/1623/files/stars-dark-blue.svg?v=1743061692" width="124" height="22" alt="" role="presentation">
-        <span>3000+ 5-Star Reviews</span>
-      </div>
+      {% if section.settings.show_customer_reviews %}
+        <div class="hydration-reviews">
+          <img class="hydration-review-stars" src="https://cdn.shopify.com/s/files/1/2340/1623/files/stars-dark-blue.svg?v=1743061692" width="124" height="22" alt="" role="presentation">
+          <span>3000+ 5-Star Reviews</span>
+        </div>
+      {% endif %}
       <h1 class="product-title">Amazing Tasting Hydration Has Arrived</h1>
       <div class="product-brief">
         {% if hydration_product.description != blank %}
@@ -184,7 +186,10 @@
 {% schema %}
 {
   "name": "Hydration Landing Main",
-  "settings": [{ "type": "product", "id": "product", "label": "Hydration product", "info": "Uses hydration-variety when empty." }],
+  "settings": [
+    { "type": "product", "id": "product", "label": "Hydration product", "info": "Uses hydration-variety when empty." },
+    { "type": "checkbox", "id": "show_customer_reviews", "label": "Show customer reviews", "default": true }
+  ],
   "presets": [{ "name": "Hydration Landing Main" }]
 }
 {% endschema %}
