@@ -31,42 +31,37 @@
       </div>
     </div>
     <div class="product-content-container">
-      <h1 class="product-title">{{ hydration_product.title | remove_first: '2025 - ' | default: 'Hydration Variety' | escape }}</h1>
+      <h1 class="product-title">Amazing Tasting Hydration Has Arrived</h1>
       <div class="product-brief">
         {% if hydration_product.description != blank %}
           {{ hydration_product.description }}
         {% endif %}
       </div>
+      <div id="hydration-introductory-offer" class="hydration-offer">
+        <div class="hydration-offer-banner">50% Off</div>
+        <div class="hydration-offer-body">
+          <div class="hydration-offer-row">
+            <div>
+              <h2>Hydration Variety 6 Pack</h2>
+              <p>6 Stick Packs / 3 Flavors</p>
+            </div>
+            <p class="hydration-offer-price"><s>$11.99</s> <span>$5.99</span></p>
+          </div>
+          <p class="hydration-offer-flavors">Lemon Lime, Wild Berry, Strawberry Watermelon</p>
+          <ul class="hydration-offer-benefits">
+            <li>Renews as a Hydration Variety 36 Pack every 6 weeks</li>
+            <li>Pause or cancel anytime</li>
+          </ul>
+          <p class="hydration-offer-status" id="hydration-offer-status-{{ section.id }}">Available soon</p>
+        </div>
+      </div>
+      <button type="button" class="hydration-offer-cta" disabled aria-describedby="hydration-offer-status-{{ section.id }}">Available soon</button>
       {% if hydration_product.metafields.custom.product_description_bullets.value != blank %}
         <ul class="product-description-bullets">
           {% for bullet in hydration_product.metafields.custom.product_description_bullets.value %}
             <li>{{ bullet | escape }}</li>
           {% endfor %}
         </ul>
-      {% endif %}
-      <div id="hydration-introductory-offer" class="hydration-offer">
-        <div class="hydration-offer-banner">Introductory Offer</div>
-        <div class="hydration-offer-body">
-          <div class="hydration-offer-row">
-            <div>
-              <h2>Hydration Variety</h2>
-              <p>Introductory price</p>
-            </div>
-            <p class="hydration-offer-price">$5.99</p>
-          </div>
-          <p class="hydration-offer-status" id="hydration-offer-status-{{ section.id }}">Available soon</p>
-        </div>
-      </div>
-      <button type="button" class="hydration-offer-cta" disabled aria-describedby="hydration-offer-status-{{ section.id }}">Available soon</button>
-      {% if hydration_product.metafields.custom.variety_pack_products.value != blank %}
-        <div class="variety-includes-container">
-          <h3 class="includes-header">Includes:</h3>
-          <ul class="includes-list">
-            {% for flavor in hydration_product.metafields.custom.variety_pack_products.value %}
-              <li>{{ flavor.title | remove_first: '2025 - ' | escape }}</li>
-            {% endfor %}
-          </ul>
-        </div>
       {% endif %}
       {% if hydration_product == blank and request.design_mode %}
         <p>Select the Hydration Variety product in this section's settings.</p>
@@ -93,8 +88,8 @@
     --hydration-dark: {{ hydration_product.metafields.custom.color_1 | default: '#002657' }};
     color: #002657;
   }
-  #shopify-section-{{ section.id }} > .section-wave-container { background-color: #ffffff; }
-  #shopify-section-{{ section.id }} .hydration-landing-main { overflow: hidden; padding: 60px 20px 40px; }
+  #shopify-section-{{ section.id }} > .section-wave-container { background-color: #E5FFFF; }
+  #shopify-section-{{ section.id }} .hydration-landing-main { background-color: #E5FFFF; overflow: hidden; padding: 60px 20px 40px; }
   #shopify-section-{{ section.id }} .hydration-landing-columns { display: flex; max-width: 1440px; margin: auto; gap: 50px; align-items: flex-start; }
   #shopify-section-{{ section.id }} .product-media-container { width: 50%; min-width: 0; padding-right: 40px; }
   #shopify-section-{{ section.id }} .product-content-container { width: 50%; min-width: 0; padding-top: 12px; }
@@ -108,20 +103,21 @@
   #shopify-section-{{ section.id }} .pdp-secondary-images-container { position: relative; display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 2%; z-index: 1; }
   #shopify-section-{{ section.id }} .secondary-img-container { padding: 0; cursor: pointer; width: 32%; aspect-ratio: 1; border-radius: 20px; border: 2px solid #002657; background: linear-gradient(184deg, var(--hydration-light), var(--hydration-medium)); overflow: hidden; }
   #shopify-section-{{ section.id }} .secondary-img-container[aria-pressed="true"] { outline: 2px solid var(--hydration-dark); outline-offset: 2px; }
-  #shopify-section-{{ section.id }} .product-title { font-family: Hornbill; font-size: 64px; font-weight: 700; letter-spacing: -1.68px; text-align: left; line-height: 54px; margin: 10px 0 0; }
+  #shopify-section-{{ section.id }} .product-title { font-family: Hornbill; font-size: 58px; font-weight: 900; letter-spacing: normal; text-align: left; line-height: 1.2; overflow-wrap: break-word; margin: 10px 0 0; }
   #shopify-section-{{ section.id }} .product-brief { font-family: Goldplay; font-size: 18px; font-weight: 500; letter-spacing: -0.11px; line-height: 1.6; margin: 20px 0; }
-  #shopify-section-{{ section.id }} .product-description-bullets { list-style: disc; padding-left: 2rem; font-family: Goldplay; font-size: 18px; font-weight: 500; line-height: 24px; margin-bottom: 20px; }
+  #shopify-section-{{ section.id }} .product-description-bullets { list-style: disc; padding-left: 2rem; font-family: Goldplay; font-size: 18px; font-weight: 500; line-height: 24px; margin: 24px 0 20px; }
   #shopify-section-{{ section.id }} .hydration-offer { border: 2px solid #002657; border-radius: 20px; overflow: hidden; font-family: Goldplay; }
   #shopify-section-{{ section.id }} .hydration-offer-banner { background: var(--hydration-medium); border-bottom: 2px solid #002657; text-align: center; padding: 4px 10px; font-size: 24px; font-weight: 600; }
   #shopify-section-{{ section.id }} .hydration-offer-body { background: var(--hydration-light); padding: 20px; }
-  #shopify-section-{{ section.id }} .hydration-offer-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  #shopify-section-{{ section.id }} .hydration-offer-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 16px; }
   #shopify-section-{{ section.id }} .hydration-offer-row h2 { font: 800 30px/36px Hornbill; margin: 0; }
-  #shopify-section-{{ section.id }} .hydration-offer-price { font-size: 30px; font-weight: 700; white-space: nowrap; }
+  #shopify-section-{{ section.id }} .hydration-offer-price { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 30px; font-weight: 700; }
+  #shopify-section-{{ section.id }} .hydration-offer-price s { font-weight: 500; }
+  #shopify-section-{{ section.id }} .hydration-offer-price > * { white-space: nowrap; }
+  #shopify-section-{{ section.id }} .hydration-offer-flavors { margin-top: 12px; overflow-wrap: break-word; }
+  #shopify-section-{{ section.id }} .hydration-offer-benefits { list-style: disc; padding-left: 1.5rem; margin-top: 16px; }
   #shopify-section-{{ section.id }} .hydration-offer-status { margin-top: 16px; }
   #shopify-section-{{ section.id }} .hydration-offer-cta { display: block; width: 100%; height: 60px; margin-top: 16px; font: 600 20px/20px Goldplay; color: #fff; border-radius: 33px; border: 2px solid #002657; box-shadow: 2px 6px 0 #002657; background: #fe6b00; cursor: not-allowed; }
-  #shopify-section-{{ section.id }} .variety-includes-container { font-family: Goldplay; margin-top: 24px; }
-  #shopify-section-{{ section.id }} .includes-header { font-size: 16px; font-weight: 600; }
-  #shopify-section-{{ section.id }} .includes-list { list-style: disc; padding-left: 1.5rem; margin: 8px 0 16px; font-size: 14px; font-weight: 500; }
   @media (max-width: 1023px) {
     #shopify-section-{{ section.id }} .hydration-landing-main { padding: 40px 20px 28px; }
     #shopify-section-{{ section.id }} .hydration-landing-columns { flex-direction: column; gap: 20px; }
@@ -129,7 +125,7 @@
     #shopify-section-{{ section.id }} .pdp-images-section { margin: auto; }
     #shopify-section-{{ section.id }} .product-title { margin: 0; }
   }
-  @media (max-width: 766px) { #shopify-section-{{ section.id }} .product-title { font-size: 40px; line-height: 1.1; } }
+  @media (max-width: 766px) { #shopify-section-{{ section.id }} .product-title { font-size: 40px; line-height: 1.2; } }
   @media (max-width: 640px) {
     #shopify-section-{{ section.id }} .pdp-images-section { gap: 15px; }
     #shopify-section-{{ section.id }} .pdp-main-img-container { border-radius: 20px; }
