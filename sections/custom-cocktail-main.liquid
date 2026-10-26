@@ -164,11 +164,11 @@ section.landing-page-main {
   aspect-ratio: 379 / 401;
 }
 
-.img-wrapper-lg img,
-.img-wrapper-sm img {
+[data-cocktail-gallery] .img-wrapper-lg img,
+[data-cocktail-gallery] .img-wrapper-sm img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
 }
@@ -694,12 +694,12 @@ input[type="radio"]:checked::after {
     margin-right: 16px;
   }
 
-  .lp-carousel-image {
+  [data-cocktail-gallery] .lp-carousel-image {
     flex: 0 0 auto;
-    height: 260px;
-    width: auto;
+    height: 100%;
+    width: 100%;
     scroll-snap-align: center;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .lp-main-wrapper {
@@ -918,12 +918,12 @@ input[type="radio"]:checked::after {
           <div class="buy-options-wrapper">
             <div class="buy-option-container-lg selected">
               <div class="sale-bar sale-bar_lg">
-                <span class="sale-bar-text">Introductory Offer — 50% Off</span>
+                <span class="sale-bar-text">50% Off</span>
               </div>
               <div class="buy-option-container-lg-product">
                 <div class="buy-option-info">
                   <h3 class="product-name">Cocktail &amp; Mocktail Variety 6 Pack</h3>
-                  <p class="product-contents">6 PACKETS / 3 FLAVOURS</p>
+                  <p class="product-contents">6 PACKETS / 3 FLAVORS</p>
                 </div>
                 <div class="buy-option-pricing">
                   <div class="buy-option-pricing-comparison">
@@ -944,7 +944,7 @@ input[type="radio"]:checked::after {
         </div>
 
         <div class="flavor-container">
-          <h5 class="flavor-heading">6 packets / 3 flavours</h5>
+          <h5 class="flavor-heading">6 packets / 3 flavors</h5>
           <div class="flavor-card-grid-double-row active">
               <div class="flavor-card-double">
                 <div class="flavor-card-double-image-container">
