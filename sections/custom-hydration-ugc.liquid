@@ -48,6 +48,8 @@
 
 #shopify-section-{{ section.id }} .video-carousel-section-wave-container {
   top:0;
+  /* Cover fractional-pixel seams at both edges of the Lottie divider. */
+  margin-block: -2px;
 }
 #shopify-section-{{ section.id }} .pdp-video-carousel-wave {
   background-color:{{ product.metafields.custom.color_2 }};

@@ -408,6 +408,8 @@
 #shopify-section-{{ section.id }} .hydration-comparison__wave-wrap {
     background-color: {{ section.settings.background_color }};
     bottom: 0;
+    /* Cover fractional-pixel seams at both edges of the Lottie divider. */
+    margin-block: -2px;
     z-index: 0;
   }
 #shopify-section-{{ section.id }} .hydration-comparison__wave-wrap .section-wave {
