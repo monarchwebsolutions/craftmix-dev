@@ -1,42 +1,52 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "custom-hydration-main",
       "settings": {
-        "product": "hydration-variety"
+        "product": "hydration-variety",
+        "show_customer_reviews": false
       }
     },
     "nutrition": {
       "type": "custom-hydration-nutrition",
       "settings": {
-        "background_color": "#ffffff",
-        "product": "hydration-variety"
+        "product": "hydration-variety",
+        "background_color": "#ffffff"
       }
     },
     "faq": {
       "type": "custom-hydration-faq",
       "settings": {
-        "heading": "Got Questions",
-        "product": "hydration-variety"
+        "product": "hydration-variety",
+        "heading": "Got Questions"
       }
     },
     "comparison": {
       "type": "custom-hydration-comparison",
       "settings": {
-        "background_color": "#EAD1FA",
+        "background_color": "#ead1fa",
         "cta_text": "Shop Now",
         "make_anchor_link": false,
         "cta_anchor_id": "hydration-introductory-offer",
         "cta_url": "",
-        "cta_bg_color": "#60D3F8",
+        "cta_bg_color": "#60d3f8",
         "cta_text_color": "#002657"
       }
     },
     "ugc": {
       "type": "custom-hydration-ugc",
       "settings": {
-        "background_color": "#ffffff",
-        "product": "hydration-variety"
+        "product": "hydration-variety",
+        "background_color": "#ffffff"
       }
     },
     "footer": {
