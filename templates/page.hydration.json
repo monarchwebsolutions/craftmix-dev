@@ -13,7 +13,7 @@
       "type": "custom-hydration-main",
       "settings": {
         "product": "hydration-variety",
-        "show_customer_reviews": false
+        "show_customer_reviews": true
       }
     },
     "nutrition": {
