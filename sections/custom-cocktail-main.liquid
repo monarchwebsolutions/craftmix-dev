@@ -1,7 +1,40 @@
+{% liquid
+  assign cocktail_product = section.settings.product
+  assign cocktail_variant = cocktail_product.first_available_variant
+  assign cocktail_form_id = 'CocktailCheckout-' | append: section.id
+  assign cocktail_checkout_url = routes.root_url | append: 'checkout'
+  assign cocktail_purchase_type = section.settings.purchase_type | default: 'subscription'
+  assign cocktail_plan_id = section.settings.selling_plan_id | strip
+  assign cocktail_selling_plan = nil
+  assign cocktail_can_checkout = false
+  if cocktail_product != blank and cocktail_variant.available
+    assign cocktail_can_checkout = true
+  endif
+  if cocktail_purchase_type == 'subscription'
+    for allocation in cocktail_variant.selling_plan_allocations
+      assign allocation_plan_id = allocation.selling_plan.id | append: ''
+      if allocation.selling_plan.recurring_deliveries
+        if cocktail_plan_id == blank or cocktail_plan_id == allocation_plan_id
+          assign cocktail_selling_plan = allocation.selling_plan
+          break
+        endif
+      endif
+    endfor
+    unless cocktail_selling_plan
+      assign cocktail_can_checkout = false
+    endunless
+  elsif cocktail_product.requires_selling_plan
+    assign cocktail_can_checkout = false
+  endif
+%}
+
 {% schema %}
 {
   "name": "Cocktail & Mocktail Main",
   "settings": [
+    { "type": "product", "id": "product", "label": "Cocktail product", "info": "Checkout purchases this product's first available variant. The button is disabled when no product is selected or the product is unavailable." },
+    { "type": "select", "id": "purchase_type", "label": "Checkout purchase type", "default": "subscription", "options": [{ "value": "subscription", "label": "Subscription" }, { "value": "one_time", "label": "One-time purchase" }] },
+    { "type": "text", "id": "selling_plan_id", "label": "Subscription selling plan ID", "info": "Optional. Leave blank for the first subscription plan, or enter an ID from the editor-only list below the checkout button to select a specific renewal schedule. Invalid IDs disable checkout." },
     { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
     { "type": "image_picker", "id": "gallery_image_1", "label": "Supplemental image 1" },
     { "type": "image_picker", "id": "gallery_image_2", "label": "Supplemental image 2" },
@@ -447,8 +480,31 @@ input[type="radio"]:checked::after {
   flex-grow: 0;
 }
 
-.buy-button:hover {
+[data-cocktail-gallery] .buy-button:not(:disabled):hover,
+[data-cocktail-gallery] .buy-button:not(:disabled):focus-visible {
   box-shadow: none;
+}
+
+[data-cocktail-gallery] .buy-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+[data-cocktail-gallery] .buy-button:focus-visible {
+  outline: 2px solid #002657;
+  outline-offset: 4px;
+}
+
+[data-cocktail-gallery] .cocktail-checkout-editor-help {
+  margin-top: 16px;
+  padding: 12px;
+  border: 1px dashed #002657;
+  font: 400 14px/1.5 Goldplay;
+}
+
+[data-cocktail-gallery] .cocktail-checkout-editor-help summary {
+  cursor: pointer;
+  font-weight: 700;
 }
 
 .flavor-container {
@@ -940,7 +996,47 @@ input[type="radio"]:checked::after {
               </div>
             </div>
           </div>
-          <button type="button" class="buy-button" disabled>Available soon</button>
+          {% if cocktail_can_checkout %}
+            {% form 'product', cocktail_product, id: cocktail_form_id, return_to: cocktail_checkout_url, data-cocktail-checkout: 'true' %}
+              <input type="hidden" name="id" value="{{ cocktail_variant.id }}">
+              <input type="hidden" name="quantity" value="{{ cocktail_variant.quantity_rule.min | default: 1 }}">
+              {% if cocktail_selling_plan %}
+                <input type="hidden" name="selling_plan" value="{{ cocktail_selling_plan.id }}">
+              {% endif %}
+              {% if form.errors %}
+                <div role="alert">{{ form.errors | default_errors }}</div>
+              {% endif %}
+              <button type="submit" class="buy-button">CHECKOUT</button>
+            {% endform %}
+          {% else %}
+            <button type="button" class="buy-button" disabled>CHECKOUT</button>
+          {% endif %}
+          {% if request.design_mode %}
+            {% if cocktail_product == blank %}
+              <p>Select the cocktail product in this section's settings to enable checkout.</p>
+            {% else %}
+              <details class="cocktail-checkout-editor-help">
+                <summary>Subscription checkout settings (editor only)</summary>
+                {% if cocktail_purchase_type == 'subscription' %}
+                  {% if cocktail_selling_plan %}
+                    <p>Checkout uses: {{ cocktail_selling_plan.name | escape }} (ID: {{ cocktail_selling_plan.id }}).</p>
+                  {% else %}
+                    <p>Checkout is disabled: select a product with a subscription plan and enter a matching plan ID, or leave the plan ID blank to use its first subscription plan.</p>
+                  {% endif %}
+                {% else %}
+                  <p>Checkout is set to a one-time purchase.</p>
+                {% endif %}
+                <p>Available subscription plans for this product's first available variant:</p>
+                <ul>
+                  {% for allocation in cocktail_variant.selling_plan_allocations %}
+                    {% if allocation.selling_plan.recurring_deliveries %}
+                      <li>{{ allocation.selling_plan.name | escape }} - ID: <code>{{ allocation.selling_plan.id }}</code></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+              </details>
+            {% endif %}
+          {% endif %}
         </div>
 
         <div class="flavor-container">
@@ -1002,6 +1098,28 @@ input[type="radio"]:checked::after {
   const controller = new AbortController();
   const instance = {controller, embla: null, retry: null};
   instances.set(section, instance);
+  const checkoutForm = section.querySelector('[data-cocktail-checkout]');
+  const checkoutButton = checkoutForm?.querySelector('.buy-button');
+  if (checkoutForm && checkoutButton) {
+   const submitCheckout = event => {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    if (checkoutButton.disabled) return;
+
+    checkoutButton.disabled = true;
+    checkoutForm.setAttribute('aria-busy', 'true');
+    // Native submission bypasses cart-drawer hooks and honors return_to.
+    HTMLFormElement.prototype.submit.call(checkoutForm);
+   };
+   checkoutForm.addEventListener('click', event => {
+    if (event.target.closest('.buy-button')) submitCheckout(event);
+   }, {capture: true, signal: controller.signal});
+   checkoutForm.addEventListener('submit', submitCheckout, {capture: true, signal: controller.signal});
+   window.addEventListener('pageshow', () => {
+    checkoutButton.disabled = false;
+    checkoutForm.removeAttribute('aria-busy');
+   }, {signal: controller.signal});
+  }
   const image = section.querySelector('.img-wrapper-lg img');
   if (image) {
    const images = [image,...section.querySelectorAll('.img-wrapper-sm img')].map(img=>({src:img.src,alt:img.alt}));
