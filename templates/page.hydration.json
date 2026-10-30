@@ -12,7 +12,7 @@
     "main": {
       "type": "custom-hydration-main",
       "settings": {
-        "product": "hydration-variety",
+        "product": "hydration-variety-buy-box",
         "show_customer_reviews": true
       }
     },
