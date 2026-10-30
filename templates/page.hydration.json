@@ -13,6 +13,7 @@
       "type": "custom-hydration-main",
       "settings": {
         "product": "hydration-variety-buy-box",
+        "purchase_type": "subscription",
         "show_customer_reviews": true
       }
     },

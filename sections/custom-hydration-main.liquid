@@ -3,15 +3,28 @@
   assign hydration_variant = hydration_product.first_available_variant
   assign hydration_form_id = 'HydrationCheckout-' | append: section.id
   assign hydration_checkout_url = routes.root_url | append: 'checkout'
+  assign hydration_purchase_type = section.settings.purchase_type | default: 'subscription'
+  assign hydration_plan_id = section.settings.selling_plan_id | strip
+  assign hydration_selling_plan = nil
   assign hydration_can_checkout = false
   if hydration_product != blank and hydration_variant.available
     assign hydration_can_checkout = true
   endif
-  if hydration_product.requires_selling_plan
-    assign hydration_selling_plan = hydration_variant.selling_plan_allocations.first.selling_plan
-    if hydration_selling_plan == blank
+  if hydration_purchase_type == 'subscription'
+    for allocation in hydration_variant.selling_plan_allocations
+      assign allocation_plan_id = allocation.selling_plan.id | append: ''
+      if allocation.selling_plan.recurring_deliveries
+        if hydration_plan_id == blank or hydration_plan_id == allocation_plan_id
+          assign hydration_selling_plan = allocation.selling_plan
+          break
+        endif
+      endif
+    endfor
+    unless hydration_selling_plan
       assign hydration_can_checkout = false
-    endif
+    endunless
+  elsif hydration_product.requires_selling_plan
+    assign hydration_can_checkout = false
   endif
   assign hero = hydration_product.featured_image
 %}
@@ -77,7 +90,7 @@
         {% form 'product', hydration_product, id: hydration_form_id, return_to: hydration_checkout_url, data-hydration-checkout: 'true' %}
           <input type="hidden" name="id" value="{{ hydration_variant.id }}">
           <input type="hidden" name="quantity" value="{{ hydration_variant.quantity_rule.min | default: 1 }}">
-          {% if hydration_selling_plan != blank %}
+          {% if hydration_selling_plan %}
             <input type="hidden" name="selling_plan" value="{{ hydration_selling_plan.id }}">
           {% endif %}
           {% if form.errors %}
@@ -87,6 +100,28 @@
         {% endform %}
       {% else %}
         <button type="button" class="hydration-offer-cta" disabled>CHECKOUT</button>
+      {% endif %}
+      {% if request.design_mode and hydration_product != blank %}
+        <details class="hydration-checkout-editor-help">
+          <summary>Subscription checkout settings (editor only)</summary>
+          {% if hydration_purchase_type == 'subscription' %}
+            {% if hydration_selling_plan %}
+              <p>Checkout uses: {{ hydration_selling_plan.name | escape }} (ID: {{ hydration_selling_plan.id }}).</p>
+            {% else %}
+              <p>Checkout is disabled: select a product with a subscription plan and enter a matching plan ID, or leave the plan ID blank to use its first subscription plan.</p>
+            {% endif %}
+          {% else %}
+            <p>Checkout is set to a one-time purchase.</p>
+          {% endif %}
+          <p>Available subscription plans for this product's first available variant:</p>
+          <ul>
+            {% for allocation in hydration_variant.selling_plan_allocations %}
+              {% if allocation.selling_plan.recurring_deliveries %}
+                <li>{{ allocation.selling_plan.name | escape }} - ID: <code>{{ allocation.selling_plan.id }}</code></li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </details>
       {% endif %}
       {% if hydration_product.metafields.custom.product_description_bullets.value != blank %}
         <ul class="product-description-bullets" role="list">
@@ -154,6 +189,8 @@
   #shopify-section-{{ section.id }} .hydration-offer-cta:not(:disabled):focus-visible { box-shadow: none; }
   #shopify-section-{{ section.id }} .hydration-offer-cta:disabled { cursor: not-allowed; opacity: 0.6; }
   #shopify-section-{{ section.id }} .hydration-offer-cta:focus-visible { outline: 2px solid #002657; outline-offset: 4px; }
+  #shopify-section-{{ section.id }} .hydration-checkout-editor-help { margin-top: 16px; padding: 12px; border: 1px dashed #002657; font: 400 14px/1.5 Goldplay; }
+  #shopify-section-{{ section.id }} .hydration-checkout-editor-help summary { cursor: pointer; font-weight: 700; }
   @media (max-width: 1023px) {
     #shopify-section-{{ section.id }} .hydration-landing-main { padding: 40px 20px 28px; }
     #shopify-section-{{ section.id }} .hydration-landing-columns { flex-direction: column; gap: 20px; }
@@ -245,6 +282,8 @@
   "name": "Hydration Landing Main",
   "settings": [
     { "type": "product", "id": "product", "label": "Hydration product", "info": "Checkout purchases this product's first available variant. The button is disabled when no product is selected or the product is unavailable." },
+    { "type": "select", "id": "purchase_type", "label": "Checkout purchase type", "default": "subscription", "options": [{ "value": "subscription", "label": "Subscription" }, { "value": "one_time", "label": "One-time purchase" }] },
+    { "type": "text", "id": "selling_plan_id", "label": "Subscription selling plan ID", "info": "Optional. Leave blank for the first subscription plan, or enter an ID from the editor-only list below the checkout button to select a specific renewal schedule. Invalid IDs disable checkout." },
     { "type": "checkbox", "id": "show_customer_reviews", "label": "Show customer reviews", "default": true }
   ],
   "presets": [{ "name": "Hydration Landing Main" }]
