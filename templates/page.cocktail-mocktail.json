@@ -56,7 +56,9 @@
         "faq_6LKdfV"
       ],
       "settings": {
+        "product": "variety-6-pack-buy-box",
         "purchase_type": "subscription",
+        "selling_plan_id": "",
         "hero_image": "shopify://shop_images/V1_-_Variety_6_Pack.png",
         "gallery_image_1": "shopify://shop_images/V2_-_Variety_6_Pack.png",
         "gallery_image_2": "shopify://shop_images/4_-_Party-square.webp",
