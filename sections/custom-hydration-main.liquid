@@ -1,5 +1,18 @@
 {% liquid
-  assign hydration_product = section.settings.product | default: all_products['hydration-variety']
+  assign hydration_product = section.settings.product
+  assign hydration_variant = hydration_product.first_available_variant
+  assign hydration_form_id = 'HydrationCheckout-' | append: section.id
+  assign hydration_checkout_url = routes.root_url | append: 'checkout'
+  assign hydration_can_checkout = false
+  if hydration_product != blank and hydration_variant.available
+    assign hydration_can_checkout = true
+  endif
+  if hydration_product.requires_selling_plan
+    assign hydration_selling_plan = hydration_variant.selling_plan_allocations.first.selling_plan
+    if hydration_selling_plan == blank
+      assign hydration_can_checkout = false
+    endif
+  endif
   assign hero = hydration_product.featured_image
 %}
 <section class="hydration-landing-main" data-hydration-main>
@@ -60,7 +73,21 @@
           </ul>
         </div>
       </div>
-      <button type="button" class="hydration-offer-cta" disabled>AVAILABLE SOON</button>
+      {% if hydration_can_checkout %}
+        {% form 'product', hydration_product, id: hydration_form_id, return_to: hydration_checkout_url %}
+          <input type="hidden" name="id" value="{{ hydration_variant.id }}">
+          <input type="hidden" name="quantity" value="{{ hydration_variant.quantity_rule.min | default: 1 }}">
+          {% if hydration_selling_plan != blank %}
+            <input type="hidden" name="selling_plan" value="{{ hydration_selling_plan.id }}">
+          {% endif %}
+          {% if form.errors %}
+            <div role="alert">{{ form.errors | default_errors }}</div>
+          {% endif %}
+          <button type="submit" class="hydration-offer-cta">CHECKOUT</button>
+        {% endform %}
+      {% else %}
+        <button type="button" class="hydration-offer-cta" disabled>CHECKOUT</button>
+      {% endif %}
       {% if hydration_product.metafields.custom.product_description_bullets.value != blank %}
         <ul class="product-description-bullets" role="list">
           {% for bullet in hydration_product.metafields.custom.product_description_bullets.value %}
@@ -121,7 +148,9 @@
   #shopify-section-{{ section.id }} .hydration-offer-price > * { white-space: nowrap; }
   #shopify-section-{{ section.id }} .hydration-offer-flavors { margin-top: 12px; overflow-wrap: break-word; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits { margin-top: 16px; }
-  #shopify-section-{{ section.id }} .hydration-offer-cta { display: block; width: 100%; height: 60px; margin-top: 16px; font: 600 20px/20px Goldplay; color: #fff; border-radius: 33px; border: 2px solid #002657; box-shadow: 2px 6px 0 #002657; background: #fe6b00; cursor: not-allowed; }
+  #shopify-section-{{ section.id }} .hydration-offer-cta { display: block; width: 100%; height: 60px; margin-top: 16px; font: 600 20px/20px Goldplay; color: #fff; border-radius: 33px; border: 2px solid #002657; box-shadow: 2px 6px 0 #002657; background: #fe6b00; cursor: pointer; }
+  #shopify-section-{{ section.id }} .hydration-offer-cta:disabled { cursor: not-allowed; opacity: 0.6; }
+  #shopify-section-{{ section.id }} .hydration-offer-cta:focus-visible { outline: 2px solid #002657; outline-offset: 4px; }
   @media (max-width: 1023px) {
     #shopify-section-{{ section.id }} .hydration-landing-main { padding: 40px 20px 28px; }
     #shopify-section-{{ section.id }} .hydration-landing-columns { flex-direction: column; gap: 20px; }
@@ -187,7 +216,7 @@
 {
   "name": "Hydration Landing Main",
   "settings": [
-    { "type": "product", "id": "product", "label": "Hydration product", "info": "Uses hydration-variety when empty." },
+    { "type": "product", "id": "product", "label": "Hydration product", "info": "Checkout purchases this product's first available variant. The button is disabled when no product is selected or the product is unavailable." },
     { "type": "checkbox", "id": "show_customer_reviews", "label": "Show customer reviews", "default": true }
   ],
   "presets": [{ "name": "Hydration Landing Main" }]
