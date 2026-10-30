@@ -74,7 +74,7 @@
         </div>
       </div>
       {% if hydration_can_checkout %}
-        {% form 'product', hydration_product, id: hydration_form_id, return_to: hydration_checkout_url %}
+        {% form 'product', hydration_product, id: hydration_form_id, return_to: hydration_checkout_url, data-hydration-checkout: 'true' %}
           <input type="hidden" name="id" value="{{ hydration_variant.id }}">
           <input type="hidden" name="quantity" value="{{ hydration_variant.quantity_rule.min | default: 1 }}">
           {% if hydration_selling_plan != blank %}
@@ -148,7 +148,9 @@
   #shopify-section-{{ section.id }} .hydration-offer-price > * { white-space: nowrap; }
   #shopify-section-{{ section.id }} .hydration-offer-flavors { margin-top: 12px; overflow-wrap: break-word; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits { margin-top: 16px; }
-  #shopify-section-{{ section.id }} .hydration-offer-cta { display: block; width: 100%; height: 60px; margin-top: 16px; font: 600 20px/20px Goldplay; color: #fff; border-radius: 33px; border: 2px solid #002657; box-shadow: 2px 6px 0 #002657; background: #fe6b00; cursor: pointer; }
+  #shopify-section-{{ section.id }} .hydration-offer-cta { display: block; width: 100%; height: 60px; margin-top: 16px; font: 600 20px/20px Goldplay; color: #fff; border-radius: 33px; border: 2px solid #002657; box-shadow: 2px 6px 0 #002657; background: #fe6b00; cursor: pointer; transition: box-shadow 0.4s ease; }
+  #shopify-section-{{ section.id }} .hydration-offer-cta:not(:disabled):hover,
+  #shopify-section-{{ section.id }} .hydration-offer-cta:not(:disabled):focus-visible { box-shadow: none; }
   #shopify-section-{{ section.id }} .hydration-offer-cta:disabled { cursor: not-allowed; opacity: 0.6; }
   #shopify-section-{{ section.id }} .hydration-offer-cta:focus-visible { outline: 2px solid #002657; outline-offset: 4px; }
   @media (max-width: 1023px) {
@@ -205,6 +207,31 @@
             section.querySelectorAll('[data-hydration-image]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
           });
         });
+
+        const checkoutForm = section.querySelector('[data-hydration-checkout]');
+        const checkoutButton = checkoutForm?.querySelector('.hydration-offer-cta');
+        if (checkoutForm && checkoutButton) {
+          const submitCheckout = event => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+            if (checkoutButton.disabled) return;
+
+            checkoutButton.disabled = true;
+            checkoutForm.setAttribute('aria-busy', 'true');
+            // Native submission bypasses cart-drawer hooks and honors return_to.
+            HTMLFormElement.prototype.submit.call(checkoutForm);
+          };
+
+          checkoutForm.addEventListener('click', event => {
+            if (event.target.closest('.hydration-offer-cta')) submitCheckout(event);
+          }, { capture: true });
+          checkoutForm.addEventListener('submit', submitCheckout, { capture: true });
+
+          window.addEventListener('pageshow', () => {
+            checkoutButton.disabled = false;
+            checkoutForm.removeAttribute('aria-busy');
+          });
+        }
       });
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => init(document), { once: true });
