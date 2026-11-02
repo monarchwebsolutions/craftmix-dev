@@ -11,6 +11,58 @@
   "sections": {
     "main": {
       "type": "custom-hydration-main",
+      "blocks": {
+        "benefit_flavor": {
+          "type": "benefit",
+          "settings": {
+            "heading": "Delicious Flavor:",
+            "description": "We spent a year formulating the best tasting hydration mix ever"
+          }
+        },
+        "benefit_electrolytes": {
+          "type": "benefit",
+          "settings": {
+            "heading": "1,125 Electrolytes Per Stick:",
+            "description": "3x electrolytes & 80% less sugar than leading sports drinks"
+          }
+        },
+        "benefit_sglt1": {
+          "type": "benefit",
+          "settings": {
+            "heading": "SGLT1 Technology:",
+            "description": "A hint of sugar activates absorption and hydrates your body faster"
+          }
+        },
+        "benefit_moments": {
+          "type": "benefit",
+          "settings": {
+            "heading": "Made for Every Moment:",
+            "description": "Daily hydration, workouts, weekend recovery, travel, and sleep"
+          }
+        },
+        "benefit_water": {
+          "type": "benefit",
+          "settings": {
+            "heading": "Just Add Water:",
+            "description": "Mix with 16oz of water and serve over ice"
+          }
+        },
+        "benefit_ingredients": {
+          "type": "benefit",
+          "settings": {
+            "heading": "Zero artificial ingredients",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_flavor",
+        "benefit_electrolytes",
+        "benefit_sglt1",
+        "benefit_moments",
+        "benefit_water",
+        "benefit_ingredients"
+      ],
       "settings": {
         "product": "hydration-variety-buy-box",
         "purchase_type": "subscription",

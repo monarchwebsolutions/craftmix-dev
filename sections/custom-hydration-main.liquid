@@ -123,10 +123,11 @@
           </ul>
         </details>
       {% endif %}
-      {% if hydration_product.metafields.custom.product_description_bullets.value != blank %}
+      {% assign benefit_blocks = section.blocks | where: 'type', 'benefit' %}
+      {% if benefit_blocks.size > 0 %}
         <ul class="product-description-bullets" role="list">
-          {% for bullet in hydration_product.metafields.custom.product_description_bullets.value %}
-            <li>{{ bullet | escape }}</li>
+          {% for block in benefit_blocks %}
+            <li {{ block.shopify_attributes }}><strong>{{ block.settings.heading | escape }}</strong>{% if block.settings.description != blank %} {{ block.settings.description | escape }}{% endif %}</li>
           {% endfor %}
         </ul>
       {% endif %}
@@ -214,6 +215,8 @@
   #shopify-section-{{ section.id }} .hydration-offer-row > div { min-width: 0; overflow-wrap: break-word; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits,
   #shopify-section-{{ section.id }} .product-description-bullets { color: #002657; font: 600 20px/1.4 Goldplay; }
+  #shopify-section-{{ section.id }} .product-description-bullets { font-weight: 400; }
+  #shopify-section-{{ section.id }} .product-description-bullets strong { font-weight: 700; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits { list-style: none; padding-left: 0; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits li { display: flex; align-items: baseline; gap: 5px; overflow-wrap: anywhere; }
   #shopify-section-{{ section.id }} .hydration-offer-benefits li::before { content: ""; flex: 0 0 17px; height: 10px; background: url('https://cdn.shopify.com/s/files/1/2340/1623/files/lp-tick.svg?v=1744287348') center / contain no-repeat; }
@@ -285,6 +288,16 @@
     { "type": "select", "id": "purchase_type", "label": "Checkout purchase type", "default": "subscription", "options": [{ "value": "subscription", "label": "Subscription" }, { "value": "one_time", "label": "One-time purchase" }] },
     { "type": "text", "id": "selling_plan_id", "label": "Subscription selling plan ID", "info": "Optional. Leave blank for the first subscription plan, or enter an ID from the editor-only list below the checkout button to select a specific renewal schedule. Invalid IDs disable checkout." },
     { "type": "checkbox", "id": "show_customer_reviews", "label": "Show customer reviews", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Heading" },
+        { "type": "textarea", "id": "description", "label": "Description (optional)" }
+      ]
+    }
   ],
   "presets": [{ "name": "Hydration Landing Main" }]
 }
