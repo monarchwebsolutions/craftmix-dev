@@ -1,0 +1,43 @@
+.lp-promo-badge {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 135px;
+  height: 135px;
+  z-index: 2;
+  pointer-events: none;
+}
+.lp-promo-badge__shape { display: block; width: 100%; height: 100%; overflow: visible; }
+.lp-promo-badge__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18%;
+  color: #002657;
+  font-family: Goldplay;
+  font-size: 22.5px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: center;
+}
+[data-hydration-main] .lp-promo-badge {
+  top: -25px;
+  right: max(-30px, calc(303px - 50vw));
+}
+@media (max-width: 640px) {
+  [data-hydration-main] .lp-promo-badge { width: 105px; height: 105px; top: -18px; right: -17px; }
+  [data-hydration-main] .lp-promo-badge__text { font-size: 18px; }
+}
+@media (min-width: 530px) {
+  [data-cocktail-gallery] .lp-promo-badge {
+    top: -25px;
+    right: max(-30px, calc(250px - 50vw));
+  }
+}
+[data-cocktail-gallery] .lp-mobile-heading-offer { display: none; }
+@media (max-width: 529px) {
+  [data-cocktail-gallery] .lp-promo-badge { display: none; }
+  [data-cocktail-gallery] .lp-mobile-heading-offer { display: block; white-space: nowrap; }
+}

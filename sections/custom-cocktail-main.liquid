@@ -1,3 +1,4 @@
+{{ 'landing-promo-badge.css' | asset_url | stylesheet_tag }}
 {% liquid
   assign cocktail_product = section.settings.product
   assign cocktail_variant = cocktail_product.first_available_variant
@@ -32,6 +33,7 @@
 {
   "name": "Cocktail & Mocktail Main",
   "settings": [
+    { "type": "checkbox", "id": "show_promo_badge", "label": "Show 50% OFF badge", "default": true },
     { "type": "product", "id": "product", "label": "Cocktail product", "info": "Checkout purchases this product's first available variant. The button is disabled when no product is selected or the product is unavailable." },
     { "type": "select", "id": "purchase_type", "label": "Checkout purchase type", "default": "subscription", "options": [{ "value": "subscription", "label": "Subscription" }, { "value": "one_time", "label": "One-time purchase" }] },
     { "type": "text", "id": "selling_plan_id", "label": "Subscription selling plan ID", "info": "Optional. Leave blank for the first subscription plan, or enter an ID from the editor-only list below the checkout button to select a specific renewal schedule. Invalid IDs disable checkout." },
@@ -929,6 +931,10 @@ input[type="radio"]:checked::after {
     <div class="flex-container">
       <div class="flex-item-left">
         <div class="img-lg-container">
+          {% if section.settings.show_promo_badge %}
+            {% assign promo_badge_id = section.id | append: '-cocktail-hero' %}
+            {% render 'landing-promo-badge', badge_id: promo_badge_id %}
+          {% endif %}
           <div id="lander-featured-image" class="img-wrapper-lg">
             {% if section.settings.hero_image != blank %}
               <img src="{{ section.settings.hero_image | image_url: width: 1548 }}" alt="{{ section.settings.hero_image.alt | escape }}" width="770" height="706">
@@ -962,7 +968,7 @@ input[type="radio"]:checked::after {
           <span class="review-text">3000+ 5-Star Reviews</span>
         </div>
         <div class="heading">
-          <h1 class="heading-text">The #1 Instant Cocktail & Mocktail Mixer</h1>
+          <h1 class="heading-text">The #1 Instant Cocktail & Mocktail Mixer{% if section.settings.show_promo_badge %}<span class="lp-mobile-heading-offer"> 50% OFF</span>{% endif %}</h1>
         </div>
         <div class="paragraph">
           <p class="paragraph-text">Make a delicious cocktail or mocktail in seconds with just liquor, water & ice</p>
