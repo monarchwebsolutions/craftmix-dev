@@ -252,7 +252,32 @@
 <script src="{{ 'avidai-tracking.js' | asset_url }}" defer></script>
 <!-- End AvidAI Tracking Script - DO NOT REMOVE THIS LINE -->
 
-  </head>
+  <!-- OneText SDK: added automatically by OneText, please don't edit -->
+<script type="application/json" id="onetext-config">{"version":1,"accountToken":"onetext_account_production_01997251-bfcf-7bb9-972a-c05c48d42c15","requireConsent":false}</script>
+
+    <script id="onetext-loader">
+    (function () {
+        "use strict";
+        if (window.__onetextLoaderRan__) return;
+        window.__onetextLoaderRan__ = true;
+        var config = JSON.parse(document.getElementById('onetext-config').textContent);
+        var day = Math.floor(Date.now() / 86400000) * 86400000;
+        var script = document.createElement('script');
+        script.src = 'https://onetext.com/sdk/onetext.min.js' +
+            '?onetext-account-token=' + encodeURIComponent(config.accountToken) +
+            '&timestamp=' + day +
+            (config.requireConsent ? '&onetext-require-consent=true' : '');
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function () {
+                document.head.appendChild(script);
+            }, { once: true });
+        } else {
+            document.head.appendChild(script);
+        }
+    }());
+    </script>
+
+<!-- /OneText SDK --></head>
   <body
     class="gradient scrollbar-body overflow-x-hidden text-[{{ settings.text_base_size | times: 0.007875 }}rem] md:text-[{{ settings.text_base_size | times: 0.00875 }}rem]{% if settings.lang_direction contains request.locale.iso_code %} rtl{% endif %}"
     x-data="{ runDispatch: true }"
