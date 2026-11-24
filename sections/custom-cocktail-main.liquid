@@ -987,12 +987,16 @@ input[type="radio"]:checked::after {
                   <h3 class="product-name">Cocktail &amp; Mocktail Variety 6 Pack</h3>
                   <p class="product-contents">6 PACKETS / 3 FLAVORS</p>
                 </div>
-                <div class="buy-option-pricing">
-                  <div class="buy-option-pricing-comparison">
-                    <p class="buy-option-pricing-comparison-before">$9.99</p>
-                    <p class="buy-option-pricing-comparison-after">$4.99</p>
+                {% if cocktail_can_checkout %}
+                  <div class="buy-option-pricing">
+                    <div class="buy-option-pricing-comparison">
+                      {% if cocktail_variant.compare_at_price != blank and cocktail_variant.compare_at_price > cocktail_variant.price %}
+                        <p class="buy-option-pricing-comparison-before">{{ cocktail_variant.compare_at_price | money }}</p>
+                      {% endif %}
+                      <p class="buy-option-pricing-comparison-after">{{ cocktail_variant.price | money }}</p>
+                    </div>
                   </div>
-                </div>
+                {% endif %}
               </div>
               <div class="buy-option-container-lg-footer">
                 <div class="club-benifits">

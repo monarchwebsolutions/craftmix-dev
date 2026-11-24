@@ -82,7 +82,14 @@
               <h2>Hydration Variety 6 Pack</h2>
               <p class="hydration-pack-details">6 Stick Packs / 3 Flavors</p>
             </div>
-            <p class="hydration-offer-price"><s>$11.99</s> <span>$5.99</span></p>
+            {% if hydration_can_checkout %}
+              <p class="hydration-offer-price">
+                {% if hydration_variant.compare_at_price != blank and hydration_variant.compare_at_price > hydration_variant.price %}
+                  <s>{{ hydration_variant.compare_at_price | money }}</s>
+                {% endif %}
+                <span>{{ hydration_variant.price | money }}</span>
+              </p>
+            {% endif %}
           </div>
           <p class="hydration-offer-flavors">Lemon Lime, Wild Berry, Strawberry Watermelon</p>
           <ul class="hydration-offer-benefits" role="list">
